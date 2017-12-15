@@ -1,0 +1,1198 @@
+<?xml version="1.0" ?>
+
+<xsd:schema targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance">
+
+	<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+
+	<xsd:simpleType name="SystemTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="EnterpriseServer" />
+			<xsd:enumeration value="RegionServer" />
+			<xsd:enumeration value="MarketServer" />
+			<xsd:enumeration value="BladeServer" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="ResourceTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CMTS" />
+			<xsd:enumeration value="CMS" />
+			<xsd:enumeration value="Channel" />
+			<xsd:enumeration value="HFC" />
+			<xsd:enumeration value="CM" />
+			<xsd:enumeration value="MTA" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="StatusColorT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Gray" />
+			<xsd:enumeration value="Green" />
+			<xsd:enumeration value="Yellow" />
+			<xsd:enumeration value="Orange" />
+			<xsd:enumeration value="Red" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="SnmpVersionT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="v1" />
+			<xsd:enumeration value="v2c" />
+			<xsd:enumeration value="v3" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="SnmpV2CAttributesT">
+		<xsd:all>
+			<xsd:element name="readCommnunity" type="xsd:string" />
+			<xsd:element name="writeCommnunity" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="GenericCountsT">
+		<xsd:all>
+			<xsd:element name="totalCm" type="xsd:short" />
+			<xsd:element name="onlineCm" type="xsd:short" />
+			<xsd:element name="totalMta" type="xsd:short" />
+			<xsd:element name="availableMta" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:simpleType name="ChannelTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Upstream" />
+			<xsd:enumeration value="Downstream" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="EndUserDeviceTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CM" />
+			<xsd:enumeration value="eMTA" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="InputTimeT">
+		<xsd:all>
+			<xsd:element name="year" type="xsd:short" />
+			<xsd:element name="monthOfYear" type="xsd:short" />
+			<xsd:element name="dayOfMonth" type="xsd:short" />
+			<xsd:element name="hourOfDay" type="xsd:short" />
+			<xsd:element name="minuteOfHour" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ResultBatchT">
+		<xsd:all>
+			<xsd:element name="fromIndex" type="xsd:short" />
+			<xsd:element name="toIndex" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="TopoHierarchyKeyT">
+		<xsd:all>
+			<xsd:element name="regionId" type="xsd:integer" />
+			<xsd:element name="marketId" type="xsd:integer" />
+			<xsd:element name="bladeId" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="LocalSystemT">
+		<xsd:all>
+			<xsd:element name="systemType" type="tns:SystemTypeT" />
+			<xsd:element name="systemName" type="xsd:string" />
+			<xsd:element name="parentHost" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ResourceT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="resourceId" type="xsd:integer" />
+			<xsd:element name="resourceType" type="tns:ResourceTypeT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="RegionT">
+		<xsd:all>
+			<xsd:element name="regionId" type="xsd:integer" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="host" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="MarketT">
+		<xsd:all>
+			<xsd:element name="regionId" type="xsd:integer" />
+			<xsd:element name="marketId" type="xsd:integer" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="host" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="BladeT">
+		<xsd:all>
+			<xsd:element name="regionId" type="xsd:integer" />
+			<xsd:element name="marketId" type="xsd:integer" />
+			<xsd:element name="bladeId" type="xsd:integer" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="host" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmsT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="cmsResId" type="xsd:integer" />
+			<xsd:element name="cmsName" type="xsd:string" />
+			<xsd:element name="cmsType" type="xsd:string" />
+			<xsd:element name="cmsSubType" type="xsd:string" />
+			<xsd:element name="cmsHost" type="xsd:string" />
+			<xsd:element name="loginName" type="xsd:string" />
+			<xsd:element name="loginPassword" type="xsd:string" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmtsT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="cmtsName" type="xsd:string" />
+			<xsd:element name="cmtsHost" type="xsd:string" />
+			<xsd:element name="cmtsSnmpVersion" type="tns:SnmpVersionT" />
+			<xsd:element name="cmSnmpVersion" type="tns:SnmpVersionT" />
+			<xsd:element name="mtaSnmpVersion" type="tns:SnmpVersionT" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />
+			<xsd:element name="counts" type="tns:GenericCountsT" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ChannelT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="channelResId" type="xsd:integer" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="channelName" type="xsd:string" />
+			<xsd:element name="channelType" type="tns:ChannelTypeT" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />
+			<xsd:element name="counts" type="tns:GenericCountsT" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="hfcResId" type="xsd:integer" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="hfcName" type="xsd:string" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />
+			<xsd:element name="counts" type="tns:GenericCountsT" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CableModemT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="cmResId" type="xsd:integer" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="upChannelResId" type="xsd:integer" />
+			<xsd:element name="downChannelResId" type="xsd:integer" />
+			<xsd:element name="hfcResId" type="xsd:integer" />
+			<xsd:element name="macAddress" type="xsd:string" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />
+			<xsd:element name="cmStatus" type="xsd:string" />
+			<xsd:element name="host" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" />
+			<xsd:element name="cmIndex" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="EmtaT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="emtaResId" type="xsd:integer" />
+			<xsd:element name="cmResId" type="xsd:integer" nillable="true"/>
+			<xsd:element name="macAddress" type="xsd:string" />
+			<xsd:element name="statusColor" type="tns:StatusColorT" />			
+			<xsd:element name="host" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="EmtaSecondaryT">
+		<xsd:all>
+			<xsd:element name="phone1" type="xsd:string" />
+			<xsd:element name="phone2" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlarmIdT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="alarmId" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAlarmIdT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AlarmIdT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AbstractAlarmT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="alarmId" type="xsd:integer" />
+			<xsd:element name="resourceId" type="xsd:integer" />
+			<xsd:element name="resourceName" type="xsd:string" />
+			<xsd:element name="alarmTime" type="xsd:integer" />
+			<xsd:element name="alarmTimeUSec" type="xsd:integer" />
+			<xsd:element name="soakDuration" type="xsd:short" />
+			<xsd:element name="alarmState" type="xsd:string" />
+			<xsd:element name="alarmType" type="xsd:string" />
+			<xsd:element name="alarmSubType" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CurrentAlarmT">
+		<xsd:all>
+			<xsd:element name="abstractAlarm" type="tns:AbstractAlarmT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HistoricalAlarmT">
+		<xsd:all>
+			<xsd:element name="abstractAlarm" type="tns:AbstractAlarmT" />
+			<xsd:element name="clearedUser" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+<!--  
+	<xsd:complexType name="AlarmHistoryT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" />
+			<xsd:element name="alarmId" type="xsd:integer" />
+			<xsd:element name="timeStamp" type="xsd:string" />
+			<xsd:element name="alarmState" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+-->
+
+	<xsd:complexType name="AlarmHistoryT">
+		<xsd:all>
+			<xsd:element name="time" type="xsd:string" />
+			<xsd:element name="state" type="xsd:string" />
+			<xsd:element name="extraInfo" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAlarmHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AlarmHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<!-- 
+	<xsd:complexType name="CurrentAlarmDetailsT">
+		<xsd:all>
+			<xsd:element name="currentAlarm" type="tns:CurrentAlarmT" />
+			<xsd:element name="alarmDetails" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HistoricalAlarmDetailsT">
+		<xsd:all>
+			<xsd:element name="historicalAlarm" type="tns:HistoricalAlarmT" />
+			<xsd:element name="alarmDetails" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+-->
+
+	<xsd:complexType name="ArrayOfRegionsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:RegionT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfMarketsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:MarketT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfBladesT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:BladeT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCmsesT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CmsT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCmtsesT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CmtsT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfSnmpV2CAttributesT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:SnmpV2CAttributesT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfChannelsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:ChannelT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfHfcsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:HfcT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCableModemsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CableModemT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfEmtasT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:EmtaT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCurrentAlarmsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CurrentAlarmT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfHistoricalAlarmsT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:HistoricalAlarmT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<!--
+	<xsd:complexType name="ArrayOfAlarmHistoriesT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AlarmHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+-->
+
+	<xsd:complexType name="MappedEuDevicesT">
+		<xsd:all>
+			<xsd:element name="cm" type="tns:CableModemT" nillable="true"/>
+			<xsd:element name="mta" type="tns:EmtaT" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<!-- Query State -->
+	
+	<xsd:complexType name="ScrollPageT">
+		<xsd:all>
+			<xsd:element name="batch" type="tns:ResultBatchT" />
+			<xsd:element name="start" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="ArrayOfScrollPageT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:ScrollPageT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryStateT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" nillable="true"/>
+			<xsd:element name="pages" type="tns:ArrayOfScrollPageT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="ArrayOfQueryStateT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:QueryStateT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Performance/Stats data type definitions -->
+	
+	<xsd:complexType name="GenericCountsHistoryT">
+		<xsd:all>
+			<xsd:element name="counts" type="tns:GenericCountsT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfGenericCountsHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:GenericCountsHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- CM Status -->
+
+	<xsd:complexType name="CmStatusT">
+		<xsd:all>
+			<xsd:element name="docsisState" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmStatusHistoryT">
+		<xsd:all>
+			<xsd:element name="cmStatus" type="tns:CmStatusT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCmStatusHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CmStatusHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- MTA Availability -->
+	
+	<xsd:complexType name="MtaAvailabilityT">
+		<xsd:all>
+			<xsd:element name="available" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaAvailabilityHistoryT">
+		<xsd:all>
+			<xsd:element name="available" type="tns:MtaAvailabilityT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfMtaAvailabilityHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:MtaAvailabilityHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- MTA Prov Status -->
+	
+	<xsd:complexType name="MtaProvStatusT">
+		<xsd:all>
+			<xsd:element name="provState" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaProvStatusHistoryT">
+		<xsd:all>
+			<xsd:element name="provStatus" type="tns:MtaProvStatusT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfMtaProvStatusHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:MtaProvStatusHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- MTA Ping Status -->
+	
+	<xsd:complexType name="MtaPingStatusT">
+		<xsd:all>
+			<xsd:element name="pingState" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaPingStatusHistoryT">
+		<xsd:all>
+			<xsd:element name="pingStatus" type="tns:MtaPingStatusT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfMtaPingStatusHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:MtaPingStatusHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- CM Performance -->
+	
+	<xsd:complexType name="CmPerformanceT">
+		<xsd:all>
+			<xsd:element name="downstreamSNR" type="xsd:short" />
+			<xsd:element name="downstreamPower" type="xsd:short" />
+			<xsd:element name="upstreamPower" type="xsd:short" />
+			<xsd:element name="t1Timeouts" type="xsd:short" />
+			<xsd:element name="t2Timeouts" type="xsd:short" />
+			<xsd:element name="t3Timeouts" type="xsd:short" />
+			<xsd:element name="t4Timeouts" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmPerformanceHistoryT">
+		<xsd:all>
+			<xsd:element name="cmPerformance" type="tns:CmPerformanceT" />
+			<xsd:element name="timeSec" type="xsd:integer" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmCurrentPerformanceT">
+		<xsd:all>
+			<xsd:element name="cmPerformance" type="tns:CmPerformanceT" />
+			<xsd:element name="recordedTime" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCmPerformanceHistoryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CmPerformanceHistoryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- CSR Portal Data Structures / Classes -->
+
+	<xsd:complexType name="CTECustomerT">
+		<xsd:all>
+			<xsd:element name="accountNumber" type="xsd:string" nillable="true"/>
+			<xsd:element name="accountActive" type="xsd:short" nillable="true"/>
+			<xsd:element name="firstName" type="xsd:string" />
+			<xsd:element name="lastName" type="xsd:string" />
+			<xsd:element name="street1" type="xsd:string" />
+			<xsd:element name="street2" type="xsd:string" nillable="true" />
+			<xsd:element name="city" type="xsd:string" />
+			<xsd:element name="state" type="xsd:string" />
+			<xsd:element name="zip" type="xsd:string" />
+			<xsd:element name="phone1" type="xsd:string" />
+			<xsd:element name="phone2" type="xsd:string" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfCTECustomerT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CTECustomerT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CTEAbstractMacT">
+		<xsd:all>
+			<xsd:element name="mac" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" nillable="true" />
+			<xsd:element name="host" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CTEAbstractNameT">
+		<xsd:all>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" nillable="true" />
+			<xsd:element name="host" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CTEDataT">
+		<xsd:all>
+			<xsd:element name="customer" type="tns:CTECustomerT" />
+			<xsd:element name="cm" type="tns:CTEAbstractMacT" nillable="true" />
+			<xsd:element name="mta" type="tns:CTEAbstractMacT" nillable="true" />
+			<xsd:element name="cmts" type="tns:CTEAbstractNameT" nillable="true" />
+			<xsd:element name="cms" type="tns:CTEAbstractNameT" nillable="true" />
+			<xsd:element name="hfcName" type="xsd:string" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfCTEDataT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CTEDataT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CTEQueryInputT">
+		<xsd:all>
+			<xsd:element name="accountNumber" type="xsd:string" nillable="true"/>
+			<xsd:element name="firstName" type="xsd:string"  nillable="true"/>
+			<xsd:element name="lastName" type="xsd:string"  nillable="true"/>
+			<xsd:element name="primaryPhone" type="xsd:string"  nillable="true"/>
+			<xsd:element name="cmMac" type="xsd:string"  nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfCTEQueryInputT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CTEQueryInputT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- CMS data structures -->
+	
+	<xsd:complexType name="CMSLineT">
+		<xsd:all>
+			<xsd:element name="number" type="xsd:string" />
+			<xsd:element name="status" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCMSLineT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CMSLineT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Not used anymore. Instead use ArrayOfCMSLineT -->
+	
+	<xsd:complexType name="CMSResultT">
+		<xsd:all>
+			<xsd:element name="line1" type="tns:CMSLineT" />
+			<xsd:element name="line2" type="tns:CMSLineT" nillable="true" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<!-- User Classes -->
+
+	<xsd:simpleType name="UserAccessTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Read" />
+			<xsd:enumeration value="Write" />
+			<xsd:enumeration value="Execute" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="UserAccessT">
+		<xsd:all>
+			<xsd:element name="type" type="tns:UserAccessTypeT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfUserAccessT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:UserAccessT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="ApplicationDomainTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Alarm" />
+			<xsd:enumeration value="CSR Portal" />
+			<xsd:enumeration value="System Administration" />
+			<xsd:enumeration value="User Administration" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ApplicationDomainT">
+		<xsd:all>
+			<xsd:element name="type" type="tns:ApplicationDomainTypeT" />
+			<xsd:element name="accessRights" type="tns:ArrayOfUserAccessT" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfApplicationDomainT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:ApplicationDomainT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="RoleT">
+		<xsd:all>
+			<xsd:element name="roleName" type="xsd:string" />
+			<xsd:element name="domains" type="tns:ArrayOfApplicationDomainT" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfRoleT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:RoleT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="UserT">
+		<xsd:all>
+			<xsd:element name="userId" type="xsd:string" />
+			<xsd:element name="firstName" type="xsd:string" />
+			<xsd:element name="lastName" type="xsd:string" />
+			<xsd:element name="middleInitial" type="xsd:string" nillable="true"/>
+			<xsd:element name="location" type="xsd:string" />
+			<xsd:element name="loginName" type="xsd:string" />
+			<xsd:element name="loginPassword" type="xsd:string" nillable="true"/>
+			<xsd:element name="isActive" type="xsd:short" nillable="true"/>
+			<xsd:element name="roleName" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfUserT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:UserT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Administration related datatypes -->
+	
+	<xsd:complexType name="PollingIntervalsT">
+		<xsd:all>
+			<xsd:element name="cmtsPollInterval" type="xsd:string" />
+			<xsd:element name="cmPollInterval" type="xsd:string" />
+			<xsd:element name="mtaPollInterval" type="xsd:string" />
+			<xsd:element name="mtaPingInterval" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlarmBasedStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="color" type="tns:StatusColorT" />
+			<xsd:element name="alarmType" type="xsd:string" />
+			<xsd:element name="alarmState" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAlarmStatusThresholdT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AlarmBasedStatusThresholdT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="color" type="tns:StatusColorT" />
+			<xsd:element name="childColor" type="tns:StatusColorT" />
+			<xsd:element name="thresholdPercent" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAggregateStatusThresholdT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AggregateStatusThresholdT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="alarmThreshArray" type="tns:ArrayOfAlarmStatusThresholdT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="alarmThreshArray" type="tns:ArrayOfAlarmStatusThresholdT" />
+			<xsd:element name="aggThreshArray" type="tns:ArrayOfAggregateStatusThresholdT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ChannelStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="alarmThreshArray" type="tns:ArrayOfAlarmStatusThresholdT" />
+			<xsd:element name="aggThreshArray" type="tns:ArrayOfAggregateStatusThresholdT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmtsStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="alarmThreshArray" type="tns:ArrayOfAlarmStatusThresholdT" />
+			<xsd:element name="aggThreshArray" type="tns:ArrayOfAggregateStatusThresholdT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmsStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="alarmThreshArray" type="tns:ArrayOfAlarmStatusThresholdT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="SoakWindowT">
+		<xsd:all>
+			<xsd:element name="soakWindow_1_StartTime" type="xsd:string" />
+			<xsd:element name="soakWindow_1_Duration" type="xsd:string" />
+			<xsd:element name="soakWindow_2_StartTime" type="xsd:string" />
+			<xsd:element name="soakWindow_2_Duration" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateCmOfflineTresholdT">
+		<xsd:all>
+			<xsd:element name="percentCmOffline_1" type="xsd:string" />
+			<xsd:element name="maxCm_1" type="xsd:string" />
+			<xsd:element name="percentCmOffline_2" type="xsd:string" />
+			<xsd:element name="maxCm_2" type="xsd:string" />
+			<xsd:element name="detectionWindow" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateMtaTresholdT">
+		<xsd:all>
+			<xsd:element name="mtaThresholdCount" type="xsd:string" />
+			<xsd:element name="detectionWindow" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcPowerTresholdT">
+		<xsd:all>
+			<xsd:element name="thresholdCount" type="xsd:string" />
+			<xsd:element name="detectionWindow" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmThresold" type="tns:AggregateCmOfflineTresholdT" />
+			<xsd:element name="cmSoakWindow" type="tns:SoakWindowT" />
+			<xsd:element name="mtaThresold" type="tns:AggregateMtaTresholdT" />
+			<xsd:element name="mtaSoakWindow" type="tns:SoakWindowT" />
+			<xsd:element name="powerThresold" type="tns:HfcPowerTresholdT" />
+			<xsd:element name="powerSoakWindow" type="tns:SoakWindowT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlarmTypeConfigT">
+		<xsd:all>
+			<xsd:element name="alarmType" type="xsd:string" />
+			<xsd:element name="soakWindow" type="tns:SoakWindowT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAlarmTypeConfigT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:AlarmTypeConfigT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="alarmTypes" type="tns:ArrayOfAlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmtsAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmtsDown" type="tns:AlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmsAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmsLossOfComm" type="tns:AlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CmPerformanceConfigT">
+		<xsd:all>
+			<xsd:element name="downstreamSnrLower" type="xsd:string" />
+			<xsd:element name="downstreamPowerLower" type="xsd:string" />
+			<xsd:element name="downstreamPowerUpper" type="xsd:string" />
+			<xsd:element name="upstreamPowerLower" type="xsd:string" />
+			<xsd:element name="upstreamPowerUpper" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+
+	<xsd:complexType name="ConfigDownloadT">
+		<xsd:all>
+			<xsd:element name="cmPerfCfg" type="tns:CmPerformanceConfigT" nillable="true"/>
+			<xsd:element name="cmsAlarmCfg" type="tns:CmsAlarmConfigT" nillable="true"/>
+			<xsd:element name="cmtsAlarmCfg" type="tns:CmtsAlarmConfigT" nillable="true"/>
+			<xsd:element name="mtaAlarmCfg" type="tns:MtaAlarmConfigT" nillable="true"/>
+			<xsd:element name="hfcAlarmCfg" type="tns:HfcAlarmConfigT" nillable="true"/>			
+			<xsd:element name="pollingIntervals" type="tns:PollingIntervalsT" nillable="true"/>			
+			<xsd:element name="userAccessRights" type="tns:ArrayOfUserAccessT" nillable="true"/>
+			<xsd:element name="applicationDomains" type="tns:ArrayOfApplicationDomainT" nillable="true"/>
+			<xsd:element name="roles" type="tns:ArrayOfRoleT" nillable="true"/>
+			<xsd:element name="users" type="tns:ArrayOfUserT" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>	
+
+	<!-- C Peer Services Data Structures -->
+	
+	<xsd:complexType name="CmtsCmDataT">
+		<xsd:all>
+			<xsd:element name="cmIpAddress" type="xsd:string" />
+			<xsd:element name="cmMac" type="xsd:string" />
+			<xsd:element name="upstreamChannelIndex" type="xsd:string" />
+			<xsd:element name="downstreamChannelIndex" type="xsd:string" />
+			<xsd:element name="cmIndex" type="xsd:string" />
+			<xsd:element name="cmStatus" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="CmDataT">
+		<xsd:all>
+			<xsd:element name="mac" type="xsd:string" />
+			<xsd:element name="host" type="xsd:string" />
+			<xsd:element name="cmIndex" type="xsd:string" />
+			<xsd:element name="downstreamSNR" type="xsd:string" />
+			<xsd:element name="downstreamPower" type="xsd:string" />
+			<xsd:element name="upstreamPower" type="xsd:string" />
+			<xsd:element name="t1Count" type="xsd:string"/>
+			<xsd:element name="t2Count" type="xsd:string"/>
+			<xsd:element name="t3Count" type="xsd:string"/>
+			<xsd:element name="t4Count" type="xsd:string"/>
+			<xsd:element name="field1" type="xsd:string" nillable="true"/>
+			<xsd:element name="field2" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="MtaDataT">
+		<xsd:all>
+			<xsd:element name="provStatus" type="xsd:string" />
+			<xsd:element name="provCounter" type="xsd:string" />
+			<xsd:element name="pingStatus" type="xsd:string" nillable="true"/>
+			<xsd:element name="batteryStatus1" type="xsd:string" nillable="true"/>
+			<xsd:element name="batteryStatus2" type="xsd:string" nillable="true"/>
+			<xsd:element name="field1" type="xsd:string" nillable="true"/>
+			<xsd:element name="field2" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<!-- Reports Services Data Structures -->
+	
+	<xsd:complexType name="StatusSummaryT">
+		<xsd:all>
+			<xsd:element name="topologyKey" type="tns:TopoHierarchyKeyT" nillable="true"/>
+			<xsd:element name="resId" type="xsd:integer" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="sumRedStatusTime" type="xsd:integer" />
+			<xsd:element name="sumGreenStatusTime" type="xsd:integer" />
+			<xsd:element name="sumStateChanges" type="xsd:short" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="HfcStatusSummaryT">
+		<xsd:all>
+			<xsd:element name="statusSummary" type="tns:StatusSummaryT" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="cmtsName" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="ArrayOfHfcStatusSummaryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:HfcStatusSummaryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaStatusSummaryT">
+		<xsd:all>
+			<xsd:element name="statusSummary" type="tns:StatusSummaryT" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="cmtsName" type="xsd:string" />
+			<xsd:element name="hfcResId" type="xsd:integer" />
+			<xsd:element name="hfcName" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="ArrayOfMtaStatusSummaryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:MtaStatusSummaryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmStatusSummaryT">
+		<xsd:all>
+			<xsd:element name="statusSummary" type="tns:StatusSummaryT" />
+			<xsd:element name="cmtsResId" type="xsd:integer" />
+			<xsd:element name="cmtsName" type="xsd:string" />
+			<xsd:element name="hfcResId" type="xsd:integer" />
+			<xsd:element name="hfcName" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="ArrayOfCmStatusSummaryT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:CmStatusSummaryT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Reports Response Data structures -->
+	
+	<xsd:complexType name="MtaStatusSummaryRespT">
+		<xsd:all>
+			<xsd:element name="mtaData" type="tns:ArrayOfMtaStatusSummaryT" />
+			<xsd:element name="queryState" type="tns:ArrayOfQueryStateT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="HfcStatusSummaryRespT">
+		<xsd:all>
+			<xsd:element name="hfcData" type="tns:ArrayOfHfcStatusSummaryT" />
+			<xsd:element name="queryState" type="tns:ArrayOfQueryStateT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="CmStatusSummaryRespT">
+		<xsd:all>
+			<xsd:element name="cmData" type="tns:ArrayOfCmStatusSummaryT" />
+			<xsd:element name="queryState" type="tns:ArrayOfQueryStateT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<!-- Alarms Response Data structures -->
+	
+	<xsd:complexType name="CurrentAlarmsRespT">
+		<xsd:all>
+			<xsd:element name="alarms" type="tns:ArrayOfCurrentAlarmsT" />
+			<xsd:element name="queryState" type="tns:ArrayOfQueryStateT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="HistoricalAlarmsRespT">
+		<xsd:all>
+			<xsd:element name="alarms" type="tns:ArrayOfHistoricalAlarmsT" />
+			<xsd:element name="queryState" type="tns:ArrayOfQueryStateT" />
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<!-- Event Message Data structures -->
+	
+	<xsd:simpleType name="EventTypeT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Add"/>
+			<xsd:enumeration value="Delete"/>
+			<xsd:enumeration value="Update"/>
+			<xsd:enumeration value="Clear"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="EventCategoryT">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Resource"/>
+			<xsd:enumeration value="Configuration"/>
+			<xsd:enumeration value="Alarm"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="EventMessageT">
+		<xsd:all>
+			<xsd:element name="eventType" type="tns:EventTypeT"/>
+			<xsd:element name="eventCategory" type="tns:EventCategoryT"/>
+			<xsd:element name="eventSubCategory" type="xsd:string" nillable="true"/>
+			<xsd:element name="objectId" type="xsd:string" nillable="true"/>
+		</xsd:all>
+	</xsd:complexType>	
+	
+	<!-- CA Customer Data structures -->
+	
+	<xsd:complexType name="CACustomerT">
+		<xsd:all>
+			<xsd:element name="accountNumber" type="xsd:string" nillable="true"/>
+			<xsd:element name="address" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>	
+	
+</xsd:schema>

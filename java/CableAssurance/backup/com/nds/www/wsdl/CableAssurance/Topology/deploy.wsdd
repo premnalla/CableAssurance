@@ -1,0 +1,103 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TopologyService WSDL service -->
+
+  <service name="TopologyEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.nds.com/wsdl/CableAssurance/Topology"/>
+      <parameter name="wsdlServiceElement" value="TopologyService"/>
+      <parameter name="schemaUnqualified" value="http://www.nds.com/wsdl/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="TopologyEP"/>
+      <parameter name="className" value="com.nds.www.wsdl.CableAssurance.Topology.TopologySOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="TopologyEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getRegions" qname="operNS:getRegions" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfRegionsT" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:RegionT" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getMarkets" qname="operNS:getMarkets" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfMarketsT" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:MarketT" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getBlades" qname="operNS:getBlades" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfBladesT" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:BladeT" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getCmtses" qname="operNS:getCmtses" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfCmtsesT" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:CmtsT" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="getRegions getCmtses getBlades getMarkets"/>
+      <parameter name="scope" value="Session"/>
+
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfBladesT"
+        type="java:com.nds.www.wsdl.CableAssurance.BladeT[]"
+        innerType="cmp-ns:BladeT" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfCmtsesT"
+        type="java:com.nds.www.wsdl.CableAssurance.CmtsT[]"
+        innerType="cmp-ns:CmtsT" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfMarketsT"
+        type="java:com.nds.www.wsdl.CableAssurance.MarketT[]"
+        innerType="cmp-ns:MarketT" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:MarketT"
+        type="java:com.nds.www.wsdl.CableAssurance.MarketT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:StatusColorT"
+        type="java:com.nds.www.wsdl.CableAssurance.StatusColorT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfRegionsT"
+        type="java:com.nds.www.wsdl.CableAssurance.RegionT[]"
+        innerType="cmp-ns:RegionT" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:CmtsT"
+        type="java:com.nds.www.wsdl.CableAssurance.CmtsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:BladeT"
+        type="java:com.nds.www.wsdl.CableAssurance.BladeT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:RegionT"
+        type="java:com.nds.www.wsdl.CableAssurance.RegionT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

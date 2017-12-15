@@ -1,0 +1,127 @@
+@CHARSET "ISO-8859-1";
+
+.background {
+	background: ;
+	background-attachment: ;
+	background-color: ;
+	backtround-image: ;
+	backtround-position: ;
+	backtround-repeat: ;
+}
+
+.border {
+	border: ;
+	border-bottom: ;
+	border-bottom-color: ;
+	border-bottom-style: ;
+	border-bottom-width: ;
+	border-color:;
+	border-left:;
+	border-left-color:;
+	border-left-style:;
+	border-left-width:;
+	border-right:;
+	border-right-color:;
+	border-right-style:;
+	border-right-width:;
+	border-style:;
+	border-top:;
+	border-top-color:;
+	border-top-style:;
+	border-top-width:;
+	border-width:;
+}
+
+.classification {
+	clear:;
+	cursor:;
+	display:;
+	float:;
+	position:;
+	visibility:;
+}
+
+.dimension {
+	height:;
+	line-height:;
+	max-height:;
+	max-width:;
+	min-height:;
+	min-width:;
+	width:;
+}
+
+.font {
+	font:;
+	font-family:;
+	font-size:;
+	font-size_adjust:;
+	font-stretch:;
+	font-style:;
+	font-variant:;
+	font-weitht:;
+}
+
+.list {
+	list-style:;
+	list-style-image:;
+	list-style-position:;
+	list-style-type:;
+}
+
+.margin {
+	margin:;
+	margin-bottom:;
+	margin-left:;
+	margin-right:;
+	margin-top:;
+}
+
+.outline {
+	outline:;
+	outline-color:;
+	outline-style:;
+	outline-width:;
+}
+
+.padding {
+	padding:;
+	padding-bottom:;
+	padding-left:;
+	padding-top:;
+	padding-right:;
+}
+
+.positioning {
+	bottom:;
+	clip:;
+	left:;
+	overflow:;
+	position:;
+	right:;
+	top:;
+	vertical-align:;
+	z-index:;
+}
+
+.table {
+	border-collapse:;
+	border-spacing:;
+	caption-size:;
+	empty-cells:;
+	table-layout:;
+}
+
+.text {
+	color:;
+	direction:;
+	letter-spacing:;
+	text-align:;
+	text-decoration:;
+	text-indent:;
+	text-shadow:;
+	text-transform:;
+	white-space:;
+	white-spacing:;
+}
+

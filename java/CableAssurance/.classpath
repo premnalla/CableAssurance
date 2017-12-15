@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PSC_Common_Library"/>
+	<classpathentry kind="lib" path="deplibs/commons-el.jar"/>
+	<classpathentry kind="lib" path="deplibs/jasper-compiler.jar"/>
+	<classpathentry kind="lib" path="deplibs/jasper-compiler-jdt.jar"/>
+	<classpathentry kind="lib" path="deplibs/jasper-runtime.jar"/>
+	<classpathentry kind="lib" path="deplibs/jsp-api.jar"/>
+	<classpathentry kind="lib" path="deplibs/naming-factory.jar"/>
+	<classpathentry kind="lib" path="deplibs/naming-factory-dbcp.jar"/>
+	<classpathentry kind="lib" path="deplibs/naming-resources.jar"/>
+	<classpathentry kind="lib" path="deplibs/servlet-api.jar"/>
+	<classpathentry kind="lib" path="deplibs/commons-logging-1.1.jar"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>

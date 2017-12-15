@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+
+<!-- OBSOLETED. Use CTEServices instead -->
+
+<definitions name="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-csr="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/webservices/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+
+	<message name="GetCustomerByNameRequest">
+		<part name="firstName" type="xsd:string" />
+		<part name="LastName" type="xsd:string" />
+	</message>
+	<message name="GetCustomerByNameResponse">
+		<part name="name" type="tns:ArrayOfCTEDataT" />
+	</message>
+
+	<message name="GetCustomerByAccountRequest">
+		<part name="accountNumber" type="xsd:string" />
+	</message>
+	<message name="GetCustomerByAccountResponse">
+		<part name="name" type="tns:CTEDataT" />
+	</message>
+
+	<message name="GetCmByMacRequest">
+		<part name="macAddress" type="xsd:string" />
+	</message>
+	<message name="GetCmByMacResponse">
+		<part name="cm" type="tns:CableModemT" />
+	</message>
+
+	<message name="GetMtaByMacRequest">
+		<part name="macAddress" type="xsd:string" />
+	</message>
+	<message name="GetMtaByMacResponse">
+		<part name="mta" type="tns:EmtaT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	
+	<portType name="CsrPortalEP">
+		<operation name="getCustomerByName">
+			<input message="tns-csr:GetCustomerByNameRequest" />
+			<output message="tns-csr:GetCustomerByNameResponse" />
+		</operation>
+		<operation name="getCustomerByAccount">
+			<input message="tns-csr:GetCustomerByAccountRequest" />
+			<output message="tns-csr:GetCustomerByAccountResponse" />
+		</operation>
+		<operation name="getCmByMac">
+			<input message="tns-csr:GetCmByMacRequest" />
+			<output message="tns-csr:GetCmByMacResponse" />
+		</operation>
+		<operation name="getMtaByMac">
+			<input message="tns-csr:GetMtaByMacRequest" />
+			<output message="tns-csr:GetMtaByMacResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	
+	<binding name="CsrPortalSOAPBinding" type="tns-csr:CsrPortalEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getCustomerByName">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCustomerByAccount">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmByMac">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaByMac">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	
+	<service name="CsrPortalService">
+		<port name="CsrPortalEP" binding="tns-csr:CsrPortalSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/CsrPortalEP" />
+		</port>
+	</service>
+
+</definitions>

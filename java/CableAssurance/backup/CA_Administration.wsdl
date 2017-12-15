@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-adm="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/webservices/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- data type declns -->
+	
+	<xsd:complexType name="PollingIntervalsT">
+		<xsd:all>
+			<xsd:element name="cmtsPollInterval" type="xsd:string" />
+			<xsd:element name="cmPollInterval" type="xsd:string" />
+			<xsd:element name="mtaPollInterval" type="xsd:string" />
+			<xsd:element name="mtaPingInterval" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlarmBasedStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="color" type="tns:StatusColorT" />
+			<xsd:element name="alarmType" type="xsd:string" />
+			<xsd:element name="alarmState" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateStatusThresholdT">
+		<xsd:all>
+			<xsd:element name="color" type="tns:StatusColorT" />
+			<xsd:element name="childColor" type="tns:StatusColorT" />
+			<xsd:element name="thresholdPercent" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="SoakWindowT">
+		<xsd:all>
+			<xsd:element name="soakWindow_1" type="xsd:string" />
+			<xsd:element name="soakWindow_1_Duration" type="xsd:string" />
+			<xsd:element name="soakWindow_2" type="xsd:string" />
+			<xsd:element name="soakWindow_2_Duration" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateCmOfflineTresholdT">
+		<xsd:all>
+			<xsd:element name="percentCmOffline_1" type="xsd:string" />
+			<xsd:element name="maxCm_1" type="xsd:string" />
+			<xsd:element name="percentCmOffline_2" type="xsd:string" />
+			<xsd:element name="maxCm_2" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AggregateMtaTresholdT">
+		<xsd:all>
+			<xsd:element name="mtaThresholdCount" type="xsd:string" />
+			<xsd:element name="mtaThresholdWindow" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcPowerTresholdT">
+		<xsd:all>
+			<xsd:element name="thresholdCount" type="xsd:string" />
+			<xsd:element name="thresholdWindow" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="HfcAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmThresold" type="tns-adm:AggregateCmOfflineTresholdT" />
+			<xsd:element name="cmSoakWindow" type="tns-adm:SoakWindowT" />
+			<xsd:element name="mtaThresold" type="tns-adm:AggregateMtaTresholdT" />
+			<xsd:element name="mtaSoakWindow" type="tns-adm:SoakWindowT" />
+			<xsd:element name="powerThresold" type="tns-adm:HfcPowerTresholdT" />
+			<xsd:element name="powerSoakWindow" type="tns-adm:SoakWindowT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlarmTypeConfigT">
+		<xsd:all>
+			<xsd:element name="alarmType" type="xsd:string" />
+			<xsd:element name="soakWindow" type="tns-adm:SoakWindowT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAlarmTypeConfigT">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns-adm:AlarmTypeConfigT[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MtaAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="alarmTypes" type="tns-adm:ArrayOfAlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmtsAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmtsDown" type="tns-adm:AlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="CmsAlarmConfigT">
+		<xsd:all>
+			<xsd:element name="cmsLossOfComm" type="tns-adm:AlarmTypeConfigT" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+
+	<message name="UpdateCmtsRequest">
+		<part name="cmts" type="tns:CmtsT" />
+	</message>
+	<message name="UpdateCmtsResponse">
+		<part name="result" type="xsd:short" />
+	</message>
+
+	<message name="UpdateCmsRequest">
+		<part name="cms" type="tns:CmsT" />
+	</message>
+	<message name="UpdateCmsResponse">
+		<part name="result" type="xsd:short" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="AdministrationEP">
+		<operation name="updateCmts">
+			<input message="tns-adm:UpdateCmtsRequest" />
+			<output message="tns-adm:UpdateCmtsResponse" />
+		</operation>
+		<operation name="updateCms">
+			<input message="tns-adm:UpdateCmsRequest" />
+			<output message="tns-adm:UpdateCmsResponse" />
+		</operation>
+	</portType>
+	
+	<!-- binding declns -->
+	<binding name="AdministrationSOAPBinding" type="tns-adm:AdministrationEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="updateCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="AdministrationService">
+		<port name="AdministrationEP" binding="tns-adm:AdministrationSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/AdministrationEP" />
+		</port>
+	</service>
+
+</definitions>

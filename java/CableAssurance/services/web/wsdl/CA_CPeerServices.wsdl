@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+
+<definitions
+	name="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-cpeer="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import
+		namespace="http://www.palmyrasys.com/webservices/CableAssurance"
+		location="CableAssurance.xsd" />
+
+	<!-- message declns -->	
+	
+	<message name="empty" />
+
+	<message name="PingMtaRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+	</message>
+	<message name="PingMtaResponse">
+		<part name="result" type="xsd:string" />
+	</message>
+
+	<message name="GetMtaDataRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetMtaDataResponse">
+		<part name="result" type="tns:MtaDataT" />
+	</message>
+
+	<message name="GetCmDataRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmDataResponse">
+		<part name="result" type="tns:CmDataT" />
+	</message>
+
+	<message name="GetCmtsCmDataRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+		<part name="cmResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmtsCmDataResponse">
+		<part name="result" type="tns:CmtsCmDataT" />
+	</message>
+
+	<message name="EventInput">
+		<part name="event" type="tns:EventMessageT" />
+	</message>
+	<message name="EventOutput">
+		<part name="result" type="xsd:short" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	
+	<portType name="CPeerServiceEP">
+		<operation name="pingMta">
+			<input message="tns-cpeer:PingMtaRequest" />
+			<output message="tns-cpeer:PingMtaResponse" />
+		</operation>
+		<operation name="getMtaData">
+			<input message="tns-cpeer:GetMtaDataRequest" />
+			<output message="tns-cpeer:GetMtaDataResponse" />
+		</operation>
+		<operation name="getCmData">
+			<input message="tns-cpeer:GetCmDataRequest" />
+			<output message="tns-cpeer:GetCmDataResponse" />
+		</operation>
+		<operation name="getCmtsCmData">
+			<input message="tns-cpeer:GetCmtsCmDataRequest" />
+			<output message="tns-cpeer:GetCmtsCmDataResponse" />
+		</operation>
+		<operation name="sendEvent">
+			<input message="tns-cpeer:EventInput" />
+			<output message="tns-cpeer:EventOutput" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	
+	<binding name="CPeerServiceSOAPBinding" type="tns-cpeer:CPeerServiceEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="pingMta">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaData">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmData">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsCmData">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="sendEvent">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/CPeerService"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	
+	<service name="CPeerServiceService">
+		<port name="CPeerServiceEP"
+			binding="tns-cpeer:CPeerServiceSOAPBinding">
+			<soap:address
+				location="http://localhost:9091/CableAssurance/caservices/CPeerServiceEP" />
+		</port>
+	</service>
+
+</definitions>

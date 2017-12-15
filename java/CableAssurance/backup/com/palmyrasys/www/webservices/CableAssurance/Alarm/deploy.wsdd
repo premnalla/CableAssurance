@@ -1,0 +1,145 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AlarmService WSDL service -->
+
+  <service name="AlarmEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"/>
+      <parameter name="wsdlServiceElement" value="AlarmService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="AlarmEP"/>
+      <parameter name="className" value="com.palmyrasys.www.webservices.CableAssurance.Alarm.AlarmSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="AlarmEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getCurrentAlarms" qname="operNS:getCurrentAlarms" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:ArrayOfCurrentAlarmsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CurrentAlarmT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="fromTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="toTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="batch" type="tns:ResultBatchT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCurrentAlarm" qname="operNS:getCurrentAlarm" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:CurrentAlarmT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="alarmId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCurrentAlarmDetails" qname="operNS:getCurrentAlarmDetails" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:CurrentAlarmDetailsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="alarmId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCurrentAlarmsByType" qname="operNS:getCurrentAlarmsByType" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:ArrayOfCurrentAlarmsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CurrentAlarmT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="alarmType" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="alarmSubType" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="fromTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="toTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="batch" type="tns:ResultBatchT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getHistoricalAlarms" qname="operNS:getHistoricalAlarms" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:ArrayOfHistoricalAlarmsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:HistoricalAlarmT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="fromTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="toTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="batch" type="tns:ResultBatchT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getHistoricalAlarm" qname="operNS:getHistoricalAlarm" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:HistoricalAlarmT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="alarmId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHistoricalAlarmDetails" qname="operNS:getHistoricalAlarmDetails" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:HistoricalAlarmDetailsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="alarmId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHistoricalAlarmsByType" qname="operNS:getHistoricalAlarmsByType" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Alarm" returnQName="name" returnType="rtns:ArrayOfHistoricalAlarmsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:HistoricalAlarmT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="alarmType" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="alarmSubType" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="fromTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="toTime" type="tns:InputTimeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="batch" type="tns:ResultBatchT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <parameter name="allowedMethods" value="getHistoricalAlarms getHistoricalAlarm getCurrentAlarmsByType getCurrentAlarm getHistoricalAlarmsByType getHistoricalAlarmDetails getCurrentAlarmDetails getCurrentAlarms"/>
+      <parameter name="scope" value="Session"/>
+
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfCurrentAlarmsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CurrentAlarmT[]"
+        innerType="cmp-ns:CurrentAlarmT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CurrentAlarmT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CurrentAlarmT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AbstractAlarmT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AbstractAlarmT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HistoricalAlarmDetailsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HistoricalAlarmDetailsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfHistoricalAlarmsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HistoricalAlarmT[]"
+        innerType="cmp-ns:HistoricalAlarmT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:InputTimeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.InputTimeT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ResultBatchT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ResultBatchT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HistoricalAlarmT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HistoricalAlarmT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CurrentAlarmDetailsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CurrentAlarmDetailsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:TopoHierarchyKeyT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.TopoHierarchyKeyT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="RunCblAssurance" default="RunService" basedir=".">
+
+	<property name="axis.dist.libs" value="./WebContent/WEB-INF/lib" />
+	<property name="axis.dist.classes"
+		value="./WebContent/WEB-INF/classes" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${axis.dist.classes}" />
+	</path>
+
+	<target name="RunService">
+
+		<echo>${axis.dist.libs}</echo>
+		<echo>${basedir}</echo>
+
+		<java classname="com.palmyrasys.www.webservices.CableAssurance.LocalSystemSOAPBindingStub" fork="yes">
+			<classpath>
+				<path refid="axis.classpath" />
+			</classpath>
+		</java>
+
+	</target>
+
+</project>

@@ -1,0 +1,108 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CsrPortalService WSDL service -->
+
+  <service name="CsrPortalEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal"/>
+      <parameter name="wsdlServiceElement" value="CsrPortalService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="CsrPortalEP"/>
+      <parameter name="className" value="com.palmyrasys.www.webservices.CableAssurance.CsrPortal.CsrPortalSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="CsrPortalEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getCustomerByName" qname="operNS:getCustomerByName" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal" returnQName="name" returnType="rtns:ArrayOfCTEDataT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CTEDataT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="firstName" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="LastName" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCmByMac" qname="operNS:getCmByMac" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal" returnQName="cm" returnType="rtns:CableModemT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="macAddress" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getMtaByMac" qname="operNS:getMtaByMac" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/CsrPortal" returnQName="mta" returnType="rtns:EmtaT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="macAddress" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getMtaByMac getCmByMac getCustomerByName"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CTEAbstractMacT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CTEAbstractMacT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CTECustomerT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CTECustomerT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:EmtaT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.EmtaT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:TopoHierarchyKeyT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.TopoHierarchyKeyT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CTEDataT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CTEDataT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CableModemT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CableModemT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:StatusColorT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.StatusColorT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CTEAbstractNameT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CTEAbstractNameT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfCTEDataT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CTEDataT[]"
+        innerType="cmp-ns:CTEDataT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

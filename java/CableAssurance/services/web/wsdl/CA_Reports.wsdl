@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-reports="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/webservices/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+
+	<!-- Generic Request -->
+	
+	<message name="GetGenReq">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="resId" type="xsd:integer" />
+		<part name="resType" type="tns:ResourceTypeT" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:ArrayOfQueryStateT" />
+	</message>
+
+	<!-- MTA Responses -->	
+	
+	<message name="GetMtaStatusSummaryResp">
+		<part name="returnValue" type="tns:MtaStatusSummaryRespT" />
+	</message>
+
+	<!-- HFC Responses -->	
+	
+	<message name="GetHfcStatusSummaryResp">
+		<part name="returnValue" type="tns:HfcStatusSummaryRespT" />
+	</message>
+
+	<!-- CM Responses -->	
+	
+	<message name="GetCmStatusSummaryResp">
+		<part name="returnValue" type="tns:CmStatusSummaryRespT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	
+	<portType name="ReportsEP">
+		<operation name="getHfcStatusSummary1">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetHfcStatusSummaryResp" />
+		</operation>
+		<operation name="getHfcStatusSummary2">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetHfcStatusSummaryResp" />
+		</operation>
+		<operation name="getMtaStatusSummary1">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetMtaStatusSummaryResp" />
+		</operation>
+		<operation name="getMtaStatusSummary2">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetMtaStatusSummaryResp" />
+		</operation>
+		<operation name="getCmStatusSummary1">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetCmStatusSummaryResp" />
+		</operation>
+		<operation name="getCmStatusSummary2">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetCmStatusSummaryResp" />
+		</operation>
+		<operation name="getCmTcaStatusSummary1">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetCmStatusSummaryResp" />
+		</operation>
+		<operation name="getCmTcaStatusSummary2">
+			<input message="tns-reports:GetGenReq" />
+			<output message="tns-reports:GetCmStatusSummaryResp" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	
+	<binding name="ReportsSOAPBinding" type="tns-reports:ReportsEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getHfcStatusSummary1">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcStatusSummary2">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaStatusSummary1">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaStatusSummary2">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmStatusSummary1">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmStatusSummary2">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmTcaStatusSummary1">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmTcaStatusSummary2">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Reports"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	
+	<service name="ReportsService">
+		<port name="ReportsEP" binding="tns-reports:ReportsSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/ReportsEP" />
+		</port>
+	</service>
+
+</definitions>

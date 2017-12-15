@@ -1,0 +1,520 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AdministrationService WSDL service -->
+
+  <service name="AdministrationEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/webservices/CableAssurance/Administration"/>
+      <parameter name="wsdlServiceElement" value="AdministrationService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="AdministrationEP"/>
+      <parameter name="className" value="com.palmyrasys.www.webservices.CableAssurance.Administration.AdministrationSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="AdministrationEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="updateCmts" qname="operNS:updateCmts" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:CmtsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addCmts" qname="operNS:addCmts" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:CmtsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="deleteCmts" qname="operNS:deleteCmts" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:CmtsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addCmtsAllSnmpV2CAttributes" qname="operNS:addCmtsAllSnmpV2CAttributes" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmtsResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="attributes" type="tns:ArrayOfSnmpV2CAttributesT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateCmtsAllSnmpV2CAttributes" qname="operNS:updateCmtsAllSnmpV2CAttributes" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmtsResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="attributes" type="tns:ArrayOfSnmpV2CAttributesT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateCms" qname="operNS:updateCms" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cms" type="tns:CmsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addCms" qname="operNS:addCms" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cms" type="tns:CmsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="deleteCms" qname="operNS:deleteCms" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cms" type="tns:CmsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getPollingIntervals" qname="operNS:getPollingIntervals" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="pollingInterval" returnType="rtns:PollingIntervalsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updatePollingIntervals" qname="operNS:updatePollingIntervals" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:PollingIntervalsT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getMtaStatusThreshold" qname="operNS:getMtaStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="threshold" returnType="rtns:MtaStatusThresholdT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateMtaStatusThreshold" qname="operNS:updateMtaStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:MtaStatusThresholdT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getHfcStatusThreshold" qname="operNS:getHfcStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="threshold" returnType="rtns:HfcStatusThresholdT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateHfcStatusThreshold" qname="operNS:updateHfcStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:HfcStatusThresholdT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getChannelStatusThreshold" qname="operNS:getChannelStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="threshold" returnType="rtns:ChannelStatusThresholdT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateChannelStatusThreshold" qname="operNS:updateChannelStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:ChannelStatusThresholdT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCmtsStatusThreshold" qname="operNS:getCmtsStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="threshold" returnType="rtns:CmtsStatusThresholdT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateCmtsStatusThreshold" qname="operNS:updateCmtsStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:CmtsStatusThresholdT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCmsStatusThreshold" qname="operNS:getCmsStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="threshold" returnType="rtns:CmsStatusThresholdT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateCmsStatusThreshold" qname="operNS:updateCmsStatusThreshold" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pollintInterval" type="tns:CmsStatusThresholdT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getMtaAlarmConfig" qname="operNS:getMtaAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="alarmConfig" returnType="rtns:MtaAlarmConfigT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateMtaAlarmConfig" qname="operNS:updateMtaAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="alarmConfig" type="tns:MtaAlarmConfigT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getHfcAlarmConfig" qname="operNS:getHfcAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="alarmConfig" returnType="rtns:HfcAlarmConfigT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateHfcAlarmConfig" qname="operNS:updateHfcAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="alarmConfig" type="tns:HfcAlarmConfigT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCmtsAlarmConfig" qname="operNS:getCmtsAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="alarmConfig" returnType="rtns:CmtsAlarmConfigT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateCmtsAlarmConfig" qname="operNS:updateCmtsAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="alarmConfig" type="tns:CmtsAlarmConfigT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCmsAlarmConfig" qname="operNS:getCmsAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="alarmConfig" returnType="rtns:CmsAlarmConfigT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateCmsAlarmConfig" qname="operNS:updateCmsAlarmConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="alarmConfig" type="tns:CmsAlarmConfigT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateLocalSystem" qname="operNS:updateLocalSystem" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:LocalSystemT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateRegion" qname="operNS:updateRegion" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:RegionT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addRegion" qname="operNS:addRegion" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:RegionT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateMarket" qname="operNS:updateMarket" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:MarketT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addMarket" qname="operNS:addMarket" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:MarketT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateBlade" qname="operNS:updateBlade" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:BladeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addBlade" qname="operNS:addBlade" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:BladeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="deleteBlade" qname="operNS:deleteBlade" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmts" type="tns:BladeT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getCmPerfConfig" qname="operNS:getCmPerfConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="cmPerf" returnType="rtns:CmPerformanceConfigT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="updateCmPerfConfig" qname="operNS:updateCmPerfConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="cmPerf" type="tns:CmPerformanceConfigT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="addUser" qname="operNS:addUser" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="user" type="tns:UserT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="getUsers" qname="operNS:getUsers" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="name" returnType="rtns:ArrayOfUserT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:UserT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getUser" qname="operNS:getUser" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="name" returnType="rtns:UserT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="loginName" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="updateUser" qname="operNS:updateUser" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="user" type="tns:UserT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateUserPassword" qname="operNS:updateUserPassword" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="loginName" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="newPassword" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getApplicationDomains" qname="operNS:getApplicationDomains" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:ArrayOfApplicationDomainT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:ApplicationDomainT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getAccessRights" qname="operNS:getAccessRights" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:ArrayOfUserAccessT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:UserAccessT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getRoles" qname="operNS:getRoles" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:ArrayOfRoleT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:RoleT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getRole" qname="operNS:getRole" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:RoleT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="roleName" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addRole" qname="operNS:addRole" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="role" type="tns:RoleT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="updateRole" qname="operNS:updateRole" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="result" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="role" type="tns:RoleT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <operation name="downloadConfigFromParent" qname="operNS:downloadConfigFromParent" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="rc" returnType="rtns:short" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getConfig" qname="operNS:getConfig" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Administration" returnQName="configData" returnType="rtns:ConfigDownloadT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="updateCmtsAllSnmpV2CAttributes addUser addCmtsAllSnmpV2CAttributes addRegion getApplicationDomains updateChannelStatusThreshold addBlade updateCmtsAlarmConfig updateBlade getCmsStatusThreshold addCms updateCmsAlarmConfig updateCmtsStatusThreshold getHfcAlarmConfig getPollingIntervals getCmtsStatusThreshold updateMtaAlarmConfig deleteCms getChannelStatusThreshold updateCmts updateUser getMtaAlarmConfig updateUserPassword downloadConfigFromParent updateRegion getUsers getRoles addRole updatePollingIntervals getHfcStatusThreshold updateHfcAlarmConfig addMarket getMtaStatusThreshold updateCms updateMarket deleteBlade updateCmsStatusThreshold getAccessRights addCmts getConfig updateHfcStatusThreshold getCmPerfConfig getRole getUser updateCmPerfConfig getCmtsAlarmConfig deleteCmts getCmsAlarmConfig updateRole updateMtaStatusThreshold updateLocalSystem"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:SnmpVersionT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.SnmpVersionT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HfcPowerTresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HfcPowerTresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AggregateMtaTresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AggregateMtaTresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AlarmTypeConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AlarmTypeConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfRoleT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.RoleT[]"
+        innerType="cmp-ns:RoleT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HfcStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HfcStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:LocalSystemT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.LocalSystemT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfUserAccessT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.UserAccessT[]"
+        innerType="cmp-ns:UserAccessT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AggregateCmOfflineTresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AggregateCmOfflineTresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:MtaStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.MtaStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AggregateStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AggregateStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmsAlarmConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmsAlarmConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmsStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmsStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:BladeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.BladeT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfAlarmTypeConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AlarmTypeConfigT[]"
+        innerType="cmp-ns:AlarmTypeConfigT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfAlarmStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AlarmBasedStatusThresholdT[]"
+        innerType="cmp-ns:AlarmBasedStatusThresholdT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:SoakWindowT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.SoakWindowT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmtsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmtsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:RegionT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.RegionT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmPerformanceConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmPerformanceConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfApplicationDomainT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ApplicationDomainT[]"
+        innerType="cmp-ns:ApplicationDomainT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfAggregateStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AggregateStatusThresholdT[]"
+        innerType="cmp-ns:AggregateStatusThresholdT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ConfigDownloadT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ConfigDownloadT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfSnmpV2CAttributesT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.SnmpV2CAttributesT[]"
+        innerType="cmp-ns:SnmpV2CAttributesT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:SnmpV2CAttributesT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.SnmpV2CAttributesT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:TopoHierarchyKeyT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.TopoHierarchyKeyT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmtsAlarmConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmtsAlarmConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:UserT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.UserT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:AlarmBasedStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.AlarmBasedStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:RoleT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.RoleT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ApplicationDomainTypeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ApplicationDomainTypeT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:MtaAlarmConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.MtaAlarmConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:UserAccessTypeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.UserAccessTypeT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:GenericCountsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.GenericCountsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ChannelStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ChannelStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmtsStatusThresholdT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmtsStatusThresholdT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:StatusColorT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.StatusColorT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ApplicationDomainT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ApplicationDomainT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:MarketT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.MarketT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfUserT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.UserT[]"
+        innerType="cmp-ns:UserT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HfcAlarmConfigT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HfcAlarmConfigT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:UserAccessT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.UserAccessT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:PollingIntervalsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.PollingIntervalsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:SystemTypeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.SystemTypeT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

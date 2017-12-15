@@ -1,0 +1,231 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TopologyService WSDL service -->
+
+  <service name="TopologyEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/webservices/CableAssurance/Topology"/>
+      <parameter name="wsdlServiceElement" value="TopologyService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="TopologyEP"/>
+      <parameter name="className" value="com.palmyrasys.www.webservices.CableAssurance.Topology.TopologySOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="TopologyEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getRegions" qname="operNS:getRegions" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfRegionsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:RegionT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getMarkets" qname="operNS:getMarkets" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfMarketsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:MarketT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getBlades" qname="operNS:getBlades" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfBladesT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:BladeT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getCmtses" qname="operNS:getCmtses" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfCmtsesT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CmtsT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="getCmts" qname="operNS:getCmts" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:CmtsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmtsResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getChannels" qname="operNS:getChannels" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfChannelsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:ChannelT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmtsResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getChannel" qname="operNS:getChannel" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ChannelT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="channelResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHfcs" qname="operNS:getHfcs" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfHfcsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:HfcT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmtsResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHfc" qname="operNS:getHfc" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:HfcT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="hfcResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCableModem" qname="operNS:getCableModem" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:CableModemT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="cmResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getChannelCmes" qname="operNS:getChannelCmes" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfCableModemsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CableModemT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="channelResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHfcCmes" qname="operNS:getHfcCmes" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfCableModemsT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CableModemT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="hfcResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getEmta" qname="operNS:getEmta" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:EmtaT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="emtaResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getChannelEmtas" qname="operNS:getChannelEmtas" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfEmtasT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:EmtaT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="channelResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getHfcEmtas" qname="operNS:getHfcEmtas" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Topology" returnQName="name" returnType="rtns:ArrayOfEmtasT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:EmtaT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="topologyKey" type="tns:TopoHierarchyKeyT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+        <parameter qname="hfcResId" type="tns:integer" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getChannelEmtas getHfc getChannels getHfcCmes getCmts getMarkets getChannelCmes getCableModem getHfcEmtas getRegions getHfcs getEmta getChannel getCmtses getBlades"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ChannelTypeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ChannelTypeT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfEmtasT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.EmtaT[]"
+        innerType="cmp-ns:EmtaT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfHfcsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HfcT[]"
+        innerType="cmp-ns:HfcT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:GenericCountsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.GenericCountsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfCableModemsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CableModemT[]"
+        innerType="cmp-ns:CableModemT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfBladesT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.BladeT[]"
+        innerType="cmp-ns:BladeT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CableModemT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CableModemT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:StatusColorT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.StatusColorT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfRegionsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.RegionT[]"
+        innerType="cmp-ns:RegionT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfChannelsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ChannelT[]"
+        innerType="cmp-ns:ChannelT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:MarketT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.MarketT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ChannelT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.ChannelT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:BladeT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.BladeT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfCmtsesT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmtsT[]"
+        innerType="cmp-ns:CmtsT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CmtsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CmtsT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:RegionT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.RegionT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfMarketsT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.MarketT[]"
+        innerType="cmp-ns:MarketT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:EmtaT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.EmtaT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:TopoHierarchyKeyT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.TopoHierarchyKeyT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:HfcT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.HfcT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

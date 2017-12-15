@@ -1,0 +1,72 @@
+
+/* Styles for demo, not necessary for scrolling layers */  
+body { font: 12px verdana, arial, helvetica, sans-serif; overflow:hidden }
+h1 { font-size:1.4em }
+h2 { font-size:1.2em }
+h1, h2, p { margin:0 0 .5em 0 }
+a:link { color:#33c }	
+a:visited { color:#339 }	
+a img { border:none;  }
+div#footer { position:absolute; left:10px; top:280px; z-index:103 }
+
+/* Styles for scrolling layers and scrollbars  */
+div#holder1 { 
+  position:absolute; left:10px; top:30px;
+  width:190px; height:170px; 
+  overflow:hidden; z-index:100 }
+div#wn1  { 
+  position:absolute; left:0; top:0;
+  width:190px; height:150px; 
+  clip:rect(0, 190px, 150px, 0); 
+  overflow:hidden; z-index:1
+  }
+/* op7 needs width set here too (?) */  
+div#lyr1 { width:180px }
+div.content { 
+  position:absolute; visibility:hidden; 
+  left:0; top:0; z-index:1 
+  }  
+
+/* Set small font-size or size/position of div's will be off in some browsers  */
+div#scrollbar1 { 
+  position:absolute; visibility:hidden;
+  left:170px; top:0;
+  width:11px; height:150px; 
+  font-size:1px; z-index:2
+  }
+div#track1 { 
+  position:absolute; left:0; top:12px;
+  width:11px; height:126px;
+  background: url("../images/track.gif") #336 repeat;
+  z-index:1
+  }
+div#dragBar1 {
+  position:absolute; left:1px; top:1px;
+  width:9px; height:20px;
+  background-color:#ceced6;
+  z-index:1
+  }  
+div#up1 { position:absolute; left:0; top:0; z-index:2 }  
+div#down1 { position:absolute; left:0; bottom:0; z-index:3 }  
+
+/* Horizontal scrollbar for wn2 */  
+div#scrollbar2 { 
+  position:absolute; visibility:hidden;
+  left:0; top:155px;
+  width:170px; height:11px;
+  font-size:1px; z-index:2
+  }
+div#track2 { 
+  position:absolute; left:12px; top:0;
+  width:146px; height:11px; 
+  background: url("../images/track.gif") #336 repeat;
+  z-index:1
+  }
+div#dragBar2 {
+  position:absolute; left:1px; top:1px;
+  width:20px; height:9px; 
+  background-color:#ceced6; z-index:1
+  }  
+div#left2 { position:absolute; left:0; bottom:0; z-index:2 }  
+div#right2 { position:absolute; right:0; bottom:0; z-index:3 }  
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/webservices/CableAssurance/LocalSystem"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/LocalSystem"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-locsys="http://www.palmyrasys.com/webservices/CableAssurance/LocalSystem"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/webservices/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="GetLocalSystemResponse">
+		<part name="name" type="tns:LocalSystemT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="LocalSystemEP">
+		<operation name="getLocalSystem">
+			<input message="tns-locsys:empty" />
+			<output message="tns-locsys:GetLocalSystemResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="LocalSystemSOAPBinding" type="tns-locsys:LocalSystemEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getLocalSystem">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="LocalSystemService">
+		<port name="LocalSystemEP" binding="tns-locsys:LocalSystemSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/LocalSystemEP" />
+		</port>
+	</service>
+
+</definitions>

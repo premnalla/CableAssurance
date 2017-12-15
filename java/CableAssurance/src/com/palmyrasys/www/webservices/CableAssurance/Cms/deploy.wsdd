@@ -1,0 +1,45 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CmsService WSDL service -->
+
+  <service name="CmsEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/webservices/CableAssurance/Cms"/>
+      <parameter name="wsdlServiceElement" value="CmsService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="CmsEP"/>
+      <parameter name="className" value="com.palmyrasys.www.webservices.CableAssurance.Cms.CmsSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="CmsEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getLineStatus" qname="operNS:getLineStatus" xmlns:operNS="http://www.palmyrasys.com/webservices/CableAssurance/Cms" returnQName="output" returnType="rtns:ArrayOfCMSLineT" xmlns:rtns="http://www.palmyrasys.com/webservices/CableAssurance" returnItemType="tns2:CMSLineT" xmlns:tns2="http://www.palmyrasys.com/webservices/CableAssurance" soapAction="" >
+        <parameter qname="input" type="tns:ArrayOfCMSLineT" xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"/>
+      </operation>
+      <parameter name="allowedMethods" value="getLineStatus"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:CMSLineT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CMSLineT"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        qname="ns:ArrayOfCMSLineT"
+        type="java:com.palmyrasys.www.webservices.CableAssurance.CMSLineT[]"
+        innerType="cmp-ns:CMSLineT" xmlns:cmp-ns="http://www.palmyrasys.com/webservices/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

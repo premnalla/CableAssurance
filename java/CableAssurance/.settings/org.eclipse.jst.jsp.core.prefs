@@ -1,0 +1,5 @@
+#Tue Dec 12 17:41:59 EST 2006
+eclipse.preferences.version=1
+jsp-content-type/<project>=application/xhtml+xml
+jsp-language/<project>=java
+validateFragments/<project>=true
