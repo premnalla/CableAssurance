@@ -1,0 +1,38 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from JDeviceService WSDL service -->
+
+  <service name="JDeviceEP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.palmyrasys.com/services/CableAssurance/JDevice"/>
+      <parameter name="wsdlServiceElement" value="JDeviceService"/>
+      <parameter name="schemaUnqualified" value="http://www.palmyrasys.com/services/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="JDeviceEP"/>
+      <parameter name="className" value="com.palmyrasys.www.services.CableAssurance.JDevice.JDeviceSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="JDeviceEP"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="getDeviceDetails" qname="operNS:getDeviceDetails" xmlns:operNS="http://www.palmyrasys.com/services/CableAssurance/JDevice" returnQName="details" returnType="rtns:EndUserDeviceTypeT" xmlns:rtns="http://www.palmyrasys.com/services/CableAssurance" soapAction="" >
+        <parameter qname="macAddress" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getDeviceDetails"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.palmyrasys.com/services/CableAssurance"
+        qname="ns:EndUserDeviceTypeT"
+        type="java:com.palmyrasys.www.services.CableAssurance.EndUserDeviceTypeT"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

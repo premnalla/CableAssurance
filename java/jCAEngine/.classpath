@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry combineaccessrules="false" kind="src" path="/PSC_Common_Library"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jCAServerCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jCAEngineBootstrap"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

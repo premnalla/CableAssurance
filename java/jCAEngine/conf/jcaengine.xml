@@ -1,0 +1,17 @@
+<!-- Example Server Configuration File -->
+<!-- Note that component elements are nested corresponding to their
+	parent-child relationships with each other -->
+
+<!-- 
+	A "Server" is a singleton element that represents the entire JVM,
+	which may contain one or more "Service" instances.  The Server
+	listens for a shutdown command on the indicated port.
+	
+	Note:  A "Server" is not itself a "Container", so you may not
+	define subcomponents such as "Valves" or "Loggers" at this level.
+-->
+
+<Server port="9010" shutdown="SHUTDOWN">
+
+
+</Server>
