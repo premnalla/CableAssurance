@@ -1,0 +1,974 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-adm="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/webservices/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+	<message name="ShortResponse">
+		<part name="result" type="xsd:short" />
+	</message>
+
+	<message name="UpdateLocalSystemRequest">
+		<part name="cmts" type="tns:LocalSystemT" />
+	</message>
+
+	<message name="UpdateRegionRequest">
+		<part name="cmts" type="tns:RegionT" />
+	</message>
+
+	<message name="AddRegionRequest">
+		<part name="cmts" type="tns:RegionT" />
+	</message>
+
+	<message name="UpdateMarketRequest">
+		<part name="cmts" type="tns:MarketT" />
+	</message>
+
+	<message name="AddMarketRequest">
+		<part name="cmts" type="tns:MarketT" />
+	</message>
+
+	<message name="UpdateBladeRequest">
+		<part name="cmts" type="tns:BladeT" />
+	</message>
+
+	<message name="AddBladeRequest">
+		<part name="cmts" type="tns:BladeT" />
+	</message>
+
+	<message name="DeleteBladeRequest">
+		<part name="cmts" type="tns:BladeT" />
+	</message>
+
+	<message name="UpdateCmtsRequest">
+		<part name="cmts" type="tns:CmtsT" />
+	</message>
+
+	<message name="AddCmtsRequest">
+		<part name="cmts" type="tns:CmtsT" />
+	</message>
+
+	<message name="DeleteCmtsRequest">
+		<part name="cmts" type="tns:CmtsT" />
+	</message>
+
+	<message name="UpdateCmsRequest">
+		<part name="cms" type="tns:CmsT" />
+	</message>
+
+	<message name="AddCmsRequest">
+		<part name="cms" type="tns:CmsT" />
+	</message>
+
+	<message name="DeleteCmsRequest">
+		<part name="cms" type="tns:CmsT" />
+	</message>
+
+	<message name="UpdateCmtsAllSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+		<part name="attributes" type="tns:ArrayOfSnmpV2CAttributesT" />
+	</message>
+
+	<message name="AddCmtsAllSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+		<part name="attributes" type="tns:ArrayOfSnmpV2CAttributesT" />
+	</message>
+
+	<message name="GetPollingIntervalsResponse">
+		<part name="pollingInterval" type="tns:PollingIntervalsT" />
+	</message>
+	<message name="UpdatePollingIntervalsRequest">
+		<part name="pollintInterval" type="tns:PollingIntervalsT" />
+	</message>
+
+	<message name="GetMtaStatusThresholdResponse">
+		<part name="threshold" type="tns:MtaStatusThresholdT" />
+	</message>
+	<message name="UpdateMtaStatusThresholdRequest">
+		<part name="pollintInterval" type="tns:MtaStatusThresholdT" />
+	</message>
+
+	<message name="GetHfcStatusThresholdResponse">
+		<part name="threshold" type="tns:HfcStatusThresholdT" />
+	</message>
+	<message name="UpdateHfcStatusThresholdRequest">
+		<part name="pollintInterval" type="tns:HfcStatusThresholdT" />
+	</message>
+
+	<message name="GetChannelStatusThresholdResponse">
+		<part name="threshold" type="tns:ChannelStatusThresholdT" />
+	</message>
+	<message name="UpdateChannelStatusThresholdRequest">
+		<part name="pollintInterval" type="tns:ChannelStatusThresholdT" />
+	</message>
+
+	<message name="GetCmtsStatusThresholdResponse">
+		<part name="threshold" type="tns:CmtsStatusThresholdT" />
+	</message>
+	<message name="UpdateCmtsStatusThresholdRequest">
+		<part name="pollintInterval" type="tns:CmtsStatusThresholdT" />
+	</message>
+
+	<message name="GetCmsStatusThresholdResponse">
+		<part name="threshold" type="tns:CmsStatusThresholdT" />
+	</message>
+	<message name="UpdateCmsStatusThresholdRequest">
+		<part name="pollintInterval" type="tns:CmsStatusThresholdT" />
+	</message>
+
+	<message name="GetMtaAlarmConfigResponse">
+		<part name="alarmConfig" type="tns:MtaAlarmConfigT" />
+	</message>
+	<message name="UpdateMtaAlarmConfigRequest">
+		<part name="alarmConfig" type="tns:MtaAlarmConfigT" />
+	</message>
+
+	<message name="GetHfcAlarmConfigResponse">
+		<part name="alarmConfig" type="tns:HfcAlarmConfigT" />
+	</message>
+	<message name="UpdateHfcAlarmConfigRequest">
+		<part name="alarmConfig" type="tns:HfcAlarmConfigT" />
+	</message>
+
+	<message name="GetCmtsAlarmConfigResponse">
+		<part name="alarmConfig" type="tns:CmtsAlarmConfigT" />
+	</message>
+	<message name="UpdateCmtsAlarmConfigRequest">
+		<part name="alarmConfig" type="tns:CmtsAlarmConfigT" />
+	</message>
+
+	<message name="GetCmsAlarmConfigResponse">
+		<part name="alarmConfig" type="tns:CmsAlarmConfigT" />
+	</message>
+	<message name="UpdateCmsAlarmConfigRequest">
+		<part name="alarmConfig" type="tns:CmsAlarmConfigT" />
+	</message>
+
+	<!-- CM Perf configuration -->
+	
+	<message name="GetCmPerfConfigResponse">
+		<part name="cmPerf" type="tns:CmPerformanceConfigT" />
+	</message>
+	<message name="UpdateCmPerfConfigRequest">
+		<part name="cmPerf" type="tns:CmPerformanceConfigT" />
+	</message>
+
+	<!-- User Access control config -->
+	
+	<message name="AddUserRequest">
+		<part name="user" type="tns:UserT" />
+	</message>
+	<message name="UpdateUserRequest">
+		<part name="user" type="tns:UserT" />
+	</message>
+	<message name="GetUsersResponse">
+		<part name="name" type="tns:ArrayOfUserT" />
+	</message>
+	<message name="GetUserRequest">
+		<part name="loginName" type="xsd:string" />
+	</message>
+	<message name="GetUserResponse">
+		<part name="name" type="tns:UserT" />
+	</message>
+	<message name="UpdateUserPasswordRequest">
+		<part name="loginName" type="xsd:string" />
+		<part name="newPassword" type="xsd:string" />
+	</message>
+	
+	<!-- Additions 07-14-07 -->
+	
+	<message name="GetRolesResponse">
+		<part name="result" type="tns:ArrayOfRoleT" />
+	</message>
+	
+	<message name="GetRoleRequest">
+		<part name="roleName" type="xsd:string" />
+	</message>
+	<message name="GetRoleResponse">
+		<part name="result" type="tns:RoleT" />
+	</message>
+	
+	<message name="UpdateRoleRequest">
+		<part name="role" type="tns:RoleT" />
+	</message>
+	
+	<!-- Config Synchronization configuration -->
+	
+	<message name="DownloadConfigResponse">
+		<part name="rc" type="xsd:short" />
+	</message>
+
+	<message name="GetConfigResponse">
+		<part name="configData" type="tns:ConfigDownloadT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="AdministrationEP">
+		<operation name="updateLocalSystem">
+			<input message="tns-adm:UpdateLocalSystemRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateRegion">
+			<input message="tns-adm:UpdateRegionRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addRegion">
+			<input message="tns-adm:AddRegionRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateMarket">
+			<input message="tns-adm:UpdateMarketRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addMarket">
+			<input message="tns-adm:AddMarketRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateBlade">
+			<input message="tns-adm:UpdateBladeRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addBlade">
+			<input message="tns-adm:AddBladeRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="deleteBlade">
+			<input message="tns-adm:DeleteBladeRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateCmts">
+			<input message="tns-adm:UpdateCmtsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addCmts">
+			<input message="tns-adm:AddCmtsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="deleteCmts">
+			<input message="tns-adm:DeleteCmtsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addCmtsAllSnmpV2CAttributes">
+			<input message="tns-adm:AddCmtsAllSnmpV2CAttributeRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateCmtsAllSnmpV2CAttributes">
+			<input message="tns-adm:UpdateCmtsAllSnmpV2CAttributeRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateCms">
+			<input message="tns-adm:UpdateCmsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="addCms">
+			<input message="tns-adm:AddCmsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="deleteCms">
+			<input message="tns-adm:DeleteCmsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getPollingIntervals">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetPollingIntervalsResponse" />
+		</operation>
+		<operation name="updatePollingIntervals">
+			<input message="tns-adm:UpdatePollingIntervalsRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getMtaStatusThreshold">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetMtaStatusThresholdResponse" />
+		</operation>
+		<operation name="updateMtaStatusThreshold">
+			<input message="tns-adm:UpdateMtaStatusThresholdRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getHfcStatusThreshold">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetHfcStatusThresholdResponse" />
+		</operation>
+		<operation name="updateHfcStatusThreshold">
+			<input message="tns-adm:UpdateHfcStatusThresholdRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getChannelStatusThreshold">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetChannelStatusThresholdResponse" />
+		</operation>
+		<operation name="updateChannelStatusThreshold">
+			<input message="tns-adm:UpdateChannelStatusThresholdRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getCmtsStatusThreshold">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetCmtsStatusThresholdResponse" />
+		</operation>
+		<operation name="updateCmtsStatusThreshold">
+			<input message="tns-adm:UpdateCmtsStatusThresholdRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getCmsStatusThreshold">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetCmsStatusThresholdResponse" />
+		</operation>
+		<operation name="updateCmsStatusThreshold">
+			<input message="tns-adm:UpdateCmsStatusThresholdRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>		
+		<operation name="getMtaAlarmConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetMtaAlarmConfigResponse" />
+		</operation>
+		<operation name="updateMtaAlarmConfig">
+			<input message="tns-adm:UpdateMtaAlarmConfigRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getHfcAlarmConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetHfcAlarmConfigResponse" />
+		</operation>
+		<operation name="updateHfcAlarmConfig">
+			<input message="tns-adm:UpdateHfcAlarmConfigRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getCmtsAlarmConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetCmtsAlarmConfigResponse" />
+		</operation>
+		<operation name="updateCmtsAlarmConfig">
+			<input message="tns-adm:UpdateCmtsAlarmConfigRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getCmsAlarmConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetCmsAlarmConfigResponse" />
+		</operation>
+		<operation name="updateCmsAlarmConfig">
+			<input message="tns-adm:UpdateCmsAlarmConfigRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>		
+		
+		<operation name="getCmPerfConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetCmPerfConfigResponse" />
+		</operation>
+		<operation name="updateCmPerfConfig">
+			<input message="tns-adm:UpdateCmPerfConfigRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		
+		<!-- User Access Control administration -->
+		
+		<operation name="getUsers">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetUsersResponse" />
+		</operation>
+		<operation name="addUser">
+			<input message="tns-adm:AddUserRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="getUser">
+			<input message="tns-adm:GetUserRequest" />
+			<output message="tns-adm:GetUserResponse" />
+		</operation>
+		<operation name="updateUser">
+			<input message="tns-adm:UpdateUserRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		<operation name="updateUserPassword">
+			<input message="tns-adm:UpdateUserPasswordRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		
+		<operation name="getRoles">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetRolesResponse" />
+		</operation>
+		<operation name="getRole">
+			<input message="tns-adm:GetRoleRequest" />
+			<output message="tns-adm:GetRoleResponse" />
+		</operation>
+		<operation name="updateRole">
+			<input message="tns-adm:UpdateRoleRequest" />
+			<output message="tns-adm:ShortResponse" />
+		</operation>
+		
+		<!-- Config Synchronization service calls -->
+		
+		<operation name="downloadConfigFromParent">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:DownloadConfigResponse" />
+		</operation>
+
+		<operation name="getConfig">
+			<input message="tns-adm:empty" />
+			<output message="tns-adm:GetConfigResponse" />
+		</operation>
+		
+	</portType>
+	
+	<!-- binding declns -->
+	<binding name="AdministrationSOAPBinding" type="tns-adm:AdministrationEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="updateCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="addCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="deleteCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		
+		<operation name="addCmtsAllSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmtsAllSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		
+		<operation name="updateCms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="addCms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="deleteCms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getPollingIntervals">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updatePollingIntervals">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateMtaStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateHfcStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannelStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateChannelStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmtsStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmsStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmsStatusThreshold">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+
+		<operation name="getMtaAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateMtaAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateHfcAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmtsAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmsAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmsAlarmConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+
+		<operation name="updateLocalSystem">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateRegion">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="addRegion">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateMarket">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="addMarket">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateBlade">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="addBlade">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="deleteBlade">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		
+		<operation name="getCmPerfConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateCmPerfConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		
+		<operation name="addUser">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getUsers">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getUser">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateUser">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateUserPassword">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getRoles">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getRole">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="updateRole">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+
+		<operation name="downloadConfigFromParent">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getConfig">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/webservices/CableAssurance/Administration"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+
+	</binding>
+
+	<!-- service decln -->
+	<service name="AdministrationService">
+		<port name="AdministrationEP" binding="tns-adm:AdministrationSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/AdministrationEP" />
+		</port>
+	</service>
+
+</definitions>

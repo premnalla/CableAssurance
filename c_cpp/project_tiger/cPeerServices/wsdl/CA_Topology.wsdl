@@ -1,0 +1,674 @@
+<?xml version="1.0" ?>
+
+<definitions
+	name="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-catopo="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import
+		namespace="http://www.palmyrasys.com/webservices/CableAssurance"
+		location="CableAssurance.xsd" />
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="GetRegionsResponse">
+		<part name="name" type="tns:ArrayOfRegionsT" />
+	</message>
+
+	<message name="GetMarketsResponse">
+		<part name="name" type="tns:ArrayOfMarketsT" />
+	</message>
+
+	<message name="GetBladesResponse">
+		<part name="name" type="tns:ArrayOfBladesT" />
+	</message>
+
+	<message name="GetBladeRequest">
+		<part name="regionId" type="xsd:integer" />
+		<part name="marketId" type="xsd:integer" />
+		<part name="bladeId" type="xsd:integer" />
+	</message>
+	<message name="GetBladeByNameRequest">
+		<part name="regionId" type="xsd:integer" />
+		<part name="marketId" type="xsd:integer" />
+		<part name="bladeName" type="xsd:string" />
+	</message>
+	<message name="GetBladeResponse">
+		<part name="name" type="tns:BladeT" />
+	</message>
+
+	<message name="GetCmsesResponse">
+		<part name="name" type="tns:ArrayOfCmsesT" />
+	</message>
+
+	<message name="GetCmtsesResponse">
+		<part name="name" type="tns:ArrayOfCmtsesT" />
+	</message>
+
+	<message name="GetCmsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmsResponse">
+		<part name="name" type="tns:CmsT" />
+	</message>
+
+	<message name="GetCmtsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmtsResponse">
+		<part name="name" type="tns:CmtsT" />
+	</message>
+	<message name="GetCmtsByNameRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsName" type="xsd:string" />
+	</message>
+
+	<message name="GetCmtsSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmtsSnmpV2CAttributeResponse">
+		<part name="name" type="tns:SnmpV2CAttributesT" />
+	</message>
+
+	<message name="GetCmSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmSnmpV2CAttributeResponse">
+		<part name="name" type="tns:SnmpV2CAttributesT" />
+	</message>
+
+	<message name="GetMtaSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetMtaSnmpV2CAttributeResponse">
+		<part name="name" type="tns:SnmpV2CAttributesT" />
+	</message>
+
+	<message name="GetCmtsAllSnmpV2CAttributeRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCmtsAllSnmpV2CAttributeResponse">
+		<part name="name" type="tns:ArrayOfSnmpV2CAttributesT" />
+	</message>
+
+	<message name="GetChannelRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="channelResId" type="xsd:integer" />
+	</message>
+	<message name="GetChannelResponse">
+		<part name="name" type="tns:ChannelT" />
+	</message>
+
+	<message name="GetChannelsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetChannelsResponse">
+		<part name="name" type="tns:ArrayOfChannelsT" />
+	</message>
+
+	<message name="GetHfcRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="hfcResId" type="xsd:integer" />
+	</message>
+	<message name="GetHfcResponse">
+		<part name="name" type="tns:HfcT" />
+	</message>
+
+	<message name="GetHfcsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetHfcsResponse">
+		<part name="name" type="tns:ArrayOfHfcsT" />
+	</message>
+
+	<message name="GetCableModemRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+	</message>
+	<message name="GetCableModemResponse">
+		<part name="name" type="tns:CableModemT" />
+	</message>
+
+	<message name="GetChannelCmesRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="channelResId" type="xsd:integer" />
+	</message>
+	<message name="GetChannelCmesResponse">
+		<part name="name" type="tns:ArrayOfCableModemsT" />
+	</message>
+
+	<message name="GetHfcCmesRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="hfcResId" type="xsd:integer" />
+	</message>
+	<message name="GetHfcCmesResponse">
+		<part name="name" type="tns:ArrayOfCableModemsT" />
+	</message>
+
+	<message name="GetEmtaRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="emtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetEmtaResponse">
+		<part name="name" type="tns:EmtaT" />
+	</message>
+
+	<message name="GetEmtaSecondaryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="emtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetEmtaSecondaryResponse">
+		<part name="name" type="tns:EmtaSecondaryT" />
+	</message>
+
+	<message name="GetChannelEmtasRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="channelResId" type="xsd:integer" />
+	</message>
+	<message name="GetChannelEmtasResponse">
+		<part name="name" type="tns:ArrayOfEmtasT" />
+	</message>
+
+	<message name="GetHfcEmtasRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="hfcResId" type="xsd:integer" />
+	</message>
+	<message name="GetHfcEmtasResponse">
+		<part name="name" type="tns:ArrayOfEmtasT" />
+	</message>
+
+	<!-- Messages used to fullfill CSR Portal requests -->
+	
+	<message name="GetDevsForCsrRequest">
+		<part name="cmMac" type="xsd:string"/>
+		<part name="mtaMac" type="xsd:string" />
+	</message>
+	<message name="GetDevsForCsrResponse">
+		<part name="result" type="tns:MappedEuDevicesT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+
+	<portType name="TopologyEP">
+		<operation name="getRegions">
+			<input message="tns-catopo:empty" />
+			<output message="tns-catopo:GetRegionsResponse" />
+		</operation>
+		<operation name="getMarkets">
+			<input message="tns-catopo:empty" />
+			<output message="tns-catopo:GetMarketsResponse" />
+		</operation>
+		<operation name="getBlades">
+			<input message="tns-catopo:empty" />
+			<output message="tns-catopo:GetBladesResponse" />
+		</operation>
+		<operation name="getBlade">
+			<input message="tns-catopo:GetBladeRequest" />
+			<output message="tns-catopo:GetBladeResponse" />
+		</operation>
+		<operation name="getBladeByName">
+			<input message="tns-catopo:GetBladeByNameRequest" />
+			<output message="tns-catopo:GetBladeResponse" />
+		</operation>
+		<operation name="getCmses">
+			<input message="tns-catopo:empty" />
+			<output message="tns-catopo:GetCmsesResponse" />
+		</operation>
+		<operation name="getCms">
+			<input message="tns-catopo:GetCmsRequest" />
+			<output message="tns-catopo:GetCmsResponse" />
+		</operation>
+		<operation name="getCmtses">
+			<input message="tns-catopo:empty" />
+			<output message="tns-catopo:GetCmtsesResponse" />
+		</operation>
+		<operation name="getCmts">
+			<input message="tns-catopo:GetCmtsRequest" />
+			<output message="tns-catopo:GetCmtsResponse" />
+		</operation>
+		<operation name="getCmtsByName">
+			<input message="tns-catopo:GetCmtsByNameRequest" />
+			<output message="tns-catopo:GetCmtsResponse" />
+		</operation>
+		<operation name="getCmtsSnmpV2CAttributes">
+			<input message="tns-catopo:GetCmtsSnmpV2CAttributeRequest" />
+			<output
+				message="tns-catopo:GetCmtsSnmpV2CAttributeResponse" />
+		</operation>
+		<operation name="getCmSnmpV2CAttributes">
+			<input message="tns-catopo:GetCmSnmpV2CAttributeRequest" />
+			<output message="tns-catopo:GetCmSnmpV2CAttributeResponse" />
+		</operation>
+		<operation name="getMtaSnmpV2CAttributes">
+			<input message="tns-catopo:GetMtaSnmpV2CAttributeRequest" />
+			<output message="tns-catopo:GetMtaSnmpV2CAttributeResponse" />
+		</operation>
+		<operation name="getCmtsAllSnmpV2CAttributes">
+			<input
+				message="tns-catopo:GetCmtsAllSnmpV2CAttributeRequest" />
+			<output
+				message="tns-catopo:GetCmtsAllSnmpV2CAttributeResponse" />
+		</operation>
+		<operation name="getChannels">
+			<input message="tns-catopo:GetChannelsRequest" />
+			<output message="tns-catopo:GetChannelsResponse" />
+		</operation>
+		<operation name="getChannel">
+			<input message="tns-catopo:GetChannelRequest" />
+			<output message="tns-catopo:GetChannelResponse" />
+		</operation>
+		<operation name="getHfcs">
+			<input message="tns-catopo:GetHfcsRequest" />
+			<output message="tns-catopo:GetHfcsResponse" />
+		</operation>
+		<operation name="getHfc">
+			<input message="tns-catopo:GetHfcRequest" />
+			<output message="tns-catopo:GetHfcResponse" />
+		</operation>
+		<operation name="getCableModem">
+			<input message="tns-catopo:GetCableModemRequest" />
+			<output message="tns-catopo:GetCableModemResponse" />
+		</operation>
+		<operation name="getChannelCmes">
+			<input message="tns-catopo:GetChannelCmesRequest" />
+			<output message="tns-catopo:GetChannelCmesResponse" />
+		</operation>
+		<operation name="getHfcCmes">
+			<input message="tns-catopo:GetHfcCmesRequest" />
+			<output message="tns-catopo:GetHfcCmesResponse" />
+		</operation>
+		<operation name="getEmta">
+			<input message="tns-catopo:GetEmtaRequest" />
+			<output message="tns-catopo:GetEmtaResponse" />
+		</operation>
+		<operation name="getEmtaSecondary">
+			<input message="tns-catopo:GetEmtaSecondaryRequest" />
+			<output message="tns-catopo:GetEmtaSecondaryResponse" />
+		</operation>
+		<operation name="getChannelEmtas">
+			<input message="tns-catopo:GetChannelEmtasRequest" />
+			<output message="tns-catopo:GetChannelEmtasResponse" />
+		</operation>
+		<operation name="getHfcEmtas">
+			<input message="tns-catopo:GetHfcEmtasRequest" />
+			<output message="tns-catopo:GetHfcEmtasResponse" />
+		</operation>
+
+		<!-- Services used to fullfill CSR Portal requests -->
+		
+		<operation name="getDevicesForCsrPortal">
+			<input message="tns-catopo:GetDevsForCsrRequest" />
+			<output message="tns-catopo:GetDevsForCsrResponse" />
+		</operation>
+
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="TopologySOAPBinding" type="tns-catopo:TopologyEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getRegions">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMarkets">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getBlades">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getBlade">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getBladeByName">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmses">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtses">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsByName">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsAllSnmpV2CAttributes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannels">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannel">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcs">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfc">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCableModem">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannelCmes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcCmes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getEmta">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getEmtaSecondary">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannelEmtas">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcEmtas">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getDevicesForCsrPortal">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Topology"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	
+	<service name="TopologyService">
+		<port name="TopologyEP"
+			binding="tns-catopo:TopologySOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/TopologyEP" />
+		</port>
+	</service>
+
+</definitions>

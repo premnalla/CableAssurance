@@ -1,0 +1,485 @@
+<?xml version="1.0" ?>
+
+<definitions
+	name="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-perf="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import
+		namespace="http://www.palmyrasys.com/webservices/CableAssurance"
+		location="CableAssurance.xsd" />
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+
+	<!-- Current Counts messages -->
+	
+	<message name="GetCurrentCmtsCountsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentCmtsCountsResponse">
+		<part name="name" type="tns:GenericCountsT" />
+	</message>
+
+	<message name="GetCurrentChannelCountsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="channelResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentChannelCountsResponse">
+		<part name="name" type="tns:GenericCountsT" />
+	</message>
+
+	<message name="GetCurrentHfcCountsRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="hfcResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentHfcCountsResponse">
+		<part name="name" type="tns:GenericCountsT" />
+	</message>
+
+	<!-- Counts History messages -->
+	
+	<message name="GetCmtsCountsHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmtsResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetCmtsCountsHistoryResponse">
+		<part name="name" type="tns:ArrayOfGenericCountsHistoryT" />
+	</message>
+
+	<message name="GetChannelCountsHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="channelResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetChannelCountsHistoryResponse">
+		<part name="name" type="tns:ArrayOfGenericCountsHistoryT" />
+	</message>
+
+	<message name="GetHfcCountsHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="hfcResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetHfcCountsHistoryResponse">
+		<part name="name" type="tns:ArrayOfGenericCountsHistoryT" />
+	</message>
+
+	<!-- CM messages -->
+	
+	<message name="GetCurrentCmStatusRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentCmStatusResponse">
+		<part name="name" type="tns:CmStatusT" />
+	</message>
+
+	<message name="GetCmStatusHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetCmStatusHistoryResponse">
+		<part name="name" type="tns:ArrayOfCmStatusHistoryT" />
+	</message>
+
+	<message name="GetCurrentCmPerformanceRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentCmPerformanceResponse">
+		<part name="name" type="tns:CmCurrentPerformanceT" />
+	</message>
+
+	<message name="GetCmPerformanceHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="cmResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetCmPerformanceHistoryResponse">
+		<part name="name" type="tns:ArrayOfCmPerformanceHistoryT" />
+	</message>
+
+	<!-- MTA messages -->
+	
+	<message name="GetCurrentMtaAvailabilityRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentMtaAvailabilityResponse">
+		<part name="name" type="tns:MtaAvailabilityT" />
+	</message>
+
+	<message name="GetMtaAvailabilityHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetMtaAvailabilityHistoryResponse">
+		<part name="name" type="tns:ArrayOfMtaAvailabilityHistoryT" />
+	</message>
+
+	<message name="GetCurrentMtaProvisionedStatusRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentMtaProvisionedStatusResponse">
+		<part name="name" type="tns:MtaProvStatusT" />
+	</message>
+
+	<message name="GetMtaProvisionedStatusHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetMtaProvisionedStatusHistoryResponse">
+		<part name="name" type="tns:ArrayOfMtaProvStatusHistoryT" />
+	</message>
+
+	<message name="GetCurrentMtaPingStatusRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentMtaPingStatusResponse">
+		<part name="name" type="tns:MtaPingStatusT" />
+	</message>
+
+	<message name="GetMtaPingStatusHistoryRequest">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="mtaResId" type="xsd:integer" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:QueryStateT" />
+	</message>
+	<message name="GetMtaPingStatusHistoryResponse">
+		<part name="name" type="tns:ArrayOfMtaPingStatusHistoryT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	
+	<portType name="PerformanceEP">
+		<!-- CMTS -->
+		<operation name="getCurrentCmtsCounts">
+			<input message="tns-perf:GetCurrentCmtsCountsRequest" />
+			<output message="tns-perf:GetCurrentCmtsCountsResponse" />
+		</operation>
+		<operation name="getCmtsCountsHistory">
+			<input message="tns-perf:GetCmtsCountsHistoryRequest" />
+			<output message="tns-perf:GetCmtsCountsHistoryResponse" />
+		</operation>
+		<!-- Channel -->
+		<operation name="getCurrentChannelCounts">
+			<input message="tns-perf:GetCurrentChannelCountsRequest" />
+			<output message="tns-perf:GetCurrentChannelCountsResponse" />
+		</operation>
+		<operation name="getChannelCountsHistory">
+			<input message="tns-perf:GetChannelCountsHistoryRequest" />
+			<output message="tns-perf:GetChannelCountsHistoryResponse" />
+		</operation>
+		<!-- Hfc -->
+		<operation name="getCurrentHfcCounts">
+			<input message="tns-perf:GetCurrentHfcCountsRequest" />
+			<output message="tns-perf:GetCurrentHfcCountsResponse" />
+		</operation>
+		<operation name="getHfcCountsHistory">
+			<input message="tns-perf:GetHfcCountsHistoryRequest" />
+			<output message="tns-perf:GetHfcCountsHistoryResponse" />
+		</operation>
+		<!-- CM -->
+		<operation name="getCurrentCmStatus">
+			<input message="tns-perf:GetCurrentCmStatusRequest" />
+			<output message="tns-perf:GetCurrentCmStatusResponse" />
+		</operation>
+		<operation name="getCmStatusHistory">
+			<input message="tns-perf:GetCmStatusHistoryRequest" />
+			<output message="tns-perf:GetCmStatusHistoryResponse" />
+		</operation>
+		<operation name="getCurrentCmPerformance">
+			<input message="tns-perf:GetCurrentCmPerformanceRequest" />
+			<output message="tns-perf:GetCurrentCmPerformanceResponse" />
+		</operation>
+		<operation name="getCmPerformanceHistory">
+			<input message="tns-perf:GetCmPerformanceHistoryRequest" />
+			<output message="tns-perf:GetCmPerformanceHistoryResponse" />
+		</operation>
+		<!-- MTA -->
+		<operation name="getCurrentMtaAvailability">
+			<input message="tns-perf:GetCurrentMtaAvailabilityRequest" />
+			<output message="tns-perf:GetCurrentMtaAvailabilityResponse" />
+		</operation>
+		<operation name="getMtaAvailabilityHistory">
+			<input message="tns-perf:GetMtaAvailabilityHistoryRequest" />
+			<output message="tns-perf:GetMtaAvailabilityHistoryResponse" />
+		</operation>
+		<operation name="getCurrentMtaProvisionedStatus">
+			<input message="tns-perf:GetCurrentMtaProvisionedStatusRequest" />
+			<output message="tns-perf:GetCurrentMtaProvisionedStatusResponse" />
+		</operation>
+		<operation name="getMtaProvisionedStatusHistory">
+			<input message="tns-perf:GetMtaProvisionedStatusHistoryRequest" />
+			<output message="tns-perf:GetMtaProvisionedStatusHistoryResponse" />
+		</operation>
+		<operation name="getCurrentMtaPingStatus">
+			<input message="tns-perf:GetCurrentMtaPingStatusRequest" />
+			<output message="tns-perf:GetCurrentMtaPingStatusResponse" />
+		</operation>
+		<operation name="getMtaPingStatusHistory">
+			<input message="tns-perf:GetMtaPingStatusHistoryRequest" />
+			<output message="tns-perf:GetMtaPingStatusHistoryResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="PerformanceSOAPBinding" type="tns-perf:PerformanceEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getCurrentCmtsCounts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmtsCountsHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentChannelCounts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getChannelCountsHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentHfcCounts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHfcCountsHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentCmStatus">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmStatusHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentCmPerformance">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCmPerformanceHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentMtaAvailability">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaAvailabilityHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentMtaProvisionedStatus">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaProvisionedStatusHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentMtaPingStatus">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getMtaPingStatusHistory">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Performance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="PerformanceService">
+		<port name="PerformanceEP" binding="tns-perf:PerformanceSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/PerformanceEP" />
+		</port>
+	</service>
+
+</definitions>

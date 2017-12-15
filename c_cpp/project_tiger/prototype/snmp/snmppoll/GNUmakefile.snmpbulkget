@@ -1,0 +1,105 @@
+#----------------------------------------------------------------------------
+#       GNU Makefile
+#
+#
+#----------------------------------------------------------------------------
+MAKEFILE         = GNUmakefile.bulkget
+DEPENDENCY_FILE  = .depend.bulkget
+BIN_UNCHECKED    = snmpbulkget
+
+FILES = \
+  src/snmpbulkget.c \
+#
+
+#----------------------------------------------------------------------------
+#       Include macros and targets
+#----------------------------------------------------------------------------
+LDLIBS = -lnetsnmp
+ifeq ($(OS_MAJOR),SOLARIS)
+LDLIBS += -lkstat
+endif
+
+ifeq ($(INSBIN),.)
+  ifeq ($(PWD),)
+    PWD=$(shell pwd)
+  endif
+  INSBIN = $(PWD)
+endif
+OUTPUT_DIRECTORY = $(INSBIN)
+
+include $(PROJECT_ROOT)/include/makeinclude/wrapper_macros.GNU
+
+# To build multiple targets in the same directory on AIX, it works
+# best to have a template directory per project.
+# The compiler/linker isn't too smart about instantiating templates...
+ifdef TEMPINCDIR
+TEMPINCDIR := $(TEMPINCDIR)/snmpbulkget
+all: $(TEMPINCDIR)
+endif
+
+ifneq ($(OUTPUT_DIRECTORY),)
+all: $(OUTPUT_DIRECTORY)
+$(OUTPUT_DIRECTORY):
+	-@$(MKDIR) "$(OUTPUT_DIRECTORY)"
+endif
+
+# turn off libcheck if doing a dry run
+ifeq ($(findstring n, $(MAKEFLAGS)),n)
+  LIBCHECK = 1
+else
+  # turn off libcheck if keep going was passed too
+  ifeq ($(findstring k, $(MAKEFLAGS)),k)
+    LIBCHECK = 1
+  else
+    LIBCHECK ?= $(filter-out $(foreach lib,ACE,$(findstring $(lib),$(foreach libpath,. ../../../lib /usr/lib $(INSLIB),$(wildcard $(libpath)/lib$(lib).* $(libpath)/$(lib).lib)))),ACE)
+    ifeq ($(LIBCHECK),)
+      LIBCHECK = 1
+    endif
+  endif
+endif
+ifeq ($(LIBCHECK), 1)
+BIN    = $(BIN_UNCHECKED)$(EXEEXT)
+else
+  all: lib_warning
+endif
+
+# If it contains ../ at all use notdir.
+OBJS   = $(foreach var, $(addsuffix .$(OBJEXT), $(basename $(FILES)) $(RESOURCES)), $(if $(findstring ../,$(var)),$(notdir $(var)),$(var)))
+SRC    = $(FILES)
+
+include $(PROJECT_ROOT)/include/makeinclude/macros.GNU
+include $(PROJECT_ROOT)/include/makeinclude/rules.common.GNU
+include $(PROJECT_ROOT)/include/makeinclude/rules.nonested.GNU
+
+ifneq ($(OUTPUT_DIRECTORY),)
+ifneq ($(OUTPUT_DIRECTORY),.)
+  INSTALL = $(VBIN:%=$(INSBIN)/%)
+  CLEANUP_INSTALL += $(CLEANUP_BIN:%=$(INSBIN)/%$(VAR)$(EXEEXT))
+endif
+endif
+
+include $(PROJECT_ROOT)/include/makeinclude/rules.local.GNU
+
+ACE_BASE = $(PROJECT_ROOT)/common/c_cpp/libsrc/thirdparty/ACE/ACE_wrappers
+NETSNMP_BASE = $(PROJECT_ROOT)/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp
+LDFLAGS      += -L. -L../../../lib -L$(NETSNMP_BASE)/snmplib/.libs -L$(ACE_BASE)/build/ace/.libs
+CPPFLAGS     += -I../../.. -I$(NETSNMP_BASE)/include
+ifeq ($(static_libs),1)
+#  CPPFLAGS += -DACE_AS_STATIC_LIBS
+endif
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+lib_warning:
+	@echo This project will not be built due to the following missing library:
+	@echo $(LIBCHECK)
+
+$(BIN): $(addprefix $(VDIR), $(OBJS))
+	$(LINK.cc) $(LDFLAGS) $(CC_OUTPUT_FLAG) $@ $^ $(VLDLIBS) $(POSTLINK)
+
+realclean: clean
+ifneq ($(GENERATED_DIRTY),)
+	-$(RM) -r $(GENERATED_DIRTY)
+endif
+

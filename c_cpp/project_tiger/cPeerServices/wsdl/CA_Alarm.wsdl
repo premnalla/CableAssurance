@@ -1,0 +1,251 @@
+<?xml version="1.0" ?>
+
+<definitions
+	name="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-alarm="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import
+		namespace="http://www.palmyrasys.com/webservices/CableAssurance"
+		location="CableAssurance.xsd" />
+
+	<!-- message declns -->
+	
+	<message name="empty" />
+
+	<!-- Current AlarmS -->
+	
+	<message name="GetGenAlarmsReq">
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:ArrayOfQueryStateT" />
+	</message>
+
+	<message name="GetAlarmsByTypeReq">
+		<part name="alarmType" type="xsd:string" />
+		<part name="alarmSubType" type="xsd:string" />
+		<part name="fromTime" type="tns:InputTimeT" />
+		<part name="toTime" type="tns:InputTimeT" />
+		<part name="batch" type="tns:ResultBatchT" />
+		<part name="queryState" type="tns:ArrayOfQueryStateT" />
+	</message>
+
+	<!-- Current Alarm -->
+	
+	<message name="GetCurrentAlarmsResp">
+		<part name="returnValue" type="tns:CurrentAlarmsRespT" />
+	</message>
+	
+	<message name="GetCurrentAlarmReq">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="alarmId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentAlarmResp">
+		<part name="name" type="tns:CurrentAlarmT" />
+	</message>
+
+	<message name="GetCurrentAlarmDetailsReq">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="alarmId" type="xsd:integer" />
+	</message>
+	<message name="GetCurrentAlarmDetailsResp">
+		<part name="name" type="tns:CurrentAlarmDetailsT" />
+	</message>
+
+	<!-- Historical Alarm -->
+	
+	<message name="GetHistoricalAlarmsResp">
+		<part name="returnValue" type="tns:HistoricalAlarmsRespT" />
+	</message>
+	
+	<message name="GetHistoricalAlarmReq">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="alarmId" type="xsd:integer" />
+	</message>
+	<message name="GetHistoricalAlarmResp">
+		<part name="name" type="tns:HistoricalAlarmT" />
+	</message>
+
+	<message name="GetHistoricalAlarmDetailsReq">
+		<part name="topologyKey" type="tns:TopoHierarchyKeyT" />
+		<part name="alarmId" type="xsd:integer" />
+	</message>
+	<message name="GetHistoricalAlarmDetailsResp">
+		<part name="name" type="tns:HistoricalAlarmDetailsT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	
+	<portType name="AlarmEP">
+	
+		<!-- Current Alarm -->
+		
+		<operation name="getCurrentAlarms">
+			<input message="tns-alarm:GetGenAlarmsReq" />
+			<output message="tns-alarm:GetCurrentAlarmsResp" />
+		</operation>
+		<operation name="getCurrentAlarm">
+			<input message="tns-alarm:GetCurrentAlarmReq" />
+			<output message="tns-alarm:GetCurrentAlarmResp" />
+		</operation>
+		<operation name="getCurrentAlarmDetails">
+			<input message="tns-alarm:GetCurrentAlarmDetailsReq" />
+			<output message="tns-alarm:GetCurrentAlarmDetailsResp" />
+		</operation>
+		<operation name="getCurrentAlarmsByType">
+			<input message="tns-alarm:GetAlarmsByTypeReq" />
+			<output message="tns-alarm:GetCurrentAlarmsResp" />
+		</operation>
+		
+		<!-- Historical Alarm -->
+		
+		<operation name="getHistoricalAlarms">
+			<input message="tns-alarm:GetGenAlarmsReq" />
+			<output message="tns-alarm:GetHistoricalAlarmsResp" />
+		</operation>
+		<operation name="getHistoricalAlarm">
+			<input message="tns-alarm:GetHistoricalAlarmReq" />
+			<output message="tns-alarm:GetHistoricalAlarmResp" />
+		</operation>
+		<operation name="getHistoricalAlarmDetails">
+			<input message="tns-alarm:GetHistoricalAlarmDetailsReq" />
+			<output message="tns-alarm:GetHistoricalAlarmDetailsResp" />
+		</operation>
+		<operation name="getHistoricalAlarmsByType">
+			<input message="tns-alarm:GetAlarmsByTypeReq" />
+			<output message="tns-alarm:GetHistoricalAlarmsResp" />
+		</operation>
+		
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="AlarmSOAPBinding" type="tns-alarm:AlarmEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		
+		<!-- Current Alarm -->
+		
+		<operation name="getCurrentAlarms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentAlarm">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentAlarmDetails">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getCurrentAlarmsByType">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		
+		<!-- Current Alarm -->
+		
+		<operation name="getHistoricalAlarms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHistoricalAlarm">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHistoricalAlarmDetails">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getHistoricalAlarmsByType">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Alarm"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="AlarmService">
+		<port name="AlarmEP" binding="tns-alarm:AlarmSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/AlarmEP" />
+		</port>
+	</service>
+
+</definitions>

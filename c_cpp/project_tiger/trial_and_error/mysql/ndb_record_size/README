@@ -1,0 +1,15 @@
+BUILDING
+--------
+- update the Makefile and point INSTALL_DIR to your MySQL Cluster installation
+- then do 'make'
+
+RUNNING
+-------
+- You might have to export the LD_LIBRARY_PATH to INSTALL_DIR/lib
+- ./ndb_record_size  (no args will print out help)
+
+TESTED
+------
+- Compiles on Ubuntu..
+- Compiles with 5.1.22
+- gcc version 4.1.2 20060928 (prerelease) (Ubuntu 4.1.1-13ubuntu5)

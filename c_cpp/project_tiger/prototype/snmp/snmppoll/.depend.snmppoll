@@ -1,0 +1,70 @@
+# DO NOT DELETE THIS LINE -- depgen.pl uses it.
+# DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
+
+$(sort $(VDIR)src/snmppoll.$(SOEXT) $(VDIR)src/snmppoll.$(OBJEXT) $(VSHDIR)src/snmppoll.$(SOEXT) $(VSHDIR)src/snmppoll.$(OBJEXT)): \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/config_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/definitions.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/asn1.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/callback.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/check_varbind.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/cmu_compat.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/container.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/container_binary_array.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/container_iterator.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/container_list_ssll.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/data_list.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/default_store.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/factory.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/getopt.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/int64.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/keytools.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/lcd_time.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/md5.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/mib.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/mt_support.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/oid_stash.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/parse.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/read_config.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/scapi.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp-tc.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpAAL5PVCDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpCallbackDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpIPXDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpTCPDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpTCPIPv6Domain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpUDPDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpUDPIPv6Domain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpUnixDomain.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_alarm.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_assert.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_client.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_debug.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_enum.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_impl.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_logging.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_parse_args.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_secmod.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmp_transport.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpusm.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpv3-security-includes.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/snmpv3.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/system.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/tools.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/transform_oids.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/ucd_compat.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/library/vacm.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/mib_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/net-snmp-config.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/net-snmp-includes.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/output_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/pdu_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/session_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/snmpv3_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/types.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/utilities.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/varbind_api.h \
+  /home/prem/cvs/src/common/c_cpp/libsrc/thirdparty/netsnmp/netsnmp/include/net-snmp/version.h
+
+# IF YOU PUT ANYTHING HERE IT WILL GO AWAY

@@ -1,0 +1,12 @@
+#
+#
+#
+
+#
+#id:run-level:action:command-line
+#
+# examples:
+# 1. CAEngine1:1:respawn:/opt/nds/bin/CAEngine -f /opt/nds/bin/CAEngine.conf
+# 2. foo_1:2:once:/opt/nds/bin/foo -f /opt/nds/bin/foo.ini
+#
+CAEngine:1:respawn:/home/prem/cvs/src/project_tiger/bin/CAEngine -f /home/prem/cvs/src/project_tiger/bin/CAEngine.conf

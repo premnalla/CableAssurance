@@ -1,0 +1,76 @@
+
+//********************************************************************
+// Copyright (c) 2006 Premraj Nallasivmapillai. All rights reserved.
+//********************************************************************
+
+#ifndef _axSnmpMultiRowMultiVarReqType_hpp_
+#define _axSnmpMultiRowMultiVarReqType_hpp_
+
+//********************************************************************
+// include files
+//********************************************************************
+#include "axSnmpMultipleRowsRequestType.hpp"
+
+//********************************************************************
+// definitions/macros
+//********************************************************************
+
+//********************************************************************
+// forward declerations
+//********************************************************************
+
+/** 
+ * This class is used to ...
+ * 
+ * 
+ * file/class: axSnmpMultiRowMultiVarReqType.hpp
+ * 
+ * Design Document:
+ * 
+ * System:
+ *  
+ * Sub-system:
+ * 
+ * History:
+ * 
+ * @version 1.0
+ * @author Prem Nallasivampillai
+ * @see
+ * 
+ */
+
+class axSnmpMultiRowMultiVarReqType : public axSnmpMultipleRowsRequestType
+{
+public:
+
+  /// destructor
+  virtual ~axSnmpMultiRowMultiVarReqType();
+
+  /**
+   * Describe here ...
+   *
+   * @param p1 in parameter
+   * @param p2 in-out parameter
+   * @param p3 out parameter
+   * @return 
+   *   \begin{itemize}
+   *     \item AX_SUCCESS successfully executed 
+   *     \item AX_FAILED  unsuccessfully executed 
+   *   \end{itemize}
+   * @see
+   */
+
+
+protected:
+
+  /// default constructor
+  axSnmpMultiRowMultiVarReqType();
+
+
+private:
+
+  axSnmpMultiRowMultiVarReqType(const axSnmpMultiRowMultiVarReqType &);
+
+};
+
+#endif // _axSnmpMultiRowMultiVarReqType_hpp_

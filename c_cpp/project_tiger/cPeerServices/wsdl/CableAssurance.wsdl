@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+
+<!-- OBSOLETED -->
+<!-- Use CA_LocalSystem.wsdl instead -->
+
+<definitions name="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+	targetNamespace="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+	xmlns:tns="http://www.nds.com/wsdl/CableAssurance"
+	xmlns:tns-locsys="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.nds.com/wsdl/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="GetLocalSystemsResponse">
+		<part name="name" type="tns:ArrayOfLocalSystemsT" />
+	</message>
+
+	<message name="GetLocalSystemResponse">
+		<part name="name" type="tns:LocalSystemT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="LocalSystemEP">
+		<operation name="getLocalSystem">
+			<input message="tns-locsys:empty" />
+			<output message="tns-locsys:GetLocalSystemResponse" />
+		</operation>
+		<operation name="getLocalSystems">
+			<input message="tns-locsys:empty" />
+			<output message="tns-locsys:GetLocalSystemsResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="LocalSystemSOAPBinding" type="tns-locsys:LocalSystemEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getLocalSystem">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="getLocalSystems">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance/LocalSystem"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="LocalSystemService">
+		<port name="LocalSystemEP" binding="tns-locsys:LocalSystemSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/LocalSystemEP" />
+		</port>
+	</service>
+
+</definitions>

@@ -1,0 +1,83 @@
+
+//********************************************************************
+// OBSOLETED
+//********************************************************************
+
+//********************************************************************
+// Copyright (c) 2006 Premraj Nallasivmapillai. All rights reserved.
+//********************************************************************
+
+#ifndef _axCountsAndOutageMsgQ_hpp
+#define _axCountsAndOutageMsgQ_hpp
+
+//********************************************************************
+// include files
+//********************************************************************
+#include "axCAMessageQueue.hpp"
+
+//********************************************************************
+// definitions/macros
+//********************************************************************
+
+//********************************************************************
+// forward declerations
+//********************************************************************
+
+/** 
+ * This class is used to ...
+ * 
+ * 
+ * file/class: axCountsAndOutageMsgQ.hpp
+ * 
+ * Design Document:
+ * 
+ * System:
+ *  
+ * Sub-system:
+ * 
+ * History:
+ * 
+ * @version 1.0
+ * @author Prem Nallasivampillai
+ * @see
+ * 
+ */
+
+class axCountsAndOutageMsgQ : public axCAMessageQueue
+{
+public:
+
+  /// destructor
+  virtual ~axCountsAndOutageMsgQ();
+
+  /**
+   * Describe here ...
+   *
+   * @param p1 in parameter
+   * @param p2 in-out parameter
+   * @param p3 out parameter
+   * @return 
+   *   \begin{itemize}
+   *     \item AX_SUCCESS successfully executed 
+   *     \item AX_FAILED  unsuccessfully executed 
+   *   \end{itemize}
+   * @see
+   */
+
+  ///
+  static axCountsAndOutageMsgQ * getInstance(void);
+
+protected:
+
+  /// default constructor
+  axCountsAndOutageMsgQ();
+
+
+private:
+
+  axCountsAndOutageMsgQ(const axCountsAndOutageMsgQ &);
+
+  static axCountsAndOutageMsgQ * m_instance;
+};
+
+#endif // _axCountsAndOutageMsgQ_hpp

@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<definitions
+	name="http://www.palmyrasys.com/webservices/CableAssurance/Cte"
+	targetNamespace="http://www.palmyrasys.com/webservices/CableAssurance/Cte"
+	xmlns:tns="http://www.palmyrasys.com/webservices/CableAssurance"
+	xmlns:tns-cte="http://www.palmyrasys.com/webservices/CableAssurance/Cte"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import
+		namespace="http://www.palmyrasys.com/webservices/CableAssurance"
+		location="CableAssurance.xsd" />
+
+	<!-- message declns -->
+
+	<message name="empty" />
+
+	<message name="GetCteDataRequest">
+		<part name="queryInput" type="tns:ArrayOfCTEQueryInputT" />
+	</message>
+	<message name="GetCteDataResponse">
+		<part name="name" type="tns:ArrayOfCTEDataT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+
+	<portType name="CteEP">
+		<operation name="getCteData">
+			<input message="tns-cte:GetCteDataRequest" />
+			<output message="tns-cte:GetCteDataResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+
+	<binding name="CteSOAPBinding" type="tns-cte:CteEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getCteData">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Cte"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.palmyrasys.com/webservices/CableAssurance/Cte"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+
+	<service name="CteService">
+		<port name="CteEP" binding="tns-cte:CteSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/CableAssurance/caservices/CteEP" />
+		</port>
+	</service>
+
+</definitions>
