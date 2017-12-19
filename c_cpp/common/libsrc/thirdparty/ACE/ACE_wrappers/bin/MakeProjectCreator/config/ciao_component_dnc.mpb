@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// ciao_component_dnc.mpb,v 1.4 2005/09/27 18:14:56 wotte Exp
+
+project : ciao_server_dnc, portableserver, ciao_deployment_svnt {
+  after    += CIAO_DnC_Container
+  libs     += CIAO_DnC_Container
+}

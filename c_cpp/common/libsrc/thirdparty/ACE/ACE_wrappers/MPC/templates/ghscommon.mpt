@@ -1,0 +1,10 @@
+// -*- MPC -*-
+// ghscommon.mpt,v 1.3 2006/02/10 12:37:56 elliott_c Exp
+
+conditional_include "common"
+conditional_include "unixcommon"
+
+optimize       = 1
+syslibdirs     =
+deflibdirs     =
+lib_modifier   =

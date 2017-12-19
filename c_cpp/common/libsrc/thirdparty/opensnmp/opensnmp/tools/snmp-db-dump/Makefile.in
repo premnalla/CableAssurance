@@ -1,0 +1,30 @@
+INCLUDES= -I$(top_srcdir) -I$(top_srcdir)/base -I$(top_srcdir)/mib \
+	  -I$(top_srcdir)/asn \
+	  -I$(top_srcdir)/app
+LIBS   	= -lsnmpber -lsnmpbase -lsnmpmib -lsnmpapp -lsnmpbase @LIBS@ 
+LDFLAGS	= -L$(top_srcdir)/asn -L$(top_srcdir)/base -L$(top_srcdir)/mib \
+	  -L$(top_srcdir)/app @LDFLAGS@
+DEPLIBS	= $(top_srcdir)/base/libsnmpbase.a $(top_srcdir)/asn/libsnmpber.a \
+	  $(top_srcdir)/mib/libsnmpmib.a
+
+OBJECTS=main.o
+SOURCES=main.C
+
+TARGETS=snmp-db-dump
+
+all: $(TARGETS)
+
+$(TARGETS): $(OBJECTS) $(DEPLIBS)
+	$(CXX) -o $@ $(OBJECTS) $(LDFLAGS) $(LIBS)
+
+depend:
+	makedepend $(INCLUDES) $(SOURCES)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: clean
+	$(RM) Makefile
+
+clean:
+	$(RM) -f $(TARGETS) $(OBJECTS)
+

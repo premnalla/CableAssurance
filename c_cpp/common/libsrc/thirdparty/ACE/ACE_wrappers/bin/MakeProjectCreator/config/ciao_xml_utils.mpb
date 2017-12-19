@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// ciao_xml_utils.mpb,v 1.1 2005/09/27 18:41:00 wotte Exp
+
+project : xerces {
+  includes += $(CIAO_ROOT)/tools
+  after += CIAO_XML_Utils
+  requires += exceptions
+  libs += CIAO_XML_Utils
+}

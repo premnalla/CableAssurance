@@ -1,0 +1,52 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir)/../../base -I$(srcdir)/../../asn \
+	 -I$(srcdir)/.. \
+	 -I$(srcdir)/../../dispatcher -I$(srcdir)/../../msgproc \
+	 -I$(srcdir)/../../secmod -I../.. -I$(srcdir)/../../mib
+
+LDFLAGS=-L. -L../../dispatcher -L.. \
+	-L../../msgproc -L../../secmod \
+	-L../../asn -L../../base -L../../mib \
+	-lcg -lsnmpapp \
+	-lsnmpdisp  -lsnmpmsgproc -lsnmpsecmod \
+	-lsnmpapp \
+	-lsnmpber -lsnmpbase -lsnmpber \
+	-lsnmpmib @LDFLAGS@
+
+LIBSRCS= snmpCGArchRegObj.C snmpCGArch.C CG.C sendPduArgs.C \
+	 cfgSendPduArgs.C snmpCGtoCGArchMsg.C
+LIBOBJS=$(LIBSRCS:.C=.o) 
+CGMAINSRCS=cgmain.C
+CGMAINOBJS=$(CGMAINSRCS:.C=.o) 
+OURLIBS=libcg.a ../../dispatcher/libsnmpdisp.a ../../msgproc/libsnmpmsgproc.a ../../secmod/libsnmpsecmod.a ../libsnmpapp.a ../../base/libsnmpbase.a ../../asn/libsnmpber.a ../../mib/libsnmpmib.a
+
+TARGETS=libcg.a cg
+INSTALLHEADERS=CG.H   \
+	sendPduArgs.H   \
+	snmpCGArch.H   \
+	snmpCGArchRegObj.H \
+	snmpCGtoCGArchMsg.H
+
+INSTALLPROGS=cg
+
+all: $(TARGETS)
+
+libcg.a: $(LIBOBJS)
+	ar cr $@ $(LIBOBJS)
+
+cg: $(CGMAINOBJS) $(OURLIBS)
+	$(CXX) -o $@ $(CGMAINOBJS) $(LDFLAGS) $(LIBS)
+
+cgtest: $(OURLIBS) cgtest.o
+	$(CXX) -o $@ cgtest.o $(LDFLAGS) $(LIBS)
+
+depend:
+	makedepend $(INCLUDES) $(CGMAINSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) $(TARGETS) $(CGMAINOBJS) $(LIBOBJS)
+

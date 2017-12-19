@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// taolib.mpb,v 1.10 2005/10/03 18:21:05 ossama Exp
+
+project : acelib, ace_for_tao, tao_output, taodefaults, pidl {
+  after += TAO Codeset
+  libs  += TAO
+}

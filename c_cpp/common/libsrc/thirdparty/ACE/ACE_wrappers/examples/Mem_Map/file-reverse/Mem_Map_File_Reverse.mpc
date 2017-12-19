@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// Mem_Map_File_Reverse.mpc,v 1.4 2005/11/26 03:13:13 ossama Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+  exename = file-reverse
+}

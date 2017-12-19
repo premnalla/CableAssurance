@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// install_lib.mpb,v 1.1 2005/06/29 04:09:04 jtc Exp
+
+project {
+  specific {
+    install_this_target = 1
+  }
+}

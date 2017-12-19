@@ -1,0 +1,10 @@
+// -*- MPC -*-
+// Synch_Benchmarks_Perf_Test.mpc,v 1.4 2005/11/11 17:26:34 isisbuilds Exp
+
+project : acelib {
+  avoids   += ace_for_tao
+  after    += Synch_Lib
+  libs     += Synch_Lib
+  libpaths += ../Synch_Lib
+  includes += ..
+}

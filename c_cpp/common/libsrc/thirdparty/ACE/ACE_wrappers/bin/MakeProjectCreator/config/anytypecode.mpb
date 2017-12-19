@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// anytypecode.mpb,v 1.2 2005/08/19 08:02:52 jwillemsen Exp
+
+project : taolib, taoidldefaults {
+  after   += AnyTypeCode
+  libs    += TAO_AnyTypeCode
+
+  idlflags -= -Sa -St
+}

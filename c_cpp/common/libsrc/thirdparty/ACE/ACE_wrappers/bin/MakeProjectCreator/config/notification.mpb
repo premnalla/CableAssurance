@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// notification.mpb,v 1.8 2004/09/07 23:42:00 jtc Exp
+
+project : orbsvcslib, event {
+  after     += CosNotification
+  libs      += TAO_CosNotification
+}

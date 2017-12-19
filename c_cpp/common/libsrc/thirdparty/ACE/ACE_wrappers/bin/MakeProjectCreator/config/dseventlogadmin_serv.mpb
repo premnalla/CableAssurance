@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// dseventlogadmin_serv.mpb,v 1.1 2004/09/13 01:46:52 jtc Exp
+
+project : orbsvcslib, dseventlogadmin_skel, dslogadmin_serv, event_serv {
+  after      += DsEventLogAdmin_Serv
+  libs       += TAO_DsEventLogAdmin_Serv
+}

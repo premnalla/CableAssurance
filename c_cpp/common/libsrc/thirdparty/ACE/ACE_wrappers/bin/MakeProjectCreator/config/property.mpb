@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// property.mpb,v 1.7 2006/01/15 15:14:13 jtc Exp
+
+project : orbsvcslib {
+  after     += CosProperty
+  libs      += TAO_CosProperty
+}

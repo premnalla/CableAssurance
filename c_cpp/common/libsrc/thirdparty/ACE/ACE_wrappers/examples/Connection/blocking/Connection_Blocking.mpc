@@ -1,0 +1,21 @@
+// -*- MPC -*-
+// Connection_Blocking.mpc,v 1.3 2005/11/26 03:13:13 ossama Exp
+
+project(*acceptor) : aceexe {
+  avoids += ace_for_tao
+  exename = acceptor
+  Source_Files {
+    SPIPE-acceptor.cpp
+    test_spipe_acceptor.cpp
+  }
+}
+
+project(*connector) : aceexe {
+  avoids += ace_for_tao
+  exename = connector
+  Source_Files {
+    SPIPE-connector.cpp
+    test_spipe_connector.cpp
+  }
+}
+

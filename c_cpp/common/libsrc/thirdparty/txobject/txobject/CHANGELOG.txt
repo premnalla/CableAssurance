@@ -1,0 +1,79 @@
+###############################################################################
+##
+##   Copyright (C) 2000 by Thomas M. Hazel, txObject ATK (www.tobject.org)
+##
+##                           All Rights Reserved
+##
+##   This program is free software; you can redistribute it and/or modify it
+##   under the terms of the GNU General Public License as published by the
+##   Free Software Foundation; either version 2, or (at your option) any
+##   later version.
+##
+##   This program is distributed in the hope that it will be useful,
+##   but WITHOUT ANY WARRANTY; without even the implied warranty of
+##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##   GNU General Public License for more details.
+##
+##   You should have received a copy of the GNU General Public License
+##   along with this program; if not, write to the Free Software
+##   Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+##
+###############################################################################
+
+Changes from 1.3.8 to 1.3.9
+---------------------------
+ 1) Support for txObject ATK on MAC OS X
+
+Changes from 1.3.7 to 1.3.8
+---------------------------
+ 1) fix a serialization bug in when object referencing is turned on
+
+Changes from 1.3.6 to 1.3.7
+---------------------------
+ 1) some methods to return const for container types where appropriate (layer1)
+ 2) add virtual destructor to class txAbsPacker (layer4)
+ 3) rework txStateMgr method : check for determinate contact (layer5)
+
+Changes from 1.3.5 to 1.3.6
+---------------------------
+ 1) fix packer object leak in txTCPServer class
+ 2) add print warning indicating that yields in io/timer calls are not allowed
+ 3) use a txhashtable attributed instead of 0x1 to indicate dummy slots
+     - this is a workaround for ObjectStore 6.0 not allow "invalid" addresses
+     - ObjectStore has said that they will fix this issue someday...
+
+Changes from 1.3.4 to 1.3.5
+---------------------------
+ 1) txNativeThread::yield(event, time) returned wrong value (mimic TX threads)
+ 2) spelling errors in txthrdss.cxx
+ 3) ensure native threads compile without TX threads
+ 4) make cleanup changes to two distributed object tests
+ 5) fix compile issue in txgvector.h
+
+Changes from 1.3.3 to 1.3.4
+---------------------------
+ 1) layer1 - add object type in TX_EXCEPT_FUNC signature
+ 2) layer5 - have arbitrateObject use the same algorith as arbitrateOwnership
+ 3) layer5 - add in >> n; delete n; n = 0; in txdobjutil.cxx for tables & trees 
+ 4) some general cleanup
+
+ 5) - Window2000 has a UDP socket bug :
+
+        * build with compile flag WIN2K_UDP_FIX and get Window 2000 Patch
+
+        Q249149 - WinSock Recvfrom() Now Returns WSAECONNRESET Instead
+                  of Blocking or Timing Out 
+
+        * You can get the patch from microsoft or txobject.sourceforge.net
+
+Changes from 1.3.2 to 1.3.3
+---------------------------
+ 1) cleanup some user interfaces
+ 2) add html library reference files in doc/reference/lib
+
+Changes from 1.3 to 1.3.2
+-------------------------
+ 1) fix txTimer::trigger bug : timers where not always being removed
+ 2) rename same function signatures in txSocket.cxx
+ 3) add missing txostring.h into txObject.dsp VC++ project file
+

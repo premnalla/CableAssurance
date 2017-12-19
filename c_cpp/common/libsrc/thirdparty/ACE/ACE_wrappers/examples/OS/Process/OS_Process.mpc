@@ -1,0 +1,16 @@
+// -*- MPC -*-
+// OS_Process.mpc,v 1.4 2005/11/26 03:13:13 ossama Exp
+
+project(*imore) : aceexe {
+  avoids += ace_for_tao
+  exename = imore
+  Source_Files {
+    imore.cpp
+  }
+}
+project(*process) : aceexe {
+  exename = process
+  Source_Files {
+    process.cpp
+  }
+}

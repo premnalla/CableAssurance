@@ -1,0 +1,15 @@
+// -*- MPC -*-
+// vcl.mpb,v 1.5 2006/02/22 16:32:32 elliott_c Exp
+
+project {
+  requires += vcl
+  macros   += ACE_HAS_VCL=1
+  specific(bmake, borland) {
+     use_vcl        = 1
+     lit_libs      += rtl vcl
+     compile_flags += -tW -tWV
+  }
+  verbatim(borland,macros) {
+    VCL=1
+  }
+}

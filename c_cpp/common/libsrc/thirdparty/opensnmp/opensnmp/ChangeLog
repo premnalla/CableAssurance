@@ -1,0 +1,3570 @@
+2005-12-02 14:44  hardaker
+
+	* asn/Makefile.in (1.15):
+
+	install the opensnmpKey.H file
+	
+2005-12-02 14:37  hardaker
+
+	* base/debug.H (1.17):
+
+	squash compiler comment warning.
+	
+2005-12-02 14:07  baerm
+
+	* asn/: opensnmpKey.C (1.1), opensnmpKey.H (1.1):
+
+	adding opensnmpKey class files so keys actually work, sigh.
+	
+2005-11-22 09:53  baerm
+
+	* snmpd.conf (1.3), app/cfgDebug.C (1.6), app/configMgr.C (1.8),
+	app/cg/cfgSendPduArgs.C (1.11), app/cg/cfgSendPduArgs.H (1.3),
+	app/cg/cgmain.C (1.25), app/cg/sendPduArgs.C (1.5),
+	app/cg/sendPduArgs.H (1.10), app/cg/snmpCGArch.C (1.22),
+	app/cg/snmpCGArch.H (1.14), asn/Makefile.in (1.14), base/debug.C
+	(1.18), base/snmpSNMPErrorObj.C (1.5), msgproc/snmpMPArchObj.C
+	(1.19), secmod/snmpCrypto.C (1.9), secmod/snmpCrypto.H (1.8),
+	secmod/snmpUSMArchObj.C (1.30), secmod/snmpUSMData.C (1.17),
+	secmod/snmpUSMData.H (1.10), secmod/usmAddUserMsg.C (1.6),
+	secmod/usmAddUserMsg.H (1.5), secmod/usmCheckUserMsg.C (1.3),
+	secmod/usmCheckUserMsg.H (1.2), secmod/usmDelUserMsg.C (1.5),
+	secmod/usmUserMsg.C (1.3), secmod/usmUserMsg.H (1.3),
+	test/netsnmp_daemon (1.3):
+
+	added main key, localized key, and large main key, passig to the CG
+	removed discovery handling in the msgproc as it's now done in CG
+	
+2005-11-03 13:33  baerm
+
+	* app/cg/cgmain.C (1.24), app/cg/sendPduArgs.C (1.4),
+	app/cg/sendPduArgs.H (1.9), app/cg/snmpCGtoCGArchMsg.H (1.3),
+	secmod/usmAddUserMsg.C (1.5), secmod/usmAddUserMsg.H (1.4),
+	secmod/usmCheckUserMsg.C (1.2), secmod/usmDelUserMsg.C (1.4),
+	secmod/usmUserMsg.C (1.2), secmod/usmUserMsg.H (1.2):
+
+	message changes to allow passing in key material explicitly
+	
+2005-10-31 15:15  baerm
+
+	* app/cg/sendPduArgs.H (1.8):
+
+	changed default retries to 5
+	
+2005-10-28 14:15  baerm
+
+	* app/cg/CG.C (1.24), app/cg/CG.H (1.15), app/cg/cgmain.C (1.23),
+	app/cg/sendPduArgs.C (1.3), app/cg/sendPduArgs.H (1.7),
+	app/cg/snmpCGArch.C (1.21), app/cg/snmpCGArch.H (1.13),
+	app/cg/snmpCGtoCGArchMsg.C (1.2), app/cg/snmpCGtoCGArchMsg.H (1.2),
+	base/snmpFIFOObj.H (1.5):
+
+	added retries mechanism to CG, allows for setting retries
+	and number of timeouts for an individual message.
+	
+2005-10-25 08:02  rstory
+
+	* configure (1.18):
+
+	update for configure.in
+	
+2005-10-25 08:01  rstory
+
+	* configure.in (1.20):
+
+	add --with-cxx option
+	
+2005-06-02 15:10  baerm
+
+	* app/snmpDatabase_BDB.C (1.4):
+
+	added DB_INIT_TXN to env creation
+	
+2005-06-02 15:06  hardaker
+
+	* dist/: Makefile (1.4), opensnmp.spec (1.4):
+
+	version updating
+	
+2005-06-02 11:28  baerm
+
+	* ChangeLog (1.5):
+
+	fixed typo
+	
+2005-06-02 11:11  baerm
+
+	* ChangeLog (1.4):
+
+	update for release 0.4.1
+	
+2005-04-25 16:07  baerm
+
+	* app/snmpDatabaseObj.C (1.18), app/snmpDatabaseObj.H (1.11),
+	app/cg/CG.H (1.14), app/cg/snmpCGArch.C (1.20), base/debug.C
+	(1.17), base/debug.H (1.16), base/snmpFIFOObj.C (1.6),
+	base/snmpRegObj.C (1.10), base/snmpRegObj.H (1.3),
+	dispatcher/snmpDispArchObj.C (1.17), dispatcher/snmpDispStats.C
+	(1.4):
+
+	added race condition fixes with some better static variable handling
+	in debug and various changes to thread handling.
+	
+2005-03-29 12:44  baerm
+
+	* TODO (1.5):
+
+	added race condition fix to TODO
+	
+2005-03-29 12:41  hardaker
+
+	* configure (1.17), configure.in (1.19):
+
+	better db_cxx checks and fix a typo
+	
+2005-03-29 11:40  baerm
+
+	* app/cg/cfgSendPduArgs.C (1.10):
+
+	added correct help text for AES privacy protocol use
+	
+2005-02-01 12:19  hardaker
+
+	* app/snmpIndexes.C (1.10):
+
+	modern g++ compilers complain about parens surrounding types before an array constructor.
+	
+2005-02-01 12:13  hardaker
+
+	* mib/libsmiOid.C (1.5):
+
+	modern g++ compilers complain about parens surrounding types before an array constructor.
+	
+2005-01-26 11:54  baerm
+
+	* configure (1.16), configure.in (1.18):
+
+	added patch from Ravi Joganathan to fix finding Berkeley DB's
+	db_cxx library on Debian.
+	
+2004-09-30 09:17  baerm
+
+	* asn/smiNode.C (1.11):
+
+	changed smiNode to handle MIB AUGMENT tables.
+	
+2004-09-21 08:42  baerm
+
+	* configure (1.15), configure.in (1.17):
+
+	added Berkeley 4.2 to configure
+	
+2004-09-01 20:07  hardaker
+
+	* dist/: Makefile (1.3), opensnmp.spec (1.3):
+
+	update for 0.4.0
+	
+2004-09-01 18:08  baerm
+
+	* base/snmpObj.C (1.7):
+
+	version change
+	
+2004-09-01 18:00  baerm
+
+	* ChangeLog (1.3):
+
+	0_4_0 changes
+	
+2004-07-06 10:57  baerm
+
+	* secmod/snmpUSMData.C (1.16):
+
+	changed the AES OID back to the IANA current OID, sigh.
+	
+2004-07-02 15:12  baerm
+
+	* app/cg/snmpCGArch.C (1.19), asn/TransportAddress.C (1.6),
+	asn/TransportAddress.H (1.8), base/snmpErrorObj.C (1.8),
+	base/snmpErrorObj.H (1.6), base/snmpStatusInfo.C (1.6),
+	base/snmpStatusInfo.H (1.6), dispatcher/snmpDispArchObj.C (1.16),
+	dispatcher/snmpDispNetObj.C (1.11), msgproc/snmpMPArchObj.C (1.18),
+	secmod/snmpCrypto.C (1.8), secmod/snmpUSMArchObj.C (1.29),
+	secmod/snmpUSMData.C (1.15):
+
+	fixed error handling problem.  Internal errors will now get
+	passed back to the calling application correctly
+	
+2004-06-29 15:00  baerm
+
+	* base/snmpObj.C (1.6), secmod/snmpUSMData.C (1.14):
+
+	changed USM AES priv protocol OID to match current RFC 3826 IANA numbers
+	Whic also limits support to AEs 128 only.
+	fixed version number.
+	
+2004-03-20 18:29  baerm
+
+	* ChangeLog (1.2):
+
+	updated changelog for 0.3.7 release
+	
+2004-03-20 18:10  baerm
+
+	* TODO (1.4):
+
+	added to TODO list
+	
+2004-03-14 07:18  hardaker
+
+	* app/cg/cfgSendPduArgs.C (1.9), secmod/snmpCrypto.C (1.7),
+	secmod/snmpUSMArchObj.C (1.28), secmod/snmpUSMData.C (1.13),
+	secmod/snmpUSMData.H (1.9):
+
+	The final AES specification only has 1 bit length defined (128), so
+	the other 2 (192, 256) were deleted.
+	
+2004-03-08 15:33  baerm
+
+	* app/cg/CG.C (1.23), app/cg/CG.H (1.13), app/cg/cgmain.C (1.22),
+	base/snmpRegObj.C (1.9):
+
+	 signal blocking added to default thread creation
+	 CGmain (cg app.) handles signals
+	 adjustable wait time for asynch message checking (wait for X seconds or
+	 a message arriving, whichever comes first).
+	
+2004-03-05 09:19  baerm
+
+	* TODO (1.3), app/cg/snmpCGArch.C (1.18), app/cg/snmpCGArch.H
+	(1.12), base/snmpStatusInfo.C (1.5), base/snmpStatusInfo.H (1.5),
+	dispatcher/snmpDispArchObj.C (1.15), msgproc/snmpMPArchObj.C
+	(1.17):
+
+	mp synching pduhandle to v3 msg id to cg synching pdu handle to request id
+	to the app using cg being able to use request id. Isn't modularity great!
+	
+2004-03-01 15:53  baerm
+
+	* app/cg/cgmain.C (1.21), app/cg/snmpCGArch.C (1.17), base/debug.C
+	(1.16), base/snmpErrorObj.C (1.7), base/snmpErrorObj.H (1.5),
+	base/snmpStatusInfo.C (1.4), base/snmpStatusInfo.H (1.4),
+	test/netsnmp_daemon (1.2):
+
+	fixed engine id discovery failure
+	
+2004-02-27 15:56  baerm
+
+	* app/cg/CG.C (1.22), app/cg/CG.H (1.12), app/cg/cgmain.C (1.20),
+	app/cg/snmpCGArch.C (1.16), app/cg/snmpCGArch.H (1.11),
+	base/debug.C (1.15), base/snmpRegObj.C (1.8):
+
+	mostly asynch fixes, changes to pass back engine ID info
+	debug adjusted to try to help double printing.
+	
+2004-02-19 12:38  hardaker
+
+	* base/debug.H (1.15):
+
+	Define DEBUGIF to 0 when debugging is disabled.
+	
+2004-02-19 09:29  baerm
+
+	* app/cg/CG.H (1.11):
+
+	textual changes.
+	
+2004-02-19 09:27  baerm
+
+	* app/cg/CG.C (1.21), app/cg/cgmain.C (1.19), app/cg/sendPduArgs.C
+	(1.2), app/cg/sendPduArgs.H (1.6), app/cg/snmpCGArch.C (1.15),
+	app/cg/snmpCGArch.H (1.10), asn/PDU.C (1.10), asn/PDU.H (1.8),
+	base/snmpErrorObj.C (1.6), base/snmpErrorObj.H (1.4):
+
+	timeout handling done properly.
+	
+2004-02-12 14:13  baerm
+
+	* app/cg/CG.C (1.20), app/cg/CG.H (1.10), app/cg/Makefile.in
+	(1.15), app/cg/cgmain.C (1.18), app/cg/sendPduArgs.C (1.1),
+	app/cg/sendPduArgs.H (1.5), app/cg/snmpCGArch.C (1.14),
+	app/cg/snmpCGArch.H (1.9), app/cg/snmpCGArchRegObj.C (1.3),
+	app/cg/snmpCGArchRegObj.H (1.2), app/cg/snmpCGtoCGArchMsg.C (1.1),
+	app/cg/snmpCGtoCGArchMsg.H (1.1), asn/PDU.C (1.9), asn/PDU.H (1.7),
+	base/snmpErrorObj.C (1.5), base/snmpErrorObj.H (1.3),
+	base/snmpFIFOObj.C (1.5), base/snmpFIFOObj.H (1.4),
+	secmod/snmpUSMArchObj.C (1.27):
+
+	asynch changes, adding new CG thread.
+	
+2004-01-26 09:27  baerm
+
+	* test/: cg_authPriv_ucd (1.4), cg_auth_ucd (1.4), cg_noAuth_ucd
+	(1.4):
+
+	fix testing scripts. engine ID no longer needed.
+	
+2004-01-22 16:26  baerm
+
+	* app/cg/cfgSendPduArgs.C (1.8), app/cg/cgmain.C (1.17),
+	app/cg/sendPduArgs.H (1.4), app/cg/snmpCGArch.C (1.13),
+	asn/VarBindList.C (1.9):
+
+	fixed fedora segfaulting, parameter parsing, bad cod, bad code, added walk
+	
+2003-12-19 15:04  tewok
+
+	* base/BufferClass.H (1.3):
+
+	Included <sys/types.h> to mollify FreeBSD.
+	
+2003-12-19 14:51  tewok
+
+	* asn/TransportAddress.C (1.5):
+
+	Added an include for sys/types.h.
+	
+2003-11-26 11:46  baerm
+
+	* acm/snmpVACMArchObj.C (1.9), base/opensnmpUtilities.C (1.4),
+	base/opensnmpUtilities.H (1.4):
+
+	added compare change, it might complie on g++ 2.2 now.
+	
+2003-11-19 09:54  baerm
+
+	* app/cg/CG.C (1.19), base/snmpObj.H (1.5), secmod/snmpCrypto.H
+	(1.7):
+
+	getting rid of some old stream includes.
+	
+2003-11-11 11:00  baerm
+
+	* TODO (1.2), app/cg/snmpCGArch.H (1.8), app/cr/crmain.C (1.17),
+	app/cr/mibs/snmpTable.C (1.10), secmod/snmpUSMArchObj.C (1.26):
+
+	some small fixes. changes to allow building in fedora (added assert.h in
+	a couple files that Roger had to add to get the build to work)
+	
+2003-10-03 10:44  baerm
+
+	* asn/VarBindList.C (1.8):
+
+	added Abhijits varbindlist null check, may indicate null varbinds being added in np-distd, hmmm
+	
+2003-09-30 08:44  baerm
+
+	* app/cg/CG.C (1.18):
+
+	typo fix
+	
+2003-09-29 17:16  baerm
+
+	* app/snmpEngine.C (1.12):
+
+	fixed segfault bug
+	
+2003-09-15 08:27  baerm
+
+	* app/: cfgBoolean.C (1.1), cfgBoolean.H (1.1):
+
+	adding cfgBoolean
+	
+2003-09-12 22:56  hardaker
+
+	* dist/: Makefile (1.2), opensnmp.spec (1.2):
+
+	Ok, last chance to get the include directory specification right.  sigh.
+	
+2003-09-12 15:39  hardaker
+
+	* dist/: Makefile (1.1), opensnmp.spec (1.1):
+
+	RPM managament files
+	
+2003-09-02 10:51  baerm
+
+	* TODO (1.1), acconfig.h (1.3), config.h.in (1.5), configure
+	(1.14), configure.in (1.16), acm/snmpVACMArchObj.C (1.8),
+	app/Makefile.in (1.21), app/configMgr.C (1.7), app/configMgr.H
+	(1.5), app/snmpDatabaseObj.C (1.17), app/snmpDatabaseObj.H (1.10),
+	app/snmpDatabase_BDB.C (1.3), app/snmpDatabase_BDB.H (1.3),
+	app/snmpDatabase_NDBM.C (1.3), app/snmpDatabase_NDBM.H (1.2),
+	app/snmpEngine.C (1.11), app/snmpEngine.H (1.8), app/cg/CG.C
+	(1.17), app/cg/cfgSendPduArgs.C (1.7), app/cg/cgmain.C (1.16),
+	app/cg/snmpCGArch.C (1.12), app/cg/snmpCGArch.H (1.7),
+	app/cr/crmain.C (1.16), app/cr/snmpCRArchObj.C (1.12),
+	app/cr/mibs/snmpTable.C (1.9), asn/OID.C (1.18), asn/OID.H (1.13),
+	asn/TransportAddress.C (1.4), asn/test2.C (1.3), base/debug.C
+	(1.14), base/debug.H (1.14), base/snmpArchRegObj.C (1.6),
+	base/snmpArchRegObj.H (1.5), base/snmpMessageObj.C (1.8),
+	base/snmpMessageObj.H (1.4), base/snmpMutexObj.C (1.5),
+	base/snmpMutexObj.H (1.3), base/snmpRegObj.C (1.7),
+	base/snmpRegObj.H (1.2), dispatcher/snmpDispArchObj.C (1.14),
+	dispatcher/snmpDispArchRegObj.C (1.4), dispatcher/snmpDispNetObj.C
+	(1.10), dispatcher/snmpDispNetObj.H (1.5), mib/mibManager.C (1.3),
+	mib/mibManager.H (1.3), msgproc/snmpMPArchObj.C (1.16),
+	msgproc/snmpMPArchObj.H (1.5), msgproc/snmpMPArchRegObj.C (1.3),
+	msgproc/snmpMPArchRegObj.H (1.2), secmod/snmpUSMArchObj.C (1.25),
+	secmod/snmpUSMArchRegObj.C (1.3):
+
+	blah, lot's of changes to support signal handling
+	and the proper exiting of the threads.
+	
+2003-06-30 08:13  baerm
+
+	* secmod/: usmCheckUserMsg.C (1.1), usmCheckUserMsg.H (1.1),
+	usmUserMsg.C (1.1):
+
+	tres oops, 3 more files missing
+	
+2003-06-29 08:52  baerm
+
+	* secmod/usmUserMsg.H (1.1):
+
+	oops, added usmUserMsg.H
+	
+2003-06-28 13:34  hardaker
+
+	* configure (1.13), configure.in (1.15):
+
+	reverse pthreads and libdb check since RHs libdb now needs pthreads
+	
+2003-06-28 11:51  baerm
+
+	* ChangeLog (1.1), acm/snmpVACMArchObj.C (1.7),
+	acm/snmpVACMIsAccessAllowedASI.C (1.4), app/cfgDebug.C (1.5),
+	app/cfgDebug.H (1.3), app/cfgHelp.C (1.2), app/cfgHelp.H (1.2),
+	app/cfgInteger.C (1.3), app/cfgInteger.H (1.3), app/cfgMib.C (1.3),
+	app/cfgMib.H (1.3), app/cfgPersistent.H (1.3), app/cfgScalarVar.C
+	(1.3), app/cfgScalarVar.H (1.3), app/cfgString.C (1.2),
+	app/cfgString.H (1.2), app/cfgTableEntry.C (1.3),
+	app/cfgTableEntry.H (1.3), app/cfgVarBind.C (1.5), app/cfgVarBind.H
+	(1.2), app/configMgr.C (1.6), app/configMgr.H (1.4),
+	app/configOption.H (1.3), app/snmpCRRegisterObj.C (1.3),
+	app/snmpCRRegisterScalarSet.C (1.3), app/snmpCRRegisterTable.C
+	(1.5), app/snmpDataTable.C (1.4), app/snmpDataTable.H (1.4),
+	app/snmpEngine.C (1.10), app/snmpIndexes.C (1.9), app/snmpIndexes.H
+	(1.4), app/snmpPersistentRowManager.H (1.2), app/snmpRow.C (1.6),
+	app/snmpRow.H (1.6), app/snmpRowAllocator.C (1.5),
+	app/snmpRowAllocator.H (1.4), app/snmpRowDependent.C (1.3),
+	app/snmpRowManager.C (1.3), app/snmpRowManager.H (1.2),
+	app/snmpRowStatus.C (1.5), app/snmpRowStatusCheckColsExist.C (1.3),
+	app/snmpRowStatusCheckColsExist.H (1.2), app/snmpScalarSet.C (1.3),
+	app/snmpScalarSet.H (1.4), app/cg/cfgSendPduArgs.C (1.6),
+	app/cg/cfgSendPduArgs.H (1.2), app/cg/cgmain.C (1.15),
+	app/cg/snmpCGArch.C (1.11), app/cg/snmpCGArch.H (1.6),
+	app/cr/crmain.C (1.15), app/cr/snmpCRArchObj.C (1.11),
+	app/cr/snmpCRArchRegObj.C (1.5), app/cr/snmpCRArchRegObj.H (1.3),
+	app/cr/snmpCRRegisterOID.C (1.3), app/cr/mibreg/SearchRange.H
+	(1.2), app/cr/mibs/scalarSet.H (1.5), app/cr/mibs/snmpTable.H
+	(1.5), app/cr/mibs/sysOrTable.C (1.3), app/cr/mibs/sysOrTable.H
+	(1.2), asn/BerError.H (1.3), asn/BitString.H (1.4),
+	asn/HeaderData.H (1.3), asn/Integer32.C (1.7), asn/Integer32.H
+	(1.4), asn/IpAddress.H (1.2), asn/Makefile.in (1.13), asn/Null.H
+	(1.2), asn/OID.C (1.17), asn/OID.H (1.12), asn/PDU.C (1.8),
+	asn/PDU.H (1.6), asn/RawData.C (1.4), asn/RawData.H (1.5),
+	asn/RawDataWrap.H (1.5), asn/ScopedPDU.C (1.5), asn/ScopedPDU.H
+	(1.3), asn/Sequence.H (1.2), asn/TransportAddress.C (1.3),
+	asn/TransportAddress.H (1.7), asn/Unsigned32.C (1.6),
+	asn/Unsigned32.H (1.5), asn/Unsigned64.H (1.2), asn/VarBind.H
+	(1.3), asn/VarBindList.C (1.7), asn/VarBindList.H (1.4),
+	asn/asnBadAssignment.C (1.2), asn/asnBadAssignment.H (1.5),
+	asn/asnDataType.C (1.8), asn/asnDataType.H (1.7), asn/asnIndex.H
+	(1.3), asn/asnParseError.C (1.3), asn/asnParseError.H (1.2),
+	asn/ber.H (1.2), asn/illegalOID.H (1.4), asn/smiNode.C (1.10),
+	asn/smiNode.H (1.7), asn/snmpV3Message.H (1.4), base/BufferClass.C
+	(1.4), base/debug.C (1.13), base/debug.H (1.13),
+	base/opensnmpUtilities.C (1.3), base/opensnmpUtilities.H (1.3),
+	base/snmpArchObj.C (1.3), base/snmpErrorObj.C (1.4),
+	base/snmpException.C (1.4), base/snmpException.H (1.3),
+	base/snmpMessageObj.C (1.7), base/snmpMessageObj.H (1.3),
+	base/snmpMutexObj.C (1.4), base/snmpObj.C (1.5), base/snmpObj.H
+	(1.4), base/snmpSNMPErrorObj.C (1.4), base/snmpStandardMessage.C
+	(1.2), base/snmpStatusInfo.H (1.3), base/snmpStringException.C
+	(1.4), base/snmpStringException.H (1.3), base/snmpSynchDataObj.C
+	(1.4), base/snmpSynchDataObj.H (1.3), dispatcher/snmpDispArchObj.C
+	(1.13), dispatcher/snmpDispHandleInMsg.C (1.6),
+	dispatcher/snmpDispNetObj.C (1.9),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.6),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.6),
+	dispatcher/snmpDispSendPduASI.C (1.6),
+	dispatcher/snmpDispUnregisterEngIdASI.C (1.4), mib/LIBSMI.H (1.3),
+	mib/libsmiOid.C (1.4), mib/libsmiOid.H (1.3), mib/mibModule.C
+	(1.3), mib/mibModule.H (1.3), mib/mibNode.C (1.3), mib/mibNode.H
+	(1.2), mib/mibRoot.H (1.3), mib/snmp_error.H (1.2),
+	msgproc/snmpMPArchObj.C (1.15), msgproc/snmpMPMsgObj.C (1.3),
+	msgproc/snmpMPPrepareDataElementsASI.C (1.7),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.6),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.5),
+	msgproc/snmpStateReference.C (1.4), secmod/KeyChange.C (1.4),
+	secmod/Makefile.in (1.8), secmod/USMSecurityParameters.C (1.5),
+	secmod/snmpCrypto.H (1.6), secmod/snmpKSMArchObj.C (1.3),
+	secmod/snmpUSMArchObj.C (1.24), secmod/snmpUSMArchObj.H (1.9),
+	secmod/snmpUSMData.C (1.12), secmod/snmpUSMData.H (1.8),
+	secmod/snmpUSMGenerateRequestMsgASI.C (1.5),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.6),
+	secmod/snmpUSMGenericOutMsg.C (1.3),
+	secmod/snmpUSMProcessIncomingASI.C (1.4), secmod/usmAddUserMsg.C
+	(1.4), secmod/usmAddUserMsg.H (1.3), secmod/usmDelUserMsg.C (1.3),
+	secmod/usmDelUserMsg.H (1.2), secmod/usmUserCloneFrom.C (1.10):
+
+	changes for gcc 3 compatability (tested 3.2.2), don't know about
+	backwards compatibility yet, but... woo hoo!
+	
+2003-04-03 07:51  rstory
+
+	* app/snmpDatabase_NDBM.C (1.2):
+
+	ndbm.h > db1/ndbm.h
+	
+2003-04-03 07:51  rstory
+
+	* app/Makefile.in (1.20):
+
+	don't hardcode db sources; remove extra include path
+	
+2003-04-02 21:01  rstory
+
+	* configure (1.12):
+
+	configure for updated configure.in
+	
+2003-04-02 09:20  rstory
+
+	* app/snmpDatabaseObj.C (1.16):
+
+	don't try and use ndbm unless we have the header and were asked to use it
+	
+2003-04-02 09:19  rstory
+
+	* config.h.in (1.4):
+
+	add HAVE_DB1_NDBM_H
+	
+2003-04-02 09:19  rstory
+
+	* configure.in (1.14):
+
+	rename --with-db to --with-bdb; check for db1/ndbm.h; new DB_SRCS subst so we
+	only complie db sub classes for libs we have
+	
+2003-04-02 09:17  rstory
+
+	* Makefile.bot (1.9):
+
+	fix cut-n-paste error, noted on mailig list by Buck Huppmann
+	
+2003-03-10 10:11  rstory
+
+	* Makefile.bot (1.8):
+
+	remove extra '@'
+	
+2003-03-10 09:31  rstory
+
+	* Makefile.bot (1.7):
+
+	fix subdirs for bash problem
+	
+2003-03-10 09:11  rstory
+
+	* app/cg/Makefile.in (1.14):
+
+	use $(LIBOJBS) instead of $<, which doesn't seem to work (Linux/gnu make)
+	
+2003-03-10 09:10  rstory
+
+	* .cvsignore (1.3):
+
+	ignore autom4te.cache
+	
+2003-03-10 09:08  rstory
+
+	* Makefile.bot (1.6):
+
+	fix for bash problem withe empty var in for
+	
+2003-03-07 09:28  hardaker
+
+	* app/cg/Makefile.in (1.13):
+
+	use $< instead of $^
+	
+2003-03-03 10:35  baerm
+
+	* asn/IpAddress.C (1.3):
+
+	added fix to IpAddress from patch on bug db
+	
+2003-03-02 20:58  baerm
+
+	* app/cg/CG.H (1.9):
+
+	new method added to CG
+	
+2003-02-21 10:34  baerm
+
+	* asn/OID.C (1.16), asn/PDU.C (1.7), asn/PDU.H (1.5),
+	asn/VarBindList.C (1.6), asn/VarBindList.H (1.3),
+	base/opensnmpUtilities.C (1.2), base/opensnmpUtilities.H (1.2),
+	base/snmpConstants.H (1.5), base/snmpErrorObj.C (1.3),
+	base/snmpErrorObj.H (1.2), msgproc/snmpMPArchObj.C (1.14),
+	secmod/snmpUSMArchObj.C (1.23):
+
+	Added changes for better CG API support, mostly for error handling
+	Some changes to report handling (return proper request_id for more
+	SNMP processing errors)
+	
+2003-02-11 09:14  baerm
+
+	* asn/smiNode.C (1.9), base/Makefile.in (1.8),
+	base/compareIgnoreCase.C (1.6), base/compareIgnoreCase.H (1.4),
+	base/debug.C (1.12), base/debug.H (1.12), base/opensnmpUtilities.C
+	(1.1), base/opensnmpUtilities.H (1.1):
+
+	miscelaneous changes, added a utilites name space, etc
+	
+2003-02-06 13:06  baerm
+
+	* base/: compareIgnoreCase.C (1.5), compareIgnoreCase.H (1.3):
+
+	whatver
+	
+2003-02-06 10:55  baerm
+
+	* app/snmpEngine.C (1.9), app/snmpEngine.H (1.7), app/cg/CG.C
+	(1.16), app/cg/CG.H (1.8), app/cg/cgmain.C (1.14),
+	app/cg/sendPduArgs.H (1.3), app/cg/snmpCGArch.C (1.10),
+	app/cg/snmpCGArch.H (1.5), asn/smiNode.C (1.8), asn/smiNode.H
+	(1.6), base/compareIgnoreCase.C (1.4), base/compareIgnoreCase.H
+	(1.2), base/snmpMessageObj.C (1.6):
+
+	numerous changes, most currently important is addition of scalar
+	checing in smiNode.
+	Also added some asynchrounous CG changes (not working yet though)
+	and some formatting changes.
+	
+2003-01-30 14:30  rstory
+
+	* app/PersistentVarBind.C (1.4):
+
+	update for renamed method
+	
+2003-01-30 11:36  baerm
+
+	* tools/snmp-db-dump/Makefile.in (1.6):
+
+	added library changes for compile problems
+	
+2003-01-30 10:21  rstory
+
+	* app/snmpDatabaseObj.C (1.15):
+
+	change default to Berkley to minimize impact on existing users
+	
+2003-01-30 10:20  rstory
+
+	* app/Makefile.in (1.19):
+
+	install snmpDatabaseRec.H
+	
+2003-01-29 14:12  rstory
+
+	* app/snmpDatabaseRec.H (1.2):
+
+	reorder init to keep compiler happy; use 0 instead of NULL in init
+	
+2003-01-29 14:04  rstory
+
+	* app/: snmpDatabase_BDB.C (1.2), snmpDatabase_BDB.H (1.2):
+
+	remove BDBRec, use snmpDatabaseRec + local Dbt objs; prefix methods w/'_'
+	
+2003-01-29 13:48  rstory
+
+	* app/Makefile.in (1.18):
+
+	add new snmpDatabaseRec and snmpDatabase_NBDM classes; add db1 include
+	
+2003-01-29 13:47  rstory
+
+	* tools/snmp-db-dump/main.C (1.6):
+
+	use database obj instead of direct berkley db classes
+	
+2003-01-29 13:46  rstory
+
+	* tools/snmp-db-add/main.C (1.3):
+
+	remove old debug code
+	
+2003-01-29 13:45  rstory
+
+	* app/snmpPersistentRowManager.C (1.3):
+
+	renamed db method
+	
+2003-01-29 13:45  rstory
+
+	* app/: snmpDatabase_NDBM.C (1.1), snmpDatabase_NDBM.H (1.1):
+
+	new NDBM db class
+	
+2003-01-29 13:44  rstory
+
+	* app/: snmpDatabaseObj.C (1.14), snmpDatabaseObj.H (1.9),
+	snmpDatabaseRec.C (1.1), snmpDatabaseRec.H (1.1):
+
+	move snmpDatabaseRec class to it's own file; add new snmpDatabaseTraverser
+	class; prefix protected pure virts w/'_'; add public access methods which use
+	VarBind for key/data; change newRecord() to regular virtual; use auto_ptr
+	to make sure snmpDatabaseRecs get deleted; add snmpDatabase_NDBM as default
+	DB implementation; make sure db path has trailing slash
+	
+2003-01-27 15:20  rstory
+
+	* asn/: BitString.C (1.1), BitString.H (1.3), Makefile.in (1.12):
+
+	derivce BitString from OctetString instead of RawData; override string,
+	toString and clone; new BitString.C source; add to Makefile
+	
+2003-01-27 15:18  rstory
+
+	* app/: snmpDatabaseObj.C (1.13), snmpDatabaseObj.H (1.8):
+
+	abstract snmpDatabaseObj; add snmpDatabaseRec; remove overloaded update for
+	PersistentVarBind since regular VarBind version should work fine;
+	
+2003-01-27 15:15  rstory
+
+	* app/Makefile.in (1.17):
+
+	add snmpDatabase_BDB
+	
+2003-01-27 15:12  rstory
+
+	* app/: snmpDatabase_BDB.C (1.1), snmpDatabase_BDB.H (1.1):
+
+	snmpDatabaseObj subclass for BerkleyDB
+	
+2003-01-27 11:00  rstory
+
+	* asn/OID.C (1.15):
+
+	remove extraneous ends when construction OID string
+	
+2003-01-27 10:51  rstory
+
+	* app/Makefile.in (1.16):
+
+	delete 'DO NOT DELETE' line from all Makefile.in, and add to Makefile.bot,
+	so that make depend doesn't nuke the contents of Makefile.bot from Makefile
+	
+2003-01-27 10:48  rstory
+
+	* Makefile.bot (1.5), Makefile.in (1.12), acm/Makefile.in (1.5),
+	app/cg/Makefile.in (1.12), app/cr/Makefile.in (1.8),
+	app/cr/mibreg/Makefile.in (1.5), app/cr/mibs/Makefile.in (1.4),
+	asn/Makefile.in (1.11), base/Makefile.in (1.7),
+	dispatcher/Makefile.in (1.7), mib/Makefile.in (1.8),
+	msgproc/Makefile.in (1.5), secmod/Makefile.in (1.7),
+	tools/Makefile.in (1.9), tools/snmp-conf/Makefile.in (1.4),
+	tools/snmp-db-add/Makefile.in (1.5), tools/snmp-db-dump/Makefile.in
+	(1.5):
+
+	delete 'DO NOT DELETE' line from all Makefile.in, and add to Makefile.bot,
+	so that make depend doesn't nuke the contents of Makefile.bot from Makefile
+	
+2003-01-22 12:42  hardaker
+
+	* INSTALL (1.8), configure (1.11), configure.in (1.13):
+
+	new url for sleepycat
+	
+2003-01-21 16:12  hardaker
+
+	* app/snmpIndexes.C (1.8), app/snmpIndexes.H (1.3), asn/Integer32.C
+	(1.6), asn/Integer32.H (1.3), asn/OID.C (1.14), asn/OID.H (1.11),
+	asn/RawData.C (1.3), asn/RawData.H (1.4), asn/Unsigned32.C (1.5),
+	asn/Unsigned32.H (1.4), asn/asnIndex.C (1.3), asn/asnIndex.H (1.2):
+
+	Add append_OID function to all asnIndex objects.  Use this instead of
+	toOID for speed improvements to reduce the construction and
+	destruction of OID objects for simple index builds.  snmpIndexes then
+	makes use of the same for a few minor speed enhancements.
+	
+2003-01-21 10:33  hardaker
+
+	* app/snmpIndexes.C (1.7):
+
+	Remove an unused variable (which is actually a big deal in C++ because
+	the constructor and destructor are still called.  g++ sucks as it
+	should catch and optimize this).
+	
+2003-01-21 10:32  hardaker
+
+	* app/snmpIndexes.C (1.6), asn/OID.C (1.13), asn/OID.H (1.10):
+
+	Add a operator += to the OID, which speeds up code doing appends (like
+	in snmpIndexes) since temporary construction and destruction of OIDs
+	isn't needed.
+	
+2002-12-19 16:17  baerm
+
+	* app/cfgDebug.C (1.4), base/debug.C (1.11), base/debug.H (1.11):
+
+	added sec/usec timestamp --debug-utimestamp
+	
+2002-11-21 14:27  baerm
+
+	* asn/: smiNode.C (1.7), smiNode.H (1.5):
+
+	smiNode changes in order to access smi type information
+	
+2002-11-21 11:29  baerm
+
+	* INSTALL (1.7), README (1.3), asn/smiNode.C (1.6), asn/smiNode.H
+	(1.4):
+
+	additional smiNode methods added, better install description
+	
+2002-11-19 09:58  baerm
+
+	* INSTALL (1.6):
+
+	added install changes per Rogers comments and updating it generally
+	(using ucd-snmp -> netsnmp, etc...)
+	
+2002-11-19 09:35  baerm
+
+	* test/: netsnmp_auth (1.1), netsnmp_authPriv (1.1),
+	netsnmp_auth_badAuth (1.1), netsnmp_auth_badName (1.1),
+	netsnmp_auth_badPass (1.1), netsnmp_daemon (1.1), netsnmp_noAuth
+	(1.1), ucd_auth (1.3), ucd_authPriv (1.3), ucd_auth_badAuth (1.3),
+	ucd_auth_badName (1.3), ucd_auth_badPass (1.3), ucd_daemon (1.3),
+	ucd_noAuth (1.3):
+
+	changing scripts to netsnmp (from ucd-snmp)
+	
+2002-11-15 12:26  hardaker
+
+	* configure, configure.in, app/snmpDatabaseObj.C, app/cg/CG.C,
+	base/snmpConstants.H, base/snmpException.H,
+	tools/snmp-db-dump/main.C (opensnmp_0_3_3_patch.[2,2,1,1,1,1,1]):
+
+	patches from main branch
+	
+2002-11-14 12:41  rstory
+
+	* base/snmpConstants.H (1.4):
+
+	add missing comma so error strings >1 are correct
+	
+2002-11-13 21:02  rstory
+
+	* app/snmpDatabaseObj.C (1.12), tools/snmp-db-dump/main.C (1.5):
+
+	conditionaly add new param for db open with db 4.1+
+	
+2002-11-13 21:01  rstory
+
+	* configure (1.10), configure.in (1.12):
+
+	check for libdb 4.1 path; only add most recent found db path if none specified
+	
+2002-11-12 20:55  rstory
+
+	* Makefile.bot (1.4), Makefile.in (1.11):
+
+	test rc after a subdir make and bail if not 0
+	
+2002-11-12 17:02  hardaker
+
+	* LICENSE (opensnmp_0_3_3_patch.1), LICENSE (1.4):
+
+	use the proper legal name
+	
+2002-11-11 09:39  hardaker
+
+	* configure, configure.in (opensnmp_0_3_3_patch.[1,1]), configure
+	(1.9), configure.in (1.11):
+
+	don't turn on -g debugging for non CVS checkouts
+	
+2002-11-11 09:38  baerm
+
+	* asn/: smiNode.C (1.5), smiNode.H (1.3):
+
+	added smiNode changes to allow for implied checking at entry nodes
+	for the indexes
+	
+2002-11-11 09:32  baerm
+
+	* asn/: smiNode.C, smiNode.H (opensnmp_0_3_3_patch.[1,1]):
+
+	updated smiNode to handle implied for entry nodes for indexes
+	
+2002-11-08 16:17  baerm
+
+	* app/snmpAppProcessPduASI.C (1.4),
+	app/snmpAppProcessResponsePduASI.C (1.5), app/cg/snmpCGArch.C
+	(1.9), app/cr/snmpCRArchObj.C (1.10), dispatcher/snmpDispArchObj.C
+	(1.12), dispatcher/snmpDispReturnResponsePduASI.C (1.5),
+	secmod/snmpUSMGenerateRequestMsgASI.C (1.4),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.5):
+
+	cvs conflict resolution...	can't we all just get along
+	
+2002-11-08 14:58  baerm
+
+	* base/snmpStandardMessage.C (1.1), base/snmpStandardMessage.H
+	(1.1), dispatcher/snmpFreeSendPduHandle.C (1.4),
+	dispatcher/snmpFreeSendPduHandle.H (1.2),
+	dispatcher/snmpSendPduHandle.C (1.4),
+	dispatcher/snmpSendPduHandle.H (1.3):
+
+	file removal, added the base internal message class
+	
+2002-11-08 14:36  baerm
+
+	* acm/snmpVACMArchObj.C (1.6), acm/snmpVACMArchObj.H (1.3),
+	acm/snmpVACMIsAccessAllowedASI.C (1.3),
+	acm/snmpVACMIsAccessAllowedASI.H (1.2), app/snmpAppProcessPduASI.C
+	(1.3), app/snmpAppProcessPduASI.H (1.2),
+	app/snmpAppProcessResponsePduASI.C (1.4),
+	app/snmpAppProcessResponsePduASI.H (1.2), app/snmpIndexes.C (1.5),
+	app/cg/CG.C (1.15), app/cg/Makefile.in (1.11), app/cg/cgmain.C
+	(1.13), app/cg/snmpCGArch.C (1.8), app/cr/Makefile.in (1.7),
+	app/cr/snmpCRArchObj.C (1.9), app/cr/mibreg/MIBRegTree.C (1.3),
+	app/cr/mibs/scalarSet.C (1.7), app/cr/mibs/scalarSet.H (1.4),
+	asn/HeaderData.C (1.4), asn/HeaderData.H (1.2), asn/Integer32.C
+	(1.5), asn/ScopedPDU.C (1.4), asn/ScopedPDU.H (1.2),
+	asn/snmpV3Message.C (1.4), asn/snmpV3Message.H (1.3),
+	base/BufferClass.C (1.3), base/BufferClass.H (1.2),
+	base/Makefile.in (1.6), base/snmpStatusInfo.C (1.3),
+	base/snmpStatusInfo.H (1.2), base/snmpSynchDataObj.C (1.3),
+	base/snmpSynchDataObj.H (1.2), dispatcher/Makefile.in (1.6),
+	dispatcher/snmpDispArchObj.C (1.11), dispatcher/snmpDispArchObj.H
+	(1.7), dispatcher/snmpDispNetObj.C (1.8),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.4),
+	dispatcher/snmpDispReturnResponsePduASI.H (1.3),
+	dispatcher/snmpDispSendPduASI.C (1.5),
+	dispatcher/snmpDispSendPduASI.H (1.4), msgproc/snmpMPArchObj.C
+	(1.13), msgproc/snmpMPPrepareDataElementsASI.C (1.6),
+	msgproc/snmpMPPrepareDataElementsASI.H (1.4),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.5),
+	msgproc/snmpMPPrepareOutgoingMsgASI.H (1.3),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.4),
+	msgproc/snmpMPPrepareResponseMsgASI.H (1.3),
+	msgproc/snmpStateReference.C (1.3), msgproc/snmpStateReference.H
+	(1.4), secmod/snmpUSMArchObj.C (1.22), secmod/snmpUSMArchObj.H
+	(1.8), secmod/snmpUSMGenerateRequestMsgASI.C (1.3),
+	secmod/snmpUSMGenerateRequestMsgASI.H (1.2),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.4),
+	secmod/snmpUSMGenerateResponseMsgASI.H (1.3),
+	secmod/snmpUSMProcessIncomingASI.C (1.3),
+	secmod/snmpUSMProcessIncomingASI.H (1.2), secmod/usmAddUserMsg.C
+	(1.3), secmod/usmAddUserMsg.H (1.2), test/cg_authPriv_cr (1.4):
+
+	memory leak fixes, internal messaging re-architectected,
+	miscellaneous clean ups.
+	
+2002-11-07 16:12  baerm
+
+	* base/snmpObj.C (1.4):
+
+	added version number
+	
+2002-11-07 15:36  baerm
+
+	* snmpd.4.conf (1.1), snmpd.conf (1.2), test/ucd_auth_badAuth
+	(1.2), test/ucd_auth_badName (1.2), test/ucd_auth_badPass (1.2),
+	test/ucd_daemon (1.2), test/ucd_noAuth (1.2):
+
+	script changes to match net-snmp 5.x
+	
+2002-11-07 13:59  hardaker
+
+	* base/: snmpObj.C (1.3), snmpObj.H (1.3):
+
+	added opensnmp_version() function
+	
+2002-11-07 13:51  baerm
+
+	* app/snmpDatabaseObj.C (1.11):
+
+	added mutex to DB opening
+	
+2002-10-28 14:03  baerm
+
+	* app/cg/CG.C (1.14), app/cg/CG.H (1.7), secmod/snmpUSMArchObj.C
+	(1.21):
+
+	added timeout to CG, fixed encryption problem in USM
+	
+2002-09-20 08:10  baerm
+
+	* asn/PDU.C (1.6):
+
+	use SNMP_ERR string array to print out more user friendly error messages.
+	
+2002-09-20 08:09  baerm
+
+	* base/snmpConstants.H (1.3):
+
+	added string array for SNMP_ERR values
+	
+2002-08-29 08:07  hardaker
+
+	* acconfig.h (1.2), aclocal.m4 (1.2), config.h.in (1.3), configure
+	(1.8), configure.in (1.10), app/cg/cfgSendPduArgs.C (1.5),
+	secmod/snmpCrypto.C (1.6), secmod/snmpCrypto.H (1.5),
+	secmod/snmpUSMArchObj.C (1.20), secmod/snmpUSMArchObj.H (1.7),
+	secmod/snmpUSMData.C (1.11), secmod/snmpUSMData.H (1.7):
+
+	Support for AES, as defined by the current internet-draft which is
+	likely to go forward.  Note that the OID for it is the same as the
+	net-snmp oid, which is made up and not official yet.  OpenSNMP and
+	net-snmp to inter-operate though.
+	
+2002-08-29 08:06  hardaker
+
+	* mib/mibRoot.H (1.2):
+
+	add some forgotten headers.
+	
+2002-08-29 08:04  hardaker
+
+	* Makefile.top (1.3):
+
+	separate CXX and CXXPROGS to make it easier to override just the compiler.
+	
+2002-08-20 12:51  baerm
+
+	* app/snmpDatabaseObj.C (1.10), test/ucd_auth (1.2),
+	test/ucd_authPriv (1.2):
+
+	a couple old test/ script changes and added DB_RECOVER to DB_ENV open call
+	in hopes it will help starting problem
+	
+2002-08-19 21:53  rstory
+
+	* base/snmpMessageObj.C (1.5), msgproc/snmpMPArchObj.C (1.12):
+
+	don't use \n in DEBUG macros, as they append one anyway
+	
+2002-08-19 21:52  rstory
+
+	* app/snmpDatabaseObj.C (1.9):
+
+	use parameter passed to us instead of similarly named global :-/
+	
+2002-08-16 16:47  rstory
+
+	* asn/illegalOID.H (1.3):
+
+	don't pass ourselves to ourselves
+	
+2002-08-11 22:16  rstory
+
+	* configure.in (1.9):
+
+	check for libdb 4.0
+	
+2002-05-13 15:20  baerm
+
+	* asn/: BerError.C (1.3), BerError.H (1.2):
+
+	changed BerError asnDataType to make string() and tostring() return the
+	same values
+	
+2002-04-16 15:14  rstory
+
+	* app/snmpDatabaseObj.C (1.8), tools/snmp-db-dump/main.C (1.4):
+
+	don't use local static db objects - libdb 4.x doesn't like this.
+	
+2002-04-16 13:32  rstory
+
+	* INSTALL (1.5):
+
+	note problem with libdb later than 3.1.17
+	
+2002-04-16 12:11  rstory
+
+	* Makefile.in (1.10):
+
+	create (hardcoded) /var/opensnmp dir on make install
+	
+2002-04-15 21:17  rstory
+
+	* INSTALL (1.4):
+
+	update URLs, change ucd-snmp to net-snmp
+	
+2002-04-03 16:23  baerm
+
+	* app/cg/CG.C (1.13):
+
+	memory problem. A pdu given to a message is given to a message. No implicit
+	lending allowed....
+	
+2002-02-26 21:58  baerm
+
+	* asn/smiNode.C (1.4):
+
+	it's READ_WRITE READ_CREATE doesn't mean READ_ONLY
+	
+2002-02-26 21:17  baerm
+
+	* app/snmpEngine.C (1.8):
+
+	added the IPSEC-POLICY-MIB for loading with SMI, yikes is this a mess...
+	
+2002-02-26 12:42  baerm
+
+	* app/snmpEngine.C (1.7), app/cg/CG.H (1.6), asn/Unsigned32.C
+	(1.4), asn/Unsigned32.H (1.3), asn/asnBadAssignment.H (1.4),
+	asn/illegalOID.H (1.2), base/snmpException.C (1.3),
+	base/snmpException.H (1.2), base/snmpStringException.C (1.3),
+	base/snmpStringException.H (1.2):
+
+	more smi access changes
+	
+2002-02-26 12:20  baerm
+
+	* asn/: OID.C (1.12), smiNode.C (1.3), smiNode.H (1.2):
+
+	added some changes for smi access
+	
+2002-02-06 09:06  hardaker
+
+	* LICENSE (1.3):
+
+	date range is actually needed (2000-2002) as we released it all 3 years
+	
+2002-02-06 08:24  baerm
+
+	* LICENSE (1.2):
+
+	new date in license file.
+	
+2002-02-05 15:47  baerm
+
+	* .cvsignore (1.2), asn/Unsigned32.C (1.3), asn/asnDataType.C
+	(1.7):
+
+	More ASN parsing fixes. An output fix in UInteger32.
+	
+2002-02-01 15:34  baerm
+
+	* app/snmpDatabaseObj.C (1.7), app/snmpIndexes.C (1.4),
+	app/snmpRow.C (1.5), app/cg/CG.H (1.5), asn/HeaderData.C (1.3),
+	asn/OID.C (1.11), asn/PDU.C (1.5), asn/ScopedPDU.C (1.3),
+	asn/Sequence.C (1.3), asn/TransportAddress.C (1.2),
+	asn/TransportAddress.H (1.6), asn/VarBind.C (1.6),
+	asn/VarBindList.C (1.5), asn/asnDataType.C (1.6), asn/asnDataType.H
+	(1.6), asn/snmpV3Message.C (1.3), asn/snmpV3Message.H (1.2),
+	base/compareIgnoreCase.C (1.3), base/debug.C (1.10),
+	base/snmpRegObj.C (1.6), dispatcher/snmpDispArchObj.C (1.10),
+	dispatcher/snmpDispArchObj.H (1.6),
+	dispatcher/snmpDispHandleInMsg.C (1.5),
+	dispatcher/snmpDispHandleInMsg.H (1.4), dispatcher/snmpDispNetObj.C
+	(1.7), msgproc/snmpMPArchObj.C (1.11),
+	msgproc/snmpMPPrepareDataElementsASI.C (1.5),
+	msgproc/snmpMPPrepareDataElementsASI.H (1.3),
+	secmod/USMSecurityParameters.C (1.4),
+	secmod/USMSecurityParameters.H (1.2), secmod/snmpUSMArchObj.C
+	(1.19), tools/snmp-db-dump/main.C (1.3):
+
+	added BufferClass use for mesasge buffer throughout engine processing
+	Added changes to protect against bad ASN packts (possibly malicous ASN
+	packets).
+	
+2001-12-20 12:37  baerm
+
+	* app/snmpAppProcessResponsePduASI.C (1.3), app/snmpEngine.C (1.6),
+	app/snmpEngine.H (1.6), app/cg/CG.C (1.12), app/cg/snmpCGArch.C
+	(1.7), app/cr/crmain.C (1.14), app/cr/snmpCRArchObj.C (1.8),
+	app/cr/snmpCRArchObj.H (1.3), asn/Makefile.in (1.10), asn/OID.C
+	(1.10), asn/TransportAddress.H (1.5), asn/VarBindList.C (1.4),
+	asn/asnBadAssignment.C (1.1), asn/asnBadAssignment.H (1.3),
+	base/debug.C (1.9), base/debug.H (1.10), base/snmpFIFOObj.C (1.4),
+	base/snmpFIFOObj.H (1.3), base/snmpMessageObj.C (1.4),
+	base/snmpMessageObj.H (1.2), base/snmpSNMPErrorObj.C (1.3),
+	dispatcher/snmpDispArchObj.C (1.9),
+	dispatcher/snmpDispHandleInMsg.C (1.4),
+	dispatcher/snmpDispHandleInMsg.H (1.3),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.5),
+	dispatcher/snmpDispRegisterEngIdASI.H (1.4),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.3),
+	dispatcher/snmpDispReturnResponsePduASI.H (1.2),
+	dispatcher/snmpDispSendPduASI.C (1.4),
+	dispatcher/snmpDispSendPduASI.H (1.3), dispatcher/snmpDispStats.C
+	(1.3), dispatcher/snmpDispUnregisterEngIdASI.C (1.3),
+	dispatcher/snmpFreeSendPduHandle.C (1.3),
+	dispatcher/snmpSendPduHandle.C (1.3),
+	dispatcher/snmpSendPduHandle.H (1.2), msgproc/snmpMPArchObj.C
+	(1.10), msgproc/snmpMPPrepareDataElementsASI.C (1.4),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.4),
+	secmod/USMSecurityParameters.C (1.3), secmod/snmpCrypto.C (1.5),
+	secmod/snmpUSMArchObj.C (1.18), secmod/snmpUSMData.C (1.10),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.3),
+	secmod/snmpUSMGenerateResponseMsgASI.H (1.2):
+
+	gazillions (only an approximate number) of memory leak fixes. Sadly,
+	while the majority of leaks (by size) have been fixed there is still
+	some left.
+	
+2001-11-09 14:35  baerm
+
+	* app/cg/CG.C (1.11), app/cr/snmpCRArchObj.C (1.7),
+	asn/VarBindList.C (1.3), asn/VarBindList.H (1.2), asn/asnDataType.C
+	(1.5), secmod/snmpUSMArchObj.C (1.17):
+
+	fixed some cr varbind null handling (to handle incorrect varbind's)
+	added some debug statements
+	
+2001-11-06 09:00  baerm
+
+	* app/cg/: CG.C (1.10), CG.H (1.4):
+
+	add a method to set the engineID in the CG class. Fixed a small CG VarBind
+	creation parameter problem.
+	
+2001-10-03 15:40  hardaker
+
+	* asn/VarBind.C (1.5):
+
+	check for a null value before attempting to clone it.
+	
+2001-10-03 15:40  hardaker
+
+	* app/cg/CG.C (1.9):
+
+	a couple extra debugging statements.
+	
+2001-10-01 12:23  hardaker
+
+	* asn/: PDU.C (1.4), PDU.H (1.4), VarBind.C (1.4):
+
+	minor cleanups and null checking
+	
+2001-08-28 20:47  baerm
+
+	* INSTALL (1.3), app/Makefile.in (1.15), app/cfgHelp.C (1.1),
+	app/cfgHelp.H (1.1), app/cg/Makefile.in (1.10), app/cg/cfgHelp.C
+	(1.2), app/cg/cfgHelp.H (1.2), app/cr/crmain.C (1.13),
+	asn/TransportAddress.H (1.4):
+
+	mix fixes and additions, network should work better
+	cr --help added.
+	
+2001-08-28 19:55  baerm
+
+	* base/snmpRegObj.C (1.5):
+
+	fix memory leak
+	
+2001-08-28 19:53  baerm
+
+	* app/: Makefile.in (1.14), cfgString.C (1.1), cfgString.H (1.1),
+	cr/crmain.C (1.12):
+
+	added a string configuration option and netwark address listen option
+	
+2001-08-28 19:52  baerm
+
+	* dispatcher/snmpDispNetObj.C (1.6):
+
+	more debug corrections...
+	
+2001-08-28 19:49  baerm
+
+	* asn/asnDataType.C (1.4):
+
+	minor bug fix
+	
+2001-08-28 18:54  baerm
+
+	* dispatcher/snmpDispNetObj.C (1.5):
+
+	debug fixes so that the debug message port numbers are the correct values.
+	
+2001-08-28 18:27  baerm
+
+	* dispatcher/snmpDispNetObj.C (1.4):
+
+	endian fix.
+	
+2001-08-28 17:07  baerm
+
+	* app/cr/crmain.C (1.11):
+
+	big endian port fix, default port (161) fix.
+	
+2001-08-28 14:50  hardaker
+
+	* acm/Makefile.in (1.4), acm/snmpVACMArchObj.C (1.5),
+	acm/snmpVACMArchRegObj.C (1.2), acm/snmpVACMIsAccessAllowedASI.C
+	(1.2), acm/test.C (1.2), app/PersistentVarBind.C (1.3),
+	app/cfgDebug.C (1.3), app/cfgInteger.C (1.2), app/cfgMib.C (1.2),
+	app/cfgPersistent.C (1.2), app/cfgScalarVar.C (1.2),
+	app/cfgSnmpEngine.C (1.3), app/cfgTableEntry.C (1.2),
+	app/cfgVarBind.C (1.4), app/configMgr.C (1.5),
+	app/snmpAppProcessPduASI.C (1.2),
+	app/snmpAppProcessResponsePduASI.C (1.2), app/snmpCRRegisterObj.C
+	(1.2), app/snmpCRRegisterScalarSet.C (1.2),
+	app/snmpCRRegisterTable.C (1.4), app/snmpDataTable.C (1.3),
+	app/snmpDatabaseObj.C (1.6), app/snmpEngine.C (1.5),
+	app/snmpIndexes.C (1.3), app/snmpPersistentRowManager.C (1.2),
+	app/snmpRow.C (1.4), app/snmpRowAllocator.C (1.4),
+	app/snmpRowDependent.C (1.2), app/snmpRowManager.C (1.2),
+	app/snmpRowStatus.C (1.4), app/snmpRowStatusCheckColsExist.C (1.2),
+	app/snmpStorageType.C (1.2), app/cg/CG.C (1.8), app/cg/Makefile.in
+	(1.9), app/cg/cfgSendPduArgs.C (1.4), app/cg/snmpCGArchRegObj.C
+	(1.2), app/cr/crmain.C (1.10), app/cr/snmpCRArchObj.C (1.6),
+	app/cr/snmpCRArchRegObj.C (1.4), app/cr/snmpCRRegisterOID.C (1.2),
+	app/cr/mibreg/MIBImplementation.C (1.2), app/cr/mibreg/MIBRegTree.C
+	(1.2), app/cr/mibreg/MIBRegistration.C (1.3),
+	app/cr/mibreg/Makefile.in (1.4), app/cr/mibreg/SearchRange.C (1.2),
+	app/cr/mibs/scalarSet.C (1.6), app/cr/mibs/snmpTable.C (1.8),
+	app/cr/mibs/sysOrTable.C (1.2), app/cr/mibs/tabletest.C (1.2),
+	asn/BerError.C (1.2), asn/Counter32.C (1.2), asn/Counter64.C (1.2),
+	asn/HeaderData.C (1.2), asn/Integer32.C (1.4), asn/IpAddress.C
+	(1.2), asn/Makefile.in (1.9), asn/Null.C (1.2), asn/OID.C (1.9),
+	asn/PDU.C (1.3), asn/PDU.H (1.3), asn/RawData.C (1.2),
+	asn/ScopedPDU.C (1.2), asn/Sequence.C (1.2), asn/TimeTicks.C (1.2),
+	asn/Unsigned32.C (1.2), asn/Unsigned64.C (1.2), asn/VarBind.C
+	(1.3), asn/VarBindList.C (1.2), asn/asnDataType.C (1.3),
+	asn/asnIndex.C (1.2), asn/asnParseError.C (1.2), asn/ber.C (1.2),
+	asn/main.C (1.2), asn/smiNode.C (1.2), asn/smitest.C (1.2),
+	asn/snmpV3Message.C (1.2), asn/test2.C (1.2), base/BufferClass.C
+	(1.2), base/Makefile.in (1.5), base/compareIgnoreCase.C (1.2),
+	base/debug.C (1.8), base/debug.H (1.9), base/snmpArchObj.C (1.2),
+	base/snmpArchRegObj.C (1.5), base/snmpConstants.C (1.2),
+	base/snmpErrorObj.C (1.2), base/snmpException.C (1.2),
+	base/snmpFIFOObj.C (1.3), base/snmpMessageObj.C (1.3),
+	base/snmpMutexObj.C (1.3), base/snmpObj.C (1.2),
+	base/snmpProtoErr.C (1.2), base/snmpRegObj.C (1.4),
+	base/snmpSNMPErrorObj.C (1.2), base/snmpStatusInfo.C (1.2),
+	base/snmpStringException.C (1.2), base/snmpSynchDataObj.C (1.2),
+	dispatcher/Makefile.in (1.5), dispatcher/snmpDispArchRegObj.C
+	(1.3), dispatcher/snmpDispHandleInMsg.C (1.3),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.4),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.2),
+	dispatcher/snmpDispSendPduASI.C (1.3), dispatcher/snmpDispStats.C
+	(1.2), dispatcher/snmpDispUnregisterEngIdASI.C (1.2),
+	dispatcher/snmpFreeSendPduHandle.C (1.2),
+	dispatcher/snmpSendPduHandle.C (1.2), mib/LIBSMI.C (1.2),
+	mib/Makefile.in (1.7), mib/example.C (1.2), mib/libsmiOid.C (1.3),
+	mib/mibManager.C (1.2), mib/mibManager.H (1.2), mib/mibModule.C
+	(1.2), mib/mibModule.H (1.2), mib/mibNode.C (1.2),
+	mib/projecteduse.C (1.2), mib/smitest.C (1.2), mib/thello.C (1.2),
+	msgproc/Makefile.in (1.4), msgproc/snmpGlobalData.C (1.2),
+	msgproc/snmpMPArchObj.C (1.9), msgproc/snmpMPArchRegObj.C (1.2),
+	msgproc/snmpMPMsgObj.C (1.2),
+	msgproc/snmpMPPrepareDataElementsASI.C (1.3),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.3),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.3),
+	msgproc/snmpStateReference.C (1.2), secmod/KeyChange.C (1.3),
+	secmod/Makefile.in (1.6), secmod/USMSecurityParameters.C (1.2),
+	secmod/snmpCrypto.C (1.4), secmod/snmpKSMArchObj.C (1.2),
+	secmod/snmpKSMArchRegObj.C (1.2), secmod/snmpUSMArchObj.C (1.16),
+	secmod/snmpUSMArchRegObj.C (1.2), secmod/snmpUSMData.C (1.9),
+	secmod/snmpUSMGenerateRequestMsgASI.C (1.2),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.2),
+	secmod/snmpUSMGenericOutMsg.C (1.2),
+	secmod/snmpUSMProcessIncomingASI.C (1.2), secmod/usmAddUserMsg.C
+	(1.2), secmod/usmDelUserMsg.C (1.2), secmod/usmUserCloneFrom.C
+	(1.9), tools/snmp-conf/Makefile.in (1.3),
+	tools/snmp-conf/snmp-conf.C (1.2), tools/snmp-db-add/Makefile.in
+	(1.4), tools/snmp-db-add/main.C (1.2),
+	tools/snmp-db-dump/Makefile.in (1.4), tools/snmp-db-dump/main.C
+	(1.2):
+
+	A boat load of small changes:
+	  - config.h everywhere.
+	  - debugging can be turned of at compile time.
+	
+2001-08-20 10:30  baerm
+
+	* asn/TransportAddress.C (1.1):
+
+	adding TransportAddress.C
+	
+2001-07-13 17:35  baerm
+
+	* app/cfgSnmpEngine.C (1.2), app/cg/cfgSendPduArgs.C (1.3),
+	secmod/snmpUSMArchObj.C (1.15), test/cg_authPriv_cr (1.3),
+	test/cg_authPriv_ucd (1.3), test/cg_auth_cr (1.3), test/cg_auth_ucd
+	(1.3), test/cg_noAuth_cr (1.3), test/cg_noAuth_ucd (1.3):
+
+	fixed test scripts to work again, its been awhile
+	changed command line local and authoritative engine ID parsers
+	to allow for hexidecimal input ('0x' prefix).
+	
+2001-07-13 09:43  baerm
+
+	* app/cg/snmpCGArch.C (1.6), app/cr/snmpCRArchObj.C (1.5),
+	dispatcher/snmpDispNetObj.C (1.3), dispatcher/snmpDispNetObj.H
+	(1.4):
+
+	fixed engine ID discovery problem, particularly with auth/priv messages.
+	moved some debug output to a more accurate position in CR.
+	Had funky problems with snmpDispNetObj and
+	the CVS repository. Hopefully this will fix them.
+	
+2001-07-11 10:10  baerm
+
+	* configure (1.7), configure.in (1.8), app/cfgDebug.C (1.2),
+	app/cg/cgmain.C (1.12), app/cr/crmain.C (1.9),
+	app/cr/snmpCRArchObj.C (1.4), app/cr/snmpCRArchObj.H (1.2),
+	app/cr/snmpCRArchRegObj.C (1.3), app/cr/snmpCRArchRegObj.H (1.2),
+	asn/Makefile.in (1.8), asn/TransportAddress.H (1.3), base/debug.C
+	(1.7), base/debug.H (1.8), dispatcher/snmpDispArchObj.C (1.8),
+	dispatcher/snmpDispArchObj.H (1.5),
+	dispatcher/snmpDispHandleInMsg.C (1.2),
+	dispatcher/snmpDispHandleInMsg.H (1.2),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.3),
+	dispatcher/snmpDispRegisterEngIdASI.H (1.3),
+	dispatcher/snmpDispSendPduASI.C (1.2),
+	dispatcher/snmpDispSendPduASI.H (1.2),
+	msgproc/snmpMPPrepareDataElementsASI.C (1.2),
+	msgproc/snmpMPPrepareDataElementsASI.H (1.2),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.2),
+	msgproc/snmpMPPrepareOutgoingMsgASI.H (1.2),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.2),
+	msgproc/snmpMPPrepareResponseMsgASI.H (1.2),
+	msgproc/snmpStateReference.H (1.3), tools/Makefile.in (1.8):
+
+	TransportAddress is now used within the engine and for
+	registering ports to listen on. The return port should also be the
+	recieving port (I still need to double check this but it should be true)
+	I also did some major changes to the debug object. 'ALL' (or 'all') now
+	works. The objects are now dynamic. You can change tag values in an
+	object and have the output change, You can change the global tag
+	list also and have output change. The debug level of '0' has changed a bit
+	too. It will always go to stderr, it can go to somewhere else as well if
+	you channel number '0' explicitly. (e.g. '-D 0 all /temp/somefile.txt').
+	
+2001-05-31 13:42  baerm
+
+	* msgproc/snmpMPArchObj.C (1.8):
+
+	changing statereference <-> message handling slightly and it's not
+	terribly pretty. The weak of heart should avert their eyes.
+	
+2001-05-31 13:36  baerm
+
+	* app/cfgVarBind.C (1.3):
+
+	changed cfgVarBind to allow null value entries on the command line
+	
+2001-05-30 16:55  hardaker
+
+	* dispatcher/snmpDispNetObj.H (1.3):
+
+	Don't put debug:: in front of a macro.
+	
+2001-05-29 08:34  baerm
+
+	* dispatcher/: snmpDispNetObj.C (1.2), snmpDispNetObj.H (1.2):
+
+	added old nsa branch version of dispNetObj.
+	
+2001-05-08 10:25  baerm
+
+	* app/cfgVarBind.C (1.2), app/configMgr.C (1.4), app/configMgr.H
+	(1.3), app/cg/Makefile.in (1.8), app/cg/cfgHelp.C (1.1),
+	app/cg/cfgHelp.H (1.1), app/cg/cfgSendPduArgs.C (1.2),
+	app/cg/cgmain.C (1.11), dispatcher/Makefile.in (1.4),
+	dispatcher/snmpDispArchObj.C (1.7), dispatcher/snmpDispArchObj.H
+	(1.4), dispatcher/snmpDispArchRegObj.C (1.2),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.2),
+	dispatcher/snmpDispRegisterEngIdASI.H (1.2):
+
+	dispatcher architectural changes. change the register eng id message to carry
+	a port number parameter. Doesn't affect anything in dispatcher yet though.
+	I also change some help files (output) and added a cfgHelp object to print out
+	help on -h and --help.
+	
+2001-05-02 08:53  rstory
+
+	* app/snmpEngine.H (1.5):
+
+	change default CR/NR ports to 161/162
+	
+2001-04-30 13:23  rstory
+
+	* dispatcher/snmpDispArchObj.C (1.6):
+
+	get all ports from engine; log error if no port to send from; ignore
+	ports < 0 in init (but log msg)
+	
+2001-04-30 13:21  rstory
+
+	* app/cr/crmain.C (1.8):
+
+	specify CG port of any
+	
+2001-04-30 13:21  rstory
+
+	* app/snmpEngine.C (1.4):
+
+	let applications specify ports to open, not library
+	
+2001-04-30 13:19  rstory
+
+	* app/configMgr.C (1.3):
+
+	call option_finished() for all options
+	
+2001-04-26 10:54  rstory
+
+	* base/: debug.C (1.6), debug.H (1.7):
+
+	pass const & where possible; always print level 0 msgs; misc tweaks and
+	(hopefully) optimizations (there's room for more).
+	
+2001-04-26 09:03  rstory
+
+	* dispatcher/snmpDispArchObj.C (1.5):
+
+	remove commented out code; log errors at level 0, not 9
+	
+2001-04-26 08:43  hardaker
+
+	* app/cg/snmpCGArch.C (1.5):
+
+	minor bug fixes.
+	
+2001-04-26 08:43  hardaker
+
+	* app/cg/CG.C (1.7):
+
+	Minor comment.
+	
+2001-04-26 08:43  hardaker
+
+	* acconfig.h (1.1), config.h.in (1.2), configure (1.6),
+	configure.in (1.7):
+
+	added a --disable-debugging flag (doesn't quite work yet).
+	
+2001-04-25 10:49  hardaker
+
+	* asn/: OID.C (1.8), OID.H (1.9):
+
+	turn off debugging due to dependency reasons.
+	
+2001-04-25 10:49  hardaker
+
+	* base/debug.H (1.6):
+
+	Add check for NODEBUGGING to turn off macro functionality.
+	
+2001-04-25 10:48  hardaker
+
+	* asn/Integer32.C (1.3):
+
+	in (string) output only single numeric integer (no hex).
+	
+2001-04-25 10:47  hardaker
+
+	* app/cg/: snmpCGArch.C (1.4), snmpCGArch.H (1.4):
+
+	move config.h out of .H file into .C
+	use PDU_VERSION_2.
+	
+2001-04-25 10:46  hardaker
+
+	* app/cg/CG.C (1.6):
+
+	print error objects only if there are some.
+	
+2001-04-25 10:44  hardaker
+
+	* Makefile.in (1.9):
+
+	build libopensnmp.a in a specific (no longer needed) order.
+	
+2001-04-25 10:43  hardaker
+
+	* Makefile.bot (1.3):
+
+	Silence some install sh directives.
+	
+2001-04-25 08:22  rstory
+
+	* tools/snmp-conf/Makefile.in (1.2):
+
+	add -I path to mib
+	
+2001-04-25 08:05  rstory
+
+	* configure.in (1.6), tools/Makefile.in (1.7):
+
+	add snmp-conf
+	
+2001-04-25 07:59  rstory
+
+	* app/cfgPersistent.H (1.2):
+
+	add private, unimplemented copy ctor & op=
+	
+2001-04-25 07:58  rstory
+
+	* secmod/snmpUSMArchObj.C (1.14):
+
+	fix ambiguity intorduced with new Interger32( const string& )
+	
+2001-04-25 07:57  rstory
+
+	* asn/RawData.H (1.3):
+
+	add fromString( const string&)
+	
+2001-04-25 07:56  rstory
+
+	* asn/Makefile.in (1.7):
+
+	use top_srcdir
+	
+2001-04-25 07:54  rstory
+
+	* asn/: Integer32.C (1.2), Integer32.H (1.2):
+
+	add string& ctor
+	
+2001-04-25 07:53  rstory
+
+	* app/cr/mibreg/Makefile.in (1.3):
+
+	use top_srcdir; add -I$top_srcdir)/mib
+	
+2001-04-25 07:53  rstory
+
+	* app/cr/crmain.C (1.7):
+
+	added comment
+	
+2001-04-25 07:52  rstory
+
+	* app/cg/sendPduArgs.H (1.2):
+
+	add using namespace
+	
+2001-04-25 07:52  rstory
+
+	* app/cg/cgmain.C (1.10):
+
+	update to use new command line parsing classes; still a few quirks to
+	work out, but mostly works.
+	
+2001-04-25 07:51  rstory
+
+	* app/cg/CG.C (1.5):
+
+	update to match new init() prototype
+	
+2001-04-25 07:50  rstory
+
+	* app/cg/Makefile.in (1.7):
+
+	add cfgSendPduArgs
+	
+2001-04-25 07:50  rstory
+
+	* app/cg/: snmpCGArch.C (1.3), snmpCGArch.H (1.3):
+
+	mv comman line parsing to cfgSendPduArgs.[CH]; pass references to pointers
+	instead of pointers to pointers; add timout parameter; skip init code
+	if theEngine already exists (double init); remove class timeout and
+	database path vars;
+	
+2001-04-25 07:45  rstory
+
+	* app/configOption.H (1.2):
+
+	add option_finished()
+	
+2001-04-25 07:44  rstory
+
+	* app/: configMgr.C (1.2), configMgr.H (1.2):
+
+	add argcount to parse_command_line; add private, unimplemented default
+	ctor, copy ctor, op=
+	
+2001-04-25 07:43  rstory
+
+	* app/: cfgDebug.H (1.2), cfgInteger.H (1.2), cfgMib.H (1.2),
+	cfgScalarVar.H (1.2), cfgTableEntry.H (1.2):
+
+	add private, unimplemented copy ctor, op=
+	
+2001-04-25 07:42  rstory
+
+	* app/Makefile.in (1.13):
+
+	add cfgSnmpEngine.C, cfgVarBind.C
+	
+2001-04-25 06:55  rstory
+
+	* app/cg/: cfgSendPduArgs.C (1.1), cfgSendPduArgs.H (1.1):
+
+	new command line class
+	
+2001-04-25 06:48  rstory
+
+	* app/: cfgSnmpEngine.C (1.1), cfgSnmpEngine.H (1.1), cfgVarBind.C
+	(1.1), cfgVarBind.H (1.1):
+
+	new command line option handlers
+	
+2001-04-25 05:58  rstory
+
+	* base/debug.C (1.5):
+
+	allow 'all' and 'ALL' for debug all
+	
+2001-04-25 05:55  rstory
+
+	* mib/: libsmiOid.C (1.2), libsmiOid.H (1.2):
+
+	change oid len/indexes to unsigned int to match libsmi-0.2.16
+	
+2001-04-25 05:54  rstory
+
+	* asn/OID.C (1.7):
+
+	fix un/signed comparison
+	
+2001-04-25 00:39  hardaker
+
+	* secmod/snmpUSMArchObj.C (1.13):
+
+	fix null auth/priv password usage for noAuthNoPriv users.
+	
+2001-04-24 21:01  hardaker
+
+	* app/Makefile.in (1.12):
+
+	fix make install for double definition.
+	
+2001-04-24 18:46  rstory
+
+	* tools/snmp-conf/: Makefile.in (1.1), config.txt (1.1),
+	snmp-conf.C (1.1):
+
+	new app to create database from text file
+	
+2001-04-24 14:12  rstory
+
+	* asn/OID.H (1.8):
+
+	mib.H is not a system header
+	
+2001-04-24 14:12  rstory
+
+	* secmod/usmUserCloneFrom.C (1.8):
+
+	destroy debug object in dtor instead of creating new one.
+	
+2001-04-24 12:41  hardaker
+
+	* asn/RawDataWrap.H (1.4):
+
+	fixed previous fix.
+	  (inline RawDataWrap functions weren't doing the proper thing and
+	  were returning toString() versions of strings for clone() and (string))
+	
+2001-04-20 09:33  hardaker
+
+	* app/cg/CG.C (1.4):
+
+	Always type make to find typos.  Always type make to find typos.
+	
+2001-04-20 09:32  hardaker
+
+	* app/cg/: CG.C (1.3), CG.H (1.3):
+
+	move config.h from H to C
+	
+2001-04-19 17:09  hardaker
+
+	* asn/RawDataWrap.C (1.2):
+
+	remove no longer needed RawDataWrap.C file (everything is inline in
+	the .H now)
+	
+2001-04-19 17:04  hardaker
+
+	* Makefile.bot (1.2), Makefile.in (1.8), asn/BitString.H (1.2),
+	asn/Makefile.in (1.6), asn/OID.H (1.7), asn/OctetString.H (1.2),
+	asn/RawDataWrap.H (1.3), base/Makefile.in (1.4), mib/Makefile.in
+	(1.6), mib/smi.h (1.3), tools/snmp-db-add/Makefile.in (1.3),
+	tools/snmp-db-dump/Makefile.in (1.3):
+
+	various fixes to make the make install base actually usable.
+	Ugly hack to build master library by splitting all sub-libraries
+	first.  (what's the proper way to do this without splitting?)
+	
+2001-04-19 16:08  hardaker
+
+	* Makefile.bot (1.1), Makefile.in (1.7), Makefile.top (1.2),
+	configure (1.5), configure.in (1.5), mkinstalldirs (1.1),
+	acm/Makefile.in (1.3), app/Makefile.in (1.11), app/cg/Makefile.in
+	(1.6), app/cr/Makefile.in (1.6), asn/Makefile.in (1.5),
+	base/Makefile.in (1.3), dispatcher/Makefile.in (1.3),
+	mib/Makefile.in (1.5), msgproc/Makefile.in (1.3),
+	secmod/Makefile.in (1.5), tools/Makefile.in (1.6):
+
+	make install now working.
+	  installs all headers, a master libopensnmp.a and the cg/cr apps.
+	
+2001-04-19 15:34  baerm
+
+	* INSTALL (1.2):
+
+	added a missing configuration parameter in the install file.
+	
+2001-04-19 15:10  hardaker
+
+	* asn/asnDataType.H (1.5):
+
+	drop unused param name in inline base prototype (picky compilers)
+	
+2001-04-19 15:10  hardaker
+
+	* app/snmpScalarData.H (1.4):
+
+	drop unused param name in inline base prototype
+	
+2001-04-19 13:35  hardaker
+
+	* app/cg/: CG.C (1.2), CG.H (1.2):
+
+	add a get_table() function that returns a populated snmpDataTable
+	object from a remote engine.  Mostly complete.
+	
+2001-04-19 13:34  hardaker
+
+	* asn/: OID.C (1.6), OID.H (1.6):
+
+	fix cropping
+	
+2001-04-19 13:33  hardaker
+
+	* app/snmpRow.H (1.5):
+
+	add begin() and end() definitions.
+	
+2001-04-19 13:32  hardaker
+
+	* app/: snmpIndexes.C (1.2), snmpIndexes.H (1.2):
+
+	deal with implied indexes.
+	
+2001-04-18 10:45  rstory
+
+	* asn/: OID.C (1.5), OID.H (1.5):
+
+	use class static ptr to debug object. check and init in ctors.
+	
+2001-04-17 14:17  rstory
+
+	* asn/OID.C (1.4):
+
+	create debug object in all ctors
+	
+2001-04-17 14:10  rstory
+
+	* base/: snmpArchRegObj.C (1.4), snmpArchRegObj.H (1.4):
+
+	remove commented out method; update method description for new return type.
+	
+2001-04-12 14:57  hardaker
+
+	* asn/TransportAddress.H (1.2):
+
+	add void to set_address definition
+	
+2001-04-12 08:17  hardaker
+
+	* app/cg/Makefile.in (1.5):
+
+	- Update for new classes/files (CG.*, sendPduArgs.*).
+	- build a libcg.a library for external CG use.
+	
+2001-04-12 08:15  hardaker
+
+	* app/cg/cgmain.C (1.9):
+
+	- Use new snmpCGArch init changes
+	- Use the new sendPduArgs class.
+	- change our local namespace to be CGMain from CG so as not to
+	  conflict with the CG class.
+	
+2001-04-12 08:13  hardaker
+
+	* app/cg/: CG.C (1.1), CG.H (1.1):
+
+	Implement a generic CG class to do the magic for you.  This enables
+	writing SNMP code to be quite easy.  It's not entirely complete (more
+	convenience functions needed), but is functional now.
+	
+2001-04-12 08:11  hardaker
+
+	* app/cg/: snmpCGArch.C (1.2), snmpCGArch.H (1.2):
+
+	Change the way startup is done:
+	  - Don't force the parsing of arguments.
+	  - move init stuff into an init() subroutine.
+	  - register with the dispatcher in the init routine, rather than
+	    having the application have to do it.
+	Use new sendPduArgs class
+	Support deleting a user and recreating it if sendPduArgs is "dirty".
+	
+2001-04-12 08:08  hardaker
+
+	* app/cg/sendPduArgs.H (1.1):
+
+	Generic class for sending around information needed for sending a PDU.
+	 - supports the notion of "has changed" for classes that need to know
+	   when its contained values have changed.
+	
+2001-04-12 08:05  hardaker
+
+	* asn/: Makefile.in (1.4), TransportAddress.H (1.1), asnDataTypes.H
+	(1.3):
+
+	Add a TransportAddress type.
+	  - This object now handles creation of the magic address strings from
+	    an address and port number pair.
+	
+2001-04-12 08:04  hardaker
+
+	* asn/VarBind.H (1.2):
+
+	make constructor handle just an OID to get OID = NULL for requests.
+	
+2001-04-12 08:03  hardaker
+
+	* asn/: PDU.C (1.2), PDU.H (1.2):
+
+	implement set_pduType().
+	
+2001-04-12 08:02  hardaker
+
+	* base/snmpObj.H (1.2):
+
+	Implement a couple of auto-wrapper macros for accessor functions.
+	Debate still going as to how this should be done.
+	
+2001-04-12 08:01  hardaker
+
+	* secmod/: Makefile.in (1.4), snmpUSMArchObj.C (1.12),
+	snmpUSMArchObj.H (1.6), snmpUSMData.C (1.8), snmpUSMData.H (1.6),
+	usmDelUserMsg.C (1.1), usmDelUserMsg.H (1.1):
+
+	Implement a message to support deleting a user from the USM table.
+	
+2001-03-26 17:50  baerm
+
+	* app/cg/Makefile.in (1.4), app/cg/cgmain.C (1.8),
+	app/cg/snmpCGArch.C (1.1), app/cg/snmpCGArch.H (1.1),
+	base/snmpArchRegObj.C (1.3), base/snmpArchRegObj.H (1.3),
+	base/snmpRegObj.C (1.3):
+
+	I classified the Command Generator, although I would classify it as
+	still pretty hacky, sigh... But it is a class object now. It compiles
+	and runs and perhaps the prefix on a string in a certain MIB table
+	could be change from "su" to "ro".
+	
+2001-03-26 14:57  rstory
+
+	* mib/: mibManager.C (1.1), mibManager.H (1.1):
+
+	new class to manage mibs
+	
+2001-03-26 14:56  rstory
+
+	* mib/mib.H (1.2):
+
+	remove macro.H; comment out unused path to hardcoded user directory
+	
+2001-03-26 14:55  rstory
+
+	* mib/Makefile.in (1.4):
+
+	oops - remove test target
+	
+2001-03-26 14:54  rstory
+
+	* mib/Makefile.in (1.3):
+
+	add path to base for debug class; build LIBOBJS based on LIBSRCS; remove
+	references to macro.H
+	
+2001-03-26 14:53  rstory
+
+	* mib/LIBSMI.H (1.2):
+
+	include necessary headers; use inline func with local var instead of
+	macro and static var
+	
+2001-03-26 14:52  rstory
+
+	* mib/macro.H (1.2):
+
+	remove header (modified macro incorporated in only place used)
+	
+2001-03-26 14:50  rstory
+
+	* dispatcher/snmpDispArchObj.C (1.4):
+
+	init sockets to 0; remove extra \n from logs; add errno for socket errors
+	
+2001-03-26 14:49  rstory
+
+	* base/debug.H (1.5):
+
+	add *_L macros (for local debug objects); make temporary buffer name
+	bizzare, to avoid collisions; rmv unneeded ';' in macro
+	
+2001-03-26 14:47  rstory
+
+	* asn/RawData.H (1.2):
+
+	add string version of fromHexString
+	
+2001-03-26 14:46  rstory
+
+	* asn/: OID.C (1.3), OID.H (1.4):
+
+	add string ctor; add debug; add questionable ability to specify OID of
+	negative numbers ("-1").
+	
+2001-03-26 14:43  rstory
+
+	* app/cr/crmain.C (1.6):
+
+	use new ConfigMgr class for command line
+	
+2001-03-26 14:43  rstory
+
+	* app/cr/: Makefile.in (1.5), mibs/Makefile.in (1.3):
+
+	add to include path
+	
+2001-03-26 14:42  rstory
+
+	* app/snmpRowObjectAllocator.H (1.2):
+
+	add comment
+	
+2001-03-26 14:42  rstory
+
+	* app/: snmpDatabaseObj.C (1.5), snmpDatabaseObj.H (1.7):
+
+	make dbPath static; add default path; default value for open to use default;
+	add friend PersistentOptions; make get_dbPath(0 static
+	
+2001-03-26 14:40  rstory
+
+	* app/Makefile.in (1.10):
+
+	add config classes
+	
+2001-03-26 14:37  rstory
+
+	* app/: cfgDebug.C (1.1), cfgDebug.H (1.1), cfgInteger.C (1.1),
+	cfgInteger.H (1.1), cfgMib.C (1.1), cfgMib.H (1.1), cfgPersistent.C
+	(1.1), cfgPersistent.H (1.1), cfgScalarVar.C (1.1), cfgScalarVar.H
+	(1.1), cfgTableEntry.C (1.1), cfgTableEntry.H (1.1), configMgr.C
+	(1.1), configMgr.H (1.1), configOption.H (1.1):
+
+	classes for command line/config file
+	
+2001-03-26 11:19  baerm
+
+	* msgproc/: snmpMPArchObj.C (1.7), snmpMPArchObj.H (1.4):
+
+	Added changes for connecting to different security modules (models), depending
+	on the security model (Integer32) parameter in a message.
+	
+2001-03-26 11:17  baerm
+
+	* secmod/: snmpKSMArchObj.C (1.1), snmpKSMArchObj.H (1.1),
+	snmpKSMArchRegObj.C (1.1), snmpKSMArchRegObj.H (1.1),
+	snmpUSMArchObj.H (1.5):
+
+	adding the skeleton kereberos security model files. They are unfilled with
+	any kereberos code yet. Just opensnmp arch stuff.
+	
+2001-03-23 09:06  hardaker
+
+	* asn/: .cvsignore (1.2), Makefile.in (1.3), OID.C (1.2), OID.H
+	(1.3), asnDataTypes.H (1.2), smiNode.C (1.1), smiNode.H (1.1),
+	smitest.C (1.1):
+
+	Initial implementation of the "smiNode" to extract smi related
+	information from a given OID.  Much more work needed.
+	
+2001-03-23 09:02  hardaker
+
+	* app/cr/mibs/snmpTable.C (1.7):
+
+	make use of asnObj::check_new_value
+	
+2001-03-23 09:00  hardaker
+
+	* secmod/snmpSecurityStateReference.H (1.2):
+
+	explicit call to snmpObj(re) in copy constructor.
+	
+2001-03-23 08:59  hardaker
+
+	* asn/asnBadAssignment.H (1.2):
+
+	copy from ref not *this in copy constructor.
+	
+2001-03-23 08:57  hardaker
+
+	* app/snmpScalarSet.H (1.3):
+
+	remove class:: in front of function def inside class definition.
+	
+2001-03-23 08:57  hardaker
+
+	* app/snmpEngine.H (1.4):
+
+	remove extra comma.
+	
+2001-03-15 11:10  hardaker
+
+	* app/cg/cgmain.C (1.7), app/cr/crmain.C (1.5), base/debug.C (1.4),
+	base/debug.H (1.4), dispatcher/snmpDispArchObj.H (1.3),
+	secmod/snmpCrypto.C (1.3), secmod/snmpCrypto.H (1.4),
+	secmod/snmpUSMData.C (1.7), secmod/snmpUSMData.H (1.5),
+	secmod/usmUserCloneFrom.C (1.7), secmod/usmUserCloneFrom.H (1.5):
+
+	debugging changes:
+	 - all use the same .h file.
+	 - name change.
+	
+2001-03-13 17:53  hardaker
+
+	* secmod/snmpUSMArchObj.C (1.11):
+
+	properly fix counter statistic pointer treatment.
+	
+2001-03-13 17:51  hardaker
+
+	* asn/asnDataType.H (1.4), base/snmpProtoErr.H (1.2):
+
+	remove ending commas from enums.
+	
+2001-03-13 17:50  hardaker
+
+	* asn/: OID.H (1.2), RawDataWrap.H (1.2):
+
+	remove unneeded class name declaration in prototypes.
+	
+2001-03-13 17:50  hardaker
+
+	* app/snmpRowDependent.H (1.2):
+
+	fix #endif to properly comment the comment.
+	
+2001-02-20 11:01  baerm
+
+	* app/cg/cgmain.C (1.6), base/snmpArchRegObj.C (1.2),
+	base/snmpArchRegObj.H (1.2), base/snmpFIFOObj.C (1.2),
+	base/snmpFIFOObj.H (1.2), base/snmpMutexObj.C (1.2),
+	base/snmpMutexObj.H (1.2), base/snmpRegObj.C (1.2),
+	secmod/snmpUSMArchObj.C (1.10), test/cg_authPriv_cr (1.2),
+	test/cg_authPriv_ucd (1.2), test/cg_auth_cr (1.2), test/cg_auth_ucd
+	(1.2), test/cg_noAuth_cr (1.2), test/cg_noAuth_ucd (1.2), test/cr
+	(1.3):
+
+	added timeout to threading. There is now a fifo->pop(int) call that lets
+	you place a time out value in seconds. Returning NULL if nothing is there.
+	CG handles timeouts and has -t option to adjust them.
+	Added -O 'oid_string' option to cg that allows .1.3 or 'SNMPv2-MIB::sysUpTime.0'
+	style oid entries.
+	
+2001-02-13 14:08  hardaker
+
+	* app/snmpCounterSet.C (1.2), app/snmpCounterSet.H (1.2),
+	app/snmpEngine.C (1.3), app/snmpEngine.H (1.3),
+	app/cr/snmpCRArchObj.C (1.3), dispatcher/snmpDispArchObj.C (1.3):
+
+	Implement (some of) the snmp counter set (#inPkts, etc).
+	
+2001-01-17 10:36  rstory
+
+	* secmod/: snmpUSMData.C (1.6), snmpUSMData.H (1.4):
+
+	create actual snmpStorageTyupe and snmpRowStatus object in add_row, instead
+	of just using an Integer32.
+	
+2001-01-17 10:35  rstory
+
+	* secmod/snmpUSMArchObj.C (1.9):
+
+	add column allocator for usm user table storage type column
+	
+2001-01-17 10:34  rstory
+
+	* acm/snmpVACMArchObj.C (1.4):
+
+	add column allocator for view access table storageType column
+	
+2001-01-17 09:01  rstory
+
+	* app/: snmpPersistentRowManager.C (1.1),
+	snmpPersistentRowManager.H (1.1), snmpRowManager.C (1.1),
+	snmpRowManager.H (1.1), snmpRowStorageColumnAllocator.H (1.1):
+
+	new classes; snmpRowManager now manages setable_cols and allocators, and
+	provides a virtual method row_changed() that is called during the
+	commit phase of a set; snmpPersistentRowManager will manage rows with a
+	snmpStorageType column and add/remove/update rows accordingly.
+	
+2001-01-17 08:56  rstory
+
+	* app/: snmpDatabaseObj.C (1.4), snmpDatabaseObj.H (1.6):
+
+	use new DbHelper class; add remove() method
+	
+2001-01-17 08:55  rstory
+
+	* secmod/usmUserCloneFrom.C (1.6):
+
+	comment out unused variable to get rid of annoying compiler warning
+	
+2001-01-17 08:54  rstory
+
+	* secmod/: snmpUSMArchObj.C (1.8), snmpUSMData.C (1.5):
+
+	use new snmpPersistentRowManager
+	
+2001-01-17 08:52  rstory
+
+	* app/cr/mibs/: snmpTable.C (1.6), snmpTable.H (1.4):
+
+	use new snmpRowManager class; save more information to pass to snmpRowManager
+	in snmp_set;
+	
+2001-01-17 08:50  rstory
+
+	* app/cr/snmpCRArchObj.C (1.2):
+
+	use new snmpRowManager
+	
+2001-01-17 08:49  rstory
+
+	* app/: snmpCRRegisterTable.C (1.3), snmpCRRegisterTable.H (1.3):
+
+	use new snmpRowManager class
+	
+2001-01-17 08:48  rstory
+
+	* app/snmpStorageType.H (1.2):
+
+	add should_store() method for determining if a row should be saved to
+	stable storage
+	
+2001-01-17 08:46  rstory
+
+	* app/: snmpRowAllocator.C (1.3), snmpRowAllocator.H (1.3):
+
+	remove references to columnStorage (functionality moved to new
+	snmpPersistentRowManager class)
+	
+2001-01-17 08:44  rstory
+
+	* app/: snmpRow.C (1.3), snmpRow.H (1.4):
+
+	use new snmpRowManager; remove set_row (funtionality moved into
+	snmpPersistentRowManager)
+	
+2001-01-17 08:40  rstory
+
+	* app/Makefile.in (1.9):
+
+	add snmpRowManager and snmpPersistentRowManager
+	
+2001-01-17 08:37  rstory
+
+	* acm/snmpVACMArchObj.C (1.3):
+
+	use new snmpRowStorageColumnAllocator and snmpPersistentRowManager classes.
+	
+2001-01-10 08:41  rstory
+
+	* app/: snmpPersistentDataTable.C (1.2), snmpPersistentDataTable.H
+	(1.2), snmpPersistentRow.C (1.2), snmpPersistentRow.H (1.2),
+	snmpPersistentRowAllocator.H (1.2), snmpPersistentTable.C (1.2),
+	snmpPersistentTable.H (1.2):
+
+	remove unused files
+	
+2000-12-29 23:15  hardaker
+
+	* app/snmpScalarData.C (1.2), app/snmpScalarData.H (1.3),
+	app/snmpScalarSet.C (1.2), app/snmpScalarSet.H (1.2),
+	app/cr/mibs/control.C (1.3), app/cr/mibs/control.H (1.3),
+	app/cr/mibs/scalarSet.C (1.5), app/cr/mibs/system.C (1.4),
+	app/cr/mibs/system.H (1.4), asn/asnDataType.H (1.3):
+
+	- Add range/type/value checking functions to the base asnDataType class.
+	  - still need to fill in functionality for value/range checking in
+	    higher level classes.
+	- Make the scalar* classes make use of them.
+	
+2000-12-29 23:11  hardaker
+
+	* app/cr/crmain.C (1.4), secmod/snmpUSMData.C (1.4):
+
+	whoops.  Missed some cr.H -> snmpCRArchObj.H changes.
+	
+2000-12-29 09:19  hardaker
+
+	* app/: cg/.cvsignore (1.2), cg/Makefile.in (1.3), cr/.cvsignore
+	(1.2), cr/Makefile.in (1.4), cr/cr.C (1.5), cr/cr.H (1.2),
+	cr/snmpCRArchObj.C (1.1), cr/snmpCRArchObj.H (1.1),
+	cr/snmpCRArchRegObj.C (1.2):
+
+	Following up on my threat to rename a few things:
+	  - the crmain and cgtest programs are now known as "cr" and "cg".
+	  - the crObj class has been renamed (and re-filed) as snmpCRArchObj.
+	
+2000-12-29 09:04  hardaker
+
+	* app/snmpCounterSet.C (1.1), app/snmpCounterSet.H (1.1),
+	msgproc/snmpMPArchObj.C (1.6), secmod/Makefile.in (1.3),
+	secmod/snmpUSMArchObj.C (1.7), secmod/snmpUSMArchObj.H (1.4),
+	secmod/snmpUSMData.C (1.3), secmod/snmpUSMData.H (1.3),
+	secmod/usmStatsClass.C (1.2), secmod/usmStatsClass.H (1.2):
+
+	Added a generic snmpCounterSet class and converted the USM stats class
+	into it (actually removing the need for the USM stats class in the process).
+	
+2000-12-28 15:45  hardaker
+
+	* app/: PersistentVarBind.C (1.2), PersistentVarBind.H (1.2):
+
+	make persistent varbinds usable as real asnDataTypes.
+	
+2000-12-28 15:45  hardaker
+
+	* asn/asnDataType.C (1.2):
+
+	use get_tag() instead of the value itself.
+	
+2000-12-28 15:44  hardaker
+
+	* asn/asnDataType.H (1.2):
+
+	make get_tag() virtual.
+	
+2000-12-28 15:44  hardaker
+
+	* asn/VarBind.C (1.2):
+
+	typo.
+	
+2000-12-28 15:43  hardaker
+
+	* asn/Unsigned32.H (1.2):
+
+	add operator +=.
+	
+2000-12-28 15:43  hardaker
+
+	* base/snmpMessageObj.C (1.2):
+
+	- (base/snmpMessageObj.C): don't clone synchData if none exists.
+	
+2000-12-28 15:42  hardaker
+
+	* app/cr/: Makefile.in (1.3), cr.C (1.4):
+
+	use new scalar objects.
+	
+2000-12-28 15:42  hardaker
+
+	* app/snmpDatabaseObj.H (1.5):
+
+	move constructor/destructors to protected: to get rid of warnings.
+	
+2000-12-28 15:40  hardaker
+
+	* app/: snmpCRRegisterObj.C (1.1), snmpCRRegisterObj.H (1.1),
+	snmpCRRegisterScalarSet.C (1.1), snmpCRRegisterScalarSet.H (1.1),
+	snmpCRRegisterTable.C (1.2), snmpCRRegisterTable.H (1.2),
+	snmpScalarData.H (1.2), snmpScalarSet.C (1.1), snmpScalarSet.H
+	(1.1), cr/mibs/scalarSet.C (1.4), cr/mibs/system.C (1.3),
+	cr/mibs/system.H (1.3), Makefile.in (1.8):
+
+	- Separate scalar data from the mib instrumentation.
+	- Redefine a bunch of registration objects and add a snmpScalarSet class
+	  to store a bunch of asnDataType objects in a accessible scalar set.
+	- re-attach the system group to the class tree.
+	
+2000-12-20 15:07  hardaker
+
+	* app/: Makefile.in (1.7), snmpDatabaseObj.H (1.4),
+	snmpScalarData.C (1.1), snmpScalarData.H (1.1), cr/cr.C (1.3),
+	cr/mibs/control.C (1.2), cr/mibs/control.H (1.2),
+	cr/mibs/scalarSet.C (1.3), cr/mibs/scalarSet.H (1.3),
+	cr/mibs/system.C (1.2), cr/mibs/system.H (1.2):
+
+	implemented a snmpScalarData object that separates SET semantics from
+	the data half of the world.
+	
+2000-12-19 14:33  baerm
+
+	* draft-maughan-nsa-snmpv3-sec-00.txt (1.1):
+
+	file draft-maughan-nsa-snmpv3-sec-00.txt was initially added on branch NSA.
+	
+2000-12-19 14:33  baerm
+
+	* README_NSA_ARCHITECTURE, draft-maughan-nsa-snmpv3-sec-00.txt
+	(NSA.[2,1]):
+
+	changes to README_NSA_ARCHITECTURE file
+	added draft-maughan-nsa-snmpv3-sec-00.txt
+	
+2000-12-08 17:56  hardaker
+
+	* app/cr/cr.C (NSA.10):
+
+	update the cr's ref in the NSA case since the USM/VACM access clobbered it.
+	
+2000-12-08 17:38  baerm
+
+	* acm/: VACMError.H, snmpVACMArchObj.C (NSA.[1,13]):
+
+	new file
+	
+2000-12-08 17:38  baerm
+
+	* acm/VACMError.H (1.1):
+
+	file VACMError.H was initially added on branch NSA.
+	
+2000-12-08 17:21  baerm
+
+	* acm/snmpVACMArchObj.C, acm/snmpVACMArchObj.H,
+	acm/snmpVACMIsAccessAllowedASI.H,
+	acm/snmpVACMRequestAccessToMibASI.H, app/cr/cr.C, app/cr/cr.H
+	(NSA.[12,6,2,5,9,4]):
+
+	misc bug fixes. The pdu is still getting lost somewhere...
+	
+2000-12-07 17:55  baerm
+
+	* acm/: Makefile.in, snmpVACMArchObj.C, snmpVACMArchObj.H,
+	snmpVACMRequestAccessToMibASI.C (NSA.[3,11,5,4]):
+
+	added the VACM <-> SM communication. Compiles, but segfaults...
+	and CVS has been toying with me in a bad way.
+	
+2000-12-07 14:57  hardaker
+
+	* acm/snmpVACMArchObj.C (NSA.10):
+
+	Fixed everything.  Minor re-arrangements.  Evenything works.  Mike's turn.
+	
+2000-12-07 14:41  hardaker
+
+	* acm/: snmpVACMArchObj.C, snmpVACMArchObj.H (NSA.[9,4]):
+
+	working version of the NSA VACM code (without USM speak).
+	getnext/getbulk work fine.  get support almost works (doesn't properly
+	handle VACM results).
+	
+2000-12-07 14:36  rstory
+
+	* acm/snmpVACMArchObj.C (NSA.8):
+
+	fix un-matched brace
+	
+2000-12-07 13:16  lfoster
+
+	* acm/snmpVACMArchObj.C (NSA.7):
+
+	compiles through sections of code added by lindy
+	
+2000-12-07 11:48  hardaker
+
+	* app/cr/cr.C (NSA.8):
+
+	don't change the pdu at all before sending to the acm if use_NSA is set.
+	
+2000-12-07 11:46  hardaker
+
+	* app/cr/crmain.C (NSA.3):
+
+	add -n option to the cr to *not* use the NSA architecture.
+	
+2000-12-07 11:44  hardaker
+
+	* app/cr/Makefile.in (NSA.3):
+
+	reorder dependencies to get rid of constant building.
+	
+2000-12-07 10:52  lfoster
+
+	* acm/snmpVACMArchObj.H (NSA.3):
+
+	added sendRequestResponse
+	
+2000-12-07 10:51  lfoster
+
+	* acm/snmpVACMArchObj.C (NSA.6):
+
+	more fixes, got rid of some duplicate code
+	
+2000-12-07 08:08  lfoster
+
+	* acm/snmpVACMArchObj.C (NSA.5):
+
+	Fixed some compile problems, more to come....
+	
+2000-12-06 15:13  hardaker
+
+	* acm/snmpVACMArchObj.C (NSA.4):
+
+	recommit previously deleted stuff
+	
+2000-12-06 14:48  hardaker
+
+	* app/cr/: cr.C, cr.H (NSA.[7,3]):
+
+	make replace nulls public
+	
+2000-12-06 10:45  lfoster
+
+	* app/cr/cr.C (NSA.6):
+
+	minor changes...
+	
+2000-12-06 08:40  lfoster
+
+	* acm/snmpVACMArchObj.C (NSA.3):
+
+	added more processing of snmpVACMRequestAccessToMibASIs
+	
+2000-12-05 15:58  hardaker
+
+	* app/cr/cr.C (NSA.5):
+
+	use the pdu from the message, not a cached copy in case the vacm
+	changes the pointer value.
+	
+2000-12-05 11:39  hardaker
+
+	* app/cr/: cr.C, cr.H (NSA.[4,2]):
+
+	handle return from snmpVACMRequestAccessToMibASI.
+	
+2000-12-05 11:36  hardaker
+
+	* app/snmpDatabaseObj.H (NSA.2):
+
+	make destructor protected.
+	
+2000-12-05 11:35  hardaker
+
+	* acm/: snmpVACMArchObj.C, snmpVACMArchObj.H (NSA.[2,2]):
+
+	VACM NSA getnext support almost working.
+	
+2000-12-05 10:23  hardaker
+
+	* acm/snmpVACMArchRegObj.C, acm/snmpVACMArchRegObj.H,
+	acm/snmpVACMRequestAccessToMibASI.H, app/cr/cr.C (NSA.[1,1,4,3]):
+
+	Do things properly:
+	  Make VACM arch object remember cr pointer at object creation time.
+	  Remove cr pointer from message.
+	
+2000-12-05 10:12  hardaker
+
+	* app/cr/: cr.C, cr.H (NSA.[2,1]):
+
+	use snmpEngine::use_NSA_architecture to call the proper functions.
+	
+2000-12-05 09:59  hardaker
+
+	* app/cr/Makefile.in (NSA.2):
+
+	add -I. to include line.
+	
+2000-12-05 09:56  hardaker
+
+	* acm/: snmpVACMRequestAccessToMibASI.C,
+	snmpVACMRequestAccessToMibASI.H (NSA.[3,3]):
+
+	- (acm/snmpVACMRequestAccessToMibASI.C, acm/snmpVACMRequestAccessToMibASI.H):
+	  - minor fixes.
+	  - know about the cr object.
+	
+2000-12-05 09:56  hardaker
+
+	* acm/Makefile.in (NSA.2):
+
+	- (acm/Makefile.in): add snmpVACMRequestAccessToMib.C.
+	
+2000-12-04 14:50  lfoster
+
+	* acm/: snmpVACMRequestAccessToMibASI.C,
+	snmpVACMRequestAccessToMibASI.H (NSA.[2,2]):
+
+	Changed member VarBindList to PDU
+	
+2000-12-04 13:16  lfoster
+
+	* acm/snmpVACMIsAccessAllowedASI.H (NSA.1):
+
+	Changed ifndef to SNMPVACMISACCESSALLOWEDASI_H
+	
+2000-12-04 12:55  rstory
+
+	* secmod/snmpCrypto.H (1.3):
+
+	change return type of generate_random_bytes to void, to match the return
+	type of RAND_bytes
+	
+2000-12-04 12:40  rstory
+
+	* secmod/snmpUSMArchObj.C (1.6), app/cr/mibs/snmpTable.C (1.5):
+
+	fix merge typos
+	
+2000-12-04 12:20  rstory
+
+	* app/cr/mibs/snmpTable.C (1.4):
+
+	update debugging; add call to set_row() for row persistence
+	
+2000-12-04 11:52  rstory
+
+	* secmod/: snmpUSMArchObj.C (1.5), snmpUSMData.C (1.2),
+	snmpUSMData.H (1.2):
+
+	add column persistence; remove snmpPersistent(Row|DataTable)
+	
+2000-12-04 11:48  rstory
+
+	* app/cr/snmp-db-init (1.2):
+
+	add path to persisent directory
+	
+2000-12-04 11:43  rstory
+
+	* app/cr/crmain.C (1.3):
+
+	add -P option for persistnce path; change parms to parse_command_line so
+	creation of snmpEngine can wail til after the database is initialized.
+	
+2000-12-04 11:41  rstory
+
+	* app/cr/cr.C (1.2):
+
+	remove snmpPersistent*.H
+	
+2000-12-04 11:40  rstory
+
+	* app/cg/cgmain.C (1.5):
+
+	add -P for persistent database path
+	
+2000-12-04 11:38  rstory
+
+	* app/snmpRowStatus.C (1.3):
+
+	update override_value() to handle the case where get_value() returns
+	a value other than the actual stored value (SNMP_ROW_NOTREADY). This
+	could result in a row having an incorrect state after a restart.
+	
+2000-12-04 11:32  rstory
+
+	* app/: snmpRow.C (1.2), snmpRow.H (1.3), snmpRowAllocator.C (1.2),
+	snmpRowAllocator.H (1.2):
+
+	add map for column persistence; add snmpRow::set_row() to save rows
+	
+2000-12-04 11:26  rstory
+
+	* app/: snmpDatabaseObj.C (1.3), snmpDatabaseObj.H (1.3):
+
+	remove extra endl in logging; add ifdef STATIC_BD for platforms which
+	libdb supports threading; fix a few places where libdb isn't receiving
+	null terminated string as expected
+	
+2000-12-04 11:23  rstory
+
+	* app/Makefile.in (1.6):
+
+	remove snmpPersistentRow.* snmpPersistentDataTable.*
+	
+2000-12-04 11:19  rstory
+
+	* acm/: snmpVACMArchObj.C (1.2), snmpVACMArchObj.H (1.2):
+
+	update for persistent row storage
+	
+2000-12-04 11:01  lfoster
+
+	* app/cr/cr.C (NSA.1):
+
+	Initial mods for NSA arch, includes requestAccessToMib
+	
+2000-12-04 11:00  lfoster
+
+	* acm/snmpVACMRequestAccessToMibASI.H (1.1):
+
+	file snmpVACMRequestAccessToMibASI.H was initially added on branch NSA.
+	
+2000-12-04 11:00  lfoster
+
+	* acm/: snmpVACMRequestAccessToMibASI.C,
+	snmpVACMRequestAccessToMibASI.H (NSA.[1,1]):
+
+	New class for NSA arch, similar to snmpVACMIsAccessAllowedASI
+	
+2000-12-04 11:00  lfoster
+
+	* acm/snmpVACMRequestAccessToMibASI.C (1.1):
+
+	file snmpVACMRequestAccessToMibASI.C was initially added on branch NSA.
+	
+2000-12-04 10:46  lfoster
+
+	* acm/: snmpVACMArchObj.C, snmpVACMArchObj.H (NSA.[1,1]):
+
+	Add RequestAccessToMibASI
+	
+2000-11-28 15:09  baerm
+
+	* msgproc/snmpMPArchObj.C (1.5), secmod/snmpCrypto.C (1.2),
+	secmod/snmpCrypto.H (1.2), secmod/snmpUSMArchObj.C (1.4):
+
+	added random pre_salt.
+	
+2000-11-28 15:08  baerm
+
+	* msgproc/snmpMPArchObj.C, msgproc/snmpMPArchObj.H,
+	secmod/snmpCrypto.C, secmod/snmpCrypto.H, secmod/snmpUSMArchObj.C
+	(NSA.[8,6,1,1,4]):
+
+	added random pre_salt
+	
+2000-11-27 14:43  hardaker
+
+	* app/: snmpDataTable.C (1.2), snmpDataTable.H (1.3), snmpRow.H
+	(1.2), snmpRowStatus.C (1.2), cr/mibreg/MIBImplementation.H (1.2),
+	cr/mibreg/MIBRegistration.C (1.2), cr/mibs/mibEmpty.H (1.2),
+	cr/mibs/scalarSet.C (1.2), cr/mibs/scalarSet.H (1.2),
+	cr/mibs/snmpTable.C (1.3), cr/mibs/snmpTable.H (1.3):
+
+	- (app/snmpDataTable.C, app/snmpDataTable.H, app/snmpRow.H,
+	  app/snmpRowStatus.C, app/cr/mibreg/MIBImplementation.H,
+	  app/cr/mibreg/MIBRegistration.C, app/cr/mibs/mibEmpty.H,
+	  app/cr/mibs/scalarSet.C, app/cr/mibs/scalarSet.H,
+	  app/cr/mibs/snmpTable.C, app/cr/mibs/snmpTable.H):
+	  - basic working undo support for row creation/deletion.
+	    - still not cloning the entire row, which is the next (easy) step
+	  - change all mib implementation functions from set() to snmp_Set()
+	    to avoid set container class clashes.
+	
+2000-11-22 09:12  baerm
+
+	* app/cg/cgmain.C (1.4), base/snmpConstants.H (1.2),
+	msgproc/snmpMPArchObj.C (1.4), msgproc/snmpMPArchObj.H (1.3),
+	msgproc/snmpStateReference.H (1.2), secmod/snmpUSMArchObj.C (1.3),
+	secmod/snmpUSMArchObj.H (1.3):
+
+	cross commiting eng id discovery changes from NSA to opensnmp branches
+	
+2000-11-21 15:34  baerm
+
+	* app/cg/cgmain.C, base/snmpConstants.H, msgproc/snmpMPArchObj.C,
+	msgproc/snmpMPArchObj.H, msgproc/snmpStateReference.H,
+	secmod/snmpUSMArchObj.C, secmod/snmpUSMArchObj.H
+	(NSA.[4,1,7,5,2,3,2]):
+
+	changes for cg side engine ID discovery. Auto engine discovery for noAuth
+	messages and cg discovery for Auth/AuthPriv messages.
+	
+2000-11-15 09:14  baerm
+
+	* configure, configure.in, mib/csmi, mib/smi.h,
+	msgproc/snmpMPArchObj.C (NSA.[2,2,1,1,6]):
+
+	cross posting previous changes from opensnmp
+	
+2000-11-15 08:14  hardaker
+
+	* app/: snmpDataTable.H (1.2), cr/mibs/snmpTable.C (1.2),
+	cr/mibs/snmpTable.H (1.2):
+
+	- (snmpDataTable.H, snmpTable.C, snmpTable.H):
+	  - make snmpTable an enemy of snmpDataTable.
+	
+2000-11-14 16:48  baerm
+
+	* configure (1.4), configure.in (1.4), mib/csmi (1.2), mib/smi.h
+	(1.2), msgproc/snmpMPArchObj.C (1.3):
+
+	changed configure to look for pthreads or c_r_p
+	fixed exception/segfault bug, or rather, worked around it.
+	fix to smi to allow compiling in freebsd machines, and in general
+	make our SMI class more C++ compliant. Yanked some hair out...
+	
+2000-11-02 10:22  baerm
+
+	* Makefile.in, app/Makefile.in, msgproc/Makefile.in,
+	secmod/usmUserCloneFrom.C, secmod/usmUserCloneFrom.H,
+	tools/Makefile.in (NSA.[3,6,3,1,1,3]):
+
+	commiting Robert's main line check-in's to the NSA branch and fixing some of
+	my incorrect Makefile.in's.
+	
+2000-11-01 17:27  baerm
+
+	* app/snmpEngine.C (1.2), app/snmpEngine.H (1.2), app/cg/cgmain.C
+	(1.3), app/cr/crmain.C (1.2), test/cr (1.2):
+
+	cross posting earlier changes for command line reading in cr/cg
+	
+2000-11-01 14:32  baerm
+
+	* app/: cg/cgmain.C, cr/crmain.C (NSA.[3,2]):
+
+	more command line reading changes and general cleanup.
+	
+2000-11-01 09:30  rstory
+
+	* Makefile.in (1.6), app/Makefile.in (1.5), tools/Makefile.in
+	(1.5):
+
+	turn off echo of for loop
+	
+2000-11-01 09:23  rstory
+
+	* secmod/: usmUserCloneFrom.C (1.5), usmUserCloneFrom.H (1.4):
+
+	const correctness
+	
+2000-11-01 09:06  baerm
+
+	* app/snmpEngine.C, app/snmpEngine.H, app/cg/cgmain.C,
+	app/cr/crmain.C, test/cr (NSA.[4,3,2,1,1]):
+
+	changed cr command line reading. Use -p for port now and I got rid of the
+	extra useless arguments. Cleaned up some recent string fixes, changed
+	the test/cr script to work with previous changes.
+	
+2000-10-30 14:58  baerm
+
+	* app/: snmpDatabaseObj.C (1.2), snmpDatabaseObj.H (1.2):
+
+	cross-posting previous bug fix.
+	
+2000-10-30 14:54  baerm
+
+	* app/: snmpDatabaseObj.C, snmpDatabaseObj.H (NSA.[1,1]):
+
+	Finally found that exception/string error, changed some debug object
+	initialization so the 'persist' tag should work now.
+	
+2000-10-24 15:04  baerm
+
+	* dispatcher/snmpDispNetObj.H (1.1):
+
+	file snmpDispNetObj.H was initially added on branch NSA.
+	
+2000-10-24 15:04  baerm
+
+	* dispatcher/snmpDispNetObj.C (1.1):
+
+	file snmpDispNetObj.C was initially added on branch NSA.
+	
+2000-10-24 15:04  baerm
+
+	* app/snmpEngine.C, app/snmpEngine.H, base/snmpRegObj.C,
+	base/snmpRegObj.H, dispatcher/Makefile.in,
+	dispatcher/snmpDispArchObj.C, dispatcher/snmpDispArchObj.H,
+	dispatcher/snmpDispArchRegObj.C, dispatcher/snmpDispNetObj.C,
+	dispatcher/snmpDispNetObj.H (NSA.[3,2,1,1,1,2,2,1,1,1]):
+
+	Separated out the network functions from dispatcher. snmpDispNetObj is the
+	class that handles network I/O now.
+	Minor changes to snmpRegObj's class debug output.
+	
+2000-10-17 15:41  baerm
+
+	* app/cg/cgmain.C (1.2), base/debug.H (1.3),
+	dispatcher/snmpDispArchObj.C (1.2), dispatcher/snmpDispArchObj.H
+	(1.2), msgproc/snmpMPArchObj.C (1.2), msgproc/snmpMPArchObj.H
+	(1.2), secmod/snmpUSMArchObj.C (1.2), secmod/snmpUSMArchObj.H
+	(1.2):
+
+	copying recent nsa_arch bug fixes into the opensnmp tree
+	i.e. cg and dispatcher debug handling, debug macros, usm and mp
+	use of said macros...
+	
+2000-10-17 14:56  baerm
+
+	* app/cg/cgmain.C, base/debug.H, dispatcher/snmpDispArchObj.C,
+	dispatcher/snmpDispArchObj.H, msgproc/snmpMPArchObj.C,
+	msgproc/snmpMPArchObj.H, secmod/snmpUSMArchObj.C,
+	secmod/snmpUSMArchObj.H (NSA.[1,1,1,1,5,4,2,1]):
+
+	fixed debug handling in dispatcher.
+	fixed debug handling in cg.
+	added pointer handling macros to debug.H
+	updated USM and MP to use the macros.
+	
+2000-10-12 15:37  baerm
+
+	* acm/snmpVerifyOutgoingMsg.C, acm/snmpVerifyOutgoingMsg.H,
+	app/Makefile.in, app/cg/Makefile.in, app/cr/Makefile.in,
+	base/snmpErrorObj.H, base/snmpSecurityMsg.C,
+	base/snmpSecurityMsg.H, msgproc/Makefile.in,
+	msgproc/snmpMPArchObj.C, msgproc/snmpMPArchObj.H,
+	msgproc/snmpStateReference.C, msgproc/snmpStateReference.H,
+	msgproc/snmpVerifyIncomingMsg.C, msgproc/snmpVerifyIncomingMsg.H
+	(NSA.[2,2,5,1,1,1,2,2,2,4,3,1,1,2,2]):
+
+	changes to handle snmpVerifyIncoming/Outgoing messages for the security
+	module (in the MP thread). It compiles, but is completely untested.
+	I plan to test that the non-nsa-architecture parts work (there are some
+	fairly major changes so these likely won't), but I don't know yet...
+	
+2000-10-06 11:10  ogud
+
+	* Makefile.in (1.5):
+
+	Make sure we delete the files created by config
+	
+2000-10-06 11:03  ogud
+
+	* Makefile.in (1.4), acm/Makefile.in (1.2), app/Makefile.in (1.4),
+	app/cg/Makefile.in (1.2), app/cr/Makefile.in (1.2),
+	app/cr/mibreg/Makefile.in (1.2), app/cr/mibs/Makefile.in (1.2),
+	asn/Makefile.in (1.2), base/Makefile.in (1.2),
+	dispatcher/Makefile.in (1.2), mib/Makefile.in (1.2),
+	msgproc/Makefile.in (1.2), secmod/Makefile.in (1.2),
+	tools/Makefile.in (1.4), tools/snmp-db-add/Makefile.in (1.2),
+	tools/snmp-db-dump/Makefile.in (1.2):
+
+	Updating Makefile.in to make sure make depend does not update Makefile.in
+	backing out instances of Makefile.in prior commit with dependancies in them.
+	Creating new rule make distclean that does make clean and delets Makefile's
+	        make configclean did not get all Makefiles
+	        distconfig is recursive thus no need to update top level Makefile.in
+	        when second level directory is created.
+	
+	        Olafur
+	
+2000-10-06 07:58  ogud
+
+	* Makefile.in, app/Makefile.in, tools/Makefile.in (NSA.[2,4,2]):
+
+	Pulling patch from mainline to NSA branch: Fat Finger depend/clean fix
+	
+2000-10-06 07:56  ogud
+
+	* Makefile.in (1.3), app/Makefile.in (1.3), tools/Makefile.in
+	(1.3):
+
+	Unding fat fingers in last patch make depend did make clean OOPS
+		Olafur
+	
+2000-10-06 07:28  ogud
+
+	* Makefile.in, app/Makefile.in, tools/Makefile.in (NSA.[1,3,1]):
+
+	Applying changes in mainline Makefiles in the NSA branch
+	this change prints out the directories visited by make
+	
+		Olafur
+	
+2000-10-06 06:47  ogud
+
+	* Makefile.in (1.2), app/Makefile.in (1.2), tools/Makefile.in
+	(1.2):
+
+	Make now prints out what subdirectory each file is being complied in.
+	This allows me to find the files faster when there is a compile error.
+	Top level make file now sets variable RM to use -f flag on delete
+	
+		Olafur
+	
+2000-10-05 16:05  baerm
+
+	* configure, configure.in (NSA.[1,1]):
+
+	moving over configure fixes from main branch to NSA branch
+	
+2000-10-05 12:24  baerm
+
+	* base/debug.C (NSA.1):
+
+	just moving the 'const' warning fix to this branch
+	
+2000-10-04 13:27  lfoster
+
+	* base/debug.C (1.3):
+
+	Fixed const warning in call to merge_map which was causing compile
+	failures on FreeBSD with latest gcc.
+	
+2000-10-03 16:40  baerm
+
+	* msgproc/: snmpMPArchObj.C, snmpMPArchObj.H (NSA.[3,2]):
+
+	In theory, the mp thread of the security module now handles VerifyIncomingMsg
+	appropriately...
+	
+2000-10-02 17:38  baerm
+
+	* acm/snmpVerifyOutgoingMsg.C (1.1):
+
+	file snmpVerifyOutgoingMsg.C was initially added on branch NSA.
+	
+2000-10-02 17:38  baerm
+
+	* acm/: snmpVerifyOutgoingMsg.C, snmpVerifyOutgoingMsg.H
+	(NSA.[1,1]):
+
+	forgot to add acm/snmpVerifyOutgoingMsg[C,H]
+	
+2000-10-02 17:38  baerm
+
+	* acm/snmpVerifyOutgoingMsg.H (1.1):
+
+	file snmpVerifyOutgoingMsg.H was initially added on branch NSA.
+	
+2000-10-02 17:36  baerm
+
+	* msgproc/snmpVerifyIncomingMsg.H (1.1):
+
+	file snmpVerifyIncomingMsg.H was initially added on branch NSA.
+	
+2000-10-02 17:36  baerm
+
+	* msgproc/snmpVerifyIncomingMsg.C (1.1):
+
+	file snmpVerifyIncomingMsg.C was initially added on branch NSA.
+	
+2000-10-02 17:36  baerm
+
+	* base/snmpSecurityMsg.H (1.1):
+
+	file snmpSecurityMsg.H was initially added on branch NSA.
+	
+2000-10-02 17:36  baerm
+
+	* base/snmpSecurityMsg.C (1.1):
+
+	file snmpSecurityMsg.C was initially added on branch NSA.
+	
+2000-10-02 17:36  baerm
+
+	* acm/Makefile.in, app/Makefile.in, app/snmpSecurityMsg.C,
+	app/snmpSecurityMsg.H, base/Makefile.in, base/snmpSecurityMsg.C,
+	base/snmpSecurityMsg.H, msgproc/Makefile.in,
+	msgproc/snmpMPArchObj.C, msgproc/snmpMPArchObj.H,
+	msgproc/snmpVerifyIncomingMsg.C, msgproc/snmpVerifyIncomingMsg.H
+	(NSA.[1,2,3,3,1,1,1,1,2,1,1,1]):
+
+	mostly adding snmpVerifyIncoming/OutgoingMsg classes, some MP changes.
+	
+2000-09-29 16:44  baerm
+
+	* README_NSA_ARCHITECTURE (1.1):
+
+	file README_NSA_ARCHITECTURE was initially added on branch NSA.
+	
+2000-09-29 16:44  baerm
+
+	* README_NSA_ARCHITECTURE, msgproc/snmpMPArchObj.C,
+	secmod/snmpUSMArchObj.C (NSA.[1,1,1]):
+
+	I added a README_NSA_ARCHITECTURE file to the nsa_opensnmp module
+	it is a first shot at describing our implementations, I think, though,
+	it is Sudwerk time...
+	
+2000-09-28 13:57  ogud
+
+	* configure (1.3), configure.in (1.3):
+
+	Making error messages in configure script more expicit on what version
+	of third pary software must be installed.
+	Added /usr/local to standard search path to support OS's that do not
+	normally do it.
+		Olafur
+	
+2000-09-27 15:45  baerm
+
+	* app/: Makefile.in, snmpSecurityMsg.C, snmpSecurityMsg.H
+	(NSA.[1,2,2]):
+
+	added statusInfo to snmpSecurityMsg, added snmpSecurityMsg compilation
+	to Makefile.in (you'll need to run configure to get it in the Makefile)
+	
+2000-09-26 16:59  baerm
+
+	* app/: snmpSecurityMsg.C, snmpSecurityMsg.H (NSA.[1,1]):
+
+	new base class for VACM <-> USM security access/verification
+	
+2000-09-26 16:59  baerm
+
+	* app/snmpSecurityMsg.H (1.1):
+
+	file snmpSecurityMsg.H was initially added on branch NSA.
+	
+2000-09-26 16:59  baerm
+
+	* app/snmpSecurityMsg.C (1.1):
+
+	file snmpSecurityMsg.C was initially added on branch NSA.
+	
+2000-09-21 09:13  baerm
+
+	* app/snmpEngine.C (NSA.2):
+
+	bogus change checking for diff
+	
+2000-09-21 09:10  hardaker
+
+	* configure (1.2), configure.in (1.2):
+
+	- (configure.in): check /usr/local/ssl by default.  Really.  This time I promise.
+	
+2000-09-20 16:52  baerm
+
+	* app/snmpEngine.C (NSA.1):
+
+	minor change, also checking for no diff's in mail notification
+	
+2000-09-20 15:00  baerm
+
+	* app/snmpEngine.H (NSA.1):
+
+	added bool to engine: 'use_NSA_architecture'
+	
+2000-09-20 14:54  baerm
+
+	* README (1.2), secmod/KeyChange.C (1.2), secmod/usmUserCloneFrom.C
+	(1.4), secmod/usmUserCloneFrom.H (1.3):
+
+	added to README, usmUserClone changes, but still not functional.
+	
+2000-09-19 09:33  baerm
+
+	* secmod/usmUserCloneFrom.C (1.3):
+
+	documentation change
+	
+2000-09-19 09:01  baerm
+
+	* secmod/: usmUserCloneFrom.C (1.2), usmUserCloneFrom.H (1.2):
+
+	misc changes usmUserCloneFrom, cvs mail check
+	
+2000-09-18 15:28  baerm
+
+	* secmod/KeyChange.H (1.2):
+
+	slight (non-programatic) document change to file and cvs list check...
+	
+2000-09-18 11:36  lfoster
+
+	* base/: debug.C (1.2), debug.H (1.2):
+
+	Added partial tag name matches
+	e.g., USM:processIncoming debug message matches USM on command line
+	
+2000-09-13 10:37  baerm
+
+	* .cvsignore (1.1.1.1), INSTALL (1.1.1.1), LICENSE (1.1.1.1),
+	Makefile.in (1.1.1.1), Makefile.top (1.1.1.1), README (1.1.1.1),
+	aclocal.m4 (1.1.1.1), config.guess (1.1.1.1), config.h.in
+	(1.1.1.1), config.sub (1.1.1.1), configure (1.1.1.1), configure.in
+	(1.1.1.1), install-sh (1.1.1.1), localdepends (1.1.1.1),
+	makefileindepend.pl (1.1.1.1), snmpd.conf (1.1.1.1), acm/.cvsignore
+	(1.1.1.1), acm/Makefile.in (1.1.1.1), acm/snmpVACMArchObj.C
+	(1.1.1.1), acm/snmpVACMArchObj.H (1.1.1.1),
+	acm/snmpVACMArchRegObj.C (1.1.1.1), acm/snmpVACMArchRegObj.H
+	(1.1.1.1), acm/snmpVACMIsAccessAllowedASI.C (1.1.1.1),
+	acm/snmpVACMIsAccessAllowedASI.H (1.1.1.1), acm/test.C (1.1.1.1),
+	acm/vacm/.cvsignore (1.1.1.1), app/.cvsignore (1.1.1.1),
+	app/Makefile.in (1.1.1.1), app/PersistentVarBind.C (1.1.1.1),
+	app/PersistentVarBind.H (1.1.1.1), app/snmpAppProcessPduASI.C
+	(1.1.1.1), app/snmpAppProcessPduASI.H (1.1.1.1),
+	app/snmpAppProcessResponsePduASI.C (1.1.1.1),
+	app/snmpAppProcessResponsePduASI.H (1.1.1.1),
+	app/snmpCRRegisterTable.C (1.1.1.1), app/snmpCRRegisterTable.H
+	(1.1.1.1), app/snmpColumnAllocator.H (1.1.1.1),
+	app/snmpColumnCloneAllocator.H (1.1.1.1), app/snmpDataTable.C
+	(1.1.1.1), app/snmpDataTable.H (1.1.1.1), app/snmpDatabaseObj.C
+	(1.1.1.1), app/snmpDatabaseObj.H (1.1.1.1), app/snmpEngine.C
+	(1.1.1.1), app/snmpEngine.H (1.1.1.1), app/snmpIndexes.C (1.1.1.1),
+	app/snmpIndexes.H (1.1.1.1), app/snmpPersistentDataTable.C
+	(1.1.1.1), app/snmpPersistentDataTable.H (1.1.1.1),
+	app/snmpPersistentRow.C (1.1.1.1), app/snmpPersistentRow.H
+	(1.1.1.1), app/snmpPersistentRowAllocator.H (1.1.1.1),
+	app/snmpPersistentTable.C (1.1.1.1), app/snmpPersistentTable.H
+	(1.1.1.1), app/snmpRow.C (1.1.1.1), app/snmpRow.H (1.1.1.1),
+	app/snmpRowAllocator.C (1.1.1.1), app/snmpRowAllocator.H (1.1.1.1),
+	app/snmpRowDependent.C (1.1.1.1), app/snmpRowDependent.H (1.1.1.1),
+	app/snmpRowObjectAllocator.H (1.1.1.1), app/snmpRowStatus.C
+	(1.1.1.1), app/snmpRowStatus.H (1.1.1.1), app/snmpRowStatusCheck.H
+	(1.1.1.1), app/snmpRowStatusCheckColsExist.C (1.1.1.1),
+	app/snmpRowStatusCheckColsExist.H (1.1.1.1),
+	app/snmpRowStatusColumnAllocator.H (1.1.1.1), app/snmpStorageType.C
+	(1.1.1.1), app/snmpStorageType.H (1.1.1.1), app/cg/.cvsignore
+	(1.1.1.1), app/cg/Makefile.in (1.1.1.1), app/cg/cgmain.C (1.1.1.1),
+	app/cg/snmpCGArchRegObj.C (1.1.1.1), app/cg/snmpCGArchRegObj.H
+	(1.1.1.1), app/cr/.cvsignore (1.1.1.1), app/cr/Makefile.in
+	(1.1.1.1), app/cr/cr.C (1.1.1.1), app/cr/cr.H (1.1.1.1),
+	app/cr/crmain.C (1.1.1.1), app/cr/snmp-db-init (1.1.1.1),
+	app/cr/snmpCRArchRegObj.C (1.1.1.1), app/cr/snmpCRArchRegObj.H
+	(1.1.1.1), app/cr/snmpCRRegisterOID.C (1.1.1.1),
+	app/cr/snmpCRRegisterOID.H (1.1.1.1), app/cr/mibreg/.cvsignore
+	(1.1.1.1), app/cr/mibreg/MIBImplementation.C (1.1.1.1),
+	app/cr/mibreg/MIBImplementation.H (1.1.1.1),
+	app/cr/mibreg/MIBRegTree.C (1.1.1.1), app/cr/mibreg/MIBRegTree.H
+	(1.1.1.1), app/cr/mibreg/MIBRegistration.C (1.1.1.1),
+	app/cr/mibreg/MIBRegistration.H (1.1.1.1),
+	app/cr/mibreg/MIBRegistry.H (1.1.1.1), app/cr/mibreg/Makefile.in
+	(1.1.1.1), app/cr/mibreg/SearchRange.C (1.1.1.1),
+	app/cr/mibreg/SearchRange.H (1.1.1.1), app/cr/mibs/.cvsignore
+	(1.1.1.1), app/cr/mibs/Makefile.in (1.1.1.1), app/cr/mibs/control.C
+	(1.1.1.1), app/cr/mibs/control.H (1.1.1.1), app/cr/mibs/mibEmpty.H
+	(1.1.1.1), app/cr/mibs/scalarSet.C (1.1.1.1),
+	app/cr/mibs/scalarSet.H (1.1.1.1), app/cr/mibs/snmpTable.C
+	(1.1.1.1), app/cr/mibs/snmpTable.H (1.1.1.1),
+	app/cr/mibs/sysOrTable.C (1.1.1.1), app/cr/mibs/sysOrTable.H
+	(1.1.1.1), app/cr/mibs/system.C (1.1.1.1), app/cr/mibs/system.H
+	(1.1.1.1), app/cr/mibs/tabletest.C (1.1.1.1), asn/.cvsignore
+	(1.1.1.1), asn/BerError.C (1.1.1.1), asn/BerError.H (1.1.1.1),
+	asn/BitString.H (1.1.1.1), asn/Counter32.C (1.1.1.1),
+	asn/Counter32.H (1.1.1.1), asn/Counter64.C (1.1.1.1),
+	asn/Counter64.H (1.1.1.1), asn/Gauge32.H (1.1.1.1),
+	asn/HeaderData.C (1.1.1.1), asn/HeaderData.H (1.1.1.1),
+	asn/Integer32.C (1.1.1.1), asn/Integer32.H (1.1.1.1),
+	asn/IpAddress.C (1.1.1.1), asn/IpAddress.H (1.1.1.1),
+	asn/Makefile.in (1.1.1.1), asn/Null.C (1.1.1.1), asn/Null.H
+	(1.1.1.1), asn/OID.C (1.1.1.1), asn/OID.H (1.1.1.1),
+	asn/OctetString.H (1.1.1.1), asn/Opaque.H (1.1.1.1), asn/PDU.C
+	(1.1.1.1), asn/PDU.H (1.1.1.1), asn/RawData.C (1.1.1.1),
+	asn/RawData.H (1.1.1.1), asn/RawDataWrap.C (1.1.1.1),
+	asn/RawDataWrap.H (1.1.1.1), asn/ScopedPDU.C (1.1.1.1),
+	asn/ScopedPDU.H (1.1.1.1), asn/Sequence.C (1.1.1.1), asn/Sequence.H
+	(1.1.1.1), asn/TimeTicks.C (1.1.1.1), asn/TimeTicks.H (1.1.1.1),
+	asn/Unsigned32.C (1.1.1.1), asn/Unsigned32.H (1.1.1.1),
+	asn/Unsigned64.C (1.1.1.1), asn/Unsigned64.H (1.1.1.1),
+	asn/VarBind.C (1.1.1.1), asn/VarBind.H (1.1.1.1), asn/VarBindList.C
+	(1.1.1.1), asn/VarBindList.H (1.1.1.1), asn/asnBadAssignment.H
+	(1.1.1.1), asn/asnDataType.C (1.1.1.1), asn/asnDataType.H
+	(1.1.1.1), asn/asnDataTypes.H (1.1.1.1), asn/asnIndex.C (1.1.1.1),
+	asn/asnIndex.H (1.1.1.1), asn/asnParseError.C (1.1.1.1),
+	asn/asnParseError.H (1.1.1.1), asn/ber.C (1.1.1.1), asn/ber.H
+	(1.1.1.1), asn/illegalOID.H (1.1.1.1), asn/main.C (1.1.1.1),
+	asn/snmpV3Message.C (1.1.1.1), asn/snmpV3Message.H (1.1.1.1),
+	asn/test2.C (1.1.1.1), base/.cvsignore (1.1.1.1),
+	base/BufferClass.C (1.1.1.1), base/BufferClass.H (1.1.1.1),
+	base/Makefile.in (1.1.1.1), base/compareIgnoreCase.C (1.1.1.1),
+	base/compareIgnoreCase.H (1.1.1.1), base/debug.C (1.1.1.1),
+	base/debug.H (1.1.1.1), base/snmpArchObj.C (1.1.1.1),
+	base/snmpArchObj.H (1.1.1.1), base/snmpArchRegObj.C (1.1.1.1),
+	base/snmpArchRegObj.H (1.1.1.1), base/snmpConstants.C (1.1.1.1),
+	base/snmpConstants.H (1.1.1.1), base/snmpErrorObj.C (1.1.1.1),
+	base/snmpErrorObj.H (1.1.1.1), base/snmpException.C (1.1.1.1),
+	base/snmpException.H (1.1.1.1), base/snmpFIFOObj.C (1.1.1.1),
+	base/snmpFIFOObj.H (1.1.1.1), base/snmpMessageObj.C (1.1.1.1),
+	base/snmpMessageObj.H (1.1.1.1), base/snmpMutexObj.C (1.1.1.1),
+	base/snmpMutexObj.H (1.1.1.1), base/snmpObj.C (1.1.1.1),
+	base/snmpObj.H (1.1.1.1), base/snmpProtoErr.C (1.1.1.1),
+	base/snmpProtoErr.H (1.1.1.1), base/snmpRegObj.C (1.1.1.1),
+	base/snmpRegObj.H (1.1.1.1), base/snmpSNMPErrorObj.C (1.1.1.1),
+	base/snmpSNMPErrorObj.H (1.1.1.1), base/snmpStats.H (1.1.1.1),
+	base/snmpStatusInfo.C (1.1.1.1), base/snmpStatusInfo.H (1.1.1.1),
+	base/snmpStringException.C (1.1.1.1), base/snmpStringException.H
+	(1.1.1.1), base/snmpSynchDataObj.C (1.1.1.1),
+	base/snmpSynchDataObj.H (1.1.1.1), base/threadSafeArray.H
+	(1.1.1.1), dispatcher/.cvsignore (1.1.1.1), dispatcher/Makefile.in
+	(1.1.1.1), dispatcher/snmpDispArchObj.C (1.1.1.1),
+	dispatcher/snmpDispArchObj.H (1.1.1.1),
+	dispatcher/snmpDispArchRegObj.C (1.1.1.1),
+	dispatcher/snmpDispArchRegObj.H (1.1.1.1),
+	dispatcher/snmpDispHandleInMsg.C (1.1.1.1),
+	dispatcher/snmpDispHandleInMsg.H (1.1.1.1),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.1.1.1),
+	dispatcher/snmpDispRegisterEngIdASI.H (1.1.1.1),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.1.1.1),
+	dispatcher/snmpDispReturnResponsePduASI.H (1.1.1.1),
+	dispatcher/snmpDispSendPduASI.C (1.1.1.1),
+	dispatcher/snmpDispSendPduASI.H (1.1.1.1),
+	dispatcher/snmpDispStats.C (1.1.1.1), dispatcher/snmpDispStats.H
+	(1.1.1.1), dispatcher/snmpDispUnregisterEngIdASI.C (1.1.1.1),
+	dispatcher/snmpDispUnregisterEngIdASI.H (1.1.1.1),
+	dispatcher/snmpFreeSendPduHandle.C (1.1.1.1),
+	dispatcher/snmpFreeSendPduHandle.H (1.1.1.1),
+	dispatcher/snmpSendPduHandle.C (1.1.1.1),
+	dispatcher/snmpSendPduHandle.H (1.1.1.1), mib/.cvsignore (1.1.1.1),
+	mib/LIBSMI.C (1.1.1.1), mib/LIBSMI.H (1.1.1.1), mib/Makefile.in
+	(1.1.1.1), mib/README (1.1.1.1), mib/csmi (1.1.1.1), mib/example.C
+	(1.1.1.1), mib/libsmiOid.C (1.1.1.1), mib/libsmiOid.H (1.1.1.1),
+	mib/macro.H (1.1.1.1), mib/mib.H (1.1.1.1), mib/mibModule.C
+	(1.1.1.1), mib/mibModule.H (1.1.1.1), mib/mibNode.C (1.1.1.1),
+	mib/mibNode.H (1.1.1.1), mib/mibRoot.H (1.1.1.1),
+	mib/patch.libsmi-0.2 (1.1.1.1), mib/projecteduse.C (1.1.1.1),
+	mib/smi.h (1.1.1.1), mib/smitest.C (1.1.1.1), mib/snmp_error.H
+	(1.1.1.1), mib/thello.C (1.1.1.1), mibs/SNMP-COMMUNITY-MIB
+	(1.1.1.1), mibs/SNMP-FRAMEWORK-MIB (1.1.1.1), mibs/SNMP-MPD-MIB
+	(1.1.1.1), mibs/SNMP-NOTIFICATION-MIB (1.1.1.1),
+	mibs/SNMP-PROXY-MIB (1.1.1.1), mibs/SNMP-TARGET-MIB (1.1.1.1),
+	mibs/SNMP-USER-BASED-SM-3DES-MIB (1.1.1.1),
+	mibs/SNMP-USER-BASED-SM-MIB (1.1.1.1), mibs/SNMP-USM-DH-OBJECTS-MIB
+	(1.1.1.1), mibs/SNMP-VIEW-BASED-ACM-MIB (1.1.1.1), mibs/SNMPv2-CONF
+	(1.1.1.1), mibs/SNMPv2-MIB (1.1.1.1), mibs/SNMPv2-SMI (1.1.1.1),
+	mibs/SNMPv2-TC (1.1.1.1), msgproc/.cvsignore (1.1.1.1),
+	msgproc/Makefile.in (1.1.1.1), msgproc/snmpGlobalData.C (1.1.1.1),
+	msgproc/snmpGlobalData.H (1.1.1.1), msgproc/snmpMPArchObj.C
+	(1.1.1.1), msgproc/snmpMPArchObj.H (1.1.1.1),
+	msgproc/snmpMPArchRegObj.C (1.1.1.1), msgproc/snmpMPArchRegObj.H
+	(1.1.1.1), msgproc/snmpMPMsgObj.C (1.1.1.1), msgproc/snmpMPMsgObj.H
+	(1.1.1.1), msgproc/snmpMPPrepareDataElementsASI.C (1.1.1.1),
+	msgproc/snmpMPPrepareDataElementsASI.H (1.1.1.1),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.1.1.1),
+	msgproc/snmpMPPrepareOutgoingMsgASI.H (1.1.1.1),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.1.1.1),
+	msgproc/snmpMPPrepareResponseMsgASI.H (1.1.1.1),
+	msgproc/snmpStateReference.C (1.1.1.1),
+	msgproc/snmpStateReference.H (1.1.1.1), secmod/.cvsignore
+	(1.1.1.1), secmod/KeyChange.C (1.1.1.1), secmod/KeyChange.H
+	(1.1.1.1), secmod/Makefile.in (1.1.1.1),
+	secmod/USMSecurityParameters.C (1.1.1.1),
+	secmod/USMSecurityParameters.H (1.1.1.1), secmod/snmpCrypto.C
+	(1.1.1.1), secmod/snmpCrypto.H (1.1.1.1),
+	secmod/snmpKeyChangeColumnAllocator.H (1.1.1.1),
+	secmod/snmpSecurityStateReference.H (1.1.1.1),
+	secmod/snmpUSMArchObj.C (1.1.1.1), secmod/snmpUSMArchObj.H
+	(1.1.1.1), secmod/snmpUSMArchRegObj.C (1.1.1.1),
+	secmod/snmpUSMArchRegObj.H (1.1.1.1), secmod/snmpUSMData.C
+	(1.1.1.1), secmod/snmpUSMData.H (1.1.1.1),
+	secmod/snmpUSMGenerateRequestMsgASI.C (1.1.1.1),
+	secmod/snmpUSMGenerateRequestMsgASI.H (1.1.1.1),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.1.1.1),
+	secmod/snmpUSMGenerateResponseMsgASI.H (1.1.1.1),
+	secmod/snmpUSMGenericOutMsg.C (1.1.1.1),
+	secmod/snmpUSMGenericOutMsg.H (1.1.1.1),
+	secmod/snmpUSMProcessIncomingASI.C (1.1.1.1),
+	secmod/snmpUSMProcessIncomingASI.H (1.1.1.1),
+	secmod/usmAddUserMsg.C (1.1.1.1), secmod/usmAddUserMsg.H (1.1.1.1),
+	secmod/usmStatsClass.C (1.1.1.1), secmod/usmStatsClass.H (1.1.1.1),
+	secmod/usmUserCloneFrom.C (1.1.1.1), secmod/usmUserCloneFrom.H
+	(1.1.1.1), test/.cvsignore (1.1.1.1), test/cg_authPriv_cr
+	(1.1.1.1), test/cg_authPriv_ucd (1.1.1.1), test/cg_auth_cr
+	(1.1.1.1), test/cg_auth_ucd (1.1.1.1), test/cg_noAuth_cr (1.1.1.1),
+	test/cg_noAuth_ucd (1.1.1.1), test/cr (1.1.1.1), test/ucd_auth
+	(1.1.1.1), test/ucd_authPriv (1.1.1.1), test/ucd_auth_badAuth
+	(1.1.1.1), test/ucd_auth_badName (1.1.1.1), test/ucd_auth_badPass
+	(1.1.1.1), test/ucd_daemon (1.1.1.1), test/ucd_noAuth (1.1.1.1),
+	tools/.cvsignore (1.1.1.1), tools/Makefile.in (1.1.1.1),
+	tools/mkaccess.pl (1.1.1.1), tools/snmp-db-add/.cvsignore
+	(1.1.1.1), tools/snmp-db-add/Makefile.in (1.1.1.1),
+	tools/snmp-db-add/main.C (1.1.1.1), tools/snmp-db-dump/.cvsignore
+	(1.1.1.1), tools/snmp-db-dump/Makefile.in (1.1.1.1),
+	tools/snmp-db-dump/main.C (1.1.1.1):
+
+	Initially adding the source directories to cvs 09/13/2000
+	
+2000-09-13 10:37  baerm
+
+	* .cvsignore (1.1), INSTALL (1.1), LICENSE (1.1), Makefile.in
+	(1.1), Makefile.top (1.1), README (1.1), aclocal.m4 (1.1),
+	config.guess (1.1), config.h.in (1.1), config.sub (1.1), configure
+	(1.1), configure.in (1.1), install-sh (1.1), localdepends (1.1),
+	makefileindepend.pl (1.1), snmpd.conf (1.1), acm/.cvsignore (1.1),
+	acm/Makefile.in (1.1), acm/snmpVACMArchObj.C (1.1),
+	acm/snmpVACMArchObj.H (1.1), acm/snmpVACMArchRegObj.C (1.1),
+	acm/snmpVACMArchRegObj.H (1.1), acm/snmpVACMIsAccessAllowedASI.C
+	(1.1), acm/snmpVACMIsAccessAllowedASI.H (1.1), acm/test.C (1.1),
+	acm/vacm/.cvsignore (1.1), app/.cvsignore (1.1), app/Makefile.in
+	(1.1), app/PersistentVarBind.C (1.1), app/PersistentVarBind.H
+	(1.1), app/snmpAppProcessPduASI.C (1.1), app/snmpAppProcessPduASI.H
+	(1.1), app/snmpAppProcessResponsePduASI.C (1.1),
+	app/snmpAppProcessResponsePduASI.H (1.1), app/snmpCRRegisterTable.C
+	(1.1), app/snmpCRRegisterTable.H (1.1), app/snmpColumnAllocator.H
+	(1.1), app/snmpColumnCloneAllocator.H (1.1), app/snmpDataTable.C
+	(1.1), app/snmpDataTable.H (1.1), app/snmpDatabaseObj.C (1.1),
+	app/snmpDatabaseObj.H (1.1), app/snmpEngine.C (1.1),
+	app/snmpEngine.H (1.1), app/snmpIndexes.C (1.1), app/snmpIndexes.H
+	(1.1), app/snmpPersistentDataTable.C (1.1),
+	app/snmpPersistentDataTable.H (1.1), app/snmpPersistentRow.C (1.1),
+	app/snmpPersistentRow.H (1.1), app/snmpPersistentRowAllocator.H
+	(1.1), app/snmpPersistentTable.C (1.1), app/snmpPersistentTable.H
+	(1.1), app/snmpRow.C (1.1), app/snmpRow.H (1.1),
+	app/snmpRowAllocator.C (1.1), app/snmpRowAllocator.H (1.1),
+	app/snmpRowDependent.C (1.1), app/snmpRowDependent.H (1.1),
+	app/snmpRowObjectAllocator.H (1.1), app/snmpRowStatus.C (1.1),
+	app/snmpRowStatus.H (1.1), app/snmpRowStatusCheck.H (1.1),
+	app/snmpRowStatusCheckColsExist.C (1.1),
+	app/snmpRowStatusCheckColsExist.H (1.1),
+	app/snmpRowStatusColumnAllocator.H (1.1), app/snmpStorageType.C
+	(1.1), app/snmpStorageType.H (1.1), app/cg/.cvsignore (1.1),
+	app/cg/Makefile.in (1.1), app/cg/cgmain.C (1.1),
+	app/cg/snmpCGArchRegObj.C (1.1), app/cg/snmpCGArchRegObj.H (1.1),
+	app/cr/.cvsignore (1.1), app/cr/Makefile.in (1.1), app/cr/cr.C
+	(1.1), app/cr/cr.H (1.1), app/cr/crmain.C (1.1),
+	app/cr/snmp-db-init (1.1), app/cr/snmpCRArchRegObj.C (1.1),
+	app/cr/snmpCRArchRegObj.H (1.1), app/cr/snmpCRRegisterOID.C (1.1),
+	app/cr/snmpCRRegisterOID.H (1.1), app/cr/mibreg/.cvsignore (1.1),
+	app/cr/mibreg/MIBImplementation.C (1.1),
+	app/cr/mibreg/MIBImplementation.H (1.1), app/cr/mibreg/MIBRegTree.C
+	(1.1), app/cr/mibreg/MIBRegTree.H (1.1),
+	app/cr/mibreg/MIBRegistration.C (1.1),
+	app/cr/mibreg/MIBRegistration.H (1.1), app/cr/mibreg/MIBRegistry.H
+	(1.1), app/cr/mibreg/Makefile.in (1.1), app/cr/mibreg/SearchRange.C
+	(1.1), app/cr/mibreg/SearchRange.H (1.1), app/cr/mibs/.cvsignore
+	(1.1), app/cr/mibs/Makefile.in (1.1), app/cr/mibs/control.C (1.1),
+	app/cr/mibs/control.H (1.1), app/cr/mibs/mibEmpty.H (1.1),
+	app/cr/mibs/scalarSet.C (1.1), app/cr/mibs/scalarSet.H (1.1),
+	app/cr/mibs/snmpTable.C (1.1), app/cr/mibs/snmpTable.H (1.1),
+	app/cr/mibs/sysOrTable.C (1.1), app/cr/mibs/sysOrTable.H (1.1),
+	app/cr/mibs/system.C (1.1), app/cr/mibs/system.H (1.1),
+	app/cr/mibs/tabletest.C (1.1), asn/.cvsignore (1.1), asn/BerError.C
+	(1.1), asn/BerError.H (1.1), asn/BitString.H (1.1), asn/Counter32.C
+	(1.1), asn/Counter32.H (1.1), asn/Counter64.C (1.1),
+	asn/Counter64.H (1.1), asn/Gauge32.H (1.1), asn/HeaderData.C (1.1),
+	asn/HeaderData.H (1.1), asn/Integer32.C (1.1), asn/Integer32.H
+	(1.1), asn/IpAddress.C (1.1), asn/IpAddress.H (1.1),
+	asn/Makefile.in (1.1), asn/Null.C (1.1), asn/Null.H (1.1),
+	asn/OID.C (1.1), asn/OID.H (1.1), asn/OctetString.H (1.1),
+	asn/Opaque.H (1.1), asn/PDU.C (1.1), asn/PDU.H (1.1), asn/RawData.C
+	(1.1), asn/RawData.H (1.1), asn/RawDataWrap.C (1.1),
+	asn/RawDataWrap.H (1.1), asn/ScopedPDU.C (1.1), asn/ScopedPDU.H
+	(1.1), asn/Sequence.C (1.1), asn/Sequence.H (1.1), asn/TimeTicks.C
+	(1.1), asn/TimeTicks.H (1.1), asn/Unsigned32.C (1.1),
+	asn/Unsigned32.H (1.1), asn/Unsigned64.C (1.1), asn/Unsigned64.H
+	(1.1), asn/VarBind.C (1.1), asn/VarBind.H (1.1), asn/VarBindList.C
+	(1.1), asn/VarBindList.H (1.1), asn/asnBadAssignment.H (1.1),
+	asn/asnDataType.C (1.1), asn/asnDataType.H (1.1),
+	asn/asnDataTypes.H (1.1), asn/asnIndex.C (1.1), asn/asnIndex.H
+	(1.1), asn/asnParseError.C (1.1), asn/asnParseError.H (1.1),
+	asn/ber.C (1.1), asn/ber.H (1.1), asn/illegalOID.H (1.1),
+	asn/main.C (1.1), asn/snmpV3Message.C (1.1), asn/snmpV3Message.H
+	(1.1), asn/test2.C (1.1), base/.cvsignore (1.1), base/BufferClass.C
+	(1.1), base/BufferClass.H (1.1), base/Makefile.in (1.1),
+	base/compareIgnoreCase.C (1.1), base/compareIgnoreCase.H (1.1),
+	base/debug.C (1.1), base/debug.H (1.1), base/snmpArchObj.C (1.1),
+	base/snmpArchObj.H (1.1), base/snmpArchRegObj.C (1.1),
+	base/snmpArchRegObj.H (1.1), base/snmpConstants.C (1.1),
+	base/snmpConstants.H (1.1), base/snmpErrorObj.C (1.1),
+	base/snmpErrorObj.H (1.1), base/snmpException.C (1.1),
+	base/snmpException.H (1.1), base/snmpFIFOObj.C (1.1),
+	base/snmpFIFOObj.H (1.1), base/snmpMessageObj.C (1.1),
+	base/snmpMessageObj.H (1.1), base/snmpMutexObj.C (1.1),
+	base/snmpMutexObj.H (1.1), base/snmpObj.C (1.1), base/snmpObj.H
+	(1.1), base/snmpProtoErr.C (1.1), base/snmpProtoErr.H (1.1),
+	base/snmpRegObj.C (1.1), base/snmpRegObj.H (1.1),
+	base/snmpSNMPErrorObj.C (1.1), base/snmpSNMPErrorObj.H (1.1),
+	base/snmpStats.H (1.1), base/snmpStatusInfo.C (1.1),
+	base/snmpStatusInfo.H (1.1), base/snmpStringException.C (1.1),
+	base/snmpStringException.H (1.1), base/snmpSynchDataObj.C (1.1),
+	base/snmpSynchDataObj.H (1.1), base/threadSafeArray.H (1.1),
+	dispatcher/.cvsignore (1.1), dispatcher/Makefile.in (1.1),
+	dispatcher/snmpDispArchObj.C (1.1), dispatcher/snmpDispArchObj.H
+	(1.1), dispatcher/snmpDispArchRegObj.C (1.1),
+	dispatcher/snmpDispArchRegObj.H (1.1),
+	dispatcher/snmpDispHandleInMsg.C (1.1),
+	dispatcher/snmpDispHandleInMsg.H (1.1),
+	dispatcher/snmpDispRegisterEngIdASI.C (1.1),
+	dispatcher/snmpDispRegisterEngIdASI.H (1.1),
+	dispatcher/snmpDispReturnResponsePduASI.C (1.1),
+	dispatcher/snmpDispReturnResponsePduASI.H (1.1),
+	dispatcher/snmpDispSendPduASI.C (1.1),
+	dispatcher/snmpDispSendPduASI.H (1.1), dispatcher/snmpDispStats.C
+	(1.1), dispatcher/snmpDispStats.H (1.1),
+	dispatcher/snmpDispUnregisterEngIdASI.C (1.1),
+	dispatcher/snmpDispUnregisterEngIdASI.H (1.1),
+	dispatcher/snmpFreeSendPduHandle.C (1.1),
+	dispatcher/snmpFreeSendPduHandle.H (1.1),
+	dispatcher/snmpSendPduHandle.C (1.1),
+	dispatcher/snmpSendPduHandle.H (1.1), mib/.cvsignore (1.1),
+	mib/LIBSMI.C (1.1), mib/LIBSMI.H (1.1), mib/Makefile.in (1.1),
+	mib/README (1.1), mib/csmi (1.1), mib/example.C (1.1),
+	mib/libsmiOid.C (1.1), mib/libsmiOid.H (1.1), mib/macro.H (1.1),
+	mib/mib.H (1.1), mib/mibModule.C (1.1), mib/mibModule.H (1.1),
+	mib/mibNode.C (1.1), mib/mibNode.H (1.1), mib/mibRoot.H (1.1),
+	mib/patch.libsmi-0.2 (1.1), mib/projecteduse.C (1.1), mib/smi.h
+	(1.1), mib/smitest.C (1.1), mib/snmp_error.H (1.1), mib/thello.C
+	(1.1), mibs/SNMP-COMMUNITY-MIB (1.1), mibs/SNMP-FRAMEWORK-MIB
+	(1.1), mibs/SNMP-MPD-MIB (1.1), mibs/SNMP-NOTIFICATION-MIB (1.1),
+	mibs/SNMP-PROXY-MIB (1.1), mibs/SNMP-TARGET-MIB (1.1),
+	mibs/SNMP-USER-BASED-SM-3DES-MIB (1.1), mibs/SNMP-USER-BASED-SM-MIB
+	(1.1), mibs/SNMP-USM-DH-OBJECTS-MIB (1.1),
+	mibs/SNMP-VIEW-BASED-ACM-MIB (1.1), mibs/SNMPv2-CONF (1.1),
+	mibs/SNMPv2-MIB (1.1), mibs/SNMPv2-SMI (1.1), mibs/SNMPv2-TC (1.1),
+	msgproc/.cvsignore (1.1), msgproc/Makefile.in (1.1),
+	msgproc/snmpGlobalData.C (1.1), msgproc/snmpGlobalData.H (1.1),
+	msgproc/snmpMPArchObj.C (1.1), msgproc/snmpMPArchObj.H (1.1),
+	msgproc/snmpMPArchRegObj.C (1.1), msgproc/snmpMPArchRegObj.H (1.1),
+	msgproc/snmpMPMsgObj.C (1.1), msgproc/snmpMPMsgObj.H (1.1),
+	msgproc/snmpMPPrepareDataElementsASI.C (1.1),
+	msgproc/snmpMPPrepareDataElementsASI.H (1.1),
+	msgproc/snmpMPPrepareOutgoingMsgASI.C (1.1),
+	msgproc/snmpMPPrepareOutgoingMsgASI.H (1.1),
+	msgproc/snmpMPPrepareResponseMsgASI.C (1.1),
+	msgproc/snmpMPPrepareResponseMsgASI.H (1.1),
+	msgproc/snmpStateReference.C (1.1), msgproc/snmpStateReference.H
+	(1.1), secmod/.cvsignore (1.1), secmod/KeyChange.C (1.1),
+	secmod/KeyChange.H (1.1), secmod/Makefile.in (1.1),
+	secmod/USMSecurityParameters.C (1.1),
+	secmod/USMSecurityParameters.H (1.1), secmod/snmpCrypto.C (1.1),
+	secmod/snmpCrypto.H (1.1), secmod/snmpKeyChangeColumnAllocator.H
+	(1.1), secmod/snmpSecurityStateReference.H (1.1),
+	secmod/snmpUSMArchObj.C (1.1), secmod/snmpUSMArchObj.H (1.1),
+	secmod/snmpUSMArchRegObj.C (1.1), secmod/snmpUSMArchRegObj.H (1.1),
+	secmod/snmpUSMData.C (1.1), secmod/snmpUSMData.H (1.1),
+	secmod/snmpUSMGenerateRequestMsgASI.C (1.1),
+	secmod/snmpUSMGenerateRequestMsgASI.H (1.1),
+	secmod/snmpUSMGenerateResponseMsgASI.C (1.1),
+	secmod/snmpUSMGenerateResponseMsgASI.H (1.1),
+	secmod/snmpUSMGenericOutMsg.C (1.1), secmod/snmpUSMGenericOutMsg.H
+	(1.1), secmod/snmpUSMProcessIncomingASI.C (1.1),
+	secmod/snmpUSMProcessIncomingASI.H (1.1), secmod/usmAddUserMsg.C
+	(1.1), secmod/usmAddUserMsg.H (1.1), secmod/usmStatsClass.C (1.1),
+	secmod/usmStatsClass.H (1.1), secmod/usmUserCloneFrom.C (1.1),
+	secmod/usmUserCloneFrom.H (1.1), test/.cvsignore (1.1),
+	test/cg_authPriv_cr (1.1), test/cg_authPriv_ucd (1.1),
+	test/cg_auth_cr (1.1), test/cg_auth_ucd (1.1), test/cg_noAuth_cr
+	(1.1), test/cg_noAuth_ucd (1.1), test/cr (1.1), test/ucd_auth
+	(1.1), test/ucd_authPriv (1.1), test/ucd_auth_badAuth (1.1),
+	test/ucd_auth_badName (1.1), test/ucd_auth_badPass (1.1),
+	test/ucd_daemon (1.1), test/ucd_noAuth (1.1), tools/.cvsignore
+	(1.1), tools/Makefile.in (1.1), tools/mkaccess.pl (1.1),
+	tools/snmp-db-add/.cvsignore (1.1), tools/snmp-db-add/Makefile.in
+	(1.1), tools/snmp-db-add/main.C (1.1),
+	tools/snmp-db-dump/.cvsignore (1.1), tools/snmp-db-dump/Makefile.in
+	(1.1), tools/snmp-db-dump/main.C (1.1):
+
+	Initial revision
+	

@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// Synch.mpc,v 1.2 2005/11/26 03:13:13 ossama Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+  exename = proc_sema
+}

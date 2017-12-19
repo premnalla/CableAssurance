@@ -1,0 +1,14 @@
+// -*- MPC -*-
+//
+// SendRecv_Test.mpc,v 1.6 2005/01/07 14:40:18 elliott_c Exp
+//
+
+project: aceexe, htbp {
+  exename = SendRecv_Test
+  after  += Test_Output
+  libs   += Test_Output
+
+  Source_Files {
+     SendRecv_Test.cpp
+  }
+}

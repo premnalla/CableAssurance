@@ -1,0 +1,10 @@
+// -*- MPC -*-
+// ftclientorb.mpb,v 1.7 2005/11/26 03:13:13 ossama Exp
+
+project : ftorbutils, pi, interceptors {
+  avoids    += ace_for_tao      // Requires ace/UUID
+  after     += FT_ClientORB
+  libs      += TAO_FT_ClientORB
+  requires  += ace_uuid
+  tagchecks += FT_ClientORB
+}

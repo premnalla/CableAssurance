@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// valuetype.mpb,v 1.9 2005/08/19 08:02:52 jwillemsen Exp
+
+project: taolib, anytypecode {
+  after    += Valuetype
+  libs     += TAO_Valuetype
+}

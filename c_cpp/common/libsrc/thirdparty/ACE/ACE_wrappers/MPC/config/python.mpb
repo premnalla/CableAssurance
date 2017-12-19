@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// python.mpb,v 1.1 2006/02/13 17:15:47 elliott_c Exp
+
+project {
+  requires += python
+  includes += $(PYTHON_INCLUDE)/.
+  libpaths += $(PYTHON_LIBDIR)/.
+}

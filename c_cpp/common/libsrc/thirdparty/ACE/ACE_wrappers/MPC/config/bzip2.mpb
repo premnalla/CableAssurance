@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// bzip2.mpb,v 1.1 2006/02/15 16:03:44 elliott_c Exp
+
+feature(bzip2) {
+  includes += $(BZIP2_ROOT)/include
+  libpaths += $(BZIP2_ROOT)/lib
+  macros   += USE_BZIP2
+  lit_libs += bz2
+}

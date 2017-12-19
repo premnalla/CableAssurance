@@ -1,0 +1,435 @@
+# Microsoft eMbedded Visual Tools Project File - Name="JAWS2" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE ARM) Dynamic-Link Library" 0x8502
+# TARGTYPE "Win32 (WCE ARMV4) Dynamic-Link Library" 0xa302
+# TARGTYPE "Win32 (WCE emulator) Dynamic-Link Library" 0xa602
+# TARGTYPE "Win32 (WCE x86) Dynamic-Link Library" 0x8302
+
+CFG=JAWS2 - Win32 (WCE ARM) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE run the tool that generated this project file and specify the
+!MESSAGE nmake output type.  You can then use the following command:
+!MESSAGE
+!MESSAGE NMAKE.
+!MESSAGE
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE
+!MESSAGE NMAKE CFG="JAWS2 - Win32 (WCE ARM) Debug"
+!MESSAGE
+!MESSAGE Possible choices for configuration are:
+!MESSAGE
+!MESSAGE "JAWS2 - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE ARMV4) Debug" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE ARMV4) Release" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE emulator) Debug" (based on "Win32 (WCE emulator) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE emulator) Release" (based on "Win32 (WCE emulator) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE x86) Debug" (based on "Win32 (WCE x86) Dynamic-Link Library")
+!MESSAGE "JAWS2 - Win32 (WCE x86) Release" (based on "Win32 (WCE x86) Dynamic-Link Library")
+!MESSAGE
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+
+!IF  "$(CFG)" == "JAWS2 - Win32 (WCE ARM) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "..\..\..\lib\ARM"
+# PROP Intermediate_Dir "Debug\JAWS2\ARM"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /i "..\..\.." /i ".." /r
+CPP=clarm.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\JAWS2\ARM/"  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACEd.lib /libpath:".\ARM" /libpath:"..\..\..\lib\ARM" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\ARM\JAWS2d.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /pdb:"..\..\..\lib\ARM\JAWS2d.pdb"  /dll /debug /machine:ARM /out:"..\..\..\lib\ARM\JAWS2d.dll"
+
+!ELSEIF  "$(CFG)" == "JAWS2 - Win32 (WCE ARM) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "..\..\..\lib\ARM"
+# PROP Intermediate_Dir "Release\JAWS2\ARM"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /i "..\..\.." /i ".." /r
+CPP=clarm.exe
+# ADD CPP /nologo /O2 /W3 /GR  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACE.lib /libpath:".\ARM" /libpath:"..\..\..\lib\ARM" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\ARM\JAWS2.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /pdb:none  /dll /debug /machine:ARM /out:"..\..\..\lib\ARM\JAWS2.dll"
+
+!ENDIF
+!IF  "$(CFG)" == "JAWS2 - Win32 (WCE ARMV4) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "..\..\..\lib\ARM"
+# PROP Intermediate_Dir "Debug\JAWS2\ARM"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /d ARMV4 /i "..\..\.." /i ".." /r
+CPP=clarm.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\JAWS2\ARM/" /QRxscale /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D ARMV4 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACEd.lib /libpath:".\ARM" /libpath:"..\..\..\lib\ARM" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\ARM\JAWS2d.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /pdb:"..\..\..\lib\ARM\JAWS2d.pdb"  /dll /debug /machine:ARM /out:"..\..\..\lib\ARM\JAWS2d.dll"
+
+!ELSEIF  "$(CFG)" == "JAWS2 - Win32 (WCE ARMV4) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "..\..\..\lib\ARM"
+# PROP Intermediate_Dir "Release\JAWS2\ARM"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /d ARMV4 /i "..\..\.." /i ".." /r
+CPP=clarm.exe
+# ADD CPP /nologo /O2 /W3 /GR /QRxscale /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D ARMV4 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACE.lib /libpath:".\ARM" /libpath:"..\..\..\lib\ARM" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\ARM\JAWS2.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /pdb:none  /dll /debug /machine:ARM /out:"..\..\..\lib\ARM\JAWS2.dll"
+
+!ENDIF
+!IF  "$(CFG)" == "JAWS2 - Win32 (WCE emulator) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "..\..\..\lib\IX86"
+# PROP Intermediate_Dir "Debug\JAWS2\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /i "..\..\.." /i ".." /r
+CPP=cl.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\JAWS2\IX86/"  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACEd.lib $(CEx86Corelibc) /libpath:".\IX86" /libpath:"..\..\..\lib\IX86" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\IX86\JAWS2d.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib),OLDNAMES.lib" /subsystem:$(CESubsystem) /align:"4096" /pdb:"..\..\..\lib\IX86\JAWS2d.pdb"  /dll /debug /machine:IX86 /out:"..\..\..\lib\IX86\JAWS2d.dll"
+
+!ELSEIF  "$(CFG)" == "JAWS2 - Win32 (WCE emulator) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "..\..\..\lib\IX86"
+# PROP Intermediate_Dir "Release\JAWS2\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /i "..\..\.." /i ".." /r
+CPP=cl.exe
+# ADD CPP /nologo /O2 /W3 /GR  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACE.lib $(CEx86Corelibc) /libpath:".\IX86" /libpath:"..\..\..\lib\IX86" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\IX86\JAWS2.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib),OLDNAMES.lib" /subsystem:$(CESubsystem) /align:"4096" /pdb:none  /dll /debug /machine:IX86 /out:"..\..\..\lib\IX86\JAWS2.dll"
+
+!ENDIF
+!IF  "$(CFG)" == "JAWS2 - Win32 (WCE x86) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "..\..\..\lib\IX86"
+# PROP Intermediate_Dir "Debug\JAWS2\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /i "..\..\.." /i ".." /r
+CPP=cl.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\JAWS2\IX86/"  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACEd.lib $(CEx86Corelibc) /libpath:".\IX86" /libpath:"..\..\..\lib\IX86" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\IX86\JAWS2d.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib),OLDNAMES.lib" /subsystem:$(CESubsystem) /align:"4096" /pdb:"..\..\..\lib\IX86\JAWS2d.pdb"  /dll /debug /machine:IX86 /out:"..\..\..\lib\IX86\JAWS2d.dll"
+
+!ELSEIF  "$(CFG)" == "JAWS2 - Win32 (WCE x86) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "..\..\..\lib\IX86"
+# PROP Intermediate_Dir "Release\JAWS2\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /i "..\..\.." /i ".." /r
+CPP=cl.exe
+# ADD CPP /nologo /O2 /W3 /GR  /I "..\..\.." /I ".." /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86 /D JAWS_BUILD_DLL  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo /o"..\..\..\lib\JAWS2.bsc"
+LINK32=link.exe
+# ADD LINK32 winsock.lib commctrl.lib coredll.lib iphlpapi.lib /INCREMENTAL:NO ACE.lib $(CEx86Corelibc) /libpath:".\IX86" /libpath:"..\..\..\lib\IX86" /nologo /base:"0x00100000"  /implib:"..\..\..\lib\IX86\JAWS2.lib" /entry:"_DllMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib),OLDNAMES.lib" /subsystem:$(CESubsystem) /align:"4096" /pdb:none  /dll /debug /machine:IX86 /out:"..\..\..\lib\IX86\JAWS2.dll"
+
+!ENDIF
+
+
+# Begin Target
+
+# Name "JAWS2 - Win32 (WCE ARM) Debug"
+# Name "JAWS2 - Win32 (WCE ARM) Release"
+# Name "JAWS2 - Win32 (WCE ARMV4) Debug"
+# Name "JAWS2 - Win32 (WCE ARMV4) Release"
+# Name "JAWS2 - Win32 (WCE emulator) Debug"
+# Name "JAWS2 - Win32 (WCE emulator) Release"
+# Name "JAWS2 - Win32 (WCE x86) Debug"
+# Name "JAWS2 - Win32 (WCE x86) Release"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;cxx;c"
+# Begin Source File
+
+SOURCE="Assoc_Array.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Manager.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Object.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Concurrency.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Data_Block.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="FILE.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Filecache.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Headers.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="IO.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="IO_Acceptor.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="IO_Handler.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Parse_Headers.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline_Tasks.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Policy.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Reaper.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Server.cpp"
+# End Source File
+# Begin Source File
+
+SOURCE="Waiter.cpp"
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hh"
+# Begin Source File
+
+SOURCE="Assoc_Array.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Hash_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Heap_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_List_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Manager.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Manager_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Object.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Concurrency.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Data_Block.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Export.h"
+# End Source File
+# Begin Source File
+
+SOURCE="FILE.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Filecache.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Hash_Bucket_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Headers.h"
+# End Source File
+# Begin Source File
+
+SOURCE="IO.h"
+# End Source File
+# Begin Source File
+
+SOURCE="IO_Acceptor.h"
+# End Source File
+# Begin Source File
+
+SOURCE="IO_Handler.h"
+# End Source File
+# Begin Source File
+
+SOURCE="JAWS.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Parse_Headers.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline_Handler_T.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline_Tasks.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Policy.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Reaper.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Server.h"
+# End Source File
+# Begin Source File
+
+SOURCE="Waiter.h"
+# End Source File
+# End Group
+# Begin Group "Template Files"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE="Cache_Hash_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Heap_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_List_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE="Cache_Manager_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE="Hash_Bucket_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE="Pipeline_Handler_T.cpp"
+# PROP Exclude_From_Build 1
+# End Source File
+# End Group
+# End Target
+# End Project

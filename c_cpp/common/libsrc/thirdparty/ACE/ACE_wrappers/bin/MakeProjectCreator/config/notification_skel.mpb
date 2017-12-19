@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// notification_skel.mpb,v 1.1 2004/09/07 23:42:00 jtc Exp
+
+project : orbsvcslib, notification, event_skel, portableserver {
+  after     += CosNotification_Skel
+  libs      += TAO_CosNotification_Skel
+}

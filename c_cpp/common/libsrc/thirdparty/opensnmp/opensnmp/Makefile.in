@@ -1,0 +1,93 @@
+SUBDIRS= base mib asn dispatcher msgproc secmod acm app tools
+RM=/bin/rm -f
+
+SUBLIBS=app/cg/libcg.a \
+	app/libsnmpapp.a \
+	dispatcher/libsnmpdisp.a \
+	msgproc/libsnmpmsgproc.a \
+	secmod/libsnmpsecmod.a \
+	asn/libsnmpber.a \
+	base/libsnmpbase.a \
+	mib/libsnmpmib.a
+#	acm/libsnmpvacm.a \
+
+MAINLIB=libopensnmp.a
+PREINSTALL=installsetup
+INSTALLLIBS=$(MAINLIB)
+
+all:	subdirs $(MAINLIB)
+
+### hack
+# try and preserve ordering of objects above
+$(MAINLIB): $(SUBLIBS)
+	$(srcdir)/mkinstalldirs libtmp
+	cd libtmp; \
+	b=1; \
+	for i in $(SUBLIBS); do \
+		mkdir $$b; \
+		cd $$b; \
+		$(AR) x ../../$$i; \
+		b=`expr $$b + 1`; \
+		cd ..; \
+	done
+	cd libtmp; \
+	$(AR) cr ../$@ */*.o
+	rm -rf libtmp
+
+installsetup:
+	$(srcdir)/mkinstalldirs $(libdir) $(includedir)/opensnmp $(bindir) /var/opensnmp
+
+subdirsinstall:
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making all in `pwd`/$$i"; \
+	        ( cd $$i ; $(MAKE) installeverything) ;	\
+		if test $$? != 0 ; then \
+			exit 1 ; \
+		fi \
+	fi \
+	done
+
+distclean: 
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making distclean  in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" distclean) ;	\
+		if test $$? != 0 ; then \
+			exit 1 ; \
+		fi \
+	fi \
+	done
+	$(RM) Makefile config.cache config.status config.log config.h
+
+
+clean: 
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making clean in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" clean) ;	\
+		if test $$? != 0 ; then \
+			exit 1 ; \
+		fi \
+	fi \
+	done
+
+configclean:
+	rm -f config.cache config.status config.log config.h
+	rm -f Makefile acm/vacm/Makefile acm/Makefile app/cg/Makefile \
+	      app/cr/mibreg/Makefile app/cr/Makefile app/cr/mibs/Makefile \
+	      app/Makefile Makefile asn/Makefile base/Makefile \
+	      dispatcher/Makefile msgproc/Makefile secmod/Makefile \
+	      test/Makefile mib/Makefile
+
+depend:
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making depend in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) depend ) ;	\
+		if test $$? != 0 ; then \
+			exit 1 ; \
+		fi \
+	fi \
+	done
+

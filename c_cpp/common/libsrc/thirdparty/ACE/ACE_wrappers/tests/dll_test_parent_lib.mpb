@@ -1,0 +1,10 @@
+// -*- MPC -*-
+//
+// dll_test_parent_lib.mpb,v 4.2 2005/10/12 19:16:58 ossama Exp
+
+project {
+
+  after += DLL_Test_Parent_Lib
+  libs  += DLL_Test_Parent
+
+}

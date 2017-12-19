@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// aceexe.mpb,v 1.8 2005/11/27 12:11:35 ossama Exp
+
+project: acedefaults, acenosubsets, ace_for_tao, versioned_namespace {
+
+}

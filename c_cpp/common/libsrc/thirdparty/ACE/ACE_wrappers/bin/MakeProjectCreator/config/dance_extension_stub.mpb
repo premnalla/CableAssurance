@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// dance_extension_stub.mpb,v 1.1 2006/01/26 18:00:37 dengg Exp
+
+project : ciao_deployment_stub {
+  includes += $(CIAO_ROOT)/DAnCE/Interfaces
+}

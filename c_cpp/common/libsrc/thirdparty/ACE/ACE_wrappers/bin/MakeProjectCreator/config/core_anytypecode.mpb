@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// core_anytypecode.mpb,v 1.1 2005/10/05 10:19:09 smcqueen Exp
+// N.B. This project is only intended for use within ORB core mpc files.
+// Use anytypecode.mpb in all other circumstances.
+
+project {
+  after   += AnyTypeCode
+  libs    += TAO_AnyTypeCode
+}

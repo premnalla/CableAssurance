@@ -1,0 +1,17 @@
+// -*- MPC -*-
+// Send_Msg.mpc,v 1.2 2005/11/07 03:03:02 bala Exp
+
+project(*Sender) : aceexe, exceptions, rmcast {
+  avoids = ace_for_tao
+  exename = sender
+  Source_Files {
+    Sender.cpp
+  }
+}
+project(*Receiver) : aceexe, exceptions, rmcast {
+  avoids = ace_for_tao
+  exename = receiver
+  Source_Files {
+    Receiver.cpp
+  }
+}

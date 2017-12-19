@@ -1,0 +1,12 @@
+// -*- MPC -*-
+// caching.mpc,v 1.4 2005/12/07 18:51:42 isisbuilds Exp
+
+project(http_client) : aceexe {
+  avoids   += ace_for_tao
+  requires += ace_filecache
+
+  Source_Files {
+    http_handler.cpp
+    http_client.cpp
+  }
+}

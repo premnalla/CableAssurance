@@ -1,0 +1,5 @@
+// -*- MPC -*-
+// install.mpb,v 1.1 2005/06/29 04:09:04 jtc Exp
+
+project : install_bin, install_lib, install_headers {
+}

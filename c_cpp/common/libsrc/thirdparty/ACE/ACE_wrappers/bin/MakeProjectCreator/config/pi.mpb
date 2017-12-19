@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// pi.mpb,v 1.1 2005/06/13 13:47:33 jwillemsen Exp
+
+project : taolib, codecfactory {
+  after   += PI
+  libs    += TAO_PI
+}

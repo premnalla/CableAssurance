@@ -1,0 +1,3 @@
+#! /bin/csh
+
+../app/cg/cg -p 7050 -u newUser -a NONE -l nanp -N --varbind $1 n "" localhost

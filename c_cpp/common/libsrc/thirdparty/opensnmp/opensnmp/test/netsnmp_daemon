@@ -1,0 +1,3 @@
+#! /bin/csh
+
+/usr/local/sbin/snmpd -f -L -Ddump,usm -d -C -c ../snmpd.conf -x localhost:7060 localhost:7050

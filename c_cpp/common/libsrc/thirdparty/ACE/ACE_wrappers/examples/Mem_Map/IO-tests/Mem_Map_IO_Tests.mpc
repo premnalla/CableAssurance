@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// Mem_Map_IO_Tests.mpc,v 1.3 2005/11/26 03:13:13 ossama Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+}

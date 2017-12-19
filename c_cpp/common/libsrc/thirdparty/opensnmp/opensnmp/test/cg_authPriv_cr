@@ -1,0 +1,5 @@
+#! /bin/csh
+
+../app/cg/cg -E someEngineID -e localEngineID -u newUser -a MD5 -A kissthesky -X zonkerharris -l ap -p 7050 -N --varbind $1 n "" localhost
+
+

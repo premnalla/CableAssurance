@@ -1,0 +1,30 @@
+
+SUBDIRS= snmp-db-add snmp-db-dump 
+
+all: subdirs
+
+distclean: 
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making $@ in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" $@ ) ;	\
+	fi \
+	done
+	$(RM) Makefile
+
+clean: 
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making $@ in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" $@ ) ;	\
+	fi \
+	done
+
+depend:
+	@for i in $(SUBDIRS) ; do 	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making depend in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) depend ) ;	\
+	fi \
+	done
+

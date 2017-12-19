@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// naming_serv.mpb,v 1.3 2005/11/26 03:13:13 ossama Exp
+
+project : orbsvcslib, naming_skel, iortable, messaging_optional, svc_utils {
+  avoids    += ace_for_tao        // Requires MMAP_Memory_Pool
+  after     += CosNaming_Serv
+  libs      += TAO_CosNaming_Serv
+  tagchecks += Naming
+}

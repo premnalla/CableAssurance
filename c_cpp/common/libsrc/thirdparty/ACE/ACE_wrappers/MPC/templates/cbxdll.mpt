@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// cbxdll.mpt,v 1.6 2005/03/29 13:57:06 elliott_c Exp
+
+conditional_include "common"
+conditional_include "windowscommon"
+
+common_defines  = WIN32
+
+conditional_include "user_cbxdll"

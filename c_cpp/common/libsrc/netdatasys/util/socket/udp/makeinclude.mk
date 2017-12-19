@@ -1,0 +1,11 @@
+
+
+CCC = g++
+#CCC = gcc
+
+#CFLAGS = $(CFLAGS)
+#CPPFLAGS = $(CPPFLAGS)
+#CCFLAGS = $(CCFLAGS)
+#LDFLAGS = $(LDFLAGS)
+
+

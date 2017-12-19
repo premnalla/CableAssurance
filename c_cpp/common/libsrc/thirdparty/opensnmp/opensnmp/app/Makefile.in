@@ -1,0 +1,106 @@
+DB_SRCS		= @DB_SRCS@
+
+LDFLAGS	= -L$(srcdir)/../base -L$(srcdir)/../asn -L$(srcdir)/../dispatcher \
+	  -L$(srcdir)/../msgproc -L$(srcdir)/../secmod -L$(srcdir)/../acm
+
+LIBS	= -lsnmpvacm -lsnmpsecmod -lsnmpmsgproc -lsnmpdisp -lsnmpber \
+	  -lsnmpbase
+
+INCLUDES=-I$(srcdir)/../base -I$(srcdir)/../asn -I$(srcdir)/../dispatcher \
+	 -I$(srcdir)/. -I$(srcdir)/../msgproc -I$(srcdir)/../secmod \
+	 -I$(srcdir)/cr/mibs -I$(srcdir)/cr/mibreg -I$(srcdir)/../mib -I..
+
+LIBSRCS= snmpAppProcessPduASI.C snmpAppProcessResponsePduASI.C snmpEngine.C \
+	 snmpDataTable.C snmpIndexes.C snmpRow.C snmpRowStatus.C \
+	 snmpRowStatusCheckColsExist.C PersistentVarBind.C \
+	 snmpStorageType.C snmpScalarData.C snmpScalarSet.C snmpCounterSet.C \
+	 snmpRowDependent.C snmpCRRegisterTable.C snmpRowAllocator.C \
+	 snmpDatabaseObj.C snmpDatabaseRec.C $(DB_SRCS) \
+	 snmpRowManager.C snmpPersistentRowManager.C \
+	 snmpCRRegisterObj.C snmpCRRegisterScalarSet.C \
+	 configMgr.C cfgInteger.C cfgString.C cfgDebug.C cfgMib.C \
+	 cfgSnmpEngine.C  cfgPersistent.C cfgScalarVar.C cfgTableEntry.C \
+	 cfgVarBind.C cfgHelp.C cfgBoolean.C 
+
+LIBOBJS= $(LIBSRCS:.C=.o) 
+
+SUBDIRS= cg cr
+
+TARGETS = libsnmpapp.a
+
+INSTALLHEADERS=PersistentVarBind.H	\
+	cfgDebug.H	\
+	cfgInteger.H	\
+	cfgString.H	\
+	cfgMib.H	\
+	cfgPersistent.H	\
+	cfgScalarVar.H	\
+	cfgTableEntry.H	\
+	cfgBoolean.H    \
+	cfgHelp.H       \
+	configMgr.H	\
+	configOption.H	\
+	snmpAppProcessPduASI.H	\
+	snmpAppProcessResponsePduASI.H	\
+	snmpCRRegisterObj.H	\
+	snmpCRRegisterScalarSet.H	\
+	snmpCRRegisterTable.H	\
+	snmpColumnAllocator.H	\
+	snmpColumnCloneAllocator.H	\
+	snmpCounterSet.H	\
+	snmpDataTable.H	\
+	snmpDatabaseObj.H	\
+	snmpDatabaseRec.H	\
+	snmpDatabaseObj.H	\
+	snmpEngine.H	\
+	snmpIndexes.H	\
+	snmpPersistentRowManager.H	\
+	snmpRow.H	\
+	snmpRowAllocator.H	\
+	snmpRowDependent.H	\
+	snmpRowManager.H	\
+	snmpRowObjectAllocator.H	\
+	snmpRowStatus.H	\
+	snmpRowStatusCheck.H	\
+	snmpRowStatusCheckColsExist.H	\
+	snmpRowStatusColumnAllocator.H	\
+	snmpRowStorageColumnAllocator.H	\
+	snmpScalarData.H	\
+	snmpScalarSet.H	\
+	snmpStorageType.H
+
+
+all: $(TARGETS) subdirs
+
+libsnmpapp.a: $(LIBOBJS)
+	$(AR) cr $@ $(LIBOBJS)
+
+distclean: 
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making $@ in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" $@ ) ;	\
+	fi \
+	done
+	$(RM) Makefile
+
+clean: 
+	$(RM) -f *.o *~ $(TARGETS)
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making clean in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" clean) ;	\
+	fi \
+	done
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+	@for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making depend in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) depend ) ;	\
+	fi \
+	done
+

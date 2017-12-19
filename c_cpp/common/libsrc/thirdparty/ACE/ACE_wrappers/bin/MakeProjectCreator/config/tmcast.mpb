@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// tmcast.mpb,v 1.8 2005/11/26 03:13:13 ossama Exp
+
+project: acelib, exceptions, threads {
+  avoids   += ace_for_tao
+  after    += TMCast
+  libs     += ACE_TMCast
+  includes += $(ACE_ROOT)/protocols
+}

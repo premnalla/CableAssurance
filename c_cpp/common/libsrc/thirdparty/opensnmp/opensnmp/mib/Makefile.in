@@ -1,0 +1,86 @@
+#
+# mib/Makefile.in
+#
+#  David Reeder  <dreeder@tislabs.com>   Mon Jan 31 23:42:11 EST 2000
+#
+#------------------------------------ -o- 
+LDFLAGS		= -L. -lsnmpmib @LDFLAGS@
+
+INCLUDES        = -I$(top_srcdir) -I../base
+
+LIBSRCS		= LIBSMI.C mibNode.C mibModule.C libsmiOid.C mibManager.C
+LIBHDRS		= LIBSMI.H mibNode.H mibModule.H \
+			mibManager.H \
+			mibRoot.H libsmiOid.H snmp_error.H
+
+LIBOBJS		= $(LIBSRCS:.C=.o)
+
+TARGETS		= libsnmpmib.a
+
+TEST_SRCS	= example.C thello.C smitest.C
+TEST_HDRS	=
+TEST_TARGETS	= example #thello smitest
+
+INSTALLHEADERS=LIBSMI.H	\
+	csmi \
+	libsmiOid.H	\
+	mib.H	\
+	mibManager.H	\
+	mibModule.H	\
+	mibNode.H	\
+	mibRoot.H	\
+	snmp_error.H	\
+
+#------------------------------------ -o- 
+# General targets.
+#
+all: $(TARGETS)
+
+test: $(TARGETS) $(TEST_TARGETS)
+
+libsnmpmib.a: $(LIBOBJS) $(LIBHDRS)
+	ar cr $@ $(LIBOBJS)
+
+#------------------------------------ -o- 
+# Tests.
+#
+example: example.C libsnmpmib.a
+	$(CXX) -o example example.C \
+		$(CFLAGS) \
+		$(INCLUDES) \
+		$(LDFLAGS) $(LIBS)
+
+thello: thello.C libsnmpmib.a
+	$(CXX) -o thello thello.C \
+		$(CFLAGS) \
+		$(INCLUDES) \
+		$(LDFLAGS) $(LIBS)
+
+smitest: smitest.C libsnmpmib.a
+	$(CXX) -o smitest smitest.C \
+		$(CFLAGS) \
+		$(INCLUDES) \
+		$(LDFLAGS) $(LIBS)
+
+
+#------------------------------------ -o- 
+# Cleanup.
+#
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean c:
+	rm -f *.o *~ $(TARGETS) $(TEST_TARGETS)
+	rm -f core *.core
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS) $(TEST_SRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+#------------------------------------ -o- 
+# Install things.
+#
+headers:
+	$(INSTALL) -m 0664 *.H ../include
+

@@ -1,0 +1,50 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir)/./ -I$(srcdir)/../asn -I$(srcdir)/../mib
+
+LIBSRCS= BufferClass.C snmpArchObj.C snmpArchRegObj.C snmpConstants.C \
+	 snmpErrorObj.C snmpException.C snmpFIFOObj.C snmpMessageObj.C \
+	 snmpStandardMessage.C \
+	 snmpMutexObj.C snmpObj.C snmpProtoErr.C snmpRegObj.C \
+	 snmpSNMPErrorObj.C snmpStatusInfo.C snmpStringException.C \
+	 snmpSynchDataObj.C debug.C opensnmpUtilities.C
+
+LIBOBJS= $(LIBSRCS:.C=.o)
+
+TARGETS=libsnmpbase.a
+INSTALLHEADERS=BufferClass.H	\
+	opensnmpUtilities.H	\
+	debug.H	\
+	snmpArchObj.H	\
+	snmpArchRegObj.H	\
+	snmpConstants.H	\
+	snmpErrorObj.H	\
+	snmpException.H	\
+	snmpFIFOObj.H	\
+	snmpMessageObj.H	\
+	snmpStandardMessage.H   \
+	snmpMutexObj.H	\
+	snmpObj.H	\
+	snmpProtoErr.H	\
+	snmpRegObj.H	\
+	snmpSNMPErrorObj.H	\
+	snmpStats.H	\
+	snmpStatusInfo.H	\
+	snmpStringException.H	\
+	snmpSynchDataObj.H	\
+	threadSafeArray.H
+
+all: $(TARGETS)
+
+libsnmpbase.a: $(LIBOBJS)
+	$(AR) cr libsnmpbase.a $(LIBOBJS)
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) $(TARGETS) $(LIBOBJS)
+

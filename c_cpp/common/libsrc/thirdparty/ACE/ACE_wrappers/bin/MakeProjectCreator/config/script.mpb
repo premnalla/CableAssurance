@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// script.mpb,v 1.1 2004/09/28 02:03:48 jtc Exp
+
+project {
+  Define_Custom(Script) {
+    automatic = 1
+    inputext = .sh 
+  }
+}

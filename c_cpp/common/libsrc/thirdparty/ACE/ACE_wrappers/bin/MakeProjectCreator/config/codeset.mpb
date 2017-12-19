@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// codeset.mpb,v 1.1 2005/07/13 22:16:20 mesnier_p Exp
+
+project {
+  after   += Codeset
+  libs    += TAO_Codeset
+}

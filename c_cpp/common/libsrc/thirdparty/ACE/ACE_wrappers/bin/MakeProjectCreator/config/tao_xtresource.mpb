@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// tao_xtresource.mpb,v 1.3 2005/01/23 11:53:28 mbrudka Exp
+
+project : taolib, ace_xtreactor {
+  requires += tao_xtresource
+  after    += TAO_XtResource
+  libs     += TAO_XtResource
+}

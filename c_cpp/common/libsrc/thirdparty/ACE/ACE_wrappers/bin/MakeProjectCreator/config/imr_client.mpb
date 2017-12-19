@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// imr_client.mpb,v 1.2 2005/02/18 09:07:14 jwillemsen Exp
+
+project : taolib {
+  libs    += TAO_ImR_Client
+  after   += ImR_Client
+}

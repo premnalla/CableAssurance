@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// dsnotifylogadmin_serv.mpb,v 1.2 2004/12/03 15:41:51 jtc Exp
+
+project : orbsvcslib, dsnotifylogadmin_skel, dslogadmin_serv, notification_serv {
+  after      += DsNotifyLogAdmin_Serv
+  libs       += TAO_DsNotifyLogAdmin_Serv
+}

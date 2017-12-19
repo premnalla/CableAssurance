@@ -1,0 +1,14 @@
+// -*- MPC -*-
+// automakedll.mpt,v 1.8 2005/04/08 17:18:56 elliott_c Exp
+
+conditional_include "common"
+
+lib_prefix = lib
+lib_ext    = .la
+dll_ext    = .la
+exe_ext    =
+
+linkflags =
+includedir =
+
+conditional_include "user_automakedll"

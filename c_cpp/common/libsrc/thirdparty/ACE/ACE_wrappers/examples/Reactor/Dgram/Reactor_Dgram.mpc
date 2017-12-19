@@ -1,0 +1,18 @@
+// -*- MPC -*-
+// Reactor_Dgram.mpc,v 1.3 2005/11/26 03:13:13 ossama Exp
+
+project(*CO) : aceexe {
+  avoids += ace_for_tao
+  exename = codgram
+  Source_Files {
+    CODgram.cpp
+  }
+}
+
+project : aceexe {
+  exename = dgram
+  Source_Files {
+    Dgram.cpp
+  }
+}
+

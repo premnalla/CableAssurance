@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// ziparchive.mpb,v 1.1 2005/06/28 12:53:24 mxiong Exp
+
+feature(ziparchive) {
+  includes += $(ZIPARCHIVEROOT)
+  libpaths += $(ZIPARCHIVEROOT)/lib
+  libs += ziparch
+  // @@ Notice:
+}

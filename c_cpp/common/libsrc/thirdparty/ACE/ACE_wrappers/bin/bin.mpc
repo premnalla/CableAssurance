@@ -1,0 +1,16 @@
+//  -*- MPC -*-
+// bin.mpc,v 4.1 2004/11/12 22:28:16 shuston Exp
+
+project(bin) : aceexe, script {
+  exename = envinfo
+  Source_Files {
+    envinfo.cpp
+  }
+  verbatim(automake, bottom) {
+    TESTS = auto_run_tests.pl
+  }
+  Script_Files {
+    auto_run_tests.pl
+    ace_tests.lst
+  }
+}

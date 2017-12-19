@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// fault_tolerance.mpb,v 1.6 2005/07/01 11:24:13 jwillemsen Exp
+
+project : naming, notification, portablegroup, messaging, ftorb, pi, pi_server {
+  after     += FaultTolerance
+  libs      += TAO_FaultTolerance
+  tagchecks += FaultTolerance
+}

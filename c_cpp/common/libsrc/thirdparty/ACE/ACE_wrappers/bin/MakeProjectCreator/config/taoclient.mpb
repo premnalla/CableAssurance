@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// taoclient.mpb,v 1.5 2005/08/19 08:02:52 jwillemsen Exp
+
+project : taoexe, negotiate_codesets {
+  exename = client
+}

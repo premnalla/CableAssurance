@@ -1,0 +1,13 @@
+// -*- MPC -*-
+// servers.mpc,v 1.4 2005/11/30 17:36:10 isisbuilds Exp
+
+project(Netsvcs_server) : aceexe {
+  avoids   += ace_for_tao
+  exename  = main
+  libs     += netsvcs
+  after    += netsvcs
+  includes += $(ACE_ROOT)/netsvcs/lib
+  Source_Files {
+    main.cpp
+  }
+}

@@ -1,0 +1,13 @@
+// -*- MPC -*-
+// rtcorbacommon.mpb,v 1.5 2005/12/22 22:40:45 jtc Exp
+
+project : portableserver, minimum_corba {
+  after    += RTCORBA_Common
+  libs     += RTCORBA_Common
+
+  specific (automake) {
+    includes += $(srcdir)/../Common
+  }
+
+  includes += ../Common
+}

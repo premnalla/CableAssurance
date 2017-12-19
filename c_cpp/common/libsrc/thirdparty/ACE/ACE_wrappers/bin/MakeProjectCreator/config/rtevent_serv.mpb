@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// rtevent_serv.mpb,v 1.2 2005/11/26 03:13:13 ossama Exp
+
+project : orbsvcslib, rtevent_skel  {
+  avoids    += ace_for_tao  // Requires ACE_crc32
+  after     += RTEvent_Serv
+  libs      += TAO_RTEvent_Serv
+  tagchecks += RTEvent
+}

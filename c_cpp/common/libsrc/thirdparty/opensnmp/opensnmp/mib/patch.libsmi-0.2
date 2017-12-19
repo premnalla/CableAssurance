@@ -1,0 +1,1133 @@
+diff -r -c libsmi-0.2.orig/lib/data.c libsmi-0.2/lib/data.c
+*** libsmi-0.2.orig/lib/data.c	Mon Feb 14 12:18:26 2000
+--- libsmi-0.2/lib/data.c	Sun Feb 27 19:44:40 2000
+***************
+*** 2127,2134 ****
+   */
+  
+  Type *
+! addType(typename, basetype, flags, parserPtr)
+!     const char     *typename;
+      SmiBasetype	   basetype;
+      TypeFlags      flags;
+      Parser	   *parserPtr;
+--- 2127,2134 ----
+   */
+  
+  Type *
+! addType(type_name, basetype, flags, parserPtr)
+!     const char     *type_name;
+      SmiBasetype	   basetype;
+      TypeFlags      flags;
+      Parser	   *parserPtr;
+***************
+*** 2140,2147 ****
+      
+      typePtr = util_malloc(sizeof(Type));
+  
+!     if (typename) {
+! 	typePtr->export.name	        = util_strdup(typename);
+      } else {
+  	typePtr->export.name		= NULL;
+      }
+--- 2140,2147 ----
+      
+      typePtr = util_malloc(sizeof(Type));
+  
+!     if (type_name) {
+! 	typePtr->export.name	        = util_strdup(type_name);
+      } else {
+  	typePtr->export.name		= NULL;
+      }
+***************
+*** 2688,2695 ****
+   */
+  
+  Type *
+! findTypeByName(typename)
+!     const char *typename;
+  {
+      Module *modulePtr;
+      Type   *typePtr;
+--- 2688,2695 ----
+   */
+  
+  Type *
+! findTypeByName(type_name)
+!     const char *type_name;
+  {
+      Module *modulePtr;
+      Type   *typePtr;
+***************
+*** 2699,2705 ****
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, typename)) {
+  		return (typePtr);
+  	    }
+  	}
+--- 2699,2705 ----
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, type_name)) {
+  		return (typePtr);
+  	    }
+  	}
+***************
+*** 2728,2735 ****
+   */
+  
+  Type *
+! findNextTypeByName(typename, prevTypePtr)
+!     const char *typename;
+      Type       *prevTypePtr;
+  {
+      Module *modulePtr;
+--- 2728,2735 ----
+   */
+  
+  Type *
+! findNextTypeByName(type_name, prevTypePtr)
+!     const char *type_name;
+      Type       *prevTypePtr;
+  {
+      Module *modulePtr;
+***************
+*** 2740,2746 ****
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, typename)) {
+  		return (typePtr);
+  	    }
+  	}
+--- 2740,2746 ----
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, type_name)) {
+  		return (typePtr);
+  	    }
+  	}
+***************
+*** 2769,2777 ****
+   */
+  
+  Type *
+! findTypeByModulenameAndName(modulename, typename)
+      const char *modulename;
+!     const char *typename;
+  {
+      Type       *typePtr;
+      Module     *modulePtr;
+--- 2769,2777 ----
+   */
+  
+  Type *
+! findTypeByModulenameAndName(modulename, type_name)
+      const char *modulename;
+!     const char *type_name;
+  {
+      Type       *typePtr;
+      Module     *modulePtr;
+***************
+*** 2781,2787 ****
+      if (modulePtr) {
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+! 	    if ((typePtr->export.name) && !strcmp(typePtr->export.name, typename)) {
+  		return (typePtr);
+  	    }
+  	}
+--- 2781,2787 ----
+      if (modulePtr) {
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+! 	    if ((typePtr->export.name) && !strcmp(typePtr->export.name, type_name)) {
+  		return (typePtr);
+  	    }
+  	}
+***************
+*** 2810,2818 ****
+   */
+  
+  Type *
+! findTypeByModuleAndName(modulePtr, typename)
+      Module      *modulePtr;
+!     const char  *typename;
+  {
+      Type        *typePtr;
+  
+--- 2810,2818 ----
+   */
+  
+  Type *
+! findTypeByModuleAndName(modulePtr, type_name)
+      Module      *modulePtr;
+!     const char  *type_name;
+  {
+      Type        *typePtr;
+  
+***************
+*** 2820,2826 ****
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, typename)) {
+  		return (typePtr);
+  	    }
+  	}
+--- 2820,2826 ----
+  	for (typePtr = modulePtr->firstTypePtr; typePtr;
+  	     typePtr = typePtr->nextPtr) {
+  	    if ((typePtr->export.name) &&
+! 		!strcmp(typePtr->export.name, type_name)) {
+  		return (typePtr);
+  	    }
+  	}
+***************
+*** 3417,3423 ****
+  
+  Module *
+  loadModule(modulename)
+!     char	    *modulename;
+  {
+      Parser	    parser;
+      char	    s[200];
+--- 3417,3423 ----
+  
+  Module *
+  loadModule(modulename)
+!     const char	    *modulename;
+  {
+      Parser	    parser;
+      char	    s[200];
+diff -r -c libsmi-0.2.orig/lib/data.h libsmi-0.2/lib/data.h
+*** libsmi-0.2.orig/lib/data.h	Thu Feb 10 16:27:21 2000
+--- libsmi-0.2/lib/data.h	Sun Feb 27 19:45:27 2000
+***************
+*** 419,425 ****
+  
+  
+  
+! extern Type *addType(const char *typename,
+  		     SmiBasetype basetype,
+  		     TypeFlags flags,
+  		     Parser *parserPtr);
+--- 419,425 ----
+  
+  
+  
+! extern Type *addType(const char *type_name,
+  		     SmiBasetype basetype,
+  		     TypeFlags flags,
+  		     Parser *parserPtr);
+***************
+*** 472,487 ****
+  
+  
+  
+! extern Type *findTypeByName(const char *typename);
+  
+! extern Type *findNextTypeByName(const char *typename,
+  				Type *prevTypePtr);
+  
+  extern Type *findTypeByModuleAndName(Module *modulePtr,
+! 				     const char *typename);
+  
+  extern Type *findTypeByModulenameAndName(const char *modulename,
+! 					 const char *typename);
+  
+  
+  
+--- 472,487 ----
+  
+  
+  
+! extern Type *findTypeByName(const char *type_name);
+  
+! extern Type *findNextTypeByName(const char *type_name,
+  				Type *prevTypePtr);
+  
+  extern Type *findTypeByModuleAndName(Module *modulePtr,
+! 				     const char *type_name);
+  
+  extern Type *findTypeByModulenameAndName(const char *modulename,
+! 					 const char *type_name);
+  
+  
+  
+***************
+*** 504,510 ****
+  
+  extern void freeData();
+  
+! extern Module *loadModule(char *modulename);
+  
+  
+  extern int checkFormat(SmiBasetype basetype, char *format);
+--- 504,510 ----
+  
+  extern void freeData();
+  
+! extern Module *loadModule(const char *modulename);
+  
+  
+  extern int checkFormat(SmiBasetype basetype, char *format);
+diff -r -c libsmi-0.2.orig/lib/smi.c libsmi-0.2/lib/smi.c
+*** libsmi-0.2.orig/lib/smi.c	Sun Feb 13 17:18:59 2000
+--- libsmi-0.2/lib/smi.c	Sun Feb 27 19:49:45 2000
+***************
+*** 93,99 ****
+  
+  
+  
+! void getModulenameAndName(char *arg1, char *arg2,
+  			  char **module, char **name)
+  {
+      char	    *p;
+--- 93,99 ----
+  
+  
+  
+! void getModulenameAndName(const char *arg1, const char *arg2,
+  			  char **module, char **name)
+  {
+      char	    *p;
+***************
+*** 371,377 ****
+  
+  
+  
+! int smiIsLoaded(char *module)
+  {
+      if (!module)
+  	return 0;
+--- 371,377 ----
+  
+  
+  
+! int smiIsLoaded(const char *module)
+  {
+      if (!module)
+  	return 0;
+***************
+*** 381,387 ****
+  
+  
+  
+! char *smiLoadModule(char *module)
+  {
+      Module *modulePtr;
+      
+--- 381,387 ----
+  
+  
+  
+! char *smiLoadModule(const char *module)
+  {
+      Module *modulePtr;
+      
+***************
+*** 506,512 ****
+  
+  
+  
+! SmiModule *smiGetModule(char *module)
+  {
+      Module	      *modulePtr;
+      
+--- 506,512 ----
+  
+  
+  
+! SmiModule *smiGetModule(const char *module)
+  {
+      Module	      *modulePtr;
+      
+***************
+*** 909,915 ****
+  
+  
+  
+! SmiNode *smiGetNode(SmiModule *smiModulePtr, char *node)
+  {
+      Object	    *objectPtr = NULL;
+      Module	    *modulePtr = NULL;
+--- 909,915 ----
+  
+  
+  
+! SmiNode *smiGetNode(SmiModule *smiModulePtr, const char *node)
+  {
+      Object	    *objectPtr = NULL;
+      Module	    *modulePtr = NULL;
+diff -r -c libsmi-0.2.orig/lib/smi.h libsmi-0.2/lib/smi.h
+*** libsmi-0.2.orig/lib/smi.h	Tue Feb 15 05:41:51 2000
+--- libsmi-0.2/lib/smi.h	Sun Feb 27 19:48:09 2000
+***************
+*** 288,300 ****
+  
+  extern int smiReadConfig(const char *filename, const char *tag);
+  
+! extern char *smiLoadModule(char *module);
+  
+! extern int smiIsLoaded(char *module);
+  
+  
+  
+! extern SmiModule *smiGetModule(char *module);
+  
+  extern SmiModule *smiGetFirstModule();
+  
+--- 288,300 ----
+  
+  extern int smiReadConfig(const char *filename, const char *tag);
+  
+! extern char *smiLoadModule(const char *module);
+  
+! extern int smiIsLoaded(const char *module);
+  
+  
+  
+! extern SmiModule *smiGetModule(const char *module);
+  
+  extern SmiModule *smiGetFirstModule();
+  
+***************
+*** 345,351 ****
+  
+  
+  
+! extern SmiNode *smiGetNode(SmiModule *smiModulePtr, char *name);
+  
+  extern SmiNode *smiGetNodeByOID(unsigned int oidlen, SmiSubid oid[]);
+  
+--- 345,351 ----
+  
+  
+  
+! extern SmiNode *smiGetNode(SmiModule *smiModulePtr, const char *name);
+  
+  extern SmiNode *smiGetNodeByOID(unsigned int oidlen, SmiSubid oid[]);
+  
+diff -r -c libsmi-0.2.orig/lib/smi.h.in libsmi-0.2/lib/smi.h.in
+*** libsmi-0.2.orig/lib/smi.h.in	Sun Feb 13 17:18:59 2000
+--- libsmi-0.2/lib/smi.h.in	Tue Feb 29 13:05:06 2000
+***************
+*** 288,300 ****
+  
+  extern int smiReadConfig(const char *filename, const char *tag);
+  
+! extern char *smiLoadModule(char *module);
+  
+! extern int smiIsLoaded(char *module);
+  
+  
+  
+! extern SmiModule *smiGetModule(char *module);
+  
+  extern SmiModule *smiGetFirstModule();
+  
+--- 288,300 ----
+  
+  extern int smiReadConfig(const char *filename, const char *tag);
+  
+! extern char *smiLoadModule(const char *module);
+  
+! extern int smiIsLoaded(const char *module);
+  
+  
+  
+! extern SmiModule *smiGetModule(const char *module);
+  
+  extern SmiModule *smiGetFirstModule();
+  
+***************
+*** 345,351 ****
+  
+  
+  
+! extern SmiNode *smiGetNode(SmiModule *smiModulePtr, char *name);
+  
+  extern SmiNode *smiGetNodeByOID(unsigned int oidlen, SmiSubid oid[]);
+  
+--- 345,351 ----
+  
+  
+  
+! extern SmiNode *smiGetNode(SmiModule *smiModulePtr, const char *name);
+  
+  extern SmiNode *smiGetNodeByOID(unsigned int oidlen, SmiSubid oid[]);
+  
+diff -r -c libsmi-0.2.orig/tools/dump-corba.c libsmi-0.2/tools/dump-corba.c
+*** libsmi-0.2.orig/tools/dump-corba.c	Sun Feb 13 17:19:00 2000
+--- libsmi-0.2/tools/dump-corba.c	Sun Feb 27 19:41:18 2000
+***************
+*** 231,248 ****
+  
+  static char* getIdlTypeName(char *module, char *name)
+  {
+!     char *s, *typename;
+  
+!     typename = xmalloc(strlen(name) + 10);
+!     sprintf(typename, "%sType", name);
+!     typename[0] = toupper((int) typename[0]);
+  
+!     s = dictFindName(idlTypeNameList, module, typename);
+      if (! s) {
+! 	s = dictAddName(&idlTypeNameList, module, typename);
+      }
+  
+!     xfree(typename);
+      return s;
+  }
+  
+--- 231,248 ----
+  
+  static char* getIdlTypeName(char *module, char *name)
+  {
+!     char *s, *type_name;
+  
+!     type_name = xmalloc(strlen(name) + 10);
+!     sprintf(type_name, "%sType", name);
+!     type_name[0] = toupper((int) type_name[0]);
+  
+!     s = dictFindName(idlTypeNameList, module, type_name);
+      if (! s) {
+! 	s = dictAddName(&idlTypeNameList, module, type_name);
+      }
+  
+!     xfree(type_name);
+      return s;
+  }
+  
+diff -r -c libsmi-0.2.orig/tools/dump-java.c libsmi-0.2/tools/dump-java.c
+*** libsmi-0.2.orig/tools/dump-java.c	Thu Jan 27 05:46:18 2000
+--- libsmi-0.2/tools/dump-java.c	Sun Feb 27 19:41:19 2000
+***************
+*** 145,153 ****
+  	smiNode; smiNode = smiGetNextNode(smiNode, SMI_NODEKIND_ANY)) {
+  
+  	if ((smiNode->basetype == SMI_BASETYPE_ENUM) &&
+! 	    smiNode->typename &&
+! 	    islower((int)smiNode->typename[0]) &&
+! 	    (smiType = smiGetType(smiNode->typemodule, smiNode->typename))) {
+  
+  	    printf("\n/**\n");
+  	    printf(" * Derived from type of MIB node %s.%s.\n",
+--- 145,153 ----
+  	smiNode; smiNode = smiGetNextNode(smiNode, SMI_NODEKIND_ANY)) {
+  
+  	if ((smiNode->basetype == SMI_BASETYPE_ENUM) &&
+! 	    smiNode->type_name &&
+! 	    islower((int)smiNode->type_name[0]) &&
+! 	    (smiType = smiGetType(smiNode->typemodule, smiNode->type_name))) {
+  
+  	    printf("\n/**\n");
+  	    printf(" * Derived from type of MIB node %s.%s.\n",
+diff -r -c libsmi-0.2.orig/tools/dump-jdmk.c libsmi-0.2/tools/dump-jdmk.c
+*** libsmi-0.2.orig/tools/dump-jdmk.c	Thu Jan 27 05:46:18 2000
+--- libsmi-0.2/tools/dump-jdmk.c	Sun Feb 27 19:41:26 2000
+***************
+*** 267,274 ****
+  	for(smiColumn = smiGetFirstChildNode(smiRow); smiColumn;
+  	    smiColumn = smiGetNextChildNode(smiColumn)) {
+  
+! 	    if (smiColumn->typename) {
+! 		type = smiColumn->typename;
+  	    } else {
+  		switch (smiColumn->basetype) {
+  		case SMI_BASETYPE_INTEGER32:
+--- 267,274 ----
+  	for(smiColumn = smiGetFirstChildNode(smiRow); smiColumn;
+  	    smiColumn = smiGetNextChildNode(smiColumn)) {
+  
+! 	    if (smiColumn->type_name) {
+! 		type = smiColumn->type_name;
+  	    } else {
+  		switch (smiColumn->basetype) {
+  		case SMI_BASETYPE_INTEGER32:
+diff -r -c libsmi-0.2.orig/tools/dump-mosy.c libsmi-0.2/tools/dump-mosy.c
+*** libsmi-0.2.orig/tools/dump-mosy.c	Mon Feb 14 12:19:01 2000
+--- libsmi-0.2/tools/dump-mosy.c	Sun Feb 27 19:41:16 2000
+***************
+*** 241,267 ****
+      int		   i;
+      SmiType	   *smiType, *smiParentType;
+      SmiNamedNumber *nn;
+!     char	   *typename;
+      
+      for (i = 0, smiType = smiGetFirstType(smiModule);
+  	 smiType; smiType = smiGetNextType(smiType)) {
+  	
+  	smiParentType = smiGetParentType(smiType);
+! 	typename = smiParentType->name;
+  	
+  	if (smiParentType->decl == SMI_DECL_IMPLICIT_TYPE) {
+  	    smiParentType = smiGetParentType(smiParentType);
+! 	    typename = smiParentType->name;
+  	}
+  	if (smiParentType->basetype == SMI_BASETYPE_OBJECTIDENTIFIER) {
+! 	    typename = "ObjectID";
+  	}
+  	if (smiParentType->basetype == SMI_BASETYPE_ENUM) {
+! 	    typename = "INTEGER";
+  	}
+  
+  	printf("%%%-19s %-16s %-15s \"%s\"\n", "tc", smiType->name,
+! 	       typename,
+  	       smiType->format ? smiType->format : "");
+  	
+  	for (i = 0, nn = smiGetFirstNamedNumber(smiType);
+--- 241,267 ----
+      int		   i;
+      SmiType	   *smiType, *smiParentType;
+      SmiNamedNumber *nn;
+!     char	   *type_name;
+      
+      for (i = 0, smiType = smiGetFirstType(smiModule);
+  	 smiType; smiType = smiGetNextType(smiType)) {
+  	
+  	smiParentType = smiGetParentType(smiType);
+! 	type_name = smiParentType->name;
+  	
+  	if (smiParentType->decl == SMI_DECL_IMPLICIT_TYPE) {
+  	    smiParentType = smiGetParentType(smiParentType);
+! 	    type_name = smiParentType->name;
+  	}
+  	if (smiParentType->basetype == SMI_BASETYPE_OBJECTIDENTIFIER) {
+! 	    type_name = "ObjectID";
+  	}
+  	if (smiParentType->basetype == SMI_BASETYPE_ENUM) {
+! 	    type_name = "INTEGER";
+  	}
+  
+  	printf("%%%-19s %-16s %-15s \"%s\"\n", "tc", smiType->name,
+! 	       type_name,
+  	       smiType->format ? smiType->format : "");
+  	
+  	for (i = 0, nn = smiGetFirstNamedNumber(smiType);
+***************
+*** 278,284 ****
+  static void printObjects(SmiModule *smiModule)
+  {
+      int		   i, j, ignore, cnt = 0, aggregate, create;
+!     char	   *typename;
+      SmiNode	   *smiNode, *relatedNode;
+      SmiType	   *smiType;
+      SmiNamedNumber *smiNamedNumber;
+--- 278,284 ----
+  static void printObjects(SmiModule *smiModule)
+  {
+      int		   i, j, ignore, cnt = 0, aggregate, create;
+!     char	   *type_name;
+      SmiNode	   *smiNode, *relatedNode;
+      SmiType	   *smiType;
+      SmiNamedNumber *smiNamedNumber;
+***************
+*** 309,336 ****
+  	aggregate = smiNode->nodekind == SMI_NODEKIND_TABLE
+  	    || smiNode->nodekind == SMI_NODEKIND_ROW;
+  
+! 	typename = NULL;
+  	smiType = smiGetNodeType(smiNode);
+  	if (!aggregate) {
+! 	    typename = getBasetypeString(smiType->basetype);
+  	    if (smiType && (smiType->decl != SMI_DECL_IMPLICIT_TYPE)) {
+! 		typename = smiType->name;
+! 		if (!strcmp(typename, "ObjectIdentifier")) {
+! 		    typename = "ObjectID";
+  		}
+  	    }
+  	
+  	    if (smiType && smiType->decl == SMI_DECL_IMPLICIT_TYPE) {
+! 		typename = smiGetParentType(smiType)->name;
+  		if (smiType->basetype == SMI_BASETYPE_OBJECTIDENTIFIER) {
+! 		    typename = "ObjectID";
+  		}
+  		if (smiType->basetype == SMI_BASETYPE_ENUM) {
+! 		    typename = "INTEGER";
+  		}
+  	    }
+  	} else {
+! 	    typename = "Aggregate";
+  	}
+  
+  	if (smiNode->nodekind == SMI_NODEKIND_COLUMN) {
+--- 309,336 ----
+  	aggregate = smiNode->nodekind == SMI_NODEKIND_TABLE
+  	    || smiNode->nodekind == SMI_NODEKIND_ROW;
+  
+! 	type_name = NULL;
+  	smiType = smiGetNodeType(smiNode);
+  	if (!aggregate) {
+! 	    type_name = getBasetypeString(smiType->basetype);
+  	    if (smiType && (smiType->decl != SMI_DECL_IMPLICIT_TYPE)) {
+! 		type_name = smiType->name;
+! 		if (!strcmp(type_name, "ObjectIdentifier")) {
+! 		    type_name = "ObjectID";
+  		}
+  	    }
+  	
+  	    if (smiType && smiType->decl == SMI_DECL_IMPLICIT_TYPE) {
+! 		type_name = smiGetParentType(smiType)->name;
+  		if (smiType->basetype == SMI_BASETYPE_OBJECTIDENTIFIER) {
+! 		    type_name = "ObjectID";
+  		}
+  		if (smiType->basetype == SMI_BASETYPE_ENUM) {
+! 		    type_name = "INTEGER";
+  		}
+  	    }
+  	} else {
+! 	    type_name = "Aggregate";
+  	}
+  
+  	if (smiNode->nodekind == SMI_NODEKIND_COLUMN) {
+***************
+*** 340,346 ****
+  	}
+  	
+  	printf("%-20s %-16s ", smiNode->name, getOidString(smiNode, 0));
+! 	printf("%-15s %-15s %s\n", typename,
+  	       getAccessString(smiNode->access, create),
+  	       getStatusString(smiNode->status));
+  
+--- 340,346 ----
+  	}
+  	
+  	printf("%-20s %-16s ", smiNode->name, getOidString(smiNode, 0));
+! 	printf("%-15s %-15s %s\n", type_name,
+  	       getAccessString(smiNode->access, create),
+  	       getStatusString(smiNode->status));
+  
+***************
+*** 377,383 ****
+  	    }
+  
+  	    for (ignore = 0, j = 0; ignoreTypeRanges[j]; j++) {
+! 		if (strcmp(typename, ignoreTypeRanges[j]) == 0) {
+  		    ignore++;
+  		    break;
+  		}
+--- 377,383 ----
+  	    }
+  
+  	    for (ignore = 0, j = 0; ignoreTypeRanges[j]; j++) {
+! 		if (strcmp(type_name, ignoreTypeRanges[j]) == 0) {
+  		    ignore++;
+  		    break;
+  		}
+diff -r -c libsmi-0.2.orig/tools/dump-smi.c libsmi-0.2/tools/dump-smi.c
+*** libsmi-0.2.orig/tools/dump-smi.c	Sun Feb 13 17:19:00 2000
+--- libsmi-0.2/tools/dump-smi.c	Sun Feb 27 19:41:10 2000
+***************
+*** 229,246 ****
+  {
+      int         i;
+      char	**convertType;
+!     char        *typemodule, *typename;
+  
+!     typename = smiType ? smiType->name : NULL;
+      typemodule = smiType ? smiGetTypeModule(smiType)->name : NULL;
+  
+      convertType = smiv1 ? convertTypev1 : convertTypev2;
+  
+!     if (typename &&
+  	(basetype != SMI_BASETYPE_ENUM) &&
+  	(basetype != SMI_BASETYPE_BITS)) {
+  	for(i=0; convertType[i+1]; i += 4) {
+! 	    if ((!strcmp(typename, convertType[i+1])) &&
+  		((!typemodule) || (!convertType[i]) ||
+  		 (!strcmp(typemodule, convertType[i])))) {
+  		return convertType[i+3];
+--- 229,246 ----
+  {
+      int         i;
+      char	**convertType;
+!     char        *typemodule, *type_name;
+  
+!     type_name = smiType ? smiType->name : NULL;
+      typemodule = smiType ? smiGetTypeModule(smiType)->name : NULL;
+  
+      convertType = smiv1 ? convertTypev1 : convertTypev2;
+  
+!     if (type_name &&
+  	(basetype != SMI_BASETYPE_ENUM) &&
+  	(basetype != SMI_BASETYPE_BITS)) {
+  	for(i=0; convertType[i+1]; i += 4) {
+! 	    if ((!strcmp(type_name, convertType[i+1])) &&
+  		((!typemodule) || (!convertType[i]) ||
+  		 (!strcmp(typemodule, convertType[i])))) {
+  		return convertType[i+3];
+***************
+*** 248,254 ****
+  	}
+      }
+  
+!     if ((!typemodule) || (!strlen(typemodule)) || (!typename)) {
+  	if (basetype == SMI_BASETYPE_ENUM) {
+  	    return "INTEGER";
+  	}
+--- 248,254 ----
+  	}
+      }
+  
+!     if ((!typemodule) || (!strlen(typemodule)) || (!type_name)) {
+  	if (basetype == SMI_BASETYPE_ENUM) {
+  	    return "INTEGER";
+  	}
+***************
+*** 263,269 ****
+  	
+      /* TODO: fully qualified if unambigous */
+  
+!     return typename;
+  }
+  
+  
+--- 263,269 ----
+  	
+      /* TODO: fully qualified if unambigous */
+  
+!     return type_name;
+  }
+  
+  
+***************
+*** 1058,1064 ****
+  		if (smiType) {
+  		    print("%s\n", smiType->name);
+  		} else {
+! 		    /* guess typename is uppercase row name */
+  		    char *s = getUppercaseString(rowNode->name);
+  		    print("%s\n", s);
+  		    xfree(s);
+--- 1058,1064 ----
+  		if (smiType) {
+  		    print("%s\n", smiType->name);
+  		} else {
+! 		    /* guess type_name is uppercase row name */
+  		    char *s = getUppercaseString(rowNode->name);
+  		    print("%s\n", s);
+  		    xfree(s);
+***************
+*** 1069,1075 ****
+  		    print("%s\n", smiType->name);
+  		} else {
+  		    char *s = getUppercaseString(smiNode->name);
+! 		    /* guess typename is uppercase row name */
+  		    print("%s\n", s);
+  		    xfree(s);
+  		}
+--- 1069,1075 ----
+  		    print("%s\n", smiType->name);
+  		} else {
+  		    char *s = getUppercaseString(smiNode->name);
+! 		    /* guess type_name is uppercase row name */
+  		    print("%s\n", s);
+  		    xfree(s);
+  		}
+***************
+*** 1172,1178 ****
+  	    if (smiType) {
+  		print("%s ::=\n", smiType->name);
+  	    } else {
+! 		/* guess typename is uppercase row name */
+  		char *s = getUppercaseString(smiNode->name);
+  		print("%s ::=\n", s);
+  		xfree(s);
+--- 1172,1178 ----
+  	    if (smiType) {
+  		print("%s ::=\n", smiType->name);
+  	    } else {
+! 		/* guess type_name is uppercase row name */
+  		char *s = getUppercaseString(smiNode->name);
+  		print("%s ::=\n", s);
+  		xfree(s);
+diff -r -c libsmi-0.2.orig/tools/dump-sming.c libsmi-0.2/tools/dump-sming.c
+*** libsmi-0.2.orig/tools/dump-sming.c	Mon Feb 14 12:19:01 2000
+--- libsmi-0.2/tools/dump-sming.c	Sun Feb 27 19:41:09 2000
+***************
+*** 192,213 ****
+  			   SmiType *smiType)
+  {
+      int         i;
+!     char        *typemodule, *typename;
+  
+!     typename = smiType ? smiType->name : NULL;
+      typemodule = smiType ? smiGetTypeModule(smiType)->name : NULL;
+      
+!     if ((!typemodule) && (typename) &&
+  	(basetype != SMI_BASETYPE_ENUM) &&
+  	(basetype != SMI_BASETYPE_BITS)) {
+  	for(i=0; convertType[i]; i += 2) {
+! 	    if (!strcmp(typename, convertType[i])) {
+  		return convertType[i+1];
+  	    }
+  	}
+      }
+  
+!     if ((!typemodule) || (!strlen(typemodule)) || (!typename)) {
+  	if (basetype == SMI_BASETYPE_ENUM) {
+  	    return "Enumeration";
+  	}
+--- 192,213 ----
+  			   SmiType *smiType)
+  {
+      int         i;
+!     char        *typemodule, *type_name;
+  
+!     type_name = smiType ? smiType->name : NULL;
+      typemodule = smiType ? smiGetTypeModule(smiType)->name : NULL;
+      
+!     if ((!typemodule) && (type_name) &&
+  	(basetype != SMI_BASETYPE_ENUM) &&
+  	(basetype != SMI_BASETYPE_BITS)) {
+  	for(i=0; convertType[i]; i += 2) {
+! 	    if (!strcmp(type_name, convertType[i])) {
+  		return convertType[i+1];
+  	    }
+  	}
+      }
+  
+!     if ((!typemodule) || (!strlen(typemodule)) || (!type_name)) {
+  	if (basetype == SMI_BASETYPE_ENUM) {
+  	    return "Enumeration";
+  	}
+***************
+*** 216,228 ****
+  	}
+      }
+  	
+!     if (!typename) {
+  	return smingStringBasetype(basetype);
+      }
+      
+      /* TODO: fully qualified if unambigous */
+  
+!     return typename;
+  }
+  
+  
+--- 216,228 ----
+  	}
+      }
+  	
+!     if (!type_name) {
+  	return smingStringBasetype(basetype);
+      }
+      
+      /* TODO: fully qualified if unambigous */
+  
+!     return type_name;
+  }
+  
+  
+diff -r -c libsmi-0.2.orig/tools/dump-tree.c libsmi-0.2/tools/dump-tree.c
+*** libsmi-0.2.orig/tools/dump-tree.c	Sat Feb 12 05:58:47 2000
+--- libsmi-0.2/tools/dump-tree.c	Sun Feb 27 19:41:14 2000
+***************
+*** 172,178 ****
+      SmiType     *type;
+      int         i = 0, cnt, prefixlen, newtypefieldlen = 8;
+      char        c = 0;
+!     char	*typename;
+  
+      if (smiNode) {
+  	prefixlen = strlen(prefix);
+--- 172,178 ----
+      SmiType     *type;
+      int         i = 0, cnt, prefixlen, newtypefieldlen = 8;
+      char        c = 0;
+!     char	*type_name;
+  
+      if (smiNode) {
+  	prefixlen = strlen(prefix);
+***************
+*** 181,195 ****
+  	case SMI_NODEKIND_COLUMN:
+  	    c = prefix[prefixlen-1];
+  	    prefix[prefixlen-1] = getStatusChar(smiNode->status);
+! 	    typename = getTypeName(smiNode);
+  	    printf("%s-- %s %-*s %s(%u)\n",
+  		   prefix,
+  		   getFlags(smiNode),
+  		   typefieldlen,
+! 		   typename,
+  		   smiNode->name,
+  		   smiNode->oid[smiNode->oidlen-1]);
+! 	    xfree(typename);
+  	    if (c) {
+  		prefix[prefixlen-1] = c;
+  	    }
+--- 181,195 ----
+  	case SMI_NODEKIND_COLUMN:
+  	    c = prefix[prefixlen-1];
+  	    prefix[prefixlen-1] = getStatusChar(smiNode->status);
+! 	    type_name = getTypeName(smiNode);
+  	    printf("%s-- %s %-*s %s(%u)\n",
+  		   prefix,
+  		   getFlags(smiNode),
+  		   typefieldlen,
+! 		   type_name,
+  		   smiNode->name,
+  		   smiNode->oid[smiNode->oidlen-1]);
+! 	    xfree(type_name);
+  	    if (c) {
+  		prefix[prefixlen-1] = c;
+  	    }
+***************
+*** 256,267 ****
+  	    if (! pruneSubTree(childNode)) {
+  		type = smiGetNodeType(childNode);
+  		if (type) {
+! 		    typename = getTypeName(childNode);
+! 		    if (typename) {
+! 			if (strlen(typename) > newtypefieldlen) {
+! 			    newtypefieldlen = strlen(typename);
+  			}
+! 			xfree(typename);
+  		    }
+  		}
+  		cnt++;
+--- 256,267 ----
+  	    if (! pruneSubTree(childNode)) {
+  		type = smiGetNodeType(childNode);
+  		if (type) {
+! 		    type_name = getTypeName(childNode);
+! 		    if (type_name) {
+! 			if (strlen(type_name) > newtypefieldlen) {
+! 			    newtypefieldlen = strlen(type_name);
+  			}
+! 			xfree(type_name);
+  		    }
+  		}
+  		cnt++;
+diff -r -c libsmi-0.2.orig/tools/dump-types.c libsmi-0.2/tools/dump-types.c
+*** libsmi-0.2.orig/tools/dump-types.c	Sat Feb 12 05:58:47 2000
+--- libsmi-0.2/tools/dump-types.c	Sun Feb 27 19:41:12 2000
+***************
+*** 52,58 ****
+  
+  typedef struct TypeNode {
+      char        *typemodule;
+!     char        *typename;
+      SmiBasetype basetype;
+      struct TypeNode *nextNodePtr;
+      struct TypeNode *childNodePtr;
+--- 52,58 ----
+  
+  typedef struct TypeNode {
+      char        *typemodule;
+!     char        *type_name;
+      SmiBasetype basetype;
+      struct TypeNode *nextNodePtr;
+      struct TypeNode *childNodePtr;
+***************
+*** 257,263 ****
+      
+      newType = xmalloc(sizeof(TypeNode));
+      newType->typemodule = smiGetTypeModule(smiType)->name;
+!     newType->typename = smiType->name;
+      newType->basetype = smiType->basetype;
+      newType->childNodePtr = NULL;
+      newType->nextNodePtr = NULL;
+--- 257,263 ----
+      
+      newType = xmalloc(sizeof(TypeNode));
+      newType->typemodule = smiGetTypeModule(smiType)->name;
+!     newType->type_name = smiType->name;
+      newType->basetype = smiType->basetype;
+      newType->childNodePtr = NULL;
+      newType->nextNodePtr = NULL;
+***************
+*** 282,288 ****
+  	 || !smiParentType
+  	 || strcmp(smiGetTypeModule(smiParentType)->name,
+  		   root->typemodule) == 0) &&
+! 	(!smiParentType || strcmp(smiParentType->name, root->typename) == 0)) {
+  	newType = createTypeNode(smiType);
+  	newType->typemodule = smiGetTypeModule(smiType)->name;
+  
+--- 282,288 ----
+  	 || !smiParentType
+  	 || strcmp(smiGetTypeModule(smiParentType)->name,
+  		   root->typemodule) == 0) &&
+! 	(!smiParentType || strcmp(smiParentType->name, root->type_name) == 0)) {
+  	newType = createTypeNode(smiType);
+  	newType->typemodule = smiGetTypeModule(smiType)->name;
+  
+***************
+*** 336,342 ****
+      if (root->typemodule
+   	&& strcmp(root->typemodule, smiGetTypeModule(smiType)->name) == 0
+  	&& smiType->name
+!  	&& strcmp(root->typename, smiType->name) == 0) {
+  	result = root;
+      }
+      
+--- 336,342 ----
+      if (root->typemodule
+   	&& strcmp(root->typemodule, smiGetTypeModule(smiType)->name) == 0
+  	&& smiType->name
+!  	&& strcmp(root->type_name, smiType->name) == 0) {
+  	result = root;
+      }
+      
+***************
+*** 393,399 ****
+      }
+  
+      for (typeNode = root; typeNode; typeNode = typeNode->nextNodePtr) {
+! 	int len = strlen(typeNode->typename);
+  	if (len > namelen) namelen = len;
+      }
+      
+--- 393,399 ----
+      }
+  
+      for (typeNode = root; typeNode; typeNode = typeNode->nextNodePtr) {
+! 	int len = strlen(typeNode->type_name);
+  	if (len > namelen) namelen = len;
+      }
+      
+***************
+*** 402,418 ****
+  	    SmiType *smiType;
+  	    char c = '+', *flags;
+  	    smiModule = smiGetModule(typeNode->typemodule);
+! 	    smiType = smiGetType(smiModule, typeNode->typename);
+  	    if (smiType) {
+  		c = getStatusChar(smiType->status);
+  		if (getBaseTypeCount(typeNode->basetype)) {
+  		    flags = getFlags(smiType);
+  		    if (flags && *flags) {
+  			printf("%s  %c-- %s %-*s", prefix, c, flags,
+! 			       namelen, typeNode->typename);
+  		    } else {
+  			printf("%s  %c--%-*s", prefix, c,
+! 			       namelen, typeNode->typename);
+  		    }
+  		    printRestrictions(smiType);
+  		    if (smiType->format) {
+--- 402,418 ----
+  	    SmiType *smiType;
+  	    char c = '+', *flags;
+  	    smiModule = smiGetModule(typeNode->typemodule);
+! 	    smiType = smiGetType(smiModule, typeNode->type_name);
+  	    if (smiType) {
+  		c = getStatusChar(smiType->status);
+  		if (getBaseTypeCount(typeNode->basetype)) {
+  		    flags = getFlags(smiType);
+  		    if (flags && *flags) {
+  			printf("%s  %c-- %s %-*s", prefix, c, flags,
+! 			       namelen, typeNode->type_name);
+  		    } else {
+  			printf("%s  %c--%-*s", prefix, c,
+! 			       namelen, typeNode->type_name);
+  		    }
+  		    printRestrictions(smiType);
+  		    if (smiType->format) {

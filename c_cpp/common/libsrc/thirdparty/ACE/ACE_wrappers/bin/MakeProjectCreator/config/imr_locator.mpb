@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// imr_locator.mpb,v 1.3 2004/09/26 14:10:44 jwillemsen Exp
+
+project : orbsvcsexe, minimum_corba {
+  after += ImR_Locator
+  libs  += TAO_ImR_Locator
+}

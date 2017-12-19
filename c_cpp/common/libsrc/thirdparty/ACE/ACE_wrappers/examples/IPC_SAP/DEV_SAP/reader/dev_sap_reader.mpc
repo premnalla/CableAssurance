@@ -1,0 +1,11 @@
+// -*- MPC -*-
+// dev_sap_reader.mpc,v 1.4 2005/11/26 03:13:13 ossama Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+  exename = reader
+  Source_Files {
+    reader.cpp
+  }
+}
+

@@ -1,0 +1,4 @@
+// -*- MPC -*-
+// gnuexe.mpt,v 1.10 2004/12/13 16:17:58 elliott_c Exp
+
+conditional_include "gnudll"

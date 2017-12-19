@@ -1,0 +1,15 @@
+// -*- MPC -*-
+// rpc.mpb,v 1.2 2004/10/05 13:53:34 elliott_c Exp
+
+project {
+  requires += rpc
+  Define_Custom(rpcgen) {
+    command              = rpcgen
+    commandflags         = -C
+    pch_postrule         = 1
+    inputext             = .x
+    source_pre_extension = _svc, _clnt
+    source_outputext     = .c
+    header_outputext     = .h
+  }
+}

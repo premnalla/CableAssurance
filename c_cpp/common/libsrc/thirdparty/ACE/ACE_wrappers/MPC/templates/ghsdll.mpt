@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// ghsdll.mpt,v 1.5 2005/12/21 12:28:51 elliott_c Exp
+
+conditional_include "ghscommon"
+
+conditional_include "user_ghsdll"

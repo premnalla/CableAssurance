@@ -1,0 +1,18 @@
+// -*- MPC -*-
+// QOS_Diffserv.mpc,v 1.5 2005/12/07 18:51:42 isisbuilds Exp
+
+project(*client) : aceexe, qos {
+  avoids += ace_for_tao
+  exename = client
+  requires += qos
+  Source_Files {
+    diffserv_test.cpp
+  }
+}
+project(*server) : aceexe, qos {
+  exename = server
+  requires += qos
+  Source_Files {
+    server.cpp
+  }
+}

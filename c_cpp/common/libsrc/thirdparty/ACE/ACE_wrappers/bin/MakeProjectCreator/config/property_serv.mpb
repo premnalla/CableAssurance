@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// property_serv.mpb,v 1.1 2006/01/15 15:14:13 jtc Exp
+
+project : orbsvcslib, property_skel {
+  after     += CosProperty_Serv
+  libs      += TAO_CosProperty_Serv
+  tagchecks += Property
+}

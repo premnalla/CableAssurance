@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// codecfactory.mpb,v 1.2 2005/08/19 08:02:52 jwillemsen Exp
+
+project : taolib, anytypecode {
+  after   += CodecFactory
+  libs    += TAO_CodecFactory
+}

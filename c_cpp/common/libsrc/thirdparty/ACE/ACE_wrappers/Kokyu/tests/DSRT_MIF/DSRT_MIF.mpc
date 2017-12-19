@@ -1,0 +1,7 @@
+//  -*- MPC -*-
+// DSRT_MIF.mpc,v 1.4 2005/11/26 03:37:24 ossama Exp
+
+project: kokyu {
+  avoids += ace_for_tao
+  exename = MIF
+}

@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// ipv6.mpb,v 1.2 2005/10/12 09:25:49 jwillemsen Exp
+
+feature(ipv6) {
+  specific(vc6, vc7, vc71, vc8, nmake, borland, bmake, cbx) {
+    lit_libs += iphlpapi
+  }
+  macros += ACE_HAS_IPV6
+}

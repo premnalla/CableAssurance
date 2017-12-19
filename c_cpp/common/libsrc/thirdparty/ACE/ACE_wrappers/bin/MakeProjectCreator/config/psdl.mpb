@@ -1,0 +1,19 @@
+// -*- MPC -*-
+// psdl.mpb,v 1.4 2004/11/18 17:56:13 elliott_c Exp
+
+project {
+  after += PSDL_Parser PSDL PSDL_Datastore
+  libs  += TAO_PSDL TAO_PSDL_Datastore
+
+  Define_Custom(PSDL) {
+    dependent        = $(TAO_ROOT)/orbsvcs/PSS/psdl_tao
+    command          = $(TAO_ROOT)/orbsvcs/PSS/psdl_tao
+    libpath          = $(ACE_ROOT)/lib
+    inputext         = .psdl
+    source_outputext = .cpp
+    header_outputext = .h
+    inline_outputext = .i
+    // unlike idl, the psdl compiler doesn't seem to generate *S.* files.
+    pre_extension    = C
+  }
+}

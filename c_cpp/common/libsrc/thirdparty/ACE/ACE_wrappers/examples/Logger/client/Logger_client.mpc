@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// Logger_client.mpc,v 1.3 2004/11/18 13:13:25 elliott_c Exp
+
+project : aceexe {
+  exename = logging_app
+}

@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// pidl.mpb,v 1.1 2004/08/13 04:13:28 jtc Exp
+
+project {
+  Define_Custom(PIDL) {
+    automatic = 1
+    inputext = .pidl
+  }
+}

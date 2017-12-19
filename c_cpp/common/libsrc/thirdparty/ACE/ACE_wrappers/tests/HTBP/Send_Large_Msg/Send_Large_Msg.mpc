@@ -1,0 +1,23 @@
+// -*- MPC -*-
+//
+// Send_Large_Msg.mpc,v 1.7 2005/01/15 22:21:27 jwillemsen Exp
+
+project(*Server): aceexe, htbp {
+  exename = server
+  after  += Test_Output
+  libs   += Test_Output
+
+  Source_Files {
+    server.cpp
+  }
+}
+
+project(*Client): aceexe, htbp {
+  exename = client
+  after  += Test_Output
+  libs   += Test_Output
+
+  Source_Files {
+    client.cpp
+  }
+}

@@ -1,0 +1,9 @@
+// -*- MPC -*-
+//csd_tp_foo_a_lib.mpb,v 1.1 2005/10/19 00:27:49 dai_y Exp
+
+project : csd_tp_test_lib {
+  after += csd_tp_foo_a_lib
+  includes += $(TAO_ROOT)/tests/CSD_Strategy_Tests/TP_Foo_A
+  libs += CSD_TP_Foo_A
+  libpaths += $(TAO_ROOT)/tests/CSD_Strategy_Tests/TP_Foo_A
+}

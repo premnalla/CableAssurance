@@ -1,0 +1,231 @@
+dnl Process this file with autoconf to produce a configure script.
+dnl
+
+dnl provide it a file to simply check for its existence.
+AC_INIT(app/cr/mibs/snmpTable.C)
+
+dnl where output #define's will go.
+AC_CONFIG_HEADER(config.h)
+
+AC_ARG_WITH(cxx, [
+Compiler Options:
+  --with-cxx=CXX                    use CXX to compile (default=g++).],
+    [CXX=$with_cxx;export CXX])
+
+dnl We're using c++ to test everything below.
+AC_LANG_CPLUSPLUS
+
+dnl other compile time and link time flags
+AC_ARG_WITH(cxxflags,
+[--with-cxxflags=CXXFLAGS        use CXXFLAGS as compile time arguments.],
+    [CXXFLAGS=$with_cxxflags; CPPFLAGS=$with_cxxflags; export CXXFLAGS; export C
+PPFLAGS; cxxflagspassed=yes])
+
+AC_ARG_WITH(ldflags,
+[--with-ldflags=LDFLAGS          use LDFLAGS as link time arguments to ld.],
+    [LIBS=$with_ldflags; export LIBS])
+
+dnl signal handling return type check
+AC_TYPE_SIGNAL
+
+dnl smi defaults to /usr/local, so add it to the search path (redunant on some OS)
+AC_ADD_SEARCH_PATH(/usr/local)
+
+AC_ARG_WITH(openssl,
+[--with-openssl=PATH             Look for openssl in PATH/lib.],
+    if test "x$withval" != "xyes"; then
+      opensslpathset=1
+      AC_ADD_SEARCH_PATH($withval)
+    fi
+)
+dnl openssl defaults to /usr/local/ssl, so add it to the search path.
+if test "x$opensslpathset" != "xyes"; then
+    AC_ADD_SEARCH_PATH(/usr/local/ssl)
+fi
+
+AC_ARG_WITH(bdb,
+[--with-bdb=PATH                 Look for the berkeley DB library in PATH/lib.],
+    if test "x$nwithval" = "xyes"; then
+      if test -d "/usr/local/BerkeleyDB.4.2"; then
+        AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.2)
+      elif test -d "/usr/local/BerkeleyDB.4.1"; then
+        AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.1)
+      elif test -d "/usr/local/BerkeleyDB.4.0"; then
+        AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.0)
+      elif test -d "/usr/local/BerkeleyDB.3.1"; then
+        AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.3.1)
+      fi
+    elif test -d "$withval"; then
+      AC_ADD_SEARCH_PATH($withval)
+    fi
+    db_guessed=yes
+)
+if test "x$db_guessed" != "xyes"; then
+   if test -d "/usr/local/BerkeleyDB.4.2"; then
+      AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.2)
+   elif test -d "/usr/local/BerkeleyDB.4.1"; then
+      AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.1)
+   elif test -d "/usr/local/BerkeleyDB.4.0"; then
+      AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.4.0)
+   elif test -d "/usr/local/BerkeleyDB.3.1"; then
+      AC_ADD_SEARCH_PATH(/usr/local/BerkeleyDB.3.1)
+   fi
+fi
+
+AC_ARG_WITH(efence,
+[--with-efence                   Compile with -lefence.],
+    if test "x$withval" = "xyes"; then
+      useefence=yes
+    fi)
+
+AC_ARG_ENABLE(debugging,
+[  --disable-debugging             Disallows debugging code to be built in.
+                                  This might provide some speed benefits.])
+
+if test "x$enable_debugging" = "xno"; then
+    AC_DEFINE(NODEBUGGING)
+fi
+
+dnl find common programs like g++ and a bsd install program.
+AC_PROG_CXX
+
+if test "x$GXX" = "xyes" -a "x$cxxflagspassed" != "xyes"; then
+	dnl force some g++ specific development flags.
+	dnl XXX: remove for final release.
+	if test -d CVS ; then
+	        CXXFLAGS="-g -Wall";
+	else
+		CXXFLAGS=""
+	fi
+        export CXXFLAGS
+fi
+
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+AC_PATH_PROG(RM,rm)
+AC_PATH_PROG(AR,ar)
+
+dnl Check for needed libraries.
+AC_CHECK_LIB(smi, smiInit,,
+	AC_MSG_ERROR("libsmi not found. get version 0.2.3 or higher from http://www.ibr.cs.tu-bs.de/projects/libsmi/.  Make sure you build it with --enable-smi passed to its configure script."))
+AC_CHECK_LIB(crypto, EVP_md5,,
+	AC_MSG_ERROR("OpenSSL not found. get it from http://www.openssl.org."))
+dnl check for thread libraries, pthread first, then c_r_p (freebsd) next.
+AC_CHECK_LIB(pthread, pthread_create,,
+	AC_CHECK_LIB(c_r_p, pthread_create,,
+		AC_MSG_ERROR("pthread_create not found in libpthread or libc_r_p.")))
+dnl DbEnv::version
+
+dnl
+dnl find libdb_cxx in one of its many possible installation names/forms. grr.
+dnl
+found_dbcxx=0
+
+OLDLIBS=$LIBS
+for suffix in cxx cxx-4.3 cxx-4.2 cxx-4.1 ; do
+  if test "x$found_dbcxx" = "x0" ; then
+    AC_MSG_CHECKING([for DbEnv::version in -ldb_$suffix])
+    LIBS="$OLDLIBS -ldb_$suffix"
+    AC_TRY_LINK([#include<db_cxx.h>],
+            [int major, minor, patch; 
+             char* versionStr = DbEnv::version(&major, &minor, &patch);],
+            [AC_MSG_RESULT([yes])
+             found_dbcxx=1],
+            [AC_MSG_RESULT([no])])
+  fi
+done
+
+if test "x$found_dbcxx" = "x0" ; then
+    AC_MSG_ERROR("libDB not found. get version 3.1 or higher from http://www.sleepycat.com/.  Make sure it is compiled with --enable-cxx.")
+fi
+
+dnl efence
+if test "x$useefence" = "xyes"; then
+    AC_CHECK_LIB(efence, EF_Exit)
+fi
+
+dnl signal functions checks
+AC_CHECK_FUNCS(signal setsid sigset sigblock sighold)
+AC_CHECK_FUNCS(sigaction)
+
+dnl Check for needed functions and the libraries they may exist in.
+AC_CHECK_FUNC(gethostbyname, ,
+	AC_CHECK_LIB(nsl, gethostbyname))
+AC_CHECK_FUNC(getservbyname, ,
+	AC_CHECK_LIB(socket, getservbyname))
+	
+dnl Check for needed functions.
+AC_CHECK_FUNCS(uname)
+
+dnl openssl functions
+AC_CHECK_FUNCS(AES_cfb128_encrypt)
+
+dnl Check for needed header files.
+AC_CHECK_HEADERS(sys/time.h sys/utsname.h)
+AC_CHECK_HEADERS(pthread.h)
+AC_CHECK_HEADERS(smi.h,,
+	AC_MSG_ERROR("libsmi not found. get version 0.2.3 or higher from http://www.ibr.cs.tu-bs.de/projects/libsmi/."))
+AC_CHECK_HEADERS(openssl/hmac.h openssl/evp.h,,
+	AC_MSG_ERROR("OpenSSL not found. get version 0.9.4 or higher from http://www.openssl.org/."))
+
+dnl two variants of db1 need checking.
+AC_CHECK_HEADERS(db1/ndbm.h,
+    AC_CHECK_LIB(db1, dbm_open, AC_DEFINE(HAVE_DBM_OPEN)
+    LIBS="${LIBS} -ldb1")
+    DB_SRCS="snmpDatabase_NDBM.C")
+
+dnl libdb checks
+AC_CHECK_HEADERS(db_cxx.h,
+        DB_SRCS="$DB_SRCS snmpDatabase_BDB.C",
+	AC_MSG_ERROR("libDB not found. get version 3.1.14 or higher from http://www.sleepycat.com/.    Make sure it is compiled with --enable-cxx."))
+AC_SUBST(DB_SRCS)
+
+dnl Check for a broken g++ system on solaris systems
+AC_CACHE_CHECK(if sys/stream.h and queue can not be included together,ac_cv_SYS_STREAM_H_IS_BROKEN,
+[
+AC_TRY_COMPILE([
+#include <sys/stream.h>
+#include <queue>
+],,ac_cv_SYS_STREAM_H_IS_BROKEN="yep",
+   ac_cv_SYS_STREAM_H_IS_BROKEN="nope")])
+
+if test "x$ac_cv_SYS_STREAM_H_IS_BROKEN" = "xnope"; then
+  AC_DEFINE(SYS_STREAM_H_IS_BROKEN)
+fi
+
+dnl checking old vs new DES support in openssl
+AC_CHECK_STRUCT_FOR([
+#include <openssl/des.h>
+], des_ks_struct, weak_key)
+
+dnl checking for signal 
+AC_CHECK_STRUCT_FOR([
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+#include <sys/types.h>
+#include <sys/signal.h>
+], sigaction, sa_sigaction, no)
+
+
+AC_HEADER_TIME
+
+AC_OUTPUT([
+Makefile:Makefile.top:Makefile.in:Makefile.bot
+acm/Makefile:Makefile.top:acm/Makefile.in:Makefile.bot
+app/cg/Makefile:Makefile.top:app/cg/Makefile.in:Makefile.bot
+app/cr/mibreg/Makefile:Makefile.top:app/cr/mibreg/Makefile.in:Makefile.bot
+app/cr/Makefile:Makefile.top:app/cr/Makefile.in:Makefile.bot
+app/cr/mibs/Makefile:Makefile.top:app/cr/mibs/Makefile.in:Makefile.bot
+app/Makefile:Makefile.top:app/Makefile.in:Makefile.bot
+asn/Makefile:Makefile.top:asn/Makefile.in:Makefile.bot
+base/Makefile:Makefile.top:base/Makefile.in:Makefile.bot
+dispatcher/Makefile:Makefile.top:dispatcher/Makefile.in:Makefile.bot
+msgproc/Makefile:Makefile.top:msgproc/Makefile.in:Makefile.bot
+secmod/Makefile:Makefile.top:secmod/Makefile.in:Makefile.bot
+mib/Makefile:Makefile.top:mib/Makefile.in:Makefile.bot
+tools/Makefile:Makefile.top:tools/Makefile.in:Makefile.bot
+tools/snmp-db-add/Makefile:Makefile.top:tools/snmp-db-add/Makefile.in:Makefile.bot
+tools/snmp-db-dump/Makefile:Makefile.top:tools/snmp-db-dump/Makefile.in:Makefile.bot
+])
+

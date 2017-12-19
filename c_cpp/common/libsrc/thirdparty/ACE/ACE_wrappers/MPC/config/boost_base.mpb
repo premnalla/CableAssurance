@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// boost_base.mpb,v 1.3 2006/02/15 16:03:44 elliott_c Exp
+
+project {
+  requires += boost
+  includes += $(BOOST_ROOT)/include/$(BOOST_VERSION) $(BOOST_ROOT)/.
+  libpaths += $(BOOST_ROOT)/lib
+}

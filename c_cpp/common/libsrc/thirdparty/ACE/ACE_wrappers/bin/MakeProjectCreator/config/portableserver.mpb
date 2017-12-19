@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// portableserver.mpb,v 1.7 2005/08/19 08:02:52 jwillemsen Exp
+
+project : taolib, anytypecode {
+  after   += PortableServer
+  libs    += TAO_PortableServer
+}

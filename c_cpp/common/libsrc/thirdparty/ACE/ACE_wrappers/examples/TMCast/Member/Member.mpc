@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// Member.mpc,v 1.3 2005/02/15 22:42:10 jtc Exp
+
+project: aceexe, tmcast {
+  exename = member
+}
+

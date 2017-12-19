@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// pkgconfig.mpb,v 1.1 2005/01/20 06:31:25 jtc Exp
+
+project {
+  Define_Custom(pkgconfig) {
+    automatic = 0
+    inputext = .in
+  }
+}

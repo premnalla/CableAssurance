@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// concurrency.mpb,v 1.6 2006/01/15 15:14:13 jtc Exp
+
+project : orbsvcslib {
+  after     += CosConcurrency
+  libs      += TAO_CosConcurrency
+}

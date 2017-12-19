@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// concurrency_serv.mpb,v 1.1 2006/01/15 15:14:13 jtc Exp
+
+project : orbsvcslib, concurrency_skel {
+  after     += CosConcurrency_Serv
+  libs      += TAO_CosConcurrency_Serv
+  tagchecks += Concurrency
+}

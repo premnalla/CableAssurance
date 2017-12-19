@@ -1,0 +1,81 @@
+INCLUDES=-I$(top_srcdir) -I. -I$(top_srcdir)/base -I$(top_srcdir)/mib
+LDFLAGS=-L$(srcdir) -lsnmpber -L$(top_srcdir)/base -lsnmpbase  -lefence -L$(top_srcdir)/mib -lsnmpmib @LDFLAGS@ $(LIBS)
+
+LIBOBJS=  OID.o Integer32.o asnDataType.o VarBind.o Sequence.o \
+	VarBindList.o asnParseError.o Null.o Unsigned32.o RawData.o \
+	IpAddress.o Counter32.o TimeTicks.o Unsigned64.o Counter64.o \
+	PDU.o ScopedPDU.o BerError.o snmpV3Message.o HeaderData.o asnIndex.o \
+	smiNode.o TransportAddress.o BitString.o opensnmpKey.o
+
+LIBSRCS=  main.C OID.C Integer32.C asnDataType.C VarBind.C Sequence.C \
+	VarBindList.C asnParseError.C Null.C Unsigned32.C RawData.C \
+	IpAddress.C Counter32.C TimeTicks.C Unsigned64.C Counter64.C \
+	PDU.C ScopedPDU.C BerError.C snmpV3Message.C HeaderData.C asnIndex.C \
+	smiNode.C TransportAddress.C BitString.C opensnmpKey.C
+MAINOBJS=main.o
+MAINSRCS=main.C
+TEST2OBJS=test2.o
+TEST2SRCS=test2.C
+
+
+TARGETS=libsnmpber.a main test2
+INSTALLHEADERS=BerError.H	\
+	BitString.H	\
+	Counter32.H	\
+	Counter64.H	\
+	Gauge32.H	\
+	HeaderData.H	\
+	Integer32.H	\
+	IpAddress.H	\
+	Null.H	\
+	OID.H	\
+	OctetString.H	\
+	Opaque.H	\
+	PDU.H	\
+	RawData.H	\
+	RawDataWrap.H	\
+	ScopedPDU.H	\
+	Sequence.H	\
+	TimeTicks.H	\
+	TransportAddress.H	\
+	Unsigned32.H	\
+	Unsigned64.H	\
+	VarBind.H	\
+	VarBindList.H	\
+	asnBadAssignment.H	\
+	asnDataType.H	\
+	asnDataTypes.H	\
+	asnIndex.H	\
+	asnParseError.H	\
+	ber.H	\
+	illegalOID.H	\
+	smiNode.H	\
+	asnBadAssignment.H \
+	snmpV3Message.H \
+	opensnmpKey.H
+
+all: libsnmpber.a
+
+libsnmpber.a: $(LIBOBJS)
+	$(AR) cr libsnmpber.a $(LIBOBJS)
+
+main: libsnmpber.a $(MAINOBJS)
+	$(CXX) -o main $(MAINOBJS) $(LDFLAGS)
+
+test2: libsnmpber.a $(TEST2OBJS)
+	$(CXX) -o test2 $(TEST2OBJS) $(LDFLAGS)
+
+smitest: libsnmpber.a smitest.o
+	$(CXX) -o smitest smitest.o $(LDFLAGS)
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS) $(MAINSRCS) $(TEST2SRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) -f $(TARGETS) $(LIBOBJS) $(MAINOBJS) $(TEST2OBJS)
+

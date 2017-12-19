@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// naming_skel.mpb,v 1.1 2004/09/07 23:42:00 jtc Exp
+
+project : orbsvcslib, naming, portableserver {
+  after     += CosNaming_Skel
+  libs      += TAO_CosNaming_Skel
+}

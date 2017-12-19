@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// event_skel.mpb,v 1.2 2004/09/13 01:46:52 jtc Exp
+
+project : orbsvcslib, event, ec_use_typed_events, portableserver, minimum_corba {
+  after     += CosEvent_Skel
+  libs      += TAO_CosEvent_Skel
+}

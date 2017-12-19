@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// man.mpb,v 1.1 2004/09/28 02:03:48 jtc Exp
+
+project {
+  Define_Custom(Man) {
+    automatic = 1
+    inputext = .1 .2 .3 .4 .5 .6 .7 .8
+  }
+}

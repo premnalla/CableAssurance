@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// boost_signals.mpb,v 1.3 2005/11/29 16:19:12 wotte Exp
+
+project: boost_base {
+  specific(!vc6, !vc7, !vc71, !vc8, !nmake, !em3, !bmake, !cbx) {
+    lit_libs += $(BOOST_STATIC_LIB_PREFIX)boost_signals$(BOOST_CFG)
+  }
+}

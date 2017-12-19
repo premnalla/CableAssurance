@@ -1,0 +1,7 @@
+// nmake.features,v 1.1 2005/08/29 10:55:33 jwillemsen Exp
+
+ssl=0
+qos=1
+cidl=0
+rwho=0
+sctp=0

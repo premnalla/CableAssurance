@@ -1,0 +1,277 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+Project: "util"=examples_util.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "resetdb"=examples_resetdb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "simple1"=examples_simple1.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "simple2"=examples_simple2.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "simple3"=examples_simple3.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "usequery"=examples_usequery.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "multiquery"=examples_multiquery.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom1"=examples_custom1.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom2"=examples_custom2.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom3"=examples_custom3.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom4"=examples_custom4.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom5"=examples_custom5.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "custom6"=examples_custom6.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "dbinfo"=examples_dbinfo.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "fieldinf1"=examples_fieldinf1.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "xaction"=examples_xaction.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name util
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "cgi_image"=examples_cgi_image.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "load_file"=examples_load_file.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "updel"=examples_updel.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+

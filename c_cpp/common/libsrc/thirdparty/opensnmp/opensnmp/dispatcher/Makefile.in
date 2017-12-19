@@ -1,0 +1,45 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir)/../include -I$(srcdir)/../asn \
+	-I$(srcdir)/../base \
+	-I$(srcdir)/../msgproc -I$(srcdir)/../secmod -I$(srcdir)/../app \
+	-I$(srcdir)/. -I.. -I$(srcdir)/../mib
+LDFLAGS= -L../dispatcher -lsnmpdisp -L../asn -lsnmpber \
+	-L../base -lsnmpbase  -lpthread -lstdc++ 
+
+LIBSRCS= snmpDispArchRegObj.C snmpDispArchObj.C snmpDispNetObj.C \
+         snmpDispRegisterEngIdASI.C snmpDispUnregisterEngIdASI.C \
+         snmpDispReturnResponsePduASI.C snmpDispSendPduASI.C \
+         snmpDispHandleInMsg.C snmpDispStats.C
+
+LIBOBJS= $(LIBSRCS:.C=.o) 
+
+TARGETS= libsnmpdisp.a
+INSTALLHEADERS=snmpDispArchObj.H	\
+	snmpDispArchRegObj.H	\
+	snmpDispNetObj.H        \
+	snmpDispHandleInMsg.H	\
+	snmpDispRegisterEngIdASI.H	\
+	snmpDispReturnResponsePduASI.H	\
+	snmpDispSendPduASI.H	\
+	snmpDispStats.H	\
+	snmpDispUnregisterEngIdASI.H
+
+
+all: $(TARGETS)
+
+libsnmpdisp.a: $(LIBOBJS)
+	$(AR) cr $@ $(LIBOBJS)
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) *.o *~ $(TARGETS)
+
+headers:
+	$(INSTALL) -m 0664 *.H ../include
+

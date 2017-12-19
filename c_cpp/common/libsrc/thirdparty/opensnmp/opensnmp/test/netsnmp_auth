@@ -1,0 +1,3 @@
+#! /bin/csh
+
+/usr/local/bin/snmpgetnext -u newUser -v 3 -l authNoPriv -a MD5 -A kissthesky localhost:7050 $1

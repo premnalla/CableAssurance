@@ -1,0 +1,202 @@
+# Microsoft eMbedded Visual Tools Project File - Name="gperf_docs" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE ARM) Dynamic-Link Library" 0x8502
+# TARGTYPE "Win32 (WCE ARMV4) Dynamic-Link Library" 0xa302
+# TARGTYPE "Win32 (WCE emulator) Dynamic-Link Library" 0xa602
+# TARGTYPE "Win32 (WCE x86) Dynamic-Link Library" 0x8302
+
+CFG=gperf_docs - Win32 (WCE ARM) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE run the tool that generated this project file and specify the
+!MESSAGE nmake output type.  You can then use the following command:
+!MESSAGE
+!MESSAGE NMAKE.
+!MESSAGE
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE
+!MESSAGE NMAKE CFG="gperf_docs - Win32 (WCE ARM) Debug"
+!MESSAGE
+!MESSAGE Possible choices for configuration are:
+!MESSAGE
+!MESSAGE "gperf_docs - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE ARMV4) Debug" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE ARMV4) Release" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE emulator) Debug" (based on "Win32 (WCE emulator) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE emulator) Release" (based on "Win32 (WCE emulator) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE x86) Debug" (based on "Win32 (WCE x86) Dynamic-Link Library")
+!MESSAGE "gperf_docs - Win32 (WCE x86) Release" (based on "Win32 (WCE x86) Dynamic-Link Library")
+!MESSAGE
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+
+!IF  "$(CFG)" == "gperf_docs - Win32 (WCE ARM) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Intermediate_Dir "Debug\gperf_docs\ARM"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /r
+CPP=clarm.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\gperf_docs\ARM/"  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ELSEIF  "$(CFG)" == "gperf_docs - Win32 (WCE ARM) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Intermediate_Dir "Release\gperf_docs\ARM"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /r
+CPP=clarm.exe
+# ADD CPP /nologo /O2 /W3 /GR  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ENDIF
+!IF  "$(CFG)" == "gperf_docs - Win32 (WCE ARMV4) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Intermediate_Dir "Debug\gperf_docs\ARM"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /d ARMV4 /r
+CPP=clarm.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\gperf_docs\ARM/" /QRxscale /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D ARMV4  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ELSEIF  "$(CFG)" == "gperf_docs - Win32 (WCE ARMV4) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Intermediate_Dir "Release\gperf_docs\ARM"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d ARM /d _ARM_ /d ARMV4 /r
+CPP=clarm.exe
+# ADD CPP /nologo /O2 /W3 /GR /QRxscale /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D ARM /D _ARM_ /D ARMV4  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ENDIF
+!IF  "$(CFG)" == "gperf_docs - Win32 (WCE emulator) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Intermediate_Dir "Debug\gperf_docs\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /r
+CPP=cl.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\gperf_docs\IX86/"  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ELSEIF  "$(CFG)" == "gperf_docs - Win32 (WCE emulator) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Intermediate_Dir "Release\gperf_docs\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /r
+CPP=cl.exe
+# ADD CPP /nologo /O2 /W3 /GR  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ENDIF
+!IF  "$(CFG)" == "gperf_docs - Win32 (WCE x86) Debug"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Intermediate_Dir "Debug\gperf_docs\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d _DEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /r
+CPP=cl.exe
+# ADD CPP /nologo /Ob0 /W3 /Gm /Zi /GR /Gy /Fd"Debug\gperf_docs\IX86/"  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D _DEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86  /FD /Gy /c
+# SUBTRACT CPP /Fr /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ELSEIF  "$(CFG)" == "gperf_docs - Win32 (WCE x86) Release"
+
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Intermediate_Dir "Release\gperf_docs\IX86"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "$(CePlatform)" /d NDEBUG /d UNICODE /d _UNICODE /d _i386_ /d _X86_ /d x86 /r
+CPP=cl.exe
+# ADD CPP /nologo /O2 /W3 /GR  /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D UNDER_CE=$(CEVersion) /D NDEBUG /D UNICODE /D _UNICODE /D _i386_ /D _X86_ /D x86  /FD /Gy /c
+# SUBTRACT CPP /YX
+BSC32=bscmake.exe
+# ADD BSC32 /nologo 
+
+!ENDIF
+
+
+# Begin Target
+
+# Name "gperf_docs - Win32 (WCE ARM) Debug"
+# Name "gperf_docs - Win32 (WCE ARM) Release"
+# Name "gperf_docs - Win32 (WCE ARMV4) Debug"
+# Name "gperf_docs - Win32 (WCE ARMV4) Release"
+# Name "gperf_docs - Win32 (WCE emulator) Debug"
+# Name "gperf_docs - Win32 (WCE emulator) Release"
+# Name "gperf_docs - Win32 (WCE x86) Debug"
+# Name "gperf_docs - Win32 (WCE x86) Release"
+# Begin Group "Documentation"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE="README"
+# End Source File
+# End Group
+# Begin Group "Man Files"
+
+# PROP Default_Filter "1 2 3 4 5 6 7 8"
+# Begin Source File
+
+SOURCE="gperf.1"
+# PROP Exclude_From_Build 1
+# End Source File
+# End Group
+# End Target
+# End Project

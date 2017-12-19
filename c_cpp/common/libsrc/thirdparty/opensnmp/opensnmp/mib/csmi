@@ -1,0 +1,30 @@
+//
+// csmi
+//
+// C++ wrapper for smi.h.
+//
+//
+//  David Reeder  <dreeder@tislabs.com>   Mon Jan 31 23:42:11 EST 2000
+//
+
+#ifndef _CSMI_H
+#define _CSMI_H
+
+#ifdef __cplusplus
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+namespace libsmi {
+	extern "C" {
+
+#	include "smi.h"
+
+	}
+}
+
+
+#endif // __cplusplus
+
+#endif // _CSMI_H

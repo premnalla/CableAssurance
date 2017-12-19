@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// TCP.mpc,v 1.4 2005/11/11 17:26:34 isisbuilds Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+  exename = tcp_test
+}

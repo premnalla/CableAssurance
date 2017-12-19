@@ -1,0 +1,148 @@
+#############################################################################
+#
+# openSNMP configuration file
+#
+#   this configuration file IS NOT parsed at run-time. It must be converted
+#   into the database using the snmp-conf tool.
+#
+# CAVEATS
+#
+#   Spaces and tabs are equivalent, and are ignored. i.e.
+#     { A B } is the same as { A    B }.
+#      xxx-rks " BUG - need a way to escape, i.e. when spaves are important.
+#
+#   Any text following a pound/hash character ('#') will be ignored.
+#      xxx-rks : BUG - need a way to escape, i.e. "Phone #"
+#
+
+#############################################################################
+#
+# Load_MIBS { MIBS }
+#     MIBS may be a single mib, or a list of mibs seperated by
+#     a semi-colon (':')
+#
+Load_MIBS { SNMPv2-MIB:SNMP-VIEW-BASED-ACM-MIB:SNMP-USER-BASED-SM-MIB }
+
+
+#############################################################################
+#
+# Scalar_Variable { <instance> <type> <value> }
+#
+Scalar_Variable { sysLocation.0 s Atlanta, GA }
+Scalar_Variable { sysContact.0 s Robert Story }
+
+
+#############################################################################
+#
+# Table_Entry { <table-oid> <table-index> { <column> <type> <value> } }
+#      Multiple columns may be defined for a single entry.
+#
+# vacmSecurityToGroupEntry 3.newUser
+Table_Entry {
+    vacmSecurityToGroupTable .3.7.110.101.119.85.115.101.114
+        { vacmGroupName s aGroup }
+        { vacmSecurityToGroupStorageType i 5 }
+        { vacmSecurityToGroupStatus i 1 }
+}
+
+####################################################################
+#
+# accessTable
+#
+# "aGroup"."".3.1
+Table_Entry {
+    vacmAccessTable .6.97.71.114.111.117.112.0.3.1
+        { vacmAccessContextMatch i 1 }
+        { vacmAccessReadViewName s testview }
+        { vacmAccessWriteViewName s testview }
+        { vacmAccessNotifyViewName s testview }
+        { vacmAccessStorageType i 5 }
+        { vacmAccessStatus i 1 }
+}
+#
+####################################################################
+#
+# MIBViews
+#
+# "testview".4.1.3.6.1
+Table_Entry {
+    vacmViewTreeFamilyTable .8.116.101.115.116.118.105.101.119.4.1.3.6.1
+       { vacmViewTreeFamilyMask x F0 }
+       { vacmViewTreeFamilyType i 1 }
+       { vacmViewTreeFamilyStorageType i 5 }
+       { vacmViewTreeFamilyStatus i 1 }
+}
+#
+#"testview".8.1.3.6.1.2.1.1.5
+Table_Entry {
+    vacmViewTreeFamilyTable .8.116.101.115.116.118.105.101.119.8.1.3.6.1.2.1.1.5
+       { vacmViewTreeFamilyMask x FF }
+       { vacmViewTreeFamilyType i 2 }
+       { vacmViewTreeFamilyStorageType i 5 }
+       { vacmViewTreeFamilyStatus i 1 }
+}
+#
+####################################################################
+#
+# usm user table
+#
+# ".....TEST"."newUser"
+Table_Entry {
+    usmUserTable .9.128.0.7.229.4.84.69.83.84.7.110.101.119.85.115.101.114
+       { usmUserAuthProtocol o usmHMACMD5AuthProtocol }
+       { usmUserPrivProtocol o usmDESPrivProtocol }
+       { usmUserPublic s "" }
+       { usmUserStorageType i 5 }
+       { usmUserStatus i 1 }
+       { -1 x 278cd1f90cc17ffb08ea3b59091405bf }
+       { -2 x 531051bd1e2689eb4b718f64760f3949 }
+}
+# "localEngineID"."fomike"
+Table_Entry {
+    usmUserTable .13.108.111.99.97.108.69.110.103.105.110.101.73.68.6.102.111.109.105.107.101
+       { usmUserAuthProtocol o usmNoAuthProtocol }
+       { usmUserPrivProtocol o usmNoPrivProtocol }
+       { usmUserPublic s "" }
+       { usmUserStorageType i 5 }
+       { usmUserStatus i 1 }
+       { -1 s "" }
+       { -2 s "" }
+}
+# "localEngineID"."initial"
+Table_Entry {
+    usmUserTable .13.108.111.99.97.108.69.110.103.105.110.101.73.68.7.105.110.105.116.105.97.108
+       { usmUserAuthProtocol o .1.3.6.1.6.3.10.1.1.1 }
+       { usmUserPrivProtocol o .1.3.6.1.6.3.10.1.2.1 }
+       { usmUserPublic s "" }
+       { usmUserStorageType i 5 }
+       { usmUserStatus i 1 }
+       { -1 s "" }
+       { -2 s "" }
+}
+# "localEngineID"."newUser"
+Table_Entry {
+    usmUserTable .13.108.111.99.97.108.69.110.103.105.110.101.73.68.7.110.101.119.85.115.101.114
+       { usmUserAuthProtocol o .1.3.6.1.6.3.10.1.1.2 }
+       { usmUserPrivProtocol o .1.3.6.1.6.3.10.1.2.2 }
+       { usmUserPublic s "" }
+       { usmUserStorageType i 5 }
+       { usmUserStatus i 1 }
+       { -1 x 278cd1f90cc17ffb08ea3b59091405bf }
+       { -2 x 531051bd1e2689eb4b718f64760f3949 }
+}
+# "localEngineID"."initial_auth"
+Table_Entry {
+    usmUserTable .13.108.111.99.97.108.69.110.103.105.110.101.73.68.12.105.110.105.116.105.97.108.95.97.117.116.104
+       { usmUserAuthProtocol o .1.3.6.1.6.3.10.1.1.1 }
+       { 8 o .1.3.6.1.6.3.10.1.2.1 }
+       { usmUserPublic s "" }
+       { usmUserStorageType i 5 }
+       { usmUserStatus i 1 }
+       { -1 s "" }
+       { -2 s "" }
+}
+####################################################################
+# END
+####################################################################
+
+

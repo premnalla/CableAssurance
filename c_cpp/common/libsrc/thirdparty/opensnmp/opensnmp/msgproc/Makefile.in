@@ -1,0 +1,45 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir)/../base -I$(srcdir)/../asn -I$(srcdir)/./ \
+	 -I$(srcdir)/../secmod -I$(srcdir)/../app -I$(srcdir)/../dispatcher \
+	 -I$(srcdir)/../mib
+
+LDFLAGS= -L../dispatcher -lsnmpdisp -L../secmod \
+	 -lsnmpsecmod -L../asn -lsnmpber -L../base \
+	 -lsnmpbase -lpthread -lstdc++ 
+
+LIBSRCS= snmpGlobalData.C snmpMPArchObj.C snmpMPArchRegObj.C \
+	 snmpMPMsgObj.C snmpMPPrepareDataElementsASI.C \
+	 snmpMPPrepareOutgoingMsgASI.C snmpMPPrepareResponseMsgASI.C \
+	 snmpStateReference.C
+# LIBSRCS=   snmpDispArchRegObj.C snmpDispArchObj.C \
+#            snmpDispRegisterEngIdASI.C snmpDispUnregisterEngIdASI.C \
+#            snmpDispReturnResponsePduASI.C snmpSendPduASI.C \
+#            snmpDispHandleInMsg.C snmpSendPduHandle.C \
+#            snmpDispMsgObj.C
+LIBOBJS= $(LIBSRCS:.C=.o) 
+
+TARGETS= libsnmpmsgproc.a
+INSTALLHEADERS=snmpGlobalData.H	\
+	snmpMPArchObj.H	\
+	snmpMPArchRegObj.H	\
+	snmpMPMsgObj.H	\
+	snmpMPPrepareDataElementsASI.H	\
+	snmpMPPrepareOutgoingMsgASI.H	\
+	snmpMPPrepareResponseMsgASI.H	\
+	snmpStateReference.H	\
+
+all: $(TARGETS)
+
+libsnmpmsgproc.a: $(LIBOBJS)
+	$(AR) cr $@ $(LIBOBJS)
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) *.o *~ $(TARGETS)
+

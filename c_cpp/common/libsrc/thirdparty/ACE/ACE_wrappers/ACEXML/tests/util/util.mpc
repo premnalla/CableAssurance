@@ -1,0 +1,4 @@
+// util.mpc,v 1.2 2005/05/23 19:55:19 michel_j Exp
+project: aceexe, acexml {
+  exename = test
+}

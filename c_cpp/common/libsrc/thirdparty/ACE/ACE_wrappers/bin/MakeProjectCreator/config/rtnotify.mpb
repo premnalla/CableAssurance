@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// rtnotify.mpb,v 1.4 2004/09/07 23:42:00 jtc Exp
+
+project : notification_serv, rtcorba {
+  after += RT_Notification
+  libs  += TAO_RT_Notification
+}

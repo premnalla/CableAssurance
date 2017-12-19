@@ -1,0 +1,25 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir) -I$(top_srcdir)/base -I$(top_srcdir)/asn \
+	-I$(top_srcdir)/app/mibreg -I$(top_srcdir)/app/ \
+	-I$(top_srcdir)/dispatcher -I$(top_srcdir)/app -I$(top_srcdir)/mib
+
+TARGETS=libsnmpvacm.a
+OBJS=snmpVACMArchObj.o snmpVACMArchRegObj.o snmpVACMIsAccessAllowedASI.o
+SRCS=snmpVACMArchObj.C snmpVACMArchRegObj.C snmpVACMIsAccessAllowedASI.C
+INSTALLHEADERS=snmpVACMArchObj.H snmpVACMArchRegObj.H snmpVACMIsAccessAllowedASI.H
+
+all: $(TARGETS)
+
+libsnmpvacm.a: $(OBJS)
+	$(AR) cr libsnmpvacm.a $(OBJS)
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) -f $(OBJS) $(TARGETS)
+
+depend:
+	makedepend $(INCLUDES) $(SRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+

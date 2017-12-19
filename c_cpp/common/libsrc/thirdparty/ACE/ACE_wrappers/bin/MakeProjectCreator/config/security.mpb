@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// security.mpb,v 1.9 2006/02/14 22:05:15 wotte Exp
+
+project : interceptors, portableserver, valuetype, corba_messaging, orbsvcslib, pi {
+  after     += Security
+  libs      += TAO_Security
+  tagchecks += Security
+}

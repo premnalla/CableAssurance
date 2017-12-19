@@ -1,0 +1,13 @@
+// -*- MPC -*-
+// ciao_config_handlers.mpb,v 1.3 2006/02/24 21:19:51 mxiong Exp
+
+project : ciao_xml_utils, dynamicany, typecodefactory {
+  verbatim(gnuace, macros) {
+   override no_hidden_visibility = 1
+  }
+  after += XSC_Config_Handlers
+  libs += XSC_DynAny_Handler XSC_Config_Handlers XSC_XML_Handlers RT_CCM_Config_Handlers
+}
+
+
+

@@ -1,0 +1,23 @@
+// get.mpc,v 1.3 2005/01/31 08:28:20 jwillemsen Exp
+
+project (asnmp_example_get) : aceexe {
+  exename = get
+  after += asnmp_lib
+  libs  += asnmp
+  avoids += uses_wchar
+  includes += $(ACE_ROOT)/ASNMP
+  source_files {
+    get.cpp
+  }
+}
+
+project (asnmp_example_get_async) : aceexe {
+  exename = get_async
+  after += asnmp_lib
+  libs  += asnmp
+  avoids += uses_wchar
+  includes += $(ACE_ROOT)/ASNMP
+  source_files {
+    get_async.cpp
+  }
+}

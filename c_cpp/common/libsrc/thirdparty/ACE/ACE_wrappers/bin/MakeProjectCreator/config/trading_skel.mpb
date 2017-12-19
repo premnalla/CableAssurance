@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// trading_skel.mpb,v 1.1 2004/11/18 17:56:13 elliott_c Exp
+
+project : orbsvcslib, trading, portableserver {
+  after     += CosTrading_Skel 
+  libs      += TAO_CosTrading_Skel
+}

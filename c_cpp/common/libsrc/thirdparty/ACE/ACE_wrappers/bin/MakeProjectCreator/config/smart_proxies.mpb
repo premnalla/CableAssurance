@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// smart_proxies.mpb,v 1.8 2005/08/11 11:47:23 elliott_c Exp
+
+project: taolib_with_idl {
+  after    += SmartProxies
+  libs     += TAO_SmartProxies
+  idlflags += -Gsp
+}

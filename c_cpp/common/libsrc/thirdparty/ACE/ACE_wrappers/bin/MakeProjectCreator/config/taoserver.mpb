@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// taoserver.mpb,v 1.3 2005/07/15 22:00:12 mesnier_p Exp
+
+project : taoexe, negotiate_codesets, portableserver {
+  exename  = server
+}

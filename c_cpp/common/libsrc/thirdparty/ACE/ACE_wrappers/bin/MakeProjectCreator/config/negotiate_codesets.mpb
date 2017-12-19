@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// negotiate_codesets.mpb,v 1.2 2005/08/09 16:17:14 mesnier_p Exp
+
+feature(negotiate_codesets) {
+  after += Codeset
+  libs   += TAO_Codeset
+}

@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// windowscommon.mpt,v 1.1 2005/03/29 13:57:07 elliott_c Exp
+
+lib_prefix =
+lib_ext    = .lib
+dll_ext    = .dll
+exe_ext    = .exe

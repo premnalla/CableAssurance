@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// messaging_optional.mpb,v 1.2 2005/10/28 22:12:17 busch_d Exp
+
+feature(corba_messaging) : valuetype, portableserver, pi {
+  libs  += TAO_Messaging
+  after += Messaging
+}
+

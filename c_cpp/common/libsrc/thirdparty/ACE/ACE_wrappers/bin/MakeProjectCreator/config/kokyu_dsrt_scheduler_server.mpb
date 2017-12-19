@@ -1,0 +1,5 @@
+// -*- MPC -*-
+// kokyu_dsrt_scheduler_server.mpb,v 1.6 2005/06/13 10:35:00 jwillemsen Exp
+
+project: taoserver, kokyu_dsrt_schedulers {
+}

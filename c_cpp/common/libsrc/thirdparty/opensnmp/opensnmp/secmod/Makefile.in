@@ -1,0 +1,72 @@
+INCLUDES=-I$(top_srcdir) -I$(srcdir)/../base -I$(srcdir)/../asn \
+	 -I$(srcdir)/../msgproc \
+	 -I$(srcdir)/../dispatcher -I$(srcdir)/../app -I$(srcdir)/../app/cr \
+	 -I$(srcdir)/../acm -I$(srcdir)/../mib
+
+LDFLAGS= -L../msgproc -L../dispatcher -L../base \
+	 -L../asn \
+	 -lsnmpdisp -lsnmpmsgproc -lsnmpber -lsnmpbase \
+	 -lpthread -lstdc++ -lcrypto
+
+LIBSRCS = USMSecurityParameters.C snmpCrypto.C snmpUSMArchObj.C \
+	  snmpUSMArchRegObj.C snmpUSMGenerateRequestMsgASI.C \
+	  snmpUSMGenerateResponseMsgASI.C snmpUSMGenericOutMsg.C \
+	  KeyChange.C usmUserCloneFrom.C \
+	  snmpUSMData.C snmpUSMProcessIncomingASI.C \
+	  snmpUSMProcessIncomingASI.C \
+	  usmUserMsg.C usmAddUserMsg.C usmCheckUserMsg.C usmDelUserMsg.C
+
+# LIBSRCS=   snmpDispArchRegObj.C snmpDispArchObj.C \
+#            snmpDispRegisterEngIdASI.C snmpDispUnregisterEngIdASI.C \
+#            snmpDispReturnResponsePduASI.C snmpSendPduASI.C \
+#            snmpDispHandleInMsg.C snmpSendPduHandle.C \
+#            snmpDispMsgObj.C
+LIBOBJS= $(LIBSRCS:.C=.o) 
+
+TESTSRCS=test.C snmpCrypto.C snmpUSMData.C usmStatsClass.C KeyChange.C \
+	 $(wildcard ../app/cr/mibreg/*.C)
+TESTOBJS=$(TESTSRCS:.C=.o)
+
+TARGETS= libsnmpsecmod.a
+INSTALLHEADERS=KeyChange.H	\
+	USMSecurityParameters.H	\
+	snmpCrypto.H	\
+	snmpKSMArchObj.H	\
+	snmpKSMArchRegObj.H	\
+	snmpKeyChangeColumnAllocator.H	\
+	snmpSecurityStateReference.H	\
+	snmpUSMArchObj.H	\
+	snmpUSMArchRegObj.H	\
+	snmpUSMData.H	\
+	snmpUSMGenerateRequestMsgASI.H	\
+	snmpUSMGenerateResponseMsgASI.H	\
+	snmpUSMGenericOutMsg.H	\
+	snmpUSMProcessIncomingASI.H	\
+	usmUserMsg.H \
+	usmCheckUserMsg.H \
+	usmAddUserMsg.H	\
+	usmDelUserMsg.H	\
+	usmUserCloneFrom.H
+
+all: $(TARGETS)
+
+libsnmpsecmod.a: $(LIBOBJS)
+	$(AR) cr $@ $(LIBOBJS)
+
+test: 	$(TESTOBJS)
+	$(CXX) $(CXXFLAGS) -I../mib -o $@ $(TESTOBJS) $(LDFLAGS) \
+	-L../app -L../mib -lsnmpapp -lsnmpmib -lsmi -lsnmpber \
+	-L/usr/local/ssl/lib \
+	-L/usr/local/BerkeleyDB.3.1/lib -ldb_cxx
+
+depend:
+	makedepend $(INCLUDES) $(LIBSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: Makefile clean
+	$(RM) Makefile	
+
+clean:
+	$(RM) *.o *~ $(TARGETS)
+

@@ -1,0 +1,12 @@
+// -*- MPC -*-
+// FaCE.mpc,v 1.2 2004/09/02 07:23:58 jwillemsen Exp
+
+project: aceexe {
+  exename   = FaCE
+  requires += wince
+
+  Source_Files {
+    FaCE.cpp
+    Main.cpp
+  }
+}

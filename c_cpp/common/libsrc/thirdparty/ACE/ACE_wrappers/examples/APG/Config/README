@@ -1,0 +1,5 @@
+
+Invoking HA_Status example binary
+-----------------------------------
+./HA_Status -f HA_Status.cfg
+

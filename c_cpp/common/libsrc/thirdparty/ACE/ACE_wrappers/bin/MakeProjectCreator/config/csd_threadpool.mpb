@@ -1,0 +1,7 @@
+// -*- MPC -*-
+//csd_threadpool.mpb,v 1.1 2005/10/19 00:27:49 dai_y Exp
+
+project : csd_framework {
+  after += CSD_ThreadPool
+  libs += TAO_CSD_ThreadPool
+}

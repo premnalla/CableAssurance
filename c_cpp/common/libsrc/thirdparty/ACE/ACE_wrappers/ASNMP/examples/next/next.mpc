@@ -1,0 +1,13 @@
+// next.mpc,v 1.3 2005/01/31 08:27:33 jwillemsen Exp
+
+project (asnmp_example_next) : aceexe {
+  exename = next
+  after += asnmp_lib
+  libs  += asnmp
+  avoids += uses_wchar
+  includes += $(ACE_ROOT)/ASNMP
+  source_files {
+    next.cpp
+  }
+}
+

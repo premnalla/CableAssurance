@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// ftorbutils.mpb,v 1.9 2005/03/24 19:26:55 seibel_r Exp
+
+project : iormanip, portableserver, orbsvcslib, portablegroup, minimum_corba {
+  after     += FTORB_Utils 
+  libs      += TAO_FTORB_Utils 
+  tagchecks += FTORB_Utils
+}

@@ -1,0 +1,7 @@
+// -*- MPC -*-
+//csd_pt_testservant_lib.mpb,v 1.1 2005/10/19 00:27:49 dai_y Exp
+
+project : csd_pt_testinf_lib {
+  after += csd_pt_testservant
+  libs += CSD_PT_TestServant
+}

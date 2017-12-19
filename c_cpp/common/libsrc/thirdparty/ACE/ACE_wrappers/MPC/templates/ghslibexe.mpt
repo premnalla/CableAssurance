@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// ghslibexe.mpt,v 1.3 2005/02/23 21:37:58 elliott_c Exp
+
+conditional_include "ghscommon"
+
+conditional_include "user_ghslibexe"

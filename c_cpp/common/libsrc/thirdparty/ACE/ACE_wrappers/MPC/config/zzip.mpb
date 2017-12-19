@@ -1,0 +1,16 @@
+// -*- MPC -*-
+// zzip.mpb,v 1.4 2005/06/28 11:31:32 elliott_c Exp
+
+feature(zzip) {
+  includes += $(ZZIP_ROOT)/include
+  macros   += USE_ZZIP
+  libpaths += $(ZZIP_ROOT)/lib
+
+  // @@ Notice: If you are building with Cygwin, you may need to manually
+  //            change the following library to zziplib.
+  specific(gnuace, make, sle, automake, ghs) {
+    libs += zzip
+  } else {
+    libs += zziplib
+  }
+}

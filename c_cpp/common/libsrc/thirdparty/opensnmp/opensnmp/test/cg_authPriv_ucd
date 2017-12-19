@@ -1,0 +1,3 @@
+#! /bin/csh
+
+../app/cg/cg -p 7050 -u newUser -a MD5 -A kissthesky -X zonkerharris -l ap -N --varbind $1 n "" localhost

@@ -1,0 +1,147 @@
+
+README for MIB objects
+======================
+
+
+
+#------------------------------------ -o- 
+CONTENTS OF THIS DIRECTORY
+
+LIBSMI.C LIBSMI.H		Class LIBSMI.  C++ wrapper for libsmi.
+
+libsmiOid.C libsmiOid.H		Class libsmiOid.  OID manipulation and
+				  numeric<==>label conversion.
+
+mibModule.C mibModule.H		Class mibModule and mibRoot.  Represents
+mibRoot.H			  SNMP modules and provides support for
+				  initialization of the MIB tree.
+
+mibNode.C mibNode.H		Class mibNode.  OO-like interface to 
+				  a tree of MIB nodes.
+
+mib.H macro.H snmp_error.H	Global header, debug, and miscellaneous.
+
+example.C projecteduse.C	Example code demonstrating core MIB
+				  Class definitions, and thoughts about
+				  future directions.
+
+smitest.C thello.C 		Test functions.
+
+libsmi.a csmi smi.h		Frank Strauss' libsmi and headers.
+
+patch.libsmi-0.2		Patches against libsmi-0.2.
+
+Makefile E/ build/		Makefile and build directories.
+
+
+
+#------------------------------------ -o- 
+DIRECTORY STRUCTURE
+
+mib/	MIB Class definition.
+mibs/	Minimal set of standard MIBs necessary to initialize MIB tree.
+
+
+
+#------------------------------------ -o- 
+ARCHITECTURE
+
+Class relationships:
+
+	LIBSMI
+	    \				libsmiOid
+	    mibModule (mibRoot)
+		  \
+		mibNode
+
+
+LIBSMI provides a C++ interface to libsmi.a.
+
+mibRoot is defined in a separate file, but is included in the mibModule
+  definition.
+
+libsmiOid is a helper class used by the other classes.
+  This class has a number of small but useful features such as:
+
+	. Changing the length of an OID path,
+	. Choosing an arbitrary contiguous subset of an OID path.
+
+
+Please read the file and function headers for more details.  All
+  header files contain a one-line synposis for important member functions.
+
+
+
+#------------------------------------ -o- 
+BUILDING, USING
+
+
+NOTE:	The following instructions have been tested under only one
+	operating system, namely "Linux 2.2.12-20 #7".
+
+
+0) Download libsmi (version 0.2).
+
+    ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/libsmi-0.2.tar.gz
+
+   *Version 0.2.4 works just fine* -- Wes
+
+1) *DONT DO THIS* -- Wes
+
+  Apply patches.
+
+    % tar xfvz libsmi-0.2.tar.gz
+    % patch -p0 <patch.libsmi-0.2
+
+
+2) Follow INSTALLATION instructions in the README file.  Configure
+   with "--enable-smi".  *It defaults to --enable-smi already* -- Wes
+
+
+    % ./configure --enable-smi
+    % make
+    % make check
+
+
+3) *DONT DO THIS* -- Wes
+
+  Copy libsmi.a and smi.h into the mib/ directory.
+
+    % cp lib/.libs/libsmi.a <mib_directory>
+    % cp lib/smi.h <mib_directory>
+
+
+4) *DONT DO THIS* -- Wes 
+   cd into mib/ directory and configure LIBSMI_PATH (near the top of
+   LIBSMI.H).
+
+   (This may be complemented by using the "--with-smipath" directive
+    in Step #2 above.)
+
+
+5) Build the MIB Class code and run the example.
+
+    % make test
+    % ./example
+
+
+
+#------------------------------------ -o- 
+FOR FURTHER INFORMATION
+
+The primary author of Libsmi is Frank Strauss <strauss@ibr.cs.tu-bs.de>.
+
+To learn more about libsmi, including download and CVS access
+information, (free) license terms, manual pages, and mailing list
+details, please consider:
+
+        http://www.ibr.cs.tu-bs.de/projects/libsmi/
+
+For additional information about the SMIng project, consider:
+
+        http://www.ibr.cs.tu-bs.de/projects/sming/
+
+
+
+  David Reeder  <dreeder@cs.pdx.edu>   Sun Feb 27 17:16:09 EST 2000
+

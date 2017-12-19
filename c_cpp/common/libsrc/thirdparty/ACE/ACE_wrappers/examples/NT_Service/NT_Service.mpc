@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// NT_Service.mpc,v 1.5 2006/03/01 23:48:42 shuston Exp
+
+project : aceexe, winregistry {
+  avoids += wince
+  exename = main
+}

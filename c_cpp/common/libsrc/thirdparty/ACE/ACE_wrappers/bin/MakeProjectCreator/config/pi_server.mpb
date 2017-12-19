@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// pi_server.mpb,v 1.1 2005/06/17 09:13:39 jwillemsen Exp
+
+project : taolib, pi, portableserver {
+  after   += PI_Server
+  libs    += TAO_PI_Server
+}

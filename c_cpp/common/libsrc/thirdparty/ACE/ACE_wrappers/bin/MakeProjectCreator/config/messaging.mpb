@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// messaging.mpb,v 1.10 2005/10/26 22:34:17 busch_d Exp
+
+project : valuetype, portableserver, pi, corba_messaging, messaging_optional {
+  after    += Messaging
+}

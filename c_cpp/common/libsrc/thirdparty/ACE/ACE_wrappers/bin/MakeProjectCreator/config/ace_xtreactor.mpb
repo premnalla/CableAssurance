@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// ace_xtreactor.mpb,v 1.3 2005/01/23 11:53:28 mbrudka Exp
+
+project : acelib, ace_xt {
+  requires += ace_xtreactor
+  after    += ACE_XtReactor
+  libs     += ACE_XtReactor
+}

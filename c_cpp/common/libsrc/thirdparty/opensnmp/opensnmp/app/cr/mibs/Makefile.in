@@ -1,0 +1,27 @@
+INCLUDES=-I$(top_srcdir)/base -I$(top_srcdir)/asn -I$(top_srcdir)/mib \
+	-I$(srcdir)/../mibreg -I$(top_srcdir) -I. -I../.. \
+	 -I$(top_srcdir)/secmod  -I$(top_srcdir)/acm -I$(top_srcdir)
+LDFLAGS=-L$(srcdir)/../../../asn -lsnmpber -L$(srcdir)/../../../base \
+	-lsnmpbase -lstdc++
+
+OBJS=system.o sysOrTable.o scalarSet.o snmpTable.o control.o
+SRCS=system.C sy.CrTable.C scalarSet.C snmpTable.C control.C
+
+TARGETS=
+
+all: $(TARGETS) $(OBJS)
+
+depend:
+	makedepend $(INCLUDES) $(SRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: 
+	$(RM) Makefile
+
+clean:
+	$(RM) -f $(TARGETS) $(OBJS)
+
+tabletest: tabletest.o
+	$(CXX) -o tabletest tabletest.o snmpIndexes.o $(LDFLAGS)
+

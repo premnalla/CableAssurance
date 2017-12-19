@@ -1,0 +1,29 @@
+
+SAMPLE_EXTRA_LIBS =
+CC = gcc
+CPP = gcc -E
+CXX = g++
+DEPDIR = .deps
+RANLIB = ranlib
+
+platform = LINUX
+SOAPHEADER = calc.h
+INCLUDES = -I$(top_builddir)/soapcpp2
+SOAP_NS = calc.nsmap calc.wsdl
+SOAP_H_FILES = soapH.h soapStub.h
+SOAP_C_CLIENT = soapClient.c soapC.c
+SOAP_C_SERVER = soapServer.c soapC.c
+SOAP_CPP_CLIENT = soapClient.cpp soapC.cpp
+SOAP_CPP_SERVER = soapServer.cpp soapC.cpp
+SOAP_C_SRC = $(SOAP_C_CLIENT) soapServer.c $(SOAP_H_FILES) $(SOAP_NS)
+LDADD = $(SOAP_C_LIB) $(SAMPLE_EXTRA_LIBS)
+BUILT_SOURCES = $(SOAP_C_SRC)
+
+######
+calcclient_SOURCES = calcclient.c $(SOAPHEADER) $(SOAP_C_CLIENT)
+calcclient_LDADD = $(SOAP_C_LIB) $(SAMPLE_EXTRA_LIBS) -lm
+
+######
+calcserver_SOURCES = calcserver.c $(SOAPHEADER) $(SOAP_C_SERVER)
+calcserver_LDADD = $(SOAP_C_LIB) $(SAMPLE_EXTRA_LIBS) -lm
+

@@ -1,0 +1,28 @@
+// -*- MPC -*-
+// bmakelibexe.mpt,v 1.12 2006/02/22 20:05:55 elliott_c Exp
+
+conditional_include "bmakecommon"
+
+startup_letter   = x
+use_exe_modifier =
+
+Release {
+  optimize         = 1
+  defines          = NDEBUG
+  exeoutputdir     = Static_Release
+  intermediate_dir = Static_Release
+  lib_modifier     = s
+  postlinkrmext    = .tds
+}
+
+Debug {
+  optimize         =
+  debug_prj        = 1
+  defines          = _DEBUG
+  exeoutputdir     = Static_Debug
+  intermediate_dir = Static_Debug
+  lib_modifier     = sd
+  postlinkrmext    = .tds
+}
+
+conditional_include "user_bmakelibexe"

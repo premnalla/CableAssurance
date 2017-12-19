@@ -1,0 +1,59 @@
+install: $(PREINSTALL) installheaders installprogs installlibs installsubdirs
+
+installheaders:
+	@if test "$(INSTALLHEADERS)" != ""; then \
+		it="$(INSTALLHEADERS)"; \
+		for i in $$it ; do	\
+			echo "installing $$i in $(includedir)/opensnmp"; \
+		        $(INSTALL) $$i $(includedir)/opensnmp ;	\
+		done \
+	fi
+
+installprogs:
+	@if test "$(INSTALLPROGS)" != ""; then \
+		it="$(INSTALLPROGS)"; \
+		for i in $$it ; do	\
+			echo "installing $$i in $(bindir)"; \
+		        $(INSTALL) $$i $(bindir) ;		\
+		done \
+	fi
+
+installlibs:
+	@if test "$(INSTALLLIBS)" != ""; then \
+		it="$(INSTALLLIBS)"; \
+		for i in $$it ; do	\
+			echo "installing $$i in $(libdir)"; \
+		        $(INSTALL) $$i $(libdir) ;		\
+			ranlib $(libdir)/$$i ; \
+		done \
+	fi
+
+subdirs:
+	@if test "$(SUBDIRS)" != ""; then \
+		it="$(SUBDIRS)" ; \
+		for i in $$it ; do	\
+			if [ "$$i" != "nulldir" -a -d $$i ]; then \
+				echo "making all in `pwd`/$$i"; \
+			        ( cd $$i ; $(MAKE)) ;	\
+				if test $$? != 0 ; then \
+					exit 1 ; \
+				fi \
+			fi \
+		done \
+	fi
+
+installsubdirs:
+	@if test "$(SUBDIRS)" != ""; then \
+		it="$(SUBDIRS)" ; \
+		for i in $$it ; do	\
+			if [ "$$i" != "nulldir" -a -d $$i ]; then \
+				echo "making all in `pwd`/$$i"; \
+	        		( cd $$i ; $(MAKE) install) ;	\
+				if test $$? != 0 ; then \
+					exit 1 ; \
+				fi \
+			fi \
+		done \
+	fi
+
+# DO NOT DELETE

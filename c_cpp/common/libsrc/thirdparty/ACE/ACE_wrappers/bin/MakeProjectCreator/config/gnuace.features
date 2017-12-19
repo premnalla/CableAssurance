@@ -1,0 +1,9 @@
+// gnuace.features,v 1.2 2005/08/22 09:35:48 jwillemsen Exp
+
+ssl=1
+qt=1
+fl=1
+tk=1
+xt=1
+cidl=1
+sctp=1

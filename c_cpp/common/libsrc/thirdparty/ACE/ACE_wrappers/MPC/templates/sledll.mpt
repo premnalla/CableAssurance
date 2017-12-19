@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// sledll.mpt,v 1.5 2005/03/29 13:57:06 elliott_c Exp
+
+conditional_include "common"
+conditional_include "windowscommon"
+
+use_lib_modifier = 1
+
+conditional_include "user_sledll"

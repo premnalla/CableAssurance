@@ -1,0 +1,17 @@
+// -*- MPC -*-
+// mfc.mpb,v 1.3 2005/02/11 13:01:17 elliott_c Exp
+
+project {
+  requires += mfc
+  macros   += _AFXDLL
+  specific(em3, nmake, vc6) {
+    subsystem = windows
+  }
+  specific(vc7, vc71, vc8) {
+    subsystem = 2
+  }
+  specific {
+    use_mfc = 2
+    unicode_mfc_entry = wWinMainCRTStartup
+  }
+}

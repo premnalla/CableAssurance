@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// trading_serv.mpb,v 1.2 2006/02/10 19:24:36 elliott_c Exp
+
+project : orbsvcslib, trading_skel, dynamicany, svc_utils, iortable {
+  after     += CosTrading_Serv
+  libs      += TAO_CosTrading_Serv
+  tagchecks += Trader
+}

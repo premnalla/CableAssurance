@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// naming.mpb,v 1.7 2004/09/07 23:42:00 jtc Exp
+
+project : orbsvcslib {
+  after     += CosNaming
+  libs      += TAO_CosNaming
+}

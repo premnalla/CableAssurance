@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// htiop.mpb,v 1.2 2004/10/26 18:06:01 elliott_c Exp
+
+project : htbp {
+  after  += HTIOP
+  libs   += TAO_HTIOP
+}

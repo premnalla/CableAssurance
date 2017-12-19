@@ -1,0 +1,4 @@
+// -*- MPC -*-
+//csd_pt_test_exe.mpb,v 1.2 2005/10/21 21:30:44 dai_y Exp
+project : csd_pt_testinf_lib, csd_pt_testservant_lib, taoexe, pi {
+}

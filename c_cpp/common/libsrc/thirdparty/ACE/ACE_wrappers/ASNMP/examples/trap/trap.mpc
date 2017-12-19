@@ -1,0 +1,12 @@
+// trap.mpc,v 1.3 2005/01/31 08:26:29 jwillemsen Exp
+
+project (asnmp_example_trap) : aceexe {
+  exename = trap
+  after += asnmp_lib
+  libs  += asnmp
+  avoids += uses_wchar
+  includes += $(ACE_ROOT)/ASNMP
+  source_files {
+    trap.cpp
+  }
+}

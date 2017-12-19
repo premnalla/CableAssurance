@@ -1,0 +1,60 @@
+INCLUDES=-I$(top_srcdir)/base -I$(srcdir)/../../asn \
+	-I$(top_srcdir)/dispatcher -I$(srcdir)/mibreg -I$(srcdir)/mibs \
+	-I$(top_srcdir)/msgproc -I$(top_srcdir)/acm -I$(srcdir)/.. \
+	-I$(srcdir)/../app -I$(top_srcdir)/mib -I$(top_srcdir)/secmod \
+	-I$(top_srcdir)
+LDFLAGS=-L../../asn -L../../base -L../../mib\
+	-L../../dispatcher -L../../msgproc    \
+        -L../../secmod -L.. -L../../acm \
+	-lsnmpapp \
+	-lsnmpvacm -lsnmpdisp -lsnmpmsgproc -lsnmpsecmod -lsnmpber \
+	-lsnmpapp -lsnmpbase -lsnmpber \
+	-lsnmpmib @LDFLAGS@
+
+LIBDEPS=../libsnmpapp.a ../../asn/libsnmpber.a ../../base/libsnmpbase.a \
+	../../secmod/libsnmpsecmod.a ../../dispatcher/libsnmpdisp.a \
+	../../msgproc/libsnmpmsgproc.a ../../acm/libsnmpvacm.a \
+	../../mib/libsnmpmib.a
+
+CRMAINOBJS=crmain.o snmpCRArchObj.o snmpCRArchRegObj.o snmpCRRegisterOID.o
+CRMAINSRCS= 
+MIBOBJS=mibreg/MIBRegTree.o mibreg/MIBRegistration.o \
+	mibreg/MIBImplementation.o mibreg/SearchRange.o \
+	mibs/scalarSet.o mibs/system.o mibs/snmpTable.o mibs/control.o
+SUBDIRS=mibreg mibs
+
+SHAREDOBJS=
+
+TARGETS=cr
+INSTALLPROGS=$(TARGETS)
+
+all: subdirs cr
+
+targs: $(TARGETS)
+
+cr: $(LIBDEPS) $(CRMAINOBJS) $(MIBOBJS)
+	$(CXX) -o $@ $(CRMAINOBJS) $(SHAREDOBJS) $(MIBOBJS) $(LDFLAGS) $(LIBS)
+
+depend:
+	@for i in $(SUBDIRS); do \
+	  (cd $$i; $(MAKE) depend) ; \
+	done
+	makedepend $(INCLUDES) $(CRMAINSRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: 
+	for i in $(SUBDIRS) ; do	\
+	if [ "$$i" != "nulldir" -a -d $$i ]; then \
+		echo "making $@ in `pwd`/$$i"; \
+		( cd $$i ; $(MAKE) RM="$(RM)" $@ ) ;	\
+	fi \
+	done
+	$(RM) Makefile
+
+clean:
+	$(RM) -f $(TARGETS) $(CRMAINOBJS)
+	@for i in $(SUBDIRS); do \
+	  (cd $$i; $(MAKE) clean) ; \
+	done
+

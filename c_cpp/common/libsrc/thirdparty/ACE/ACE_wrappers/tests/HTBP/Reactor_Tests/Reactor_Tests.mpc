@@ -1,0 +1,19 @@
+// -*- MPC -*-
+//
+// Reactor_Tests.mpc,v 1.5 2004/11/01 14:43:57 mesnier_p Exp
+
+project(*Server): aceexe, htbp {
+  exename = server
+
+  Source_Files {
+    server.cpp
+  }
+}
+
+project(*Client): aceexe, htbp {
+  exename = client
+
+  Source_Files {
+    client.cpp
+  }
+}

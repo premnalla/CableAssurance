@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/services/CableAssurance/Device"
+	targetNamespace="http://www.palmyrasys.com/services/CableAssurance/Device"
+	xmlns:tns="http://www.palmyrasys.com/services/CableAssurance"
+	xmlns:tns-locsys="http://www.palmyrasys.com/services/CableAssurance/Device"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/services/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="PingDeviceRequest">
+		<part name="resourceId" type="xsd:int" />
+	</message>
+	<message name="PingDeviceResponse">
+		<part name="deviceType" type="tns:EndUserDeviceTypeT" />
+		<part name="pingResult" type="xsd:string" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="DeviceEP">
+		<operation name="pingDevice">
+			<input message="tns-locsys:PingDeviceRequest" />
+			<output message="tns-locsys:PingDeviceResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="DeviceSOAPBinding" type="tns-locsys:DeviceEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="pingDevice">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/services/CableAssurance/Device"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/services/CableAssurance/Device"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="DeviceService">
+		<port name="DeviceEP" binding="tns-locsys:DeviceSOAPBinding">
+			<soap:address
+				location="http://localhost:9081/CableAssurance/caservices/DeviceEP" />
+		</port>
+	</service>
+
+</definitions>

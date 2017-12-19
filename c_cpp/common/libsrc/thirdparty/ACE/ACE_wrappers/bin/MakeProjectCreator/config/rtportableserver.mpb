@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// rtportableserver.mpb,v 1.3 2005/06/20 10:47:29 jwillemsen Exp
+
+project : pi, portableserver, rtcorba {
+  after   += RTPortableServer
+  libs    += TAO_RTPortableServer
+}

@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// rteventlogadmin_skel.mpb,v 1.1 2006/01/17 21:00:42 jtc Exp
+
+project : orbsvcslib, rteventlogadmin, dslogadmin_skel, rtevent_skel, portableserver {
+  after      += RTEventLogAdmin_Skel
+  libs       += TAO_RTEventLogAdmin_Skel
+}

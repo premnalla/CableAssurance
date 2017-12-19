@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// Transceiver.mpc,v 1.2 2005/04/19 06:52:47 jwillemsen Exp
+
+project(*) : aceexe {
+  exename = Transceiver
+  Source_Files {
+    transceiver.cpp
+  }
+}

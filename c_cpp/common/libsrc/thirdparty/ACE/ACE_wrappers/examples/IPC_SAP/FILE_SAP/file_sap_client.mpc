@@ -1,0 +1,11 @@
+// -*- MPC -*-
+// file_sap_client.mpc,v 1.3 2005/11/26 03:13:13 ossama Exp
+
+project : aceexe {
+  avoids += ace_for_tao
+  exename = client
+  Source_Files {
+    client.cpp
+  }
+}
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.palmyrasys.com/services/CableAssurance/JDevice"
+	targetNamespace="http://www.palmyrasys.com/services/CableAssurance/JDevice"
+	xmlns:tns="http://www.palmyrasys.com/services/CableAssurance"
+	xmlns:tns-locsys="http://www.palmyrasys.com/services/CableAssurance/JDevice"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.palmyrasys.com/services/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="GetDeviceDetailsRequest">
+		<part name="macAddress" type="xsd:string" />
+	</message>
+	<message name="GetDeviceDetailsResponse">
+		<part name="details" type="tns:EndUserDeviceTypeT" />
+	</message>
+
+	<!-- endpoint/port-type declns -->
+	<portType name="JDeviceEP">
+		<operation name="getDeviceDetails">
+			<input message="tns-locsys:GetDeviceDetailsRequest" />
+			<output message="tns-locsys:GetDeviceDetailsResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="JDeviceSOAPBinding" type="tns-locsys:JDeviceEP">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getDeviceDetails">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/services/CableAssurance/JDevice"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.palmyrasys.com/services/CableAssurance/JDevice"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="JDeviceService">
+		<port name="JDeviceEP" binding="tns-locsys:JDeviceSOAPBinding">
+			<soap:address
+				location="http://localhost:9080/CableAssurance/caservices/JDeviceEP" />
+		</port>
+	</service>
+
+</definitions>

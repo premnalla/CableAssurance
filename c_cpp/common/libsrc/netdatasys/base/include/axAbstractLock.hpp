@@ -1,0 +1,80 @@
+
+//********************************************************************
+// Copyright (c) 2006 Premraj Nallasivmapillai. All rights reserved.
+//********************************************************************
+
+#ifndef _axAbstractLock_hpp_
+#define _axAbstractLock_hpp_
+
+//********************************************************************
+// include files
+//********************************************************************
+
+//********************************************************************
+// definitions/macros
+//********************************************************************
+
+//********************************************************************
+// forward declerations
+//********************************************************************
+
+/** 
+ * This class is used to ...
+ * 
+ * 
+ * file/class: axAbstractLock.hpp
+ * 
+ * Design Document:
+ * 
+ * System:
+ *  
+ * Sub-system:
+ * 
+ * History:
+ * 
+ * @version 1.0
+ * @author Prem Nallasivampillai
+ * @see
+ * 
+ */
+
+class axAbstractLock 
+{
+public:
+
+  /// destructor
+  virtual ~axAbstractLock();
+
+  /**
+   * Describe here ...
+   *
+   * @param p1 in parameter
+   * @param p2 in-out parameter
+   * @param p3 out parameter
+   * @return 
+   *   \begin{itemize}
+   *     \item AX_SUCCESS successfully executed 
+   *     \item AX_FAILED  unsuccessfully executed 
+   *   \end{itemize}
+   * @see
+   */
+
+   virtual void readPreAccess(void)=0;
+   virtual void readPostAccess(void)=0;
+
+   virtual void writePreAccess(void)=0;
+   virtual void writePostAccess(void)=0;
+
+protected:
+
+  /// default constructor
+  axAbstractLock();
+
+
+private:
+
+  axAbstractLock(const axAbstractLock &);
+
+};
+
+#endif // _axAbstractLock_hpp_

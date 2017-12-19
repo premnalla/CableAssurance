@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// threads.mpb,v 1.1 2005/01/04 17:52:31 jtc Exp
+
+project {
+  requires += threads
+}

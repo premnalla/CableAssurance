@@ -1,0 +1,5 @@
+// -*- MPC -*-
+// qt_moc.mpb,v 1.2 2005/01/23 01:31:12 mbrudka Exp
+// This file stays here for compatibility reasons
+project : qt {
+}

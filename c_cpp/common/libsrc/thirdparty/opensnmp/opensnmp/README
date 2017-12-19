@@ -1,0 +1,31 @@
+The openSNMP package supports SNMPV3 communications. It has been tested on
+ several different UNIX platforms (LINUX, SOLARIS, BSD).
+
+For installation instructions and necessary packages, look in INSTALL
+
+This README will cover some issues involved with using this Beta Version:
+
+This engine supports only the SNMP V3 protocol. In order to use this
+you will need to have users and access privileges. Currently there is
+a script, app/cr/snmp-db-init that is used to add the user
+newUser'sinfo neccessary for the tests scripts. It adds newUser to the
+USM tables using MD5 authentication (passwd: 'kissthesky'), DES
+privacy (passwd: 'zonkerharris'). It exists with the engine ID
+'localEngineID' for communicating to the CR and with the engine ID
+'0x800007E50454455354' for communicating with the netsnmp test
+configuration (./snmpd.conf).
+
+newUser exists in the VACM table with group 'aGroup' with has a view
+'testview' with is allowed to see everything under the '.1.3.6.1'
+OID tree.
+
+Entering new table values are currently limited to the following:
+
+Persistent data can also be added using some executables in tools/. An
+example of this is the shell script app/cr/snmp-db-init. You will need
+to know the explicit OID, column number, and values that you want to
+exist in order to use this.
+
+For the CG (app/cg/cg), a user'sinfo can be added at the command
+line. See 'app/cg/cg --help' for directions.
+

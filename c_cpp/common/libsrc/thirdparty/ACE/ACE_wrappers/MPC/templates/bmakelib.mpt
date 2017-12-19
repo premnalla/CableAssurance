@@ -1,0 +1,23 @@
+// -*- MPC -*-
+// bmakelib.mpt,v 1.6 2006/02/09 18:51:14 elliott_c Exp
+
+conditional_include "bmakecommon"
+
+use_lib_modifier = 1
+
+Release {
+  optimize         = 1
+  defines          = NDEBUG
+  intermediate_dir = Static_Release
+  lib_modifier     = s
+}
+
+Debug {
+  optimize         =
+  debug_prj        = 1
+  defines          = _DEBUG
+  intermediate_dir = Static_Debug
+  lib_modifier     = sd
+}
+
+conditional_include "user_bmakelib"

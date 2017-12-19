@@ -1,0 +1,3 @@
+#! /bin/csh
+
+snmpgetnext -u newUser -v 3 -l noAuthNoPriv localhost:7050 $1

@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// event.mpb,v 1.12 2004/09/07 23:42:00 jtc Exp
+
+project : orbsvcslib, ec_use_typed_events, minimum_corba {
+  after     += CosEvent
+  libs      += TAO_CosEvent
+}

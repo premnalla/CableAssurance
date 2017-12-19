@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// bidir_giop.mpb,v 1.3 2005/06/20 11:37:48 jwillemsen Exp
+
+project : taolib, pi {
+  after   += BiDir_GIOP
+  libs    += TAO_BiDirGIOP
+}

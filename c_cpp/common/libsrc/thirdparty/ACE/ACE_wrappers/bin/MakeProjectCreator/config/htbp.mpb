@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// htbp.mpb,v 1.4 2005/11/26 03:13:13 ossama Exp
+
+project : acelib {
+  avoids   += ace_for_tao   // Requires ACE_Configuration_Heap
+  after    += HTBP
+  libs     += ACE_HTBP
+  includes += $(ACE_ROOT)/protocols
+}

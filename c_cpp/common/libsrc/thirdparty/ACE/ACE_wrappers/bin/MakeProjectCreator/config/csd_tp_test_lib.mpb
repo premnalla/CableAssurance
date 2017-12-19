@@ -1,0 +1,10 @@
+// -*- MPC -*-
+//csd_tp_test_lib.mpb,v 1.1 2005/10/19 00:27:49 dai_y Exp
+
+project : taolib_with_idl, csd_threadpool, pi {
+  after += CSD_TP_Test_Lib
+  includes += $(TAO_ROOT)/tests/CSD_Strategy_Tests/TP_Common
+  libs += CSD_TP_Test
+  libpaths += $(TAO_ROOT)/tests/CSD_Strategy_Tests/TP_Common
+  idlflags  +=  -I$(TAO_ROOT)/tests/CSD_Strategy_Tests/TP_Common
+}

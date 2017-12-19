@@ -1,0 +1,4 @@
+// -*- MPC -*-
+//csd_tp_test_exe_c.mpb,v 1.1 2005/10/19 00:27:49 dai_y Exp
+project : csd_tp_foo_c_lib, taoexe {
+}

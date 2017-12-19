@@ -1,0 +1,4 @@
+#! /bin/csh
+
+../app/cg/cg -p 7050 -u newUser -a NONE -l nanp -E someEngineID \
+-e localEngineID -N --varbind $1 n "" localhost

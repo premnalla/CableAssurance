@@ -1,0 +1,12 @@
+//  -*- MPC -*-
+// HTBP.mpc,v 1.5 2005/11/28 15:27:27 ossama Exp
+
+project(HTBP) : acelib, core {
+  avoids      += ace_for_tao
+  sharedname   = ACE_HTBP
+  dynamicflags = HTBP_BUILD_DLL
+
+  Pkgconfig_Files {
+    ACE_HTBP.pc.in
+  }
+}

@@ -1,0 +1,15 @@
+- check shutdown, only shutdown extant processes
+
+- Need to change engine ID discovery to only be done within CG, MP
+  should no longer handle it (althoughh it should continue to handle
+  boots/time synching!)
+
+- Debug as namespace?, i.e. complie time ifdef's to change function
+  descriptions to void's. Otherwise use debug class.  Get away from
+  namespace munging C++ mismatched Macro's, not that I'm bitter.
+
+- need to try getting rid of ostream in debug (there is an apparent
+  threading race condition using string stream stuff causing
+  seg-faults, fun)
+
+

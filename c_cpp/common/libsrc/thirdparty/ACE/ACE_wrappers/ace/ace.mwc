@@ -1,0 +1,14 @@
+//  -*- MPC -*-
+//
+// ace.mwc,v 1.12 2005/11/26 03:13:13 ossama Exp
+
+workspace {
+  ace.mpc
+  ace_for_tao.mpc
+  ace_flreactor.mpc
+  ace_qtreactor.mpc
+  ace_tkreactor.mpc
+  ace_xtreactor.mpc
+  QoS
+  SSL
+}

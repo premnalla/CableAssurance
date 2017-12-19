@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// notifytest.mpb,v 1.12 2005/11/07 22:27:15 wotte Exp
+
+project: orbsvcsexe, notification, notification_skel, notification_serv, naming, svc_utils, event_serv, ifr_client, dynamicinterface, messaging, pi, codecfactory, valuetype {
+  after    += NotifyTests_Lib
+  libs     += TAO_NotifyTests
+  includes += $(TAO_ROOT)/orbsvcs/tests/Notify/lib
+}

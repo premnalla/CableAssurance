@@ -1,0 +1,23 @@
+INCLUDES=-I$(top_srcdir) -I$(top_srcdir)/base -I$(top_srcdir)/asn \
+	 -I$(top_srcdir)/mib \
+	 -I$(srcdir)/../mibs -I$(srcdir)
+LDFLAGS=-L$(top_srcdir)/asn -lsnmpber -L$(top_srcdir)/base -lsnmpbase 
+
+OBJS=MIBRegistration.o MIBRegTree.o MIBImplementation.o SearchRange.o
+SRCS=MIBRegistration.C MIBRegTree.C MIBImplementation.C SearchRange.C
+
+TARGETS=
+
+all: $(TARGETS) $(OBJS)
+
+depend:
+	makedepend $(INCLUDES) $(SRCS)
+	perl -n -i.bak $(top_srcdir)/localdepends Makefile
+#	perl $(top_srcdir)/makefileindepend.pl
+
+distclean: clean
+	$(RM) Makefile 
+
+clean:
+	$(RM) -f $(TARGETS) $(OBJS)
+

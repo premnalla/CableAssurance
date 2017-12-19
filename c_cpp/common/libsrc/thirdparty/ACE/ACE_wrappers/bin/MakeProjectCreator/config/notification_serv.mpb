@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// notification_serv.mpb,v 1.2 2004/11/24 18:25:59 elliott_c Exp
+
+project : orbsvcslib, svc_utils, notification_skel, etcl, dynamicany {
+  after     += CosNotification_Serv
+  libs      += TAO_CosNotification_Serv
+  tagchecks += Notify
+}

@@ -1,0 +1,10 @@
+// -*- MPC -*-
+// vc8nmake.mpb,v 1.1 2005/12/21 19:13:21 jwillemsen Exp
+
+project {
+  specific(nmake) {
+    compile_flags -= /EHs
+    compile_flags += /EHa
+  }
+}
+

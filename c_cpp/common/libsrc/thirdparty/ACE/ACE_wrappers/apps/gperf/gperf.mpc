@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// gperf.mpc,v 4.1 2005/12/27 21:35:39 jtc Exp
+
+project (gperf_docs) : man {
+
+  Man_Files {
+    gperf.1
+  }
+}

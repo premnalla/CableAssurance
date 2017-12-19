@@ -1,0 +1,6 @@
+// -*- MPC -*-
+// mkcsregdb.mpc,v 1.4 2005/01/31 08:22:12 jwillemsen Exp
+
+project: aceexe {
+  avoids += uses_wchar
+}

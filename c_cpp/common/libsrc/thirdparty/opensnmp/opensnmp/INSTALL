@@ -1,0 +1,127 @@
+How to build and test this package:
+
+1) Get and install the net-snmp package, which will be used in the
+   examples below for interoperability purposes.  Information about it
+   can be found at http://www.net-snmp.org/. The tests shown below were
+   done with the 4.x line of net-snmp.
+
+   You will also need the following installed on your system:
+
+     a) openssl     (encryption libraries)  
+ 		    http://www.openssl.org/
+
+     b) libsmi      (MIB parsing)           
+		    ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/
+
+     c) Berkeley db (persistent data)       
+	            http://www.sleepycat.com/download/index.shtml
+        	    configure with '--enable-cxx'
+
+        	    Both the 3.x and 4.x releases are known to work.
+
+2) Do:
+
+     cd opensnmp/
+     ./configure
+
+     Usually, running './configure' with no arguments will work just
+     fine. In case of abnormal setups or configuration problems
+     however, the most useful arguments are generally:
+
+     --prefix=PREFIX		default is /usr/local
+     --with-openssl=PATH	locaton of openssl install.
+     --with-db=PATH		location of Berkeley DB library     
+
+     Use ./configure --help to see all the options.
+
+
+   If configure does not have any problems:
+   
+   Run:
+
+     make
+     make install
+
+Note: You do not need to make install to run the test scripts. The
+      testing scripts run from the build directory
+
+4) Testing the Command Receiver (CR).
+
+   The CR is a command line program. Section A is a brief description
+   of how to run it. Section B describes some example shell scripts
+   available in the phaseII/test diretory.
+
+   A.) CR
+
+   The CR can be started using the following commands:
+
+     cd app/cr
+     ./cr
+	
+
+5) Examples:
+
+   A good place to look for examples is in the test/ director. The
+   shell scripts there are updated and usually work. The names of the
+   scripts pretty much follow their function.  'cg_authPrvi_cr .x.x.x'
+   would send a get next using authentication and privacy for oid
+   x.x.x to the cr application run by 'test/cr'. 'cg_authPriv_ucd'
+   would send the same message to the ucd-snmp daemon started by
+   'test/ucd_daemon'. Note, the scripts all change the port number of
+   the daemon and clients to other than the standard 161. This allows
+   for testing by a non root-priviledged user. The ucd_daemon script
+   also uses a provided configuration file.
+
+   For the 'cr' information to be correct for the above scripts,
+   app/cr/snmp-db-init needs to be run. This adds the user's info
+   (i.e. USM and VACM data) to the persistent database that the cr
+   uses. The default location of this is /var/opensnmp.
+ 
+   For both the 'app/cg/cg' and 'app/cr/cr' the --help' should give a
+   fairly good description of the command line options.
+
+   The CR script is stopped by typing ctrl-c
+
+   Brief description of shell scripts:
+
+   Inside the test/ directory there is a number of scripts used for testing
+   the CR.
+
+   The cr and ucd_daemon scripts start a snmp agent or Comand Receiver
+   (CR).
+ 
+   cr 	      -	starts the Command Receiver (app/cr/crmain) 
+		The Command Receiver is a server that runs indefinitely,
+		it can be stopped with ctrl-c
+
+   netsnmp_daemon - runs snmpd (netsnmp's snmp agent) using the provided 
+		    snmpd.conf configuration file. This can be used
+		    for SNMPv3 interoperability testing. The daemon
+		    can be stopped with ctrl-c.
+
+   The following scripts run a Command Generator (CG). The 'cg_'
+   prefixed scripts use app/cr/cgtest. The 'netsnmp_' prefixed scripts
+   use netsnmp's snmpgetnext command to test against the 'cr' script.
+
+   The following scripts require a passed in OID. Example: 
+   'cg_noAuth_cr .1.3.6'
+
+   cg_noAuth_cr     -	runs the Command Generator (phaseII/app/cg/cgtest)
+			to send a getnext PDU to the cr.
+   cg_noAuth_ucd    -	same as above but sends a getnext PDU to snmpd.
+	
+   cg_auth_cr       -	same as cg_noAuth_cr, but uses an authenticated 
+			message.
+   cg_auth_ucd      -	same as above but sends a getnext PDU to snmpd.
+
+   cg_authPriv_cr   -	same as cg_noAuth_cr, but uses an authenticated 
+			message with an encrypted scoped PDU.
+   cg_authPriv_ucd  -	same as above but sends a getnext PDU to snmpd.
+
+   
+   netsnmp_noAuth   -	runs snmpgetnext to send a getnext PDU to the CR.
+   netsnmp_auth     -   runs snmpgetnext to send an outhenticated getnext 
+			PDU to the CR.
+   netsnmp_authPriv -	runs snmpgetnext to send an outhenticated and 
+			encrypted getnext PDU to the CR.
+

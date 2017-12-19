@@ -1,0 +1,7 @@
+// -*- MPC -*-
+// global.mpb,v 1.2 2005/06/14 12:16:29 elliott_c Exp
+
+project {
+  libout   = .
+  libpaths = .
+}

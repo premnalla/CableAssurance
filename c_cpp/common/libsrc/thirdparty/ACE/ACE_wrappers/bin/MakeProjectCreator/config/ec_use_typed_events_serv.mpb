@@ -1,0 +1,5 @@
+// -*- MPC -*-
+// ec_use_typed_events_serv.mpb,v 1.1 2004/09/13 01:46:52 jtc Exp
+
+feature(ec_typed_events) : dynamicinterface, ifr_client {
+}

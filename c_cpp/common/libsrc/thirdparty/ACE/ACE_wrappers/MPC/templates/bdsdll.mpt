@@ -1,0 +1,9 @@
+// -*- MPC -*-
+// bdsdll.mpt,v 1.2 2005/12/22 14:33:20 elliott_c Exp
+
+conditional_include "common"
+conditional_include "windowscommon"
+
+common_defines  = WIN32
+
+conditional_include "user_bdsdll"
