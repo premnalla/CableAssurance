@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2001 Cisco Systems, Inc., Ericsson Radio Systems AB., MetaSolv Software, Inc., Motorola, Inc., NEC Corporation, Nokia Networks Oy,
+Nortel Networks Limited, Sun Microsystems, Inc., Telcordia Technologies, Inc., Cygent, Inc., Agilent Technologies, Inc., BEA Systems, Inc., Digital
+Fairway Corporation, Orchestream Holdings plc. All rights reserved. -->
+<!-- 
+DOCUMENTATION IS PROVIDED "AS IS" AND ALL EXPRESS OR IMPLIED
+CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED
+WARRANTY OF MERCHANTABILITY, FITNESS FOR FOR A PARTICULAR PURPOSE OR
+NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT THAT SUCH
+DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.
+-->
+<schema xmlns:co="http://java.sun.com/products/oss/xml/Common" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://java.sun.com/products/oss/xml/Common" elementFormDefault="qualified">
+	<annotation>
+		<documentation>
+			Common XML schema.
+		</documentation>
+	</annotation>
+	<!--================ApplicationContext==================-->
+	<complexType name="ApplicationContext">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="factoryClass" type="string"/>
+			<element name="url" type="anyURI"/>
+			<element name="systemProperties" type="co:ArrayOfSystemProperties"/>
+		</sequence>
+	</complexType>
+	<complexType name="SystemProperty">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="name" type="string"/>
+			<element name="value" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfSystemProperties">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="property" type="co:SystemProperty" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--================ManagedEntityKey==================-->
+	<complexType name="ManagedEntityKey">
+		<annotation>
+			<documentation>The ApplicationContext, ApplicationDN type may or may not be present in a request. However
+			their presence is mandatory in responses and events. When the applicationContext and/or applicationDN are omitted 
+			from a request, the system that receives the request assumes that the keys identify entities within its own namespace. 
+			If  the system manages multiple namespaces and the key is  ambiguous, then the IIlegalArgumentException should be thrown.
+                  </documentation>
+		</annotation>
+		<sequence>
+			<element name="applicationContext" type="co:ApplicationContext" minOccurs="0"/>
+			<element name="applicationDN" type="string" minOccurs="0"/>
+			<element name="type" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="ManagedEntityKeyResult" abstract="true">
+		<annotation>
+			<documentation>
+				The ManagedEntityKeyResult encapsulates all the information necessary to indicate the result of 
+				 a best effort operation on a specific managed entity. TheManagedEntityKeyResult is used in operations 
+				 involving the update of multiple managed entities, in the deletion of multiple managed entities 
+				 or in the creation of multiple managed entities. It contains the managed entity key, a boolean value 
+				 indicating if the set, delete or create operation was succesfull for that managed entity  and an 
+				exception describing the failure.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="success" type="boolean"/>
+			<element name="exception" type="co:BaseException" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--================ManagedEntityValue==================-->
+	<complexType name="ManagedEntityValue" abstract="true">
+		<annotation>
+			<documentation>The lastUpdateVersionNumber may or may not be present in a request. However
+			its presence is mandatory in responses and events.A request which use the resyncRequired
+			parameter and set it to true must provide a lastUpdateVersionNumber otherwise the IIlegalArgumentException 
+			should be thrown</documentation>
+		</annotation>
+		<sequence>
+			<element name="lastUpdateVersionNumber" type="long" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfManagedEntityValue">
+		<annotation>
+			<documentation>This is a representation of a value
+		array.</documentation>
+		</annotation>
+		<sequence>
+			<element name="item" type="co:ManagedEntityValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--================Events==================-->
+	<complexType name="BaseEventType" abstract="true">
+		<annotation>
+			<documentation>Base Event</documentation>
+		</annotation>
+		<sequence>
+			<element name="applicationDN" type="string"/>
+			<element name="eventTime" type="dateTime"/>
+		</sequence>
+	</complexType>
+	<!--==========EventPropertyDescriptor==========-->
+	<complexType name="EventPropertyDescriptor" abstract="true">
+		<annotation>
+			<documentation>Base Event Property Descriptor</documentation>
+		</annotation>
+		<sequence>
+			<element name="eventType" type="string" nillable="false"/>
+			<element name="propertyNames" type="co:ArrayOfString" nillable="false"/>
+			<element name="propertyTYpes" type="co:ArrayOfString" nillable="false"/>
+		</sequence>
+	</complexType>
+	<!--================ejb exceptions==================-->
+	<complexType name="CreateException">
+		<annotation>
+			<documentation> The CreateException exception can be
+		returned by all create(...) requests defined in the OSS
+		through Java XML/JMS interface. The exception is used as a
+		standard application-level exception to report a failure to
+		create a managed entity or a collection of managed
+		entities. This exception is thrown when a particular managed
+		entity or group of managed entities cannot be
+		created.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="DuplicateKeyException">
+		<annotation>
+			<documentation> The DuplicateKeyException exception is
+		returned if a managed entity cannot be created because an
+		object with the same key already exists. This exception is
+		only used when a managed entity key is provided in a
+		create(...) request and when client controlled naming is
+		used. This exception is returned by the create requests
+		defined in the OSS through Java XML/JMS
+		interface. </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="FinderException">
+		<annotation>
+			<documentation> The exception is used as a standard
+		application-level exception to report a failure to find the
+		requested managed entities. This exception is returned when a
+		collection of one or more entity cannot be found. This
+		exception should not be returned by requests that return a
+		collection of managed entitites using an associative lookup
+		approach (they should return a null list
+		instead). </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ObjectNotFoundException">
+		<annotation>
+			<documentation> The ObjectNotFoundException exception is
+		returned by an OSS through Java request to indicate that the
+		specified managed entity does not exist. Only the request that
+		are declared to return a single managed entity use this
+		exception. This exception should not be returned by methods
+		that return a collection of managed entitites. This exception
+		is returned when a singular managed entity cannot be
+		found. </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="RemoveException">
+		<annotation>
+			<documentation> The RemoveException exception is returned
+		at an attempt to remove a collection of one or more managed
+		entity when the XML/JMS interface does not allow the managed
+		entity to be removed. This exception is returned when a a
+		collection of one or more managed entity cannot be
+		removed</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--================oss exceptions==================-->
+	<complexType name="BaseException" abstract="true">
+		<annotation>
+			<documentation>The BaseException is the parent complexType of the Exceptions.</documentation>
+		</annotation>
+		<sequence>
+			<element name="message" type="string">
+				<annotation>
+					<documentation>The Message element indicates the error message from the Exception. This is most 
+			         likely the results from a Exception.getMessage() call.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SetException">
+		<annotation>
+			<documentation> The SetException exception is returned at
+		an attempt to update a a collection of one or more managed
+		entity when the XML/JMS interface does not allow the managed
+		entity to be updated. This exception is returned when a
+		collection of one or more managed entity cannot be
+		updated.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="UnsupportedOperationException">
+		<annotation>
+			<documentation> The UnsupportedOperationException
+		exception is returned by the OSS through Java XML/JMS
+		interface to report that the invoked request could not be
+		completed because it is not implemented.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="IllegalArgumentException">
+		<annotation>
+			<documentation>The IllegalArgumentException  exception is
+		returned by the OSS through Java XML/JMS interface to report
+		that the request could not be completed because one of the
+		arguments passed in is invalid.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="IllegalAttributeValueException">
+		<annotation>
+			<documentation>The IllegalAttributeValueException exception is
+		returned by the OSS through Java XML/JMS interface to report that
+		the invoked business method could not be completed because  
+		a bad argument value  is provided.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence>
+					<element name="illegalAttributeName" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ResyncRequiredException">
+		<annotation>
+			<documentation>The ResyncRequiredException exception is
+		returned by the OSS through Java XML/JMS interfacewhen an operation 
+		to update a managed entity is called with  a staled ManagedEntityValue object. 
+		A staled managed entity value represents a view of a back-end managed entity 
+		that has been updated without the knowledge of the client. The exception returns 
+		the the managed entity key of the staled object.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence>
+					<element name="managedEntityKey" type="co:ManagedEntityKey"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--================rmi  exceptions==================-->
+	<complexType name="RemoteException">
+		<annotation>
+			<documentation> The RemoteException is returned when an
+		errors occurs during any remote object
+		operation.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--================java.lang exceptions==================-->
+	<complexType name="IllegalStateException">
+		<annotation>
+			<documentation>
+				 to be defined in the DG
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseException">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--============response iterator=============-->
+	<complexType name="IteratorRequest" abstract="true">
+		<annotation>
+			<documentation>This is a representation of an Iterator
+		Request.</documentation>
+		</annotation>
+		<sequence>
+			<element name="howMany" type="unsignedInt" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="IteratorResponse" abstract="true">
+		<annotation>
+			<documentation>This is a representation of an Iterator
+		Response.</documentation>
+		</annotation>
+		<sequence>
+			<element name="sequence" type="int"/>
+			<element name="endOfReply" type="boolean"/>
+		</sequence>
+	</complexType>
+	<!--============Common Operations=============-->
+	<element name="getSupportedOptionalOperationsRequest">
+		<annotation>
+			<documentation> The getSupportedOptionalOperationsRequest
+		is used to return a list of the implemented optional
+		operations. It will return a subset of the OptionalOperations
+		enumeration, indicating which of the optional operations are
+		implemented.
+ 		Postcondition:  Every returned string in the
+		getSupportedOptionalOperationsResponse Message, can be one
+		mentioned in the OptionalOperations. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getSupportedOptionalOperationsResponse">
+		<annotation>
+			<documentation>The getSupportedOptionalOperationsResponse
+		will return a list of implemented optional operations
+		</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="optionalOperations" type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getSupportedOptionalOperationsException">
+		<annotation>
+			<documentation>The getSupportedOperationsException is
+		returned if an exception occured during the request.  The only
+		exception that is thrown is a RemoteException.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getManagedEntityTypesRequest">
+		<annotation>
+			<documentation>The getManagedEntityTypesRequest is used to
+		return a string list of available OrderTypes.  Each one of the
+		strings in the list can be passed as an argument to
+		newOrderValue(factory) to create a corresponding OrderValue
+		instance.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getManagedEntityTypesResponse">
+		<annotation>
+			<documentation>The getManagedEntityTypesResponse will
+		return a list of available managed entities. Fully qualified names, based on the
+		 XML Schema namespace should be returned.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="managedEntityTypes" type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getManagedEntityTypesException">
+		<annotation>
+			<documentation>The getManagedEntityTypesException is
+		returned if an execption occurred.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getQueryTypesRequest">
+		<annotation>
+			<documentation>The GetQueryTypesRequest will return a
+		string  list of available query types. Each one of the Query
+		Types can then be passed to the newQueryValue(factory) to
+		create a corresponding QueryValue instance.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getQueryTypesResponse">
+		<annotation>
+			<documentation>The GetQueryTypesResponse will contain the
+		list of available Query Types. Fully qualified names, based on the
+		 XML Schema namespace should be returned.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="queryType" type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getQueryTypesException">
+		<annotation>
+			<documentation>The GetQueryTypesException is returned if
+		an exception occurred.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getEventTypesRequest">
+		<annotation>
+			<documentation>The getEventTypesRequest will return a
+		string  list of available event types.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getEventTypesResponse">
+		<annotation>
+			<documentation>The getEventTypesResponse will contain the
+		list of available Event Types. Fully qualified names, based on the
+		 XML Schema namespace should be returned.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="eventType" type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getEventTypesException">
+		<annotation>
+			<documentation>The getEventTypesException is returned if
+		an exception occurred.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getEventDescriptorRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="eventType" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getEventDescriptorResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="descriptor" type="co:EventPropertyDescriptor"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getEventDescriptorException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="queryManagedEntitiesRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorRequest">
+					<sequence>
+						<element name="query" type="co:QueryValue"/>
+						<element name="attrNames" type="co:ArrayOfString"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryManagedEntitiesResponse">
+		<annotation>
+			<documentation>This returns the new entity
+		value.</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorResponse">
+					<sequence>
+						<element name="value" type="co:ArrayOfManagedEntityValue" nillable="true" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryManagedEntitiesException">
+		<annotation>
+			<documentation>This is returned if an exception
+		occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="createException" type="co:CreateException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!--============QueryValue=============-->
+	<complexType name="QueryValue" abstract="true">
+		<sequence/>
+	</complexType>
+	<!--============ArrayOfQueryValue=============-->
+	<complexType name="ArrayOfQueryValue">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="queryValue" type="co:QueryValue" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--============MultiValueList=============-->
+	<complexType name="MultiValueList" abstract="true">
+		<annotation>
+			<documentation>
+				The MultiValuedList is used In oder to minimize the amount of 
+				data required to add or remove a single attribute value from a 
+				multi-valued attribute of a Managed Entity.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="modifier" type="co:Modifier"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Modifier">
+		<annotation>
+			<documentation>
+				This is modifier is used  to indicate the operation on a MultiValueList.
+	         	</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="NONE"/>
+			<enumeration value="SET"/>
+			<enumeration value="ADD"/>
+			<enumeration value="REMOVE"/>
+		</restriction>
+	</simpleType>
+	<!--============string array=============-->
+	<complexType name="ArrayOfString">
+		<annotation>
+			<documentation>This is a representation of a String
+		array.</documentation>
+		</annotation>
+		<sequence>
+			<element name="item" type="string" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--============int array=============-->
+	<complexType name="ArrayOfInt">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="item" type="int" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfDateTime">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<sequence>
+			<element name="item" type="dateTime" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</schema>

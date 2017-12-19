@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2002 Cisco Systems, Inc., Ericsson Radio Systems AB., Motorola, Inc., NEC Corporation, Nokia Networks Oy, Nortel Networks Limited, Sun Microsystems, Inc., Telcordia Technologies, Inc., Cygent, Inc., Agilent Technologies, Inc., BEA Systems, Inc., Digital Fairway Corporation, Orchestream Holdings plc.  
+All rights reserved.  Use is subject to license terms.
+
+DOCUMENTATION IS PROVIDED "AS IS" AND ALL EXPRESS OR IMPLIED
+CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED
+WARRANTY OF MERCHANTABILITY, FITNESS FOR FOR A PARTICULAR PURPOSE OR
+NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT THAT SUCH
+DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.
+-->
+<schema targetNamespace="http://com.nokia.com/ossj/xml/RiServiceActivation" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:co="http://java.sun.com/products/oss/xml/Common" xmlns:sa="http://java.sun.com/products/oss/xml/ServiceActivation" xmlns:ri="http://com.nokia.com/ossj/xml/RiServiceActivation" elementFormDefault="qualified">
+	<import namespace="http://java.sun.com/products/oss/xml/ServiceActivation" schemaLocation="XmlServiceActivationSchema.xsd"/>
+	<complexType name="RiServiceValue">
+		<annotation>
+			<documentation>This is the service value of the reference implementation</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="sa:ServiceValue">
+				<sequence>
+					<element name="serviceActivatorHomeJndiName" type="string" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

@@ -1,0 +1,1 @@
+This version of the RI does not fully support the XML part of OSS Quality of Service API. The XML part of the RI is only included as example and may contain errors.

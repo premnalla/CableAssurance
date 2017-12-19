@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- Managed object classes not having any observable attributes
+     (empty string) will not appear when GetObservableObjectClasses() 
+     is called -->
+
+<Network>
+
+  <managedObject distinguishedName          = "System=GPRS,SGSN=1"
+                 managedObjectClass         = "SGSN"
+                 supportedGranularities     = "60"  
+                 observableObjectAttributes = "sgsnMmAttGprsAttach,INTEGER,CUMULATIVE_COUNTER, 
+							     sgsnMmSuccGprsAttach,INTEGER,CUMULATIVE_COUNTER">
+  </managedObject>
+
+
+  <managedObject distinguishedName          = "System=IPNetwork,VPN=1"
+                 managedObjectClass         = "VPN"
+                 supportedGranularities     = "60"  
+                 observableObjectAttributes = "ipDownstreamDelay,INTEGER,CUMULATIVE_COUNTER, 
+							     ipDownstreamPkts,INTEGER,CUMULATIVE_COUNTER,
+							     ipDownstreamLostPkts,INTEGER,CUMULATIVE_COUNTER,
+							     ipUpstreamDelay,INTEGER,CUMULATIVE_COUNTER,
+							     ipUpstreamPkts,INTEGER,CUMULATIVE_COUNTER,
+							     ipUpstreamLostPkts,INTEGER,CUMULATIVE_COUNTER">
+  </managedObject>
+
+
+  
+
+</Network>

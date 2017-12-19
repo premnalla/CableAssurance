@@ -1,0 +1,169 @@
+package com.motorola.fmri;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import javax.ejb.SessionBean;
+import javax.ejb.CreateException;
+import javax.ejb.SessionContext;
+
+import javax.oss.fm.monitor.AlarmValue;
+import javax.oss.ManagedEntityValue;
+
+/**
+ * AlarmValueIteratorSessionBean
+ *
+ * @author  Audrey Ward
+ * @version 1.0
+ *
+ * © Copyright 2001-2002, MOTOROLA INC. 
+ * All Rights Reserved
+ */
+public class AlarmValueIteratorSessionBean implements SessionBean {
+
+    private SessionContext ctx = null;
+   
+    private ArrayList alarmList = null;
+    
+    private boolean isLoggingEnabled = true;
+    transient private BeaTrace myLog = null;
+
+    /** Creates new AlarmValueIteratorSessionBean */
+public AlarmValueIteratorSessionBean() {}
+
+    //-----------------------------------------------------------------------------
+    //
+    // Container callbacks/methods
+    //
+    //-----------------------------------------------------------------------------
+    public void ejbCreate( ArrayList queryResults, boolean logging )
+    throws CreateException, RemoteException {
+    
+        // creates the log
+        myLog = Util.createLog("com.motorola.fmri");
+        
+        isLoggingEnabled = logging;
+        
+        if ( isLoggingEnabled ) {
+            myLog.log ("AlarmValueIteratorSessionBean: ejbCreate()");
+        }
+        alarmList = queryResults;
+
+        return;
+    }
+
+    public void ejbActivate() throws RemoteException
+    {
+        // creates the log
+        myLog = Util.createLog("com.motorola.fmri");
+        
+        if ( isLoggingEnabled ) {
+            myLog.log("AlarmValueIteratorSessionBean: ejbActivate()");
+        }
+        return;
+    }
+
+    public void ejbPassivate() throws RemoteException
+    {
+        if ( isLoggingEnabled ) {
+            myLog.log("AlarmValueIteratorBean: ejbPassivate()");
+        }
+        myLog = null;
+        return;
+    }
+
+    public void setSessionContext( SessionContext context )
+    throws javax.ejb.EJBException, java.rmi.RemoteException {
+        ctx = context;
+        return;
+    }
+
+    public void ejbRemove() throws RemoteException {
+        if ( isLoggingEnabled ) {
+            myLog.log("AlarmValueIteratorSessionBean: ejbRemove() ");
+        }
+        alarmList.clear();
+        return;
+    }
+     /**
+     * Returns a list of alarms.
+     *
+     * <p>
+     * The function takes one argument that specifies the most number of items to return. 
+     * The implementation can decide to return less or the requested number of items.
+     *
+     * <p>
+     * If zero is specified and empty list is returned.
+     *
+     * <p>
+     * If the iteration is empty or has reached then end, an empty array is returned.
+     *
+     * <p>
+     * If the argument is greater than the number of item in the iterator then all or 
+     * implementation decided number of items are returned.
+     *
+     * <p>
+     * If the agreement plus the cursor of the iterator is greater than the number of item 
+     * in the iterator, all or implementation decided number of items from the cursor to the 
+     * end is returned.
+     *
+     *@return AlarmValue[] List of alarms.
+     *@param howMany Maximum of items to return, the implementation can decide to return less.
+     *@exception java.rmi.RemoteException Is raised when a unexpected system exception occurrs.
+     */
+    public AlarmValue[] getNextAlarmValues(int howMany)
+        throws java.rmi.RemoteException {
+
+        if (isLoggingEnabled) {
+            Object[][] parms = {  { "howMany", new Integer (howMany) } };
+            myLog.logMethodEntry( "getNextAlarmValues", parms );                   
+        }
+
+        AlarmValue[] alarms = null;
+
+        int sz = howMany;
+        if ( alarmList.size() < howMany) {
+            sz = alarmList.size();
+        }
+
+        alarms = new AlarmValue[sz];
+        
+        // populate the array while removing alarm values from the array list
+        for (int x=0; x<sz; x++)
+        {
+            alarms[x] = (AlarmValue) alarmList.remove(0);
+        }
+        
+       if (isLoggingEnabled) {
+            Object[] parms2 = { "alarms", alarms };
+            myLog.logMethodExit( "getNextAlarmValues", parms2 );                   
+        } 
+        return alarms;
+    }
+    
+     /**
+     * An object created to contain the results of an operation so that 
+     * the reaults may be returned to the client at a rate determined by the 
+     * client.  The client receives a reference to the iterator as part of the 
+     * information returned by the query operation.  The client then invokes 
+     * operations on the iterator to receive batches of results in sizes 
+     * determined by the client.  
+     * The iterator keeps track of how far through the results the client has 
+     * progressed.
+     * 
+     * @param howMany Size of the result batches returned to the client.
+     * @return an array of managed entities with a size of at most howMany. The
+     * array is empty when no more results are available.
+     * @exception java.rmi.RemoteException
+     */
+    public ManagedEntityValue[] getNext( int howMany )
+    throws java.rmi.RemoteException {
+        return getNextAlarmValues( howMany );
+    }
+
+    public void remove() throws java.rmi.RemoteException, javax.ejb.RemoveException {
+        ejbRemove();
+        return;
+    }
+
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<ejb-jar>
+  <enterprise-beans>
+    <entity>
+      <description>
+      	Threshold monitor entity bean. Stores the threshold together with the assigned performance monitor.
+      </description>
+      <display-name>Threshold Monitor</display-name>
+      <ejb-name>ThresholdMonitorEntityBean</ejb-name>
+      <home>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityHome</home>
+      <remote>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntity</remote>
+      <local-home>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocalHome</local-home>
+      <local>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocal</local>
+      <ejb-class>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.String</prim-key-class>
+      <reentrant>False</reentrant>
+      <env-entry>
+        <env-entry-name>loggingEnabled</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>URL</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>iiop://localhost:3700</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>factoryClass</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>com.sun.jndi.cosnaming.CNCtxFactory</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>applicationDN</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM</env-entry-value>
+      </env-entry>
+      <resource-ref>
+	<res-ref-name>jdbc/ossjqostmri</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+	<res-sharing-scope>Shareable</res-sharing-scope>
+      </resource-ref>
+    </entity>
+    <message-driven>
+      <description>
+	The message driven bean is used for evaluating performance monitor 
+	events from the performance monitor. Incoming events are compared 
+	against threshold monitor entities. 
+      </description>
+      <display-name>ThresholdMonitorMessageBean</display-name>
+      <ejb-name>ThresholdMonitorMessageBean</ejb-name>
+      <ejb-class>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorMessageBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-selector>
+	OSS_EVENT_TYPE = 'javax.oss.pm.measurement.PerformanceDataEvent'
+      </message-selector>
+      <message-driven-destination>
+	<destination-type>javax.jms.Topic</destination-type>
+      </message-driven-destination>
+      <env-entry>
+	<env-entry-name>applicationDN</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+	<description>
+	  This is the reference to the alarm monitor session bean. 
+	</description>
+	<ejb-ref-name>ejb/AlarmMonitorHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>javax.oss.fm.monitor.JVTAlarmMonitorHome</home>
+	<remote>javax.oss.fm.monitor.JVTAlarmMonitorSession</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+	<description>
+	  This is the local reference to the threshold monitor entity bean.
+	</description>
+	<ejb-ref-name>ejb/ThresholdMonitorLocalHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocalHome</local-home>
+	<local>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocal</local>
+	<ejb-link>ThresholdMonitorEntityBean</ejb-link>
+      </ejb-local-ref>
+      <resource-ref>
+	<description>Reference to the connection factory used by the alarm monitor topic.</description>
+	<res-ref-name>jms/AlarmMonitorTopicConnectionFactory</res-ref-name>
+	<res-type>javax.jms.TopicConnectionFactory</res-type>
+	<res-auth>Container</res-auth>
+      </resource-ref>
+      <resource-env-ref>
+	<description>Reference to the back-end topic used by the alarm monitor.</description>
+	<resource-env-ref-name>jms/AlarmMonitorEventMessageTopic</resource-env-ref-name>
+	<resource-env-ref-type>javax.jms.Topic</resource-env-ref-type>
+      </resource-env-ref>
+    </message-driven>
+    <session>
+      <description>
+      	The threshold monitor bean. This is the public interface used by any 
+      	client to create, remove or search for threshold monitors.
+      </description>
+      <ejb-name>JVTThresholdMonitorSessionBean</ejb-name>
+      <home>javax.oss.pm.threshold.JVTThresholdMonitorHome</home>
+      <remote>javax.oss.pm.threshold.JVTThresholdMonitorSession</remote>
+      <ejb-class>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>Include application distinguished name in events.</description>
+	<env-entry-name>includeApplicationDNInEvent</env-entry-name>
+	<env-entry-type>java.lang.Boolean</env-entry-type>
+	<env-entry-value>true</env-entry-value>
+      </env-entry>
+      <env-entry>  
+	<description>The initial context factory classs property used in ApplicationContext.</description>
+	<env-entry-name>applicationContext/INITIAL_CONTEXT_FACTORY</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>com.sun.jndi.cosnaming.CNCtxFactory</env-entry-value>
+      </env-entry> 
+      <env-entry>
+	<description>The provider URL property used in ApplicationContext.</description>
+	<env-entry-name>applicationContext/PROVIDER_URL</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>iiop://localhost:3700</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>
+	  Context.SECURITY_PRINCIPAL property used in ApplicationContext.
+	  In a real world production this property would probably not be defined here.
+	</description>
+	<env-entry-name>applicationContext/systemProperties/java.naming.security.principal</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>guest</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>
+	  Context.SECURITY_CREDENTIALS property used in ApplicationContext.
+	  In a real world production this property would probably not be defined here.
+	</description>
+	<env-entry-name>applicationContext/systemProperties/java.naming.security.credentials</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>guest</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>Application distinguished name.</description>
+	<env-entry-name>applicationDistinguishedName</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM/Comp/JVTHome</env-entry-value>
+      </env-entry>
+
+      <env-entry>
+        <env-entry-name>loggingEnabled</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>URL</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>iiop://localhost:3700</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>factoryClass</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>com.sun.jndi.cosnaming.CNCtxFactory</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>applicationDN</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+	<description>
+	  This is the reference to the performance monitor session bean.      		
+      	</description>
+	<ejb-ref-name>ejb/PerformanceMonitorHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>javax.oss.pm.performance.JVTPerformanceMonitorHome</home>
+	<remote>javax.oss.pm.performance.JVTPerformanceMonitorSession</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>
+	  This is the reference to the alarm monitor session bean.      		
+      	</description>
+	<ejb-ref-name>ejb/AlarmMonitorHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>javax.oss.fm.monitor.JVTAlarmMonitorHome</home>
+	<remote>javax.oss.fm.monitor.JVTAlarmMonitorSession</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+	<description>
+	  This is the local reference to the threshold monitor entity bean.
+      	</description>
+	<ejb-ref-name>ejb/ThresholdMonitorLocalHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocalHome</local-home>
+	<local>ossj.qos.ri.pm.threshold.adapter.ThresholdMonitorEntityLocal</local>
+	<ejb-link>ThresholdMonitorEntityBean</ejb-link>
+      </ejb-local-ref>
+    </session>
+    <message-driven>
+      <ejb-name>XmlTMRIMessageDrivenBean</ejb-name>
+      <ejb-class>ossj.qos.mdbimpl.tm.TmRequestResponseMDB</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+	<destination-type>javax.jms.Queue</destination-type>
+      </message-driven-destination>
+    </message-driven>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+	<ejb-name>JVTThresholdMonitorSessionBean</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+	<ejb-name>ThresholdMonitorEntityBean</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+	<ejb-name>ThresholdMonitorMessageBean</ejb-name>
+	<method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+	<ejb-name>XmlTMRIMessageDrivenBean</ejb-name>
+	<method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

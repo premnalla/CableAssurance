@@ -1,0 +1,98 @@
+<!--
+	* File : placeFinder.htm
+	* This is an ArcWeb Services Sample file for PlaceFinder ArcWeb Service.
+	*/
+-->
+<html>
+    <head><title>Place Finder - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+        <font class='boldfont' ><center>Place Finder - ArcWeb Services Sample</font><br><br>
+        <!-- ============= Input Form =============   -->
+        <form action="jsp/placeFinderRes.jsp" name="mForm" target="arcWebResultWin">
+        <table width='550' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+            <tr><td>
+            <table border=0 cellpadding='0' cellspacing='0'  width='548'  bgcolor='#ddebf1'  class="textfont">
+                <tr><td height=28 colspan='3' align=center bgcolor="#4271ad" class='boldfont'><font  color=ffffff>Input Information </font></td></tr>
+                <tr><td colspan='3'>&nbsp;</td></tr>
+                <tr>
+                    <td width='5%'>&nbsp;</td>
+                    <td width='25%' >&nbsp;Place Name : </td>
+                    <td width='70' align=left><input type=text name=place  value="Redlands"></td></tr>
+                <tr><td colspan='3'>&nbsp; </b></td></tr>
+                <tr><td colspan='3'>&nbsp; </b></td></tr>
+                <tr><td colspan='3'>&nbsp; <B> Advanced Options : </b></td></tr>
+                <tr><td colspan='3'>&nbsp; </b></td></tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;Data Source : </td>
+                    <td>&nbsp;<select name=datasource>
+                                <option value='ESRI.Gazetteer.World' selected>ESRI.Gazetteer.World
+                              </select></td></tr>
+                <tr>
+                    <td><input type=checkbox name=usefilterType value=true></td>
+                    <!-- For more information, look into the document for
+                        Name-Value pair for filter types -->
+                    <td>&nbsp;Filter Type:</td>
+                    <td>&nbsp;<select name=filterType>
+                                <option value='' selected>None
+                                <option value='A'>Countries
+                                <option value='B'>Large Non-U.S. Cities
+                                <option value='C'>Large U.S. Cities
+                                <option value='D'>U.S. States"
+                                <option value='E'>Non-U.S. Administrative Areas
+                                <option value='F'>Medium U.S. Cities
+                                <option value='G'>Small U.S. Cities
+                                <option value='H'>U.S. Counties/Parishes
+                                <option value='I'>Medium Non-U.S. Cities
+                                <option value='J'>Small Non-U.S. Cities
+                                <option value='K'>U.S. Points of Interest
+                                <option value='M'>U.S. ZIP Codes
+                                <option value='O'>Land Features
+                                 <option value='P'>Water Features
+                                <option value='Q'>Ocean Features
+                                <option value='R'>Coastal Features
+                                <option value='S'>Islands
+                                <option value='T'>Airports
+                              </select></td></td></tr>
+                <tr>
+                    <td><input type=checkbox name=useRecordCount value=true></td>
+                    <td>&nbsp;Max Records : </td>
+                    <td>&nbsp;<input type=text name=count value=10></td></tr>
+                <tr>
+                    <td><input type=checkbox name=useEnvelopeFilter value=true></td>
+                    <td>&nbsp; Envelope Search:</td>
+                    <td>
+                    <table border=0  class="textfont">
+                        <tr><td></td>
+                            <td align=middle>Max Y : <input  size=5 name='maxY' value="90"></td>
+                            <td></td></tr>
+                        <tr>
+                            <td colspan='3'></td></tr>
+                        <tr>
+                            <td align=middle>Min X : <input size=5 value=-180 name=minX></td>
+                            <td align=middle></td>
+                            <td align=middle>Max X : <input size=5 value=180 name=maxX></td></tr>
+                        <tr>
+                            <td></td>
+                            <td align=middle>Min Y : <input size=5 value=-90 name=minY></td>
+                            <td></td></tr>
+                    </table>
+                    </td></tr>
+                    <tr><td colspan='3'>&nbsp; </b></td></tr>
+                    <tr><td align="center" colspan='3'><input  type=submit name="FindPlace" value="   Find Place   "></td></tr>
+                    <tr><td colspan='3'>&nbsp;<input type="hidden" name="action" value="placefinder"></td></tr>
+        </table>
+    </td></tr>
+</table>
+</form>
+    <br><center><a href="index.htm" class=textfont>Back to Index</a></center>
+    </body>
+</html>

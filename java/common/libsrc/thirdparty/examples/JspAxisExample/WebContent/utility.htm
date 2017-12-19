@@ -1,0 +1,99 @@
+<!--
+	* File : utility.htm
+	* This is an ArcWeb Services Sample file for Utility ArcWeb Service.
+	*
+-->
+<html>
+    <head><title>Utility - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+    <font class=boldfont>Utility - ArcWeb Services Sample </font><br><br>
+
+    <!-- ============================ Input Form ============================  -->
+    <form action="jsp/utilityRes.jsp" name="mForm" target="arcWebResultWin">
+    <table width='500' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+        <tr><td width='100%'>
+        <table border=0 cellpadding='0' cellspacing='0' width='498' bgcolor='#ddebf1'>
+            <tr bgcolor="#4271ad" ><td height=28  align=center class=boldfont ><font color=ffffff>Input Information<br></td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td width='100%'>
+                <table border=0 cellpadding='3' cellspacing='2'  width='100%'>
+                    <tr><td width='45%' class='boldfont'><input type=radio name="method" value='point' checked>  Point :</td>
+                        <td width='65%' class='boldfont'> <input type=radio name="method" value='envelope'>  Geographic Area:</td></tr>
+                    <tr><td><table border=0 cellpadding='0' cellspacing='0'  width='100%' class=textfont>
+                                <tr><td align=right class=textfont> X : </td>
+                                    <td><input type=text name=x size=15 value='-117.181667'>&nbsp;</td></tr>
+                                <tr><td align=right class=textfont> Y : </td>
+                                    <td><input type=text name=y size=15 value='34.055556'> &nbsp;</td></tr>
+                            </table></td>
+                        <td>
+                            <table border=0 cellpadding='0' cellspacing='0'  width='100%'>
+                                <tr><td>&nbsp;</td>
+                                    <td align=right class=textfont>Max Y : </td>
+                                    <td><input size=5 name='maxY' value="34.13"></td>
+                                    <td>&nbsp;</td></tr>
+                                <tr><td align=right class=textfont>Min X : </td>
+                                    <td><input size=5 value=-117.25 name=minX></td>
+                                    <td align=right class=textfont>Max X : </td>
+                                    <td><input size=5 value=-117.10 name=maxX></td></tr>
+                                <tr><td>&nbsp;</td>
+                                    <td align=right class=textfont>Min Y : </td>
+                                    <td><input size=5 value=33.98 name=minY></td>
+                                    <td>&nbsp;</td></tr>
+                            </table>
+                        </td></tr>
+                </table>
+            </td></tr>
+            <tr><td><hr></td></tr>
+            <tr><td width='100%'>
+                 <table border='0' cellpadding='2' cellspacing='2' width='100%'>
+                    <tr><td colspan='3' class='boldfont'> From : </td></tr>
+                    <tr><td class=textfont>ID or String  <font color=red> *  <font></td>
+                        <td> : </td>
+                        <td ><input type=text name=projectFrom value="4326" size='30'><FONT class='italicfont'>(eg. 'Geographic') </font></td></tr>
+                    <tr><td colspan='3' class='boldfont'>Project to :</td></tr>
+                    <tr><td class=textfont> ID </td>
+                        <td> : </td>
+                        <td ><select name=projectTo>
+                            <option value=4326 >4326 : Geographic (unprojected)
+                            <option value=54004>54004 : Mercator World
+                            <option value=53003>53003 : Miller World
+                            <option value=54030 selected >54030 : Robinson World
+                            <option value=102008>102008 : Albers North America
+                            <option value=102010>102010 : Equidistant Conic North America
+                            <option value=102009>102009 : Lambert North America
+                            <option value=102013>102013 : Albers Europe
+                            <option value=102031>102031 : Equidistant Conic for Europe
+                            <option value=102014>102014 : Lambert Europe
+                    <select>
+                    </td></tr>
+                    <tr><td colspan='3'>&nbsp; <input type="hidden" name="action" value="utility"></td></tr>
+                    <tr><td colspan='3' align=center><input  type=submit name="" value="   Project   "></td></tr>
+                </table></form>
+            </td></tr>
+            <tr><td>
+                <table width=600 boder=1>
+                    <tr><td>
+                        <p class='boldfont'><font color=red> *  </font>Example : Robinson World
+                        <p class='smallfont'>As id : <i>54030 </i><br>
+                        As string  : <i> PROJCS["World_Robinson",GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984", SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0], UNIT["Degree",0.017453292519943295]],PROJECTION["Robinson"], PARAMETER["False_Easting",0], PARAMETER["False_Northing",0], PARAMETER["Central_Meridian",0],UNIT["Meter",1]] <i>
+                    </td></tr>
+                </table>
+            </td></tr>
+            <tr><td>&nbsp;</td></tr>
+            </td></tr>
+            </table>
+            </td></tr>
+        </table>
+        </td></tr>
+    </table>
+<br><center><a href="index.htm" class=textfont>Back to Index</a></center>
+</body>
+</html>

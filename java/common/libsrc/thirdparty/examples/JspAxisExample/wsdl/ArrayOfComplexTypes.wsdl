@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<definitions name="GazetteerLookUp"
+	targetNamespace="http://www.scit.wlv.ac.uk/~jphb"
+	xmlns:tns="http://www.scit.wlv.ac.uk/~jphb"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+	<types>
+		<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.scit.wlv.ac.uk/~jphb">
+
+			<import
+				namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+
+			<xsd:complexType name="value">
+				<xsd:all>
+					<xsd:element name="feature" type="xsd:string" />
+					<xsd:element name="county" type="xsd:string" />
+					<xsd:element name="latitude" type="xsd:string" />
+					<xsd:element name="longitude" type="xsd:string" />
+					<xsd:element name="easting" type="xsd:string" />
+					<xsd:element name="northing" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="databaseinfo">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:value []" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+
+		</xsd:schema>
+	</types>
+
+	<message name="inforequest">
+		<part name="infobyname" type="xsd:string" />
+	</message>
+
+	<message name="inforesponse">
+		<part name="data" type="tns:databaseinfo" />
+	</message>
+
+	<portType name="infolookup">
+		<operation name="infobyname">
+			<input message="tns:inforequest" />
+			<output message="tns:inforesponse" />
+		</operation>
+	</portType>
+
+	<binding name="Gazetteer" type="tns:infolookup">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="infobyname">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://www.scit.wlv.ac.uk/~jphb"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://www.scit.wlv.ac.uk/~jphb"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<service name="Gazlookup">
+		<port name="infolookupport" binding="tns:Gazetteer">
+			<soap:address
+				location="http://info.scit.wlv.ac.uk/~jphb/cp2101/soap/server/gazserver.php" />
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="GetQuote" default="GetQuote" basedir=".">
+
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+	<property name="generated.dir" value="./generated/src" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="wsdl2java"
+		classname="org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask"
+		loaderref="axis">
+		<classpath refid="axis.classpath" />
+	</taskdef>
+
+	<target name="GetQuote">
+
+		<echo>${axis.dist.dir}</echo>
+
+		<mkdir dir="${generated.dir}" />
+
+		<delete dir="./generated/samples/addr"></delete>
+
+		<wsdl2java url="./formatting/Address/AddressBook.wsdl"
+			output="${generated.dir}" deployscope="session" serverSide="yes"
+			skeletonDeploy="yes" noimports="no" verbose="no"
+			typeMappingVersion="1.1" testcase="yes">
+			<mapping namespace="urn:AddressFetcher2"
+				package="samples.addr" />
+		</wsdl2java>
+
+	</target>
+
+</project>

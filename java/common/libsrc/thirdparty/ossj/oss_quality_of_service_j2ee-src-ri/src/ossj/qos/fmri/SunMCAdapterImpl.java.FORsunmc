@@ -1,0 +1,465 @@
+package com.motorola.fmri;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.RMISecurityManager;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
+import java.io.*;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import javax.naming.*;
+import java.util.Hashtable;
+import java.util.Properties;
+import javax.jms.*;
+import javax.ejb.*;
+import javax.oss.*;
+
+import javax.naming.*;
+import javax.jms.*;
+import java.rmi.RemoteException;
+import javax.ejb.CreateException;
+import javax.ejb.RemoveException;
+import javax.oss.fm.monitor.*;
+import javax.oss.*;
+//for SunMC
+import com.sun.symon.base.client.*;
+import com.sun.symon.base.client.alarm.*;
+
+
+public class SunMCAdapterImpl extends UnicastRemoteObject 
+	implements SunMCAdapter , SMAlarmObjectResponse  {
+
+    private static Properties properties = null;
+    private InitialContext namingContext = null;
+
+    public  boolean done = false;
+
+    private AMEventPublisher eventPublisher = null;
+    private AlarmValue alarmBase = null;
+
+    private BeaTrace myLog = null;
+
+    SMLogin loginObj ;
+
+        short [] short_severitys = {
+                PerceivedSeverity.CRITICAL,
+                PerceivedSeverity.MINOR,
+                PerceivedSeverity.WARNING,
+                PerceivedSeverity.MAJOR,
+  //             PerceivedSeverity.INDETERMINATE,
+                PerceivedSeverity.CRITICAL,
+                PerceivedSeverity.WARNING,
+                PerceivedSeverity.WARNING
+  //              PerceivedSeverity.CLEARED
+        };
+        String [] str_severitys = { "ERR", "WRN", "INF", "IRR", "DWN", "DIS", "OFF" };
+        HashMap serverityMap = null;
+
+    public SunMCAdapterImpl(String propertyFile) throws java.rmi.RemoteException,
+    javax.naming.NamingException, javax.jms.JMSException {
+        super ();
+        // Read the propertyfile
+        initProperties(propertyFile);
+      
+        System.out.println("before init");
+        init(properties.getProperty("FM_PROVIDER_URL") );
+        System.out.println("after init");
+
+	try{
+        initSunMC( properties.getProperty("SUNMC_SERVER_NAME"),
+		new Integer(properties.getProperty("SUNMC_SERVER_PORT")).intValue(),
+		properties.getProperty("SUNMC_USERNAME"),
+		properties.getProperty("SUNMC_PASSWORD"),
+		properties.getProperty("SUNMC_PUBLICKEY"));
+	}
+	catch( Exception e){
+		System.out.println( "unable to initialize SunMC" );
+	}
+    }
+
+
+    private void initProperties(String propertyFile) {
+        System.out.println("->SunMCAdapterImpl.initProperties(String propertyFile)");
+        try {
+            File propertiesFile = new File(propertyFile);
+
+            properties = new Properties();
+            properties.load( new FileInputStream(propertiesFile) );
+        }
+        catch ( Exception e ) {
+            System.out.println("Error processing " + propertyFile );
+            System.out.println("Error processing " + e );
+	    e.printStackTrace();
+            System.exit(1);
+        }
+        System.out.println("<-SunMCAdapterImpl.initProperties(String propertyFile)");
+    }
+
+    public void init(String url) {
+
+        createLog( "com.motorola.fmri");
+
+        serverityMap = new HashMap();
+        for(int i=0; i<7;i++){
+                serverityMap.put( str_severitys[i], (new Integer(short_severitys[i])));
+        }
+        System.out.println("one");
+        try {
+            namingContext = getInitialContext(url);
+        }
+        catch (NamingException nex) {
+            myLog.logException("SunMCAdapterImpl: init() ", nex );
+            System.exit(1);
+        }
+        System.out.println("two");
+
+        try {
+            eventPublisher = new AMEventPublisher();
+            System.out.println("three");
+            /*eventPublisher.init( namingContext, SessionResourceConstants.BEAM_TOPIC,
+                                 "weblogic.jms.ConnectionFactory" );*/
+           
+            eventPublisher.init( namingContext, SessionResourceConstants.BEAM_TOPIC,
+                                 "jms/sampleTCF" );
+           System.out.println("four");
+        }
+        catch( Exception x ) {
+            System.out.println("five");
+            System.out.println(x);
+            myLog.logException(" SunMCAdapterImpl: init() - creating eventPublisher ", x );
+            eventPublisher = null;
+        }
+
+        myLog.log("SunMCAdapterImpl: init() -  initialization complete.");
+
+        return;
+    }
+
+    public void cleanup() {
+        eventPublisher.close();
+
+        myLog.log("SunMCAdapterImpl: cleanup() -  complete");
+        return;
+    }
+
+    public void initSunMC( String server_name, int server_port, 
+        String user, String password , String publicKey ) throws Exception
+   {
+            System.out.println(" init SunMC  ");
+        try{
+            loginObj = new SMLogin();
+            System.out.println("Before Connection Establishment");
+            loginObj.connect(server_name, server_port, user, password, publicKey);
+            System.out.println("Successfully Connected and Authenticated");
+            SMRawDataRequest req = loginObj.getRawDataRequest();
+
+            SMAlarmObjectRequest alreq = new SMAlarmObjectRequest(req, null);
+//Asyn
+            alreq.getAlarms("1", null, null,
+                "{ERR} {WRN} {INF} {IRR} {DWN} {DIS} {OFF} ", "{O} {C} {F} ",
+                null, null, null, null, this, new Object() );
+
+        }
+        catch (Exception e) {
+            System.out.println("failed to connect to sunmc server ");
+            System.out.println(e.getMessage());
+        }
+
+   }
+    public void setAlarmResponse(SMRequestStatus status, Object identifier) {}
+
+    public void getAlarmResponse(SMRequestStatus status, Vector data,
+        Object identifier, SMAlarmIteratorAsync iter) {
+
+        if (data == null)
+            return;
+
+        SMAlarmObjectData aldata=null;
+
+        System.out.println("Callback:size " + data.size());
+
+        for(int i = 0; i < data.size(); i++) {
+            aldata = (SMAlarmObjectData)data.elementAt(i);
+                    System.out.println("Alarm Id         :   " +
+                        aldata.getAlarmId() +  " State : "+  aldata.getAlarmState());
+                    System.out.println("Alarm text       :   " +
+                        aldata.getAlarmShortText());
+            initializeAlarmBase(aldata);
+        }
+
+        try {
+            if (data.size() > 0)
+                iter.getNextAlarms();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void publishAlarmEvent( String eventType, AlarmValue alarm ) throws JMSException {
+
+        // make the NotifyNewAlarmEvent or NotifyClearedAlarmEvent
+        Event event =  EventFactory.makeEvent( eventType, alarm );
+
+        // Publish the event
+        HashMap evProperties = new HashMap();
+        EventPropertyDescriptor epd = EventFactory.getPropertyDescriptor(  eventType );
+        eventPublisher.publish( event, evProperties, (MessageBuilder)epd);
+        return;
+    }
+
+
+    private short validateSeverity( String severityString )
+    throws java.lang.IllegalArgumentException {
+
+        short severity = 1;
+        try {
+                severity=(( Integer ) (serverityMap.get(severityString))).shortValue();
+            if ( severity > 6 || severity < 0 ) {
+                throw new java.lang.IllegalArgumentException( "Severity must be a value from 1- 6" );
+            }
+        }
+        catch ( NumberFormatException e ) {
+            throw new java.lang.IllegalArgumentException( "Severity must be a value from 1-6" )
+;
+        }
+        catch ( Exception e ) {
+                System.out.println("serverity is not vaild");
+        }
+        return severity;
+    }
+
+    private void initializeAlarmBase( SMAlarmObjectData aldata )
+    {
+        alarmBase = new AlarmValueImpl();
+
+        alarmBase.setManagedObjectClass( aldata.getModule() );
+	alarmBase.setProposedRepairActions(aldata.getHost());
+        alarmBase.setAlarmType( AlarmType.QUALITY_OF_SERVICE_ALARM );
+        alarmBase.setProbableCause( ProbableCause.CALL_SETUP_FAILURE );
+        alarmBase.setAdditionalText(aldata.getAlarmShortText());
+
+        // build attribute change values..
+        int numChAttrs = 1;
+        ArrayList attrChanValList = new ArrayList(numChAttrs);
+        for ( int i = 0; i < numChAttrs; i++ ) {
+            AttributeValueChange attrChanVal = alarmBase.makeAttributeValueChange();
+            //attrChanVal.setAttributeName(aldata.getAttribute());
+            attrChanVal.setAttributeName(aldata.getProperty());
+            attrChanVal.setAttributeType("Integer");
+         //   attrChanVal.setOldValue( new Integer( i + 2 ) );
+          //  attrChanVal.setNewValue( new Integer( i + 3 ) );
+            attrChanValList.add(attrChanVal);
+        }
+        // add to the alarm...
+        AttributeValueChange[] attrChanValArray =
+                (AttributeValueChange[]) attrChanValList.toArray(new AttributeValueChange[0]);
+        alarmBase.setAttributeChanges(attrChanValArray);
+
+            short severity = validateSeverity( aldata.getSeverity() );
+            alarmBase.setPerceivedSeverity( severity );
+         
+            alarmBase.setManagedObjectClass( "SunMC." + aldata.getModule());
+            alarmBase.setManagedObjectInstance( 
+		"AgentName=" + aldata.getHost()
+		+"/AgentPort=" + aldata.getAgentPort()
+		+"/Module=" + aldata.getModule() 
+		+"/ModuleInstance=" + aldata.getModuleInstance()
+		+"/ManagedObject=" + aldata.getManagedObject()
+		+ "/Property=" + aldata.getProperty() 
+		+ "/PropertyInstance=" + aldata.getPropertyInstance() 
+		);
+
+            // Generate a simulated MOI unique key for the new alarm.
+            AlarmKey key = alarmBase.makeAlarmKey();
+            key.setAlarmPrimaryKey( "SunMC/" + aldata.getAlarmId() );
+            //key.setAlarmPrimaryKey( aldata.getAlarmId() );
+            alarmBase.setAlarmKey( key );
+
+            // Generate a simulated MOI notification id
+            alarmBase.setNotificationId( "SunMC:" + aldata.getAlarmId() );
+
+            alarmBase.setAlarmRaisedTime(new Date ( aldata.getOpenTimestamp()*1000) );
+            alarmBase.setAlarmChangedTime(new Date ( aldata.getUpdateTimestamp()*1000));
+
+            if( aldata.getAckTimestamp() != 0){
+               alarmBase.setAlarmAckState(AlarmAckState.UNACKNOWLEDGED);
+                alarmBase.setAckTime(new Date (aldata.getAckTimestamp()*1000));
+               alarmBase.setAckUserId(aldata.getAckOperator());
+                alarmBase.setAlarmAckState(AlarmAckState.ACKNOWLEDGED);
+            }
+	    else
+               alarmBase.setAlarmAckState(AlarmAckState.UNACKNOWLEDGED);
+
+        try{
+            if ( (aldata.getAlarmState().compareTo( "C") ) == 0  ) {
+		alarmBase.setPerceivedSeverity(PerceivedSeverity.CLEARED);
+                alarmBase.setAlarmClearedTime( new Date ( aldata.getCloseTimestamp()*1000) );
+                publishAlarmEvent( NotifyClearedAlarmEventPropertyDescriptor.EVENT_TYPE_VALUE, alarmBase );
+                System.out.println( "Published a NotifyClearedAlarmEvent: " );
+            }
+            else {
+                publishAlarmEvent( NotifyNewAlarmEventPropertyDescriptor.EVENT_TYPE_VALUE, alarmBase );
+                System.out.println( "Published a NotifyNewAlarmEvent: " );
+            }
+
+        }
+        catch(javax.jms.JMSException e){
+                System.out.println( "expection Published a NotifyNewAlarmEvent " );
+        }
+
+        return;
+    }
+
+    private InitialContext getInitialContext(String url)
+    throws NamingException
+    {
+        InitialContext ic = null;
+
+        try {
+	    String factory_str = properties.getProperty("JNDI_FACTORY");
+            Hashtable env = new Hashtable();
+            env.put(Context.INITIAL_CONTEXT_FACTORY, factory_str );
+            env.put(Context.PROVIDER_URL, url);
+            env.put("weblogic.jndi.createIntermediateContexts", "true");
+            //ic = new InitialContext(env);
+            ic = new InitialContext();
+        }
+        catch (NamingException ne) {
+            myLog.logException("SunMCAdapterImpl: getInitialContext() ", ne );
+            myLog.log("Please make sure that the server is running.");
+            throw ne;
+        }
+        return ic;
+    }
+
+     private void createLog(String subSystem) {
+
+        myLog = null;
+
+        // First, try to use WLS 6.1 facility
+        try {
+            Class wls6Log =
+                Class.forName("weblogic.logging.NonCatalogLogger");
+                // if there is no exception thrown, this bean is running under
+                //WLS6, so that logging facility can be used
+                myLog = (BeaTrace)Class.forName("com.motorola.fmri.BeaTrace60").newInstance();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe.toString());
+        } catch (InstantiationException ie) {
+            System.out.println(ie.toString());
+        } catch (IllegalAccessException iae) {
+            System.out.println(iae.toString());
+        }
+        if (myLog == null) {
+            // if this is not WLS6.1, simulate logging
+            myLog = new BeaTraceSimulator();
+        }
+        myLog.setSubSystem(subSystem);
+
+        return;
+    }
+
+//mothods for rmi 
+  public AlarmValue[] queryAlarmList(QueryValue[] query)
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		AlarmValue av= new AlarmValueImpl();
+		AlarmValue[]  avlist= new AlarmValue[1];
+		avlist[0] =  av  ;
+		return avlist;
+	}
+
+  public  AlarmCountsValue queryAlarmCounts(QueryValue[] query)
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		return (new AlarmCountsValueImpl() );
+	}
+
+  public   AlarmKeyResult AcknowledgeAlarms(String NotId, String ackUserId, String ackSystemId)
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		return (new AlarmKeyResultImpl());
+	}
+
+  public   AlarmKeyResult UnacknowledgeAlarms(String NotId, String ackUserId, String ackSystemId)
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		return (new AlarmKeyResultImpl () );
+	}
+
+  public   AlarmKeyResult CommentAlarms(String NotId, String ackUserId, String commentText, String ackSystemId)
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		return (new AlarmKeyResultImpl() );
+	}
+
+//getVersion is only for test rmi 
+    public String getVersion()
+        throws javax.oss.IllegalArgumentException, java.rmi.RemoteException
+	{
+		String version = new String("Sunmc Adapter version 0.1 Apr.10 2003");
+		return version;
+	}
+
+    public static void main(String args[]) {
+
+        java.rmi.registry.Registry r = null;
+
+        System.out.println("->SunMCAdapterImpl.main(String args[])");
+
+        if (args.length != 1) {
+            System.out.println("Proper usage: java SimulatorImpl propertyfile");
+            System.out.println("Wrong number of arguments supplied when trying to start EIS Simlator!");
+            System.exit(1);
+        }
+
+
+        System.out.println("Set security manager to RMISecurityManager()");
+        System.setSecurityManager(new RMISecurityManager());
+
+        try {
+            SunMCAdapterImpl myEis = new SunMCAdapterImpl(args[0]);
+
+            System.out.println("Will bind simulator to RMI registry now.");
+            try {
+                java.rmi.Naming.rebind("//localhost/SunMCAdapter", myEis);
+                System.out.println("Simulator bound in RMI registry and ready!");
+
+            } catch (RemoteException e) {
+
+                r = java.rmi.registry.LocateRegistry.createRegistry(1099);
+                try {
+                    java.rmi.Naming.rebind("//localhost/SunMCAdapter", myEis);
+                    System.out.println("Simulator bound in RMI registry and ready!");
+
+                } catch (Exception x) {
+                    System.out.println("Was not able to register the SunMC adapter in the RMI Registry. Check if the RMI registry is started!");
+                    System.out.println(e.toString());
+                    System.exit(1);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Was not able to register the SunMC adapter in the RMI Registry. Check if the RMI registry is started!");
+                System.out.println(e.toString());
+                System.exit(1);
+            }
+		
+	 //  myEis.getSunMCAlarms(); 
+
+	   for(;;){
+		Thread.sleep(1000);
+	   }
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+            System.exit(1);
+        }
+        System.out.println("<-SunMCAdapterImpl.main(String args[])");
+    }
+
+}
+
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PriceListService" default="PriceListService" basedir=".">
+
+	<property environment="env" />
+
+	<property name="wsdl.uri" value="./wsdl/PriceListService.wsdl" />
+	<property name="service.target" value="/TEMP/generated/service" />
+	<property name="client.target" value="/TEMP/generated/client" />
+
+	<property name="HelloText" value="Hello" />
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="PriceListService">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${service.target}" packageName="com.nds.www.pricelist.service.adb" language="java" databindingName="adb" synconly="true" serverside="true" serverSideInterface="true" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" generateservicexml="true" />
+
+	</target>
+
+	<target name="PriceListClient">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${client.target}" packageName="com.nds.www.pricelist.client.adb" databindingName="adb" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" language="java" synconly="true" />
+
+	</target>
+
+
+</project>

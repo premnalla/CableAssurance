@@ -1,0 +1,27 @@
+package com.telegea.oss.mdbimpl.fm;
+
+
+/**
+ * Title:        OSS\J XML RI Telegea
+ * Description:  XML based Reference Implementation for QoS API
+ * Copyright:    Copyright (c) 2002
+ * Company:      Telegea Inc.
+ * @author Vijay Sharma
+ * @version 1.0
+ */
+
+public class StartWeblogicServer {
+
+  public StartWeblogicServer() {
+  }
+
+  public static void main(String [] args){
+      //VP
+	  //System.out.println("Calling Server");
+      //VP
+	  //System.out.println("User Dir Path = |" + System.getProperty("user.dir") + "|");
+      weblogic.Server.main(args);
+  }
+
+}
+

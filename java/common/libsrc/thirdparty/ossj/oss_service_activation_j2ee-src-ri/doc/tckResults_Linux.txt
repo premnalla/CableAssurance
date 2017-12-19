@@ -1,0 +1,567 @@
+JSR-000089, OSS Service Activation API
+            Technology Compatibility Kit 1.0.4 Test Report
+Creation time is: Fri Jan 28 14:20:42 CET 2005
+==========================================================
+==========================================================
+
+Results: Event tests
+==========================================================
+[Fri Jan 28 13:45:07 CET 2005] passed: Endless Event test 0
+[Fri Jan 28 13:45:13 CET 2005] passed: Endless Event test 1
+[Fri Jan 28 13:45:40 CET 2005] passed: Endless Event test 2
+[Fri Jan 28 13:45:48 CET 2005] passed: Endless Event test 3
+[Fri Jan 28 13:46:15 CET 2005] passed: Endless Event test 4
+[Fri Jan 28 13:46:41 CET 2005] passed: Endless Event test 5
+[Fri Jan 28 13:46:47 CET 2005] passed: Endless Event test 6
+[Fri Jan 28 13:46:54 CET 2005] passed: Endless Event test 7
+[Fri Jan 28 13:47:11 CET 2005] passed: Endless Event test 8
+[Fri Jan 28 13:47:18 CET 2005] passed: Endless Event test 9
+[Fri Jan 28 13:47:30 CET 2005] passed: Endless Event test 10
+[Fri Jan 28 13:47:41 CET 2005] passed: Endless Event test 11
+[Fri Jan 28 13:47:53 CET 2005] passed: Endless Event test 12
+[Fri Jan 28 13:47:58 CET 2005] passed: Endless Event test 13
+[Fri Jan 28 13:48:09 CET 2005] passed: Endless Event test 14
+[Fri Jan 28 13:48:15 CET 2005] passed: Endless Event test 15
+[Fri Jan 28 13:48:20 CET 2005] passed: Endless Event test 16
+[Fri Jan 28 13:48:50 CET 2005] passed: Endless Event test 17
+[Fri Jan 28 13:49:07 CET 2005] passed: Endless Event test 18
+[Fri Jan 28 13:49:18 CET 2005] passed: Endless Event test 19
+[Fri Jan 28 13:49:34 CET 2005] passed: Endless Event test 20
+[Fri Jan 28 13:49:41 CET 2005] passed: Endless Event test 21
+[Fri Jan 28 13:49:46 CET 2005] passed: Endless Event test 22
+[Fri Jan 28 13:50:08 CET 2005] passed: Endless Event test 23
+[Fri Jan 28 13:50:30 CET 2005] passed: Endless Event test 24
+[Fri Jan 28 13:50:36 CET 2005] passed: Endless Event test 25
+[Fri Jan 28 13:50:42 CET 2005] passed: Endless Event test 26
+[Fri Jan 28 13:50:53 CET 2005] passed: Endless Event test 27
+[Fri Jan 28 13:50:59 CET 2005] passed: Endless Event test 28
+[Fri Jan 28 13:51:11 CET 2005] passed: Endless Event test 29
+[Fri Jan 28 13:51:16 CET 2005] passed: Endless Event test 30
+[Fri Jan 28 13:51:28 CET 2005] passed: Endless Event test 31
+[Fri Jan 28 13:51:34 CET 2005] passed: Endless Event test 32
+[Fri Jan 28 13:51:50 CET 2005] passed: Endless Event test 33
+[Fri Jan 28 13:52:02 CET 2005] passed: Endless Event test 34
+[Fri Jan 28 13:52:07 CET 2005] passed: Endless Event test 35
+[Fri Jan 28 13:52:13 CET 2005] passed: Endless Event test 36
+[Fri Jan 28 13:52:25 CET 2005] passed: Endless Event test 37
+[Fri Jan 28 13:52:41 CET 2005] passed: Endless Event test 38
+[Fri Jan 28 13:52:47 CET 2005] passed: Endless Event test 39
+[Fri Jan 28 13:53:08 CET 2005] passed: Endless Event test 40
+[Fri Jan 28 13:53:15 CET 2005] passed: Endless Event test 41
+[Fri Jan 28 13:53:21 CET 2005] passed: Endless Event test 42
+[Fri Jan 28 13:53:26 CET 2005] passed: Endless Event test 43
+[Fri Jan 28 13:53:33 CET 2005] passed: Endless Event test 44
+[Fri Jan 28 13:53:58 CET 2005] passed: Endless Event test 45
+[Fri Jan 28 13:54:05 CET 2005] passed: Endless Event test 46
+[Fri Jan 28 13:54:11 CET 2005] passed: Endless Event test 47
+[Fri Jan 28 13:54:18 CET 2005] passed: Endless Event test 48
+[Fri Jan 28 13:54:24 CET 2005] passed: Endless Event test 49
+[Fri Jan 28 13:54:40 CET 2005] passed: Endless Event test 50
+[Fri Jan 28 13:54:46 CET 2005] passed: Endless Event test 51
+[Fri Jan 28 13:54:46 CET 2005] passed: Endless Event test 52
+[Fri Jan 28 13:54:47 CET 2005] passed: Endless Event test 53
+[Fri Jan 28 13:54:47 CET 2005] passed: Endless Event test 54
+[Fri Jan 28 13:54:49 CET 2005] passed: Endless Event test 55
+[Fri Jan 28 13:54:50 CET 2005] passed: Endless Event test 56
+[Fri Jan 28 13:54:55 CET 2005] passed: Endless Event test 57
+[Fri Jan 28 13:55:01 CET 2005] passed: Endless Event test 58
+[Fri Jan 28 13:55:06 CET 2005] passed: Endless Event test 59
+[Fri Jan 28 13:55:11 CET 2005] passed: Endless Event test 60
+[Fri Jan 28 13:55:22 CET 2005] passed: Endless Event test 61
+[Fri Jan 28 13:55:28 CET 2005] passed: Endless Event test 62
+[Fri Jan 28 13:55:40 CET 2005] passed: Endless Event test 63
+[Fri Jan 28 13:55:45 CET 2005] passed: Endless Event test 64
+[Fri Jan 28 13:55:53 CET 2005] passed: Endless Event test 65
+[Fri Jan 28 13:55:58 CET 2005] passed: Endless Event test 66
+[Fri Jan 28 13:56:05 CET 2005] passed: Endless Event test 67
+[Fri Jan 28 13:56:10 CET 2005] passed: Endless Event test 68
+[Fri Jan 28 13:56:16 CET 2005] passed: Endless Event test 69
+[Fri Jan 28 13:56:32 CET 2005] passed: Endless Event test 70
+[Fri Jan 28 13:56:39 CET 2005] passed: Endless Event test 71
+[Fri Jan 28 13:56:55 CET 2005] passed: Endless Event test 72
+[Fri Jan 28 13:57:01 CET 2005] passed: Endless Event test 73
+[Fri Jan 28 13:57:03 CET 2005] passed: Endless Event test 74
+[Fri Jan 28 13:57:09 CET 2005] passed: Endless Event test 75
+[Fri Jan 28 13:57:21 CET 2005] passed: Endless Event test 76
+[Fri Jan 28 13:57:27 CET 2005] passed: Endless Event test 77
+[Fri Jan 28 13:57:33 CET 2005] passed: Endless Event test 78
+[Fri Jan 28 13:57:44 CET 2005] passed: Endless Event test 79
+[Fri Jan 28 13:57:55 CET 2005] passed: Endless Event test 80
+[Fri Jan 28 13:58:11 CET 2005] passed: Endless Event test 81
+[Fri Jan 28 13:58:17 CET 2005] passed: Endless Event test 82
+[Fri Jan 28 13:58:23 CET 2005] passed: Endless Event test 83
+[Fri Jan 28 13:58:28 CET 2005] passed: Endless Event test 84
+[Fri Jan 28 13:58:39 CET 2005] passed: Endless Event test 85
+[Fri Jan 28 13:58:39 CET 2005] passed: Endless Event test 86
+[Fri Jan 28 13:58:40 CET 2005] passed: Endless Event test 87
+[Fri Jan 28 13:58:41 CET 2005] passed: Endless Event test 88
+[Fri Jan 28 13:58:48 CET 2005] passed: Endless Event test 89
+[Fri Jan 28 13:59:15 CET 2005] passed: Endless Event test 90
+[Fri Jan 28 13:59:21 CET 2005] passed: Endless Event test 91
+[Fri Jan 28 13:59:26 CET 2005] passed: Endless Event test 92
+[Fri Jan 28 13:59:32 CET 2005] passed: Endless Event test 93
+[Fri Jan 28 13:59:44 CET 2005] passed: Endless Event test 94
+[Fri Jan 28 13:59:55 CET 2005] passed: Endless Event test 95
+[Fri Jan 28 14:00:07 CET 2005] passed: Endless Event test 96
+[Fri Jan 28 14:00:18 CET 2005] passed: Endless Event test 97
+[Fri Jan 28 14:00:28 CET 2005] passed: Endless Event test 98
+[Fri Jan 28 14:00:40 CET 2005] passed: Endless Event test 99
+[Fri Jan 28 14:00:40 CET 2005] passed: Endless Event test 100
+[Fri Jan 28 14:00:42 CET 2005] passed: Endless Event test 101
+[Fri Jan 28 14:00:48 CET 2005] passed: Endless Event test 102
+[Fri Jan 28 14:00:53 CET 2005] passed: Endless Event test 103
+[Fri Jan 28 14:01:04 CET 2005] passed: Endless Event test 104
+[Fri Jan 28 14:01:10 CET 2005] passed: Endless Event test 105
+[Fri Jan 28 14:01:15 CET 2005] passed: Endless Event test 106
+[Fri Jan 28 14:01:20 CET 2005] passed: Endless Event test 107
+[Fri Jan 28 14:01:36 CET 2005] passed: Endless Event test 108
+[Fri Jan 28 14:01:47 CET 2005] passed: Endless Event test 109
+[Fri Jan 28 14:01:57 CET 2005] passed: Endless Event test 110
+[Fri Jan 28 14:02:30 CET 2005] passed: Endless Event test 111
+[Fri Jan 28 14:02:35 CET 2005] passed: Endless Event test 112
+[Fri Jan 28 14:02:51 CET 2005] passed: Endless Event test 113
+[Fri Jan 28 14:02:56 CET 2005] passed: Endless Event test 114
+[Fri Jan 28 14:03:07 CET 2005] passed: Endless Event test 115
+[Fri Jan 28 14:03:17 CET 2005] passed: Endless Event test 116
+[Fri Jan 28 14:03:19 CET 2005] passed: Endless Event test 117
+[Fri Jan 28 14:03:31 CET 2005] passed: Endless Event test 118
+[Fri Jan 28 14:03:36 CET 2005] passed: Endless Event test 119
+[Fri Jan 28 14:03:42 CET 2005] passed: Endless Event test 120
+[Fri Jan 28 14:03:48 CET 2005] passed: Endless Event test 121
+[Fri Jan 28 14:03:54 CET 2005] passed: Endless Event test 122
+[Fri Jan 28 14:04:12 CET 2005] passed: Endless Event test 123
+[Fri Jan 28 14:04:28 CET 2005] passed: Endless Event test 124
+[Fri Jan 28 14:04:45 CET 2005] passed: Endless Event test 125
+[Fri Jan 28 14:04:52 CET 2005] passed: Endless Event test 126
+[Fri Jan 28 14:05:08 CET 2005] passed: Endless Event test 127
+[Fri Jan 28 14:05:29 CET 2005] passed: Endless Event test 128
+[Fri Jan 28 14:05:34 CET 2005] passed: Endless Event test 129
+[Fri Jan 28 14:05:41 CET 2005] passed: Endless Event test 130
+[Fri Jan 28 14:05:46 CET 2005] passed: Endless Event test 131
+[Fri Jan 28 14:05:47 CET 2005] passed: Endless Event test 132
+[Fri Jan 28 14:05:47 CET 2005] passed: Endless Event test 133
+[Fri Jan 28 14:05:55 CET 2005] passed: Endless Event test 134
+[Fri Jan 28 14:06:01 CET 2005] passed: Endless Event test 135
+[Fri Jan 28 14:06:13 CET 2005] passed: Endless Event test 136
+[Fri Jan 28 14:06:18 CET 2005] passed: Endless Event test 137
+[Fri Jan 28 14:06:24 CET 2005] passed: Endless Event test 138
+[Fri Jan 28 14:06:30 CET 2005] passed: Endless Event test 139
+[Fri Jan 28 14:06:35 CET 2005] passed: Endless Event test 140
+[Fri Jan 28 14:06:42 CET 2005] passed: Endless Event test 141
+[Fri Jan 28 14:06:48 CET 2005] passed: Endless Event test 142
+[Fri Jan 28 14:06:59 CET 2005] passed: Endless Event test 143
+[Fri Jan 28 14:07:05 CET 2005] passed: Endless Event test 144
+[Fri Jan 28 14:07:11 CET 2005] passed: Endless Event test 145
+[Fri Jan 28 14:07:23 CET 2005] passed: Endless Event test 146
+[Fri Jan 28 14:07:29 CET 2005] passed: Endless Event test 147
+[Fri Jan 28 14:07:40 CET 2005] passed: Endless Event test 148
+[Fri Jan 28 14:07:50 CET 2005] passed: Endless Event test 149
+[Fri Jan 28 14:07:56 CET 2005] passed: Endless Event test 150
+[Fri Jan 28 14:07:57 CET 2005] passed: Endless Event test 151
+[Fri Jan 28 14:08:04 CET 2005] passed: Endless Event test 152
+[Fri Jan 28 14:08:15 CET 2005] passed: Endless Event test 153
+[Fri Jan 28 14:08:26 CET 2005] passed: Endless Event test 154
+[Fri Jan 28 14:08:47 CET 2005] passed: Endless Event test 155
+[Fri Jan 28 14:08:53 CET 2005] passed: Endless Event test 156
+[Fri Jan 28 14:09:05 CET 2005] passed: Endless Event test 157
+[Fri Jan 28 14:09:22 CET 2005] passed: Endless Event test 158
+[Fri Jan 28 14:09:32 CET 2005] passed: Endless Event test 159
+[Fri Jan 28 14:09:43 CET 2005] passed: Endless Event test 160
+[Fri Jan 28 14:09:50 CET 2005] passed: Endless Event test 161
+[Fri Jan 28 14:10:00 CET 2005] passed: Endless Event test 162
+[Fri Jan 28 14:10:06 CET 2005] passed: Endless Event test 163
+[Fri Jan 28 14:10:12 CET 2005] passed: Endless Event test 164
+[Fri Jan 28 14:10:17 CET 2005] passed: Endless Event test 165
+[Fri Jan 28 14:10:28 CET 2005] passed: Endless Event test 166
+[Fri Jan 28 14:10:34 CET 2005] passed: Endless Event test 167
+[Fri Jan 28 14:10:45 CET 2005] passed: Endless Event test 168
+[Fri Jan 28 14:10:50 CET 2005] passed: Endless Event test 169
+[Fri Jan 28 14:11:02 CET 2005] passed: Endless Event test 170
+[Fri Jan 28 14:11:08 CET 2005] passed: Endless Event test 171
+[Fri Jan 28 14:11:14 CET 2005] passed: Endless Event test 172
+[Fri Jan 28 14:11:20 CET 2005] passed: Endless Event test 173
+[Fri Jan 28 14:11:25 CET 2005] passed: Endless Event test 174
+[Fri Jan 28 14:11:36 CET 2005] passed: Endless Event test 175
+[Fri Jan 28 14:11:47 CET 2005] passed: Endless Event test 176
+[Fri Jan 28 14:11:54 CET 2005] passed: Endless Event test 177
+[Fri Jan 28 14:12:14 CET 2005] passed: Endless Event test 178
+[Fri Jan 28 14:12:21 CET 2005] passed: Endless Event test 179
+[Fri Jan 28 14:12:27 CET 2005] passed: Endless Event test 180
+[Fri Jan 28 14:12:49 CET 2005] passed: Endless Event test 181
+[Fri Jan 28 14:12:55 CET 2005] passed: Endless Event test 182
+[Fri Jan 28 14:13:01 CET 2005] passed: Endless Event test 183
+[Fri Jan 28 14:13:32 CET 2005] passed: Endless Event test 184
+[Fri Jan 28 14:13:39 CET 2005] passed: Endless Event test 185
+[Fri Jan 28 14:13:50 CET 2005] passed: Endless Event test 186
+[Fri Jan 28 14:14:06 CET 2005] passed: Endless Event test 187
+[Fri Jan 28 14:14:12 CET 2005] passed: Endless Event test 188
+[Fri Jan 28 14:14:18 CET 2005] passed: Endless Event test 189
+[Fri Jan 28 14:14:39 CET 2005] passed: Endless Event test 190
+[Fri Jan 28 14:14:44 CET 2005] passed: Endless Event test 191
+[Fri Jan 28 14:14:49 CET 2005] passed: Endless Event test 192
+[Fri Jan 28 14:14:55 CET 2005] passed: Endless Event test 193
+[Fri Jan 28 14:15:12 CET 2005] passed: Endless Event test 194
+[Fri Jan 28 14:15:17 CET 2005] passed: Endless Event test 195
+[Fri Jan 28 14:15:38 CET 2005] passed: Endless Event test 196
+[Fri Jan 28 14:15:50 CET 2005] passed: Endless Event test 197
+[Fri Jan 28 14:15:55 CET 2005] passed: Endless Event test 198
+[Fri Jan 28 14:16:01 CET 2005] passed: Endless Event test 199
+[Fri Jan 28 14:16:06 CET 2005] passed: Endless Event test 200
+[Fri Jan 28 14:16:12 CET 2005] passed: Endless Event test 201
+[Fri Jan 28 14:16:28 CET 2005] passed: Endless Event test 202
+[Fri Jan 28 14:16:38 CET 2005] passed: Endless Event test 203
+[Fri Jan 28 14:16:44 CET 2005] passed: Endless Event test 204
+[Fri Jan 28 14:16:50 CET 2005] passed: Endless Event test 205
+[Fri Jan 28 14:17:11 CET 2005] passed: Endless Event test 206
+[Fri Jan 28 14:17:16 CET 2005] passed: Endless Event test 207
+[Fri Jan 28 14:17:19 CET 2005] passed: Endless Event test 208
+[Fri Jan 28 14:17:26 CET 2005] passed: Endless Event test 209
+[Fri Jan 28 14:17:37 CET 2005] passed: Endless Event test 210
+[Fri Jan 28 14:17:43 CET 2005] passed: Endless Event test 211
+[Fri Jan 28 14:17:48 CET 2005] passed: Endless Event test 212
+[Fri Jan 28 14:17:54 CET 2005] passed: Endless Event test 213
+[Fri Jan 28 14:18:00 CET 2005] passed: Endless Event test 214
+[Fri Jan 28 14:18:06 CET 2005] passed: Endless Event test 215
+[Fri Jan 28 14:18:22 CET 2005] passed: Endless Event test 216
+[Fri Jan 28 14:18:28 CET 2005] passed: Endless Event test 217
+[Fri Jan 28 14:18:34 CET 2005] passed: Endless Event test 218
+[Fri Jan 28 14:18:50 CET 2005] passed: Endless Event test 219
+[Fri Jan 28 14:18:55 CET 2005] passed: Endless Event test 220
+[Fri Jan 28 14:19:12 CET 2005] passed: Endless Event test 221
+[Fri Jan 28 14:19:17 CET 2005] passed: Endless Event test 222
+[Fri Jan 28 14:19:23 CET 2005] passed: Endless Event test 223
+[Fri Jan 28 14:19:29 CET 2005] passed: Endless Event test 224
+[Fri Jan 28 14:19:44 CET 2005] passed: Endless Event test 225
+[Fri Jan 28 14:19:50 CET 2005] passed: Endless Event test 226
+[Fri Jan 28 14:19:55 CET 2005] passed: Endless Event test 227
+[Fri Jan 28 14:20:01 CET 2005] passed: Endless Event test 228
+[Fri Jan 28 14:20:06 CET 2005] passed: Endless Event test 229
+[Fri Jan 28 14:20:22 CET 2005] passed: Endless Event test 230
+[Fri Jan 28 14:20:27 CET 2005] passed: Endless Event test 231
+[Fri Jan 28 14:20:37 CET 2005] passed: Endless Event test 232
+[Fri Jan 28 14:20:37 CET 2005] passed: Endless Event test 233
+[Fri Jan 28 14:20:37 CET 2005] passed: Endless Event test 234
+[Fri Jan 28 14:20:38 CET 2005] passed: Endless Event test 235
+[Fri Jan 28 14:20:38 CET 2005] passed: Endless Event test 236
+[Fri Jan 28 14:20:39 CET 2005] passed: Endless Event test 237
+[Fri Jan 28 14:20:39 CET 2005] passed: Endless Event test 238
+[Fri Jan 28 14:20:41 CET 2005] passed: Endless Event test 239
+
+Results: Function tests
+==========================================================
+[Fri Jan 28 13:44:39 CET 2005] passed: test_GetInitialContext
+[Fri Jan 28 13:44:39 CET 2005] passed: test_GetJVTActivationSession
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetTopicSubscriber
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetLegalServiceKeys
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetLegalOrderKeys
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetIllegalServiceKeys
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetIllegalOrderKeys
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetServiceTypes_ContainsOneService
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetOrderTypes_ContainsACTIVATE
+[Fri Jan 28 13:44:40 CET 2005] passed: test_GetQueryTypes_IsNotNull
+[Fri Jan 28 13:44:40 CET 2005] passed: test_Positive_SetActualCompletionDate_DomainValue
+[Fri Jan 28 13:44:40 CET 2005] passed: test_Positive_SetApiClientId_DomainValue
+[Fri Jan 28 13:44:40 CET 2005] passed: test_Positive_SetDescription_DomainValue
+[Fri Jan 28 13:44:40 CET 2005] passed: test_Positive_SetOrderDate_DomainValue
+[Fri Jan 28 13:44:40 CET 2005] passed: test_Positive_SetPriority_AllDomainValues
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetPriority_IllegalValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetPurchaseOrder_DomainValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetRequestedCompletionDate_DomainValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetState_AllDomainValues
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetState_NullValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetState_IllegalValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetState_SimilarValue1
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetState_SimilarValue2
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetService_DomainValues
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetOrderKey_DomainValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetOrderKey_IllegalOrderKey
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetAttributeValue_PrimitiveMINMAXValues
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetAttributeValue_PrimitiveNullValue
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Positive_SetAttributeValue_EnumDomains
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetAttributeValue_EnumIllegals
+[Fri Jan 28 13:44:41 CET 2005] passed: test_Negative_SetAttributeValue_EnumNulls
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_SetAttributeValue_DomainValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_SetAttributeValue_IllegalObject
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_IsPopulated_AttributeNameAllDomainValues
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_IsPopulated_AttributeNameNullValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_IsPopulated_AttributeNameIllegalValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_UnpopulateAttribute_AttributeNameAllDomainValues
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_UnpopulateAttribute_AttributeNameNullValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_UnpopulateAttribute_AttributeNameIllegalValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_SetAttributeValue_AttributeNameNullValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_SetAttributeValue_AttributeNameIllegalValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_GetAttributeValue_AttributeNameNullValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Negative_GetAttributeValue_AttributeNameIllegalValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_SetManagedEntityKey_DomainValue
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_SetManagedEntityKey_IllegalKey
+[Fri Jan 28 13:44:42 CET 2005] passed: test_Positive_SetAttributeValueKEY_IllegalKey
+[Fri Jan 28 13:44:42 CET 2005] passed: test_NewOrderValue_GetAttributeNames
+[Fri Jan 28 13:44:42 CET 2005] passed: test_NewOrderValue_GetSettableAttributeNames
+[Fri Jan 28 13:44:42 CET 2005] passed: test_GetAttributeNames_ContainsACTUAL_COMPLETION_DATE
+[Fri Jan 28 13:44:42 CET 2005] passed: test_SetActualCompletionDate_GetPopulatedAttributeNamesContainsACTUAL_COMPLETION_DATE
+[Fri Jan 28 13:44:42 CET 2005] passed: test_SetActualCompletionDate_IsPopulatedACTUAL_COMPLETION_DATE
+[Fri Jan 28 13:44:42 CET 2005] passed: test_GetAttributeNames_ContainsAPI_CLIENT_ID
+[Fri Jan 28 13:44:42 CET 2005] passed: test_GetSettableAttributeNames_ContainsAPI_CLIENT_ID
+[Fri Jan 28 13:44:42 CET 2005] passed: test_SetApiClientId_GetPopulatedAttributeNamesContainsAPI_CLIENT_ID
+[Fri Jan 28 13:44:42 CET 2005] passed: test_SetApiClientId_IsPopulatedAPI_CLIENT_ID
+[Fri Jan 28 13:44:42 CET 2005] passed: test_GetAttributeNames_ContainsDESCRIPTION
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsDESCRIPTION
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetDescription_GetPopulatedAttributeNamesContainsDESCRIPTION
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetDescription_IsPopulatedDESCRIPTION
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsORDER_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsORDER_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetOrderDate_GetPopulatedAttributeNamesContainsORDER_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetOrderDate_IsPopulatedORDER_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsPRIORITY
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsPRIORITY
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetPriority_GetPopulatedAttributeNamesContainsPRIORITY
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetPriority_IsPopulatedPRIORITY
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsPURCHASE_ORDER
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsPURCHASE_ORDER
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetPurchaseOrder_GetPopulatedAttributeNamesContainsPURCHASE_ORDER
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetPurchaseOrder_IsPopulatedPURCHASE_ORDER
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsREQUESTED_COMPLETION_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsREQUESTED_COMPLETION_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetRequestedCompletionDate_GetPopulatedAttributeNamesContainsREQUESTED_COMPLETION_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetRequestedCompletionDate_IsPopulatedREQUESTED_COMPLETION_DATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsSTATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_NotContainsSTATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetState_GetPopulatedAttributeNamesContainsSTATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetState_IsPopulatedSTATE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetAttributeNames_ContainsSERVICE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_GetSettableAttributeNames_ContainsSERVICE
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetService_ServiceMustNotBeNull
+[Fri Jan 28 13:44:43 CET 2005] passed: test_SetAttributeValueSERVICE_ServiceMustNotBeNull
+[Fri Jan 28 13:44:44 CET 2005] passed: test_SetService_GetPopulatedAttributeNamesContainsSERVICE
+[Fri Jan 28 13:44:44 CET 2005] passed: test_SetService_IsPopulatedSERVICE
+[Fri Jan 28 13:44:44 CET 2005] passed: test_GetAttributeNames_ContainsOrderKEY
+[Fri Jan 28 13:44:44 CET 2005] passed: test_GetSettableAttributeNames_NotContainsKEY
+[Fri Jan 28 13:44:44 CET 2005] passed: test_SetOrderKey_GetPopulatedAttributeNamesContainsKEY
+[Fri Jan 28 13:44:44 CET 2005] passed: test_SetOrderKey_IsPopulatedKEY
+[Fri Jan 28 13:44:44 CET 2005] passed: test_SetAttributeValue_GetPopulatedAttributesNamesContainsAttributeName
+[Fri Jan 28 13:44:45 CET 2005] passed: test_SetAttributeValue_IsPopulated
+[Fri Jan 28 13:44:45 CET 2005] passed: test_GetAttributeNames_NamesStartWithLowerCase
+[Fri Jan 28 13:44:45 CET 2005] passed: test_GetSettableAttributeNames_SubsetOfGetAttributeNames
+[Fri Jan 28 13:44:45 CET 2005] passed: test_UnpopulateAllAttributes_IsPopulatedFalseForAll
+[Fri Jan 28 13:44:45 CET 2005] passed: test_UnpopulateAllAttributes_GetPopulatedAttributesNamesIsEmpty
+[Fri Jan 28 13:44:45 CET 2005] passed: test_UnpopulateAllAttributes_GetAttributeValueFailsForAll
+[Fri Jan 28 13:44:45 CET 2005] passed: test_GetAttributeNames_ContainsKEY
+[Fri Jan 28 13:44:45 CET 2005] passed: test_SetManagedEntityKey_GetPopulatedAttributeNamesContainsKEY
+[Fri Jan 28 13:44:45 CET 2005] passed: test_SetManagedEntityKey_IsPopulatedKEY
+[Fri Jan 28 13:44:54 CET 2005] passed: test_GetActualCompletionDate_GetAttributeValueACTUAL_COMPLETION_DATE
+[Fri Jan 28 13:44:54 CET 2005] passed: test_GetApiClientId_GetAttributeValueAPI_CLIENT_ID
+[Fri Jan 28 13:44:54 CET 2005] passed: test_GetDescription_GetAttributeValueDESCRIPTION
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetOrderDate_GetAttributeValueORDER_DATE
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetPriority_GetAttributeValuePRIORITY
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetPurchaseOrder_GetAttributeValuePURCHASE_ORDER
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetRequestedCompletionDate_GetAttributeValueREQUESTED_COMPLETION_DATE
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetState_GetAttributeValueSTATE
+[Fri Jan 28 13:44:55 CET 2005] passed: test_GetOrderKey_GetAttributeValueKEY
+[Fri Jan 28 13:45:01 CET 2005] passed: test_SetAttributeValue_GetAttributeValue
+[Fri Jan 28 13:45:01 CET 2005] passed: test_IsPopulated_AttributeInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:02 CET 2005] passed: test_IsPopulated_GetAttributeValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_GetPopulatedAttributeNames_GetAttributeValueForAll
+[Fri Jan 28 13:45:02 CET 2005] passed: test_IsFullyPopulated_IsPopulatedTrueForAll
+[Fri Jan 28 13:45:02 CET 2005] passed: test_UnpopulateAttribute_IsPopulatedIsFalse
+[Fri Jan 28 13:45:02 CET 2005] passed: test_UnpopulateAttribute_AttributeNotInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:02 CET 2005] passed: test_UnpopulateAttribute_GetAttributeValueFails
+[Fri Jan 28 13:45:02 CET 2005] passed: test_GetAttributeValue_IsPopulated
+[Fri Jan 28 13:45:02 CET 2005] passed: test_GetAttributeValue_IsInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:02 CET 2005] passed: test_GetManagedEntityKey_GetAttributeValueKEY
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetState_AllDomainValues
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetState_NullValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetState_IllegalValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetState_SimilarValue1
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetState_SimilarValue2
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetAttributeValue_PrimitiveMINMAXValues
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetAttributeValue_PrimitiveNullValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetAttributeValue_EnumDomains
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetAttributeValue_EnumIllegals
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetAttributeValue_EnumNulls
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetAttributeValue_DomainValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_SetAttributeValue_IllegalObject
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetServiceKey_DomainValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_SetServiceKey_IllegalServiceKey
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Positive_IsPopulated_AttributeNameAllDomainValues
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_IsPopulated_AttributeNameNullValue
+[Fri Jan 28 13:45:02 CET 2005] passed: test_Negative_IsPopulated_AttributeNameIllegalValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Positive_UnpopulateAttribute_AttributeNameAllDomainValues
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_UnpopulateAttribute_AttributeNameNullValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_UnpopulateAttribute_AttributeNameIllegalValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_SetAttributeValue_AttributeNameNullValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_SetAttributeValue_AttributeNameIllegalValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_GetAttributeValue_AttributeNameNullValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Negative_GetAttributeValue_AttributeNameIllegalValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Positive_SetManagedEntityKey_DomainValue
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Positive_SetManagedEntityKey_IllegalKey
+[Fri Jan 28 13:45:03 CET 2005] passed: test_Positive_SetAttributeValueKEY_IllegalKey
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetAttributeNames_ContainsSTATE
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetSettableAttributeNames_NotContainsSTATE
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetState_IsPopulatedSTATE
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetSettableAttributeNames_NotContainsKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetAttributeValue_IsPopulated
+[Fri Jan 28 13:45:03 CET 2005] passed: test_NewServiceValue_GetAttributeNames
+[Fri Jan 28 13:45:03 CET 2005] passed: test_NewServiceValue_GetSettableAttributeNames
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetState_GetPopulatedAttributeNames_ContainsSTATE
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetAttributeNames_ContainsServiceKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetServiceKey_GetPopulatedAttributeNamesContainsKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetServiceKey_IsPopulatedKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetAttributeValue_GetPopulatedAttributesNames_ContainsAttributeName
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetAttributeNames_NamesStartWithLowerCase
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetSettableAttributeNames_SubsetOfGetAttributeNames
+[Fri Jan 28 13:45:03 CET 2005] passed: test_UnpopulateAllAttributes_IsPopulatedFalseForAll
+[Fri Jan 28 13:45:03 CET 2005] passed: test_UnpopulateAllAttributes_GetPopulatedAttributesNamesIsEmpty
+[Fri Jan 28 13:45:03 CET 2005] passed: test_UnpopulateAllAttributes_GetAttributeValueFailsForAll
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetAttributeNames_ContainsKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetManagedEntityKey_GetPopulatedAttributeNamesContainsKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_SetManagedEntityKey_IsPopulatedKEY
+[Fri Jan 28 13:45:03 CET 2005] passed: test_GetState_GetAttributeValueSTATE
+[Fri Jan 28 13:45:04 CET 2005] passed: test_SetAttributeValue_GetAttributeValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_GetServiceKey_GetAttributeValueKEY
+[Fri Jan 28 13:45:04 CET 2005] passed: test_IsPopulated_AttributeInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:04 CET 2005] passed: test_IsPopulated_GetAttributeValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_GetPopulatedAttributeNames_GetAttributeValueForAll
+[Fri Jan 28 13:45:04 CET 2005] passed: test_IsFullyPopulated_IsPopulatedTrueForAll
+[Fri Jan 28 13:45:04 CET 2005] passed: test_UnpopulateAttribute_IsPopulatedIsFalse
+[Fri Jan 28 13:45:04 CET 2005] passed: test_UnpopulateAttribute_AttributeNotInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:04 CET 2005] passed: test_UnpopulateAttribute_GetAttributeValueFails
+[Fri Jan 28 13:45:04 CET 2005] passed: test_GetAttributeValue_IsPopulated
+[Fri Jan 28 13:45:04 CET 2005] passed: test_GetAttributeValue_IsInGetPopulatedAttributeNames
+[Fri Jan 28 13:45:04 CET 2005] passed: test_GetManagedEntityKey_GetAttributeValueKEY
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Positive_NewServiceValue_AllDomainValues
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Negative_NewServiceValue_NullValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Negative_NewServiceValue_IllegalValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Positive_NewOrderValue_AllDomainValues
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Negative_NewOrderValue_NullValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Negative_NewOrderValue_IllegalValue
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Positive_NewQueryValue_AllDomainValues
+[Fri Jan 28 13:45:04 CET 2005] passed: test_Negative_NewQueryValue_NullValue
+[Fri Jan 28 13:45:05 CET 2005] passed: test_Negative_NewQueryValue_IllegalValue
+[Fri Jan 28 13:45:46 CET 2005] passed: test_Complete_OrderLifecycle_00
+[Fri Jan 28 13:47:41 CET 2005] passed: test_Complete_OrderLifecycle_01
+[Fri Jan 28 13:49:39 CET 2005] passed: test_Complete_OrderLifecycle_02
+[Fri Jan 28 13:51:16 CET 2005] passed: test_Complete_OrderLifecycle_03
+[Fri Jan 28 13:54:48 CET 2005] passed: test_Complete_OrderLifecycle_04
+[Fri Jan 28 13:55:45 CET 2005] passed: test_Complete_OrderLifecycle_05
+[Fri Jan 28 13:57:01 CET 2005] passed: test_Complete_OrderLifecycle_06
+[Fri Jan 28 13:58:41 CET 2005] passed: test_Complete_OrderLifecycle_07
+[Fri Jan 28 14:00:41 CET 2005] passed: test_Complete_OrderLifecycle_08
+[Fri Jan 28 14:02:02 CET 2005] passed: test_Complete_OrderLifecycle_09
+[Fri Jan 28 14:03:17 CET 2005] passed: test_Complete_OrderLifecycle_10
+[Fri Jan 28 14:05:48 CET 2005] passed: test_Complete_OrderLifecycle_11
+[Fri Jan 28 14:07:57 CET 2005] passed: test_Complete_OrderLifecycle_12
+[Fri Jan 28 14:09:43 CET 2005] passed: test_Complete_OrderLifecycle_13
+[Fri Jan 28 14:10:55 CET 2005] passed: test_Complete_OrderLifecycle_14
+[Fri Jan 28 14:12:49 CET 2005] passed: test_Complete_OrderLifecycle_15
+[Fri Jan 28 14:13:37 CET 2005] passed: test_Complete_OrderLifecycle_16
+[Fri Jan 28 14:14:55 CET 2005] passed: test_Complete_OrderLifecycle_17
+[Fri Jan 28 14:17:17 CET 2005] passed: test_Complete_OrderLifecycle_18
+[Fri Jan 28 14:17:42 CET 2005] passed: test_Complete_OrderLifecycle_19
+[Fri Jan 28 14:20:40 CET 2005] passed: test_OrderRetrieval
+Time: 2,161.342
+
+OK (209 tests)
+
+
+Configuration: tckproperties.txt
+==========================================================
+#Fri Jan 28 14:20:42 CET 2005
+application_name=ReferenceImplementation
+jndi_url=<none>
+total_timeout=5000
+response_queue_name=System/System1/ApplicationType/ServiceActivation/Application/1-0;1-0-1;ReferenceImplementation/Comp/ResponseQueue
+system_name=System1
+event_timeout=500
+max_string_length=512
+application_minor_version=0-1
+application_major_version=1
+jndi_factory=<none>
+
+Configuration: testproperties.txt
+==========================================================
+#Fri Jan 28 14:20:42 CET 2005
+tck_version=1.0.4
+max_bulk_elements=20
+max_services=20
+ordervalue_slice_size=50
+service_value_slice_size=50
+max_bulk_state_transitions=15
+sequences=20
+no_of_runs=3
+max_single_state_transitions=15
+max_bulk_order_types=10
+max_single_order_types=10
+servicevalue_test_level=4
+ordervalue_test_level=4
+
+Configuration: system properties
+==========================================================
+#Fri Jan 28 14:20:42 CET 2005
+java.runtime.name=Java(TM) 2 Runtime Environment, Standard Edition
+sun.boot.library.path=/usr/java/j2sdk1.4.2_06/jre/lib/i386
+java.vm.version=1.4.2_06-b03
+java.vm.vendor=Sun Microsystems Inc.
+java.vendor.url=http\://java.sun.com/
+path.separator=\:
+java.util.logging.config.file=logging.properties
+java.vm.name=Java HotSpot(TM) Client VM
+file.encoding.pkg=sun.io
+user.country=US
+sun.os.patch.level=unknown
+java.vm.specification.name=Java Virtual Machine Specification
+user.dir=/home/aebbert/sa/oss_service_activation_j2ee_sdk14-1_0_4-tck/scripts
+com.sun.CORBA.ORBUserConfigurators.com.sun.enterprise.iiop.PEORBConfigurator=
+java.runtime.version=1.4.2_06-b03
+javax.rmi.CORBA.UtilClass=com.sun.corba.ee.impl.javax.rmi.CORBA.Util
+java.awt.graphicsenv=sun.awt.X11GraphicsEnvironment
+org.omg.CORBA.ORBInitialPort=3700
+java.endorsed.dirs=/usr/java/j2sdk1.4.2_06/jre/lib/endorsed
+os.arch=i386
+javax.rmi.CORBA.StubClass=com.sun.corba.ee.impl.javax.rmi.CORBA.StubDelegateImpl
+java.io.tmpdir=/tmp
+line.separator=\n
+java.vm.specification.vendor=Sun Microsystems Inc.
+os.name=Linux
+sun.java2d.fontpath=
+org.omg.CORBA.ORBSingletonClass=com.sun.corba.ee.impl.orb.ORBSingleton
+java.library.path=/usr/java/j2sdk1.4.2_06/jre/lib/i386/client\:/usr/java/j2sdk1.4.2_06/jre/lib/i386\:/usr/java/j2sdk1.4.2_06/jre/../lib/i386\:\:/home/aebbert/SUNWappserver/lib/\:/home/aebbert/SUNWappserver/imq/lib
+com.sun.CORBA.transport.ORBIORToSocketInfoClass=com.sun.enterprise.iiop.IORToSocketInfoImpl
+com.sun.jts.pi.CLIENT_POLICY_CHECKING=false
+java.specification.name=Java Platform API Specification
+java.class.version=48.0
+org.omg.CORBA.ORBClass=com.sun.corba.ee.impl.orb.ORBImpl
+com.sun.CORBA.transport.ORBIIOPPrimaryToContactInfoClass=com.sun.enterprise.iiop.IIOPPrimaryToContactInfoImpl
+java.util.prefs.PreferencesFactory=java.util.prefs.FileSystemPreferencesFactory
+os.version=2.4.21-4.ELsmp
+user.home=/home/aebbert
+javax.rmi.CORBA.PortableRemoteObjectClass=com.sun.corba.ee.impl.javax.rmi.PortableRemoteObject
+user.timezone=Europe/Berlin
+java.awt.printerjob=sun.print.PSPrinterJob
+file.encoding=ISO-8859-1
+java.specification.version=1.4
+org.omg.CORBA.ORBInitialHost=localhost
+java.class.path=/home/aebbert/SUNWappserver/lib/appserv-rt.jar\:/home/aebbert/SUNWappserver/lib/j2ee.jar\:/home/aebbert/SUNWappserver/lib/install/applications/jmsra/imqjmsra.jar\:/home/aebbert/SUNWappserver/lib/appserv-admin.jar\:\:../lib/ossjsa.jar\:../lib/ossj_sa_ri_tck.jar\:../lib/junit.jar\:/home/aebbert/SUNWappserver/domains/domain1/applications/j2ee-apps/ossj_sa_ri/ossj_sa_riClient.jar
+user.name=aebbert
+java.vm.specification.version=1.0
+java.home=/usr/java/j2sdk1.4.2_06/jre
+sun.arch.data.model=32
+com.sun.CORBA.ORBUseDynamicStub=true
+user.language=en
+java.specification.vendor=Sun Microsystems Inc.
+java.vm.info=mixed mode
+org.omg.PortableInterceptor.ORBInitializerClass.com.sun.enterprise.iiop.FailoverIORInterceptor=dummy
+java.version=1.4.2_06
+imq.DaemonThreads=true
+java.ext.dirs=/usr/java/j2sdk1.4.2_06/jre/lib/ext
+sun.boot.class.path=/usr/java/j2sdk1.4.2_06/jre/lib/rt.jar\:/usr/java/j2sdk1.4.2_06/jre/lib/i18n.jar\:/usr/java/j2sdk1.4.2_06/jre/lib/sunrsasign.jar\:/usr/java/j2sdk1.4.2_06/jre/lib/jsse.jar\:/usr/java/j2sdk1.4.2_06/jre/lib/jce.jar\:/usr/java/j2sdk1.4.2_06/jre/lib/charsets.jar\:/usr/java/j2sdk1.4.2_06/jre/classes
+java.vendor=Sun Microsystems Inc.
+file.separator=/
+java.vendor.url.bug=http\://java.sun.com/cgi-bin/bugreport.cgi
+sun.io.unicode.encoding=UnicodeLittle
+sun.cpu.endian=little
+com.sun.CORBA.transport.ORBSocketFactoryClass=com.sun.enterprise.iiop.IIOPSSLSocketFactory
+sun.cpu.isalist=
+
+
+==========================================================
+End of report.

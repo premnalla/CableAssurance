@@ -1,0 +1,88 @@
+<!--
+        * File : proximity.htm
+	* This is an ArcWeb Services Sample file for Proximity ArcWeb Service.
+-->
+<html>
+    <head><title>Proximity - ArcWeb Services Sample</title>	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+    <font class='boldfont'>Proximity - ArcWeb Services Sample </font><br><br><br><br>
+
+    <!-- ============= Input Form =============   -->
+    <form action="jsp/proximityRes.jsp" name="mForm" target="arcWebResultWin">
+    <table width='550' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+    <tr><td width='548%' align=center>
+        <table border=0 cellpadding='2' cellspacing='0'  width='100%' bgcolor='#ddebf1' class='textfont'>
+                <tr><td height=28 colspan="3" align=center bgcolor="#4271ad" class='boldfont'><font color=ffffff>Input Information</font></td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+           	<tr><td> &nbsp;</td>
+                    <td align="left"> &nbsp;Street Address : </td>
+                    <td> <input type="text" name="street" size='25' value='380 New York St'> </td></tr>
+                <tr><td> &nbsp;</td>
+                    <td> &nbsp;City : </td>
+                    <td> <input type="text" name="city" size='8' value='Redlands'> State / Province  : <input type="text" name="state" size='5' value='CA'></td></tr>
+                <tr><td> &nbsp;</td>
+                    <td> &nbsp;Postal Code : </td>
+                    <td> <input type="text" name="zip" size='8' value='92373'> Country Code : &nbsp;&nbsp;&nbsp;<input size='5' type=text name=country value='US' ></td></tr>
+                <tr><td> &nbsp;</td>
+                    <td> &nbsp;Geocode Data Source : </td>
+                    <td class='textfont'>
+                        <select name="geoCodeDataSource">
+                            <option value="GDT.Address.US" selected>GDT.Address.US</option>
+                            <option value="GDT.Streets.US">GDT.Streets.US</option>
+                            <option value="TA.Address.US">TA.Address.US</option>
+                            <option value="TA.Streets.US">TA.Streets.US</option>
+                            <option value="GDT.Address.CA">GDT.Address.CA</option>
+                            <option value="GDT.Streets.CA">GDT.Streets.CA</option>
+                            <option value="TA.Address.EU">TA.Address.EU  &nbsp; &nbsp; &nbsp; &nbsp; </option>
+                        </select></td></tr>
+        	<tr><td colspan="3">&nbsp;</td></tr>
+                <tr><td colspan="3"><hr></td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+               <tr><td> &nbsp;</td><td> &nbsp;Data source : </td>
+                     <td><select name=dataSource>
+                            <option value='User.Defined.POI' selected>User.Defined.POI</option>
+                            <option value='ESRI.Airports.World'>ESRI.Airports.World</option>
+                            <option value='GDT.POI.CA'>GDT.POI.CA</option>
+                            <option value='GDT.POI.US'>GDT.POI.US</option>
+                            <option value='MX.CurrentWeather.NA'>MX.CurrentWeather.NA</option>
+                            <option value='MX.ForecastWeather.NA'>MX.ForecastWeather.NA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option value='TA.POI.EU'>TA.POI.EU</option>
+                            <option value='TA.POI.US'>TA.POI.US</option>
+                            <option value='TC.Traffic.US'>TC.Traffic.US</option>
+                        </select></td></tr>
+                <tr><td align=center> <input type="checkbox" name="useWhereExpression" value="true"></td><td> &nbsp;SQL WhereExpression : </td>
+                     <td><input type="text" name="whereExpression" size='25' value="Name like 'A%'"></td></tr>
+                <tr><td align=center> <input type="checkbox" name="useRadius" value="true"></td><td> &nbsp;Search Radius : </td>
+                     <td><select name=radius>
+                            <option value='1'>1
+                            <option value='2'>2
+                            <option value='5'>5
+                            <option value='10'>10
+                            <option value='25' selected>25
+                            <option value='50' >50 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </select> <font class='smallfont'>(Miles)</font>
+                            </td></tr>
+                <tr><td>&nbsp;</td><td> &nbsp;Start Record : </td>
+                     <td><input type="text" name="startRecord" size='8' value='0'></td></tr>
+                <tr><td>&nbsp;</td><td> &nbsp;Max Records : </td>
+                     <td><input type="text" name="count" size='8' value='25'></td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+		<tr><td colspan="3" align="center"><input type="submit" value="Find Locations"></td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+                <input type="hidden" name="action" value="Proximity">
+	</table>
+        </td></tr>
+    </table>
+    </form>
+	<br>
+	<a href="index.htm" class=textfont>Back to Index</a>
+</center>
+</body>
+</html>

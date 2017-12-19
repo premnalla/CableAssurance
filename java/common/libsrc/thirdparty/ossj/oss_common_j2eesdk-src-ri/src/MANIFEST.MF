@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.5.3 
+Created-By: Apache Maven
+Built-By: vince
+Package: ossj.common
+Class-Path:  oss_common_spec-1.3.jar oss_cbe_agreement_spec-1.3.jar 
+ oss_cbe_alarm_spec-1.3.jar oss_cbe_datatypes_spec-1.3.jar oss_cbe
+ _location_spec-1.3.jar oss_cbe_measurement_spec-1.3.jar oss_cbe_p
+ arty_spec-1.3.jar oss_cbe_policy_spec-1.3.jar oss_cbe_product_spe
+ c-1.3.jar oss_cbe_report_spec-1.3.jar oss_cbe_resource_spec-1.3
+ .jar oss_cbe_schedule_spec-1.3.jar oss_cbe_service_spec-1.3.jar o
+ ss_cbe_sla_spec-1.3.jar oss_cbe_trouble_spec-1.3.jar oss_cbe_bi_s
+ pec-1.3.jar oss_common_ri-1.3.jar oss_cbe_alarm_ri-1.3.jar oss_cbe_
+ datatypes_ri-1.3.jar oss_cbe_location_ri-1.3.jar oss_cbe_measurement_
+ ri-1.3.jar oss_cbe_party_ri-1.3.jar oss_cbe_policy_ri-1.3.jar oss_cbe
+ _product_ri-1.3.jar oss_cbe_report_ri-1.3.jar oss_cbe_resource_ri-1.3
+ .jar oss_cbe_schedule_ri-1.3.jar oss_cbe_service_ri-1.3.jar oss_cbe_s
+ la_ri-1.3.jar oss_cbe_trouble_ri-1.3.jar oss_cbe_bi_ri-1.3.jar oss_cb
+ e_agreement_ri-1.3.jar
+
+Name: ossj.common
+Specification-Title: oss_common_ri_ejb
+Specification-Vendor: OSS/J
+Implementation-Title: ossj.common
+Implementation-Vendor: OSS/J
+Implementation-Version: 1.3
+

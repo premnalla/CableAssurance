@@ -1,0 +1,58 @@
+<!--
+	* File : addressFinder.htm
+	* This is an ArcWeb Services Sample file for AddressFinder ArcWeb Service.
+	*
+-->
+<html>
+    <head><title>AddressFinder - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style>
+	</head>
+    <body><center><br><br>
+    <span class=boldfont>AddressFinder - ArcWeb Services Sample </span><br>
+  <br>
+    <!-- ============= Input Form =============   -->
+    <form action="jsp/addressFinderRes.jsp" name="mForm" target="arcWebResultWin">
+        <table cellpadding="2" cellspacing="0" border="0" bgcolor="#95b7d3" width='400'>
+            <tr><td>
+            <table cellpadding="0" cellspacing="0" border="0" width='398' bgcolor='#ddebf1'>
+                    <tr><td colspan="2" height=28 align=center class=boldfont bgcolor="#4271ad"><font color=ffffff>Input Information</font></td></tr>
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr><td align="left"  class=textfont> &nbsp; Street Address : </td>
+                        <td><input type="text" name="street" size='25' value='380 New York St'></td></tr>
+                    <tr><td align="left" class=textfont> &nbsp;  Intersection : </td>
+                        <td><input type="text" name="intersection" size='25'></td></tr>
+                    <tr><td class=textfont> &nbsp; City : </td>
+                        <td><input type="text" name="city" size='8' value='Redlands'> &nbsp; State : <input type="text" name="state" size='5' value='CA'></td></tr>
+                    <tr><td class=textfont> &nbsp;  ZIP Code : </td>
+                        <td><input type="text"  name="zip" value='92373' size='8'></td></tr>
+                    <tr><td class=textfont> &nbsp;  Country Code : </td>
+                        <td><input type="text"  name="country" value='US' size='8'></td></tr>
+                    <tr><td class=textfont> &nbsp;  DataSource : </td>
+                        <td><select name="datasource">
+                                <option selected value="GDT.Address.US">GDT.Address.US</option>
+                                <option value="GDT.Streets.US">GDT.Streets.US</option>
+                                <option value="TA.Address.US">TA.Address.US</option>
+                                <option value="TA.Streets.US">TA.Streets.US</option>
+                                <option value="GDT.Address.CA">GDT.Address.CA</option>
+                                <option value="GDT.Streets.CA">GDT.Streets.CA</option>
+                                <option value="TA.Address.EU">TA.Address.EU</option>
+                            </select>
+                        </td></tr>
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr><td colspan="2" align="center" ><input type="submit" class=textfont value="Find Address"></td></tr>
+                    <tr><td colspan="2" height=10>&nbsp;</td></tr>
+                    <input type="hidden" name="action" value="addressFinder">
+            </table>
+            </td></tr>
+        </table><br>
+            <a href="index.htm" class=textfont>Back to Index</a>
+        </form>
+</center></body>
+</html>

@@ -1,0 +1,79 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from LocalSystemService WSDL service -->
+
+  <service name="LocalSystemPort" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.nds.com/wsdl/CableAssurance"/>
+      <parameter name="wsdlServiceElement" value="LocalSystemService"/>
+      <parameter name="schemaUnqualified" value="http://www.nds.com/wsdl/CableAssurance"/>
+      <parameter name="wsdlServicePort" value="LocalSystemPort"/>
+      <parameter name="className" value="com.nds.www.wsdl.CableAssurance.LocalSystemSOAPBindingImpl"/>
+      <parameter name="wsdlPortType" value="LocalSystemPort"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="queryLocalSystem" qname="operNS:queryLocalSystem" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance" returnQName="name" returnType="rtns:localSystemType" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="queryChildAggregates" qname="operNS:queryChildAggregates" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance" returnQName="name" returnType="rtns:ArrayOfAggregateType" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:aggregateType" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <operation name="queryChildCmts" qname="operNS:queryChildCmts" xmlns:operNS="http://www.nds.com/wsdl/CableAssurance" returnQName="name" returnType="rtns:ArrayOfCmtsType" xmlns:rtns="http://www.nds.com/wsdl/CableAssurance" returnItemType="tns2:cmtsType" xmlns:tns2="http://www.nds.com/wsdl/CableAssurance" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="queryLocalSystem queryChildCmts queryChildAggregates"/>
+      <parameter name="scope" value="Session"/>
+
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfAggregateType"
+        type="java:com.nds.www.wsdl.CableAssurance.AggregateType[]"
+        innerType="cmp-ns:aggregateType" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:ArrayOfCmtsType"
+        type="java:com.nds.www.wsdl.CableAssurance.CmtsType[]"
+        innerType="cmp-ns:cmtsType" xmlns:cmp-ns="http://www.nds.com/wsdl/CableAssurance"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:localSystemType"
+        type="java:com.nds.www.wsdl.CableAssurance.LocalSystemType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:cmtsType"
+        type="java:com.nds.www.wsdl.CableAssurance.CmtsType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:systemTypeType"
+        type="java:com.nds.www.wsdl.CableAssurance.SystemTypeType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.nds.com/wsdl/CableAssurance"
+        qname="ns:aggregateType"
+        type="java:com.nds.www.wsdl.CableAssurance.AggregateType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

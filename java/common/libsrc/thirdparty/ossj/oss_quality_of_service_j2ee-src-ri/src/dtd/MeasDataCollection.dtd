@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT mdc (mfh , md*, mff )>
+<!ELEMENT mfh (ffv, sn, st, vn, cbt) >
+<!ELEMENT md (neid , mi*)>
+<!ELEMENT neid (neun, nedn, nesw?)>
+<!ELEMENT mi (mts,gp, mt*, mv*)>
+<!ELEMENT mv (moid , r*, sf? )>
+<!ELEMENT mff (ts)>
+<!ELEMENT ts (#PCDATA)>
+<!ELEMENT sf (#PCDATA)>
+<!ELEMENT r (#PCDATA)>
+<!ATTLIST r p CDATA "">
+<!ELEMENT mt (#PCDATA)>
+<!ATTLIST mt p CDATA "">
+<!ELEMENT moid (#PCDATA)>
+<!ELEMENT gp (#PCDATA)>
+<!ELEMENT mts (#PCDATA)>
+<!ELEMENT nedn (#PCDATA)>
+<!ELEMENT neun (#PCDATA)>
+<!ELEMENT nesw (#PCDATA)>
+<!ELEMENT cbt (#PCDATA)>
+<!ELEMENT vn (#PCDATA)>
+<!ELEMENT st (#PCDATA)>
+<!ELEMENT sn (#PCDATA)>
+<!ELEMENT ffv (#PCDATA)>

@@ -1,0 +1,51 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from StockQuoteService WSDL service -->
+
+  <service name="StockQuoteSOAPPort" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://w3.ibm.com/schemas/services/2002/11/15/stockquote/wsdl"/>
+      <parameter name="wsdlServiceElement" value="StockQuoteService"/>
+      <parameter name="schemaUnqualified" value="http://w3.ibm.com/schemas/services/2002/11/15/stockquote"/>
+      <parameter name="wsdlServicePort" value="StockQuoteSOAPPort"/>
+      <parameter name="className" value="com.ibm.w3.schemas.services._2002._11._15.stockquote.wsdl.StockQuoteSOAPBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="StockQuotePortType"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <parameter name="allowedMethods" value="*"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://w3.ibm.com/schemas/services/2002/11/15/stockquote"
+        qname="ns:>quote"
+        type="java:com.ibm.w3.schemas.services._2002._11._15.stockquote.Quote"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://w3.ibm.com/schemas/services/2002/11/15/stockquote"
+        qname="ns:lastTradeType"
+        type="java:com.ibm.w3.schemas.services._2002._11._15.stockquote.LastTradeType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://w3.ibm.com/schemas/services/2002/11/15/stockquote"
+        qname="ns:changeType"
+        type="java:com.ibm.w3.schemas.services._2002._11._15.stockquote.ChangeType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

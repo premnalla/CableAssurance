@@ -1,0 +1,45 @@
+                    OSS through Java - Billing Mediation API
+                                RI Change History
+---------------------------------------------------------------------------------
+File                  :changes.txt - changes in OSS/J Billing Mediation API RI version 1.1.1 release
+Previous Version      :1.1
+Release Date          :2005/03
+---------------------------------------------------------------------------------
+Development:
+- Create compilation/configuration and deployment script using asant
+- use the latest xml RI generator version 1.4
+
+Deployment:
+- Create deployment descriptor for J2EE SDK
+
+Compatibility:
+- Remove none portable or application server specific code
+
+Bugs:
+- Implement workaround regarding bug ID 4930974 
+  http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4930974
+- Change JNDI resources names for more consistencies
+- Fix all errors and warning reported by the Static part of the J2EE AVK
+  1.Instead of java.rmi.RemoteException all the business methods will throw javax.ejb.EJBException or other 
+    suitable RuntimeException to report non- application exceptions.
+  2.Removed the transient field declaration of Session bean fields.
+  3.Removed the read/write static field declaration of Session bean fields.
+  4.EJB reference name is prefixed with recommended string ejb.
+  5.Set accessor methods for the primary key cmp-fields in the component interface of the entity bean has been removed.
+  6.Occurrence of java:/comp  has been replaced with java:comp
+
+Changed Classes
+--------------
+1) com.nec.oss.cfi.activity.ri.ReportInfoIteratorBean.java
+2) com.nec.oss.ipb.producer.ri.JVTProducerSessionBean.java
+3) com.nec.oss.ipb.producer.ri.ProducerEntity.java
+4) com.nec.oss.ipb.producer.ri.ProducerKeyResultIteratorBean.java
+5) com.nec.oss.ipb.producer.ri.ProducerValueIteratorBean.java
+6) com.nec.oss.ipb.producer.ri.util.EventHelper.java
+7) com.nec.oss.ipb.transfer.ri.TransferStatusValueIteratorBean.java
+8) com.nec.oss.ipb.type.ri.UsageRecValueIteratorBean.java
+9) com.nec.oss.ipb.producer.ri.IPBConfig.java
+10)com.nec.oss.ipb.producer.ri.xml.IPBRIXmlMessageDrivenBean.java
+11)com.nec.oss.ipb.producer.ri.xml.IPBRIConfiguration.java
+
+Note:TransferStatusValueIteratorBean will not be deployed when the RI 1.1.1 is installed.  

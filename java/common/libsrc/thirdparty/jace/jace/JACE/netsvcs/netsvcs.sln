@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "netsvcs", "netsvcs.vjp", "{AB19D977-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Logger", "Logger\Logger.vjp", "{AB19D978-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Naming", "Naming\Naming.vjp", "{AB19D979-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Time", "Time\Time.vjp", "{AB19D97A-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Token", "Token\Token.vjp", "{AB19D97B-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {AB19D977-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {AB19D977-5A5E-11D3-86CC-D0DB55C10000}
+		1 = {AB19D978-5A5E-11D3-86CC-D0DB55C10000}
+		2 = {AB19D979-5A5E-11D3-86CC-D0DB55C10000}
+		3 = {AB19D97A-5A5E-11D3-86CC-D0DB55C10000}
+		4 = {AB19D97B-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

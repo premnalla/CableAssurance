@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.nds.com/wsdl/cableassurance"
+	targetNamespace="http://www.nds.com/wsdl/cableassurance/definitions"
+	xmlns:tns="http://www.nds.com/wsdl/cableassurance/definitions"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.nds.com/wsdl/cableassurance/schema" location="CableAssurance.xsd" />
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="LocalSystemResponse">
+		<part name="name" type="tns:localSystemType" />
+	</message>
+
+	<message name="AggregateResponse">
+		<part name="name" type="tns:ArrayOfAggregateType" />
+	</message>
+
+	<message name="CmtsResponse">
+		<part name="name" type="tns:ArrayOfCmtsType" />
+	</message>
+
+	<portType name="LocalSystemPort">
+		<operation name="queryLocalSystem">
+			<input message="tns:empty" />
+			<output message="tns:LocalSystemResponse" />
+		</operation>
+		<operation name="queryChildAggregates">
+			<input message="tns:empty" />
+			<output message="tns:AggregateResponse" />
+		</operation>
+		<operation name="queryChildCmts">
+			<input message="tns:empty" />
+			<output message="tns:CmtsResponse" />
+		</operation>
+	</portType>
+
+</definitions>
+

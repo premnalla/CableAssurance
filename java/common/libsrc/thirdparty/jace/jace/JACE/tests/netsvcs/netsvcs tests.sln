@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Logging Client Test", "Logger\Logging Client Test.vjp", "{AB19D989-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Name Service Client Test", "Naming\Name Service Client Test.vjp", "{AB19D98A-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Token Service Client Test", "Token\Token Service Client Test.vjp", "{AB19D98B-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "Time Service Client Test", "Time\Time Service Client Test.vjp", "{AB19D98C-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {AB19D989-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {AB19D989-5A5E-11D3-86CC-D0DB55C10000}
+		1 = {AB19D98A-5A5E-11D3-86CC-D0DB55C10000}
+		2 = {AB19D98B-5A5E-11D3-86CC-D0DB55C10000}
+		3 = {AB19D98C-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

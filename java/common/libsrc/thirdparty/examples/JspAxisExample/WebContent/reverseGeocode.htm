@@ -1,0 +1,49 @@
+<!--
+	* File : reverseGeocode .htm
+	* This is an ArcWeb Services Sample file for AddressFinder ArcWeb Service.
+-->
+<html>
+    <head><title>AddressFinder - Reverse Geocoding - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style>
+	</head>
+    <body><center><br><br>
+    <span class=boldfont>AddressFinder - Reverse Geocoding - ArcWeb Services Sample </span><br><br>
+
+    <!-- ============= Input Form =============   -->
+    <form action="jsp/reverseGeocodeRes.jsp" name="mForm" target="arcWebResultWin">
+    <table cellpadding="2" cellspacing="0" border="0" bgcolor="#95b7d3" width='600'>
+        <tr><td>
+        <table cellpadding="0" cellspacing="0" border="0" width='598' bgcolor='#ddebf1'>
+                <tr><td colspan="2" height=28 align=center class=boldfont bgcolor="#4271ad"><font color=ffffff>Input Information</font></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+           	<tr>
+                    <td align="right" class=textfont> &nbsp; X : </td>
+                    <td> &nbsp; <input type="text" name="x" size='25' value='-117.181667'></td></tr>
+		<tr>
+                    <td align="right" class=textfont> &nbsp;  Y : </td>
+                    <td> &nbsp; <input type="text" name="y" size='25' value='34.055556'></td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td colspan='2' class="boldfont" valign="top"> &nbsp;Optional Settings:</td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr> <td class=textfont align=right> <input type="checkbox" name="useProjection" value="true">Use Projection  &nbsp; &nbsp;ID or String   : </td>
+                     <td > &nbsp; <input type=text name=project value="4326" size='30'><FONT class='italicfont'>(eg. 'Geographic') </font></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td colspan="2" align=center><input type="submit" class=textfont value="Get Address"></td></tr>
+			<input type="hidden" name="action" value="addressFinder">
+                <tr><td colspan="2">&nbsp;</td></tr>
+                </table>
+            </td></tr>
+	</table>
+        </td></tr>
+    </table><br>
+    </form>
+    <a href="index.htm" class=textfont>Back to Index</a>
+</center></body>
+</html>

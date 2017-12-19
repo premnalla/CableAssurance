@@ -1,0 +1,114 @@
+/*
+ * Copyright: Copyright © 2001 Ericsson Radio Systems AB.
+ *            All rights reserved. Use is subject to license terms.
+ */
+package ossj.qos.ri.pm.threshold.adapter;
+
+/**
+ * Environment constants used for the threshold monitor EJBs. Note that all EJB
+ * references or environment might not be defined for all EJBs, that is the
+ * specified constant might be present in the ejb-jar.xml file (or other
+ * descriptor file) for some EJBs but not all.
+ *
+ * <p>To not cause any missunderstandings. The constants defined here are not the
+ * actual values for the constants. Instead they refer to the <code>java:comp/env</code>
+ * namespace environment property names defined in the deployment descriptor file
+ * <code>ejb-jar.xml</code> or other application server specific files. In the
+ * deployment descriptor these property names have the actual value assigned to
+ * them. That means that a constant here should not be changed unless the property
+ * <b>name</b> has been changed in the deployment descriptor!
+ *
+ * <p>The property values are retrieved from the EJB (application server) using
+ * JNDI.
+ *
+ * <p>The constants APPLICATION_CONTEXT_PROPERTY_PROVIDER_URL and
+ * APPLICATION_CONTEXT_PROPERTY_INITIAL_CONTEXT_FACTORY are the only exception.
+ * They do not refer to a "java:comp/env" property directly, but relatively
+ * beneath the APPLICATION_CONTEXT_JNDI namespace.
+ *
+ * @author Henrik Lindstrom, Ericsson
+ */
+public interface EnvironmentConstants {
+    /**
+     * Local home for threshold monitor entity bean.
+     * @see ThresholdMonitorBean
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String THRESHOLD_MONITOR_ENTITY_LOCAL_HOME =
+        "java:comp/env/ejb/ThresholdMonitorLocalHome";
+
+    /**
+     * Home for performance monitor session bean.
+     * @see ThresholdMonitorBean
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String PERFORMANCE_MONITOR_HOME =
+        "java:comp/env/ejb/PerformanceMonitorHome";
+
+    /**
+     * Home for alarm monitor session bean.
+     * @see ThresholdMonitorBean
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String ALARM_MONITOR_HOME =
+        "java:comp/env/ejb/AlarmMonitorHome";
+
+    /**
+     * The message topic that is used for sending events. Defined by the Alarm
+     * Monitor.
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String ALARM_MONITOR_EVENT_MESSAGE_TOPIC =
+        "java:comp/env/jms/AlarmMonitorEventMessageTopic";
+        // VP2 "jms/AlarmMonitorEventMessageTopic";
+
+    /**
+     * The topic connection factory used for sending alarm events. Defined by
+     * the Alarm Monitor.
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String ALARM_MONITOR_TOPIC_CONNECTION_FACTORY =
+        "java:comp/env/jms/AlarmMonitorTopicConnectionFactory";
+        // VP2 "jms/AlarmMonitorTopicConnectionFactory";
+
+    /**
+     * The property <code>includeApplicationDNInEvent</code> used by the message
+     * bean to see if the application distinguished name shall be included in
+     * generated events.
+     * @see ThresholdMonitorMessageBean
+     */
+    public static final String INCLUDE_APPLICATION_DN_IN_EVENT_PROPERTY_NAME =
+        "java:comp/env/includeApplicationDNInEvent";
+
+    /**
+     * JNDI name for the application context environment properties.
+     * @see ThresholdMonitorBean
+     */
+    public static final String APPLICATION_CONTEXT_JNDI =
+        "java:comp/env/applicationContext";
+
+    /**
+     * JNDI name for the system properties within the application context
+     * environment properties.
+     * @see ThresholdMonitorBean
+     */
+    public static final String APPLICATION_CONTEXT_SYSTEM_PROPERTIES_JNDI =
+        APPLICATION_CONTEXT_JNDI + "/systemProperties";
+
+    /**
+     * Property name for provider URL property in application context.
+     */
+    public static final String APPLICATION_CONTEXT_PROPERTY_PROVIDER_URL =
+        "PROVIDER_URL";
+    /**
+     * Property name for initial context factory property in application context.
+     */
+    public static final String APPLICATION_CONTEXT_PROPERTY_INITIAL_CONTEXT_FACTORY =
+        "INITIAL_CONTEXT_FACTORY";
+
+    /**
+     * Property name for application distinguished name property.
+     */
+    public static final String APPLICATION_DN_PROPERTY =
+        "java:comp/env/applicationDistinguishedName";
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:CPP="http://xml.apache.org/axis/wsdd/providers/CPP">
+	<service name="InteropBase" provider="CPP:RPC" description="Axis C++ web service">
+		<parameter name="className" value="/user/local/apache/axis/InteropBase.dll"/>
+		<parameter name="allowedMethods" value="echoString echoStringRequest echoStringArray echoStringArrayRequest echoInteger echoIntegerRequest echoIntegerArray echoIntegerArrayRequest echoFloat echoFloatRequest echoFloatArray echoFloatArrayRequest echoStruct echoStructRequest echoStructArray echoStructArrayRequest echoVoid echoVoidRequest echoBase64 echoBase64Request echoDate echoDateRequest echoHexBinary echoHexBinaryRequest echoDecimal echoDecimalRequest echoBoolean echoBooleanRequest "/>
+	</service>
+</deployment>

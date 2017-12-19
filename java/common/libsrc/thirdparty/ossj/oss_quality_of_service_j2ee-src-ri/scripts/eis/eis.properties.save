@@ -1,0 +1,56 @@
+#LOG PROPERTIES
+LOG_LEVEL = 1000
+#LOG_FILE  = c:/OSS_QOS/pmreports/logfile.txt
+LOG_FILE  = /qos/pmreports/logfile.txt
+
+#Network Model
+#NETWORK_MODEL = file:////mnt/MY_QOS_AS7/oss_quality_of_service-1_0_1-src-ri_s1as7/scripts/eis/network_model/Network.xml
+NETWORK_MODEL = file:////qos/scripts/eis/network_model/Network.xml
+
+#Network Model Data
+#NETWORK_MODEL_DATA_DIR = file:///c:/bea/wlserver6.0/config/mydomain/data/demo/
+#NETWORK_MODEL_DATA_DIR = c:/OSS_QOS/qospmri/network_model/data/demo/
+NETWORK_MODEL_DATA_DIR = /qos/scripts/eis/network_model/data/demo/
+
+#A scale factor that specifies how many times faster time should
+#proceed in the system. Time could be speeded up in demo situations.
+#TIME_SPEEDUP_FACTOR = 60
+TIME_SPEEDUP_FACTOR = 1
+
+#End date for the ScaledTimeGMT class. This is a class written by
+#NEC used for time transformation. 
+END_DATE = 2004-12-01_00.00.00
+
+#SWITCH PM PROPERTY MODE
+PM_PROPERTY_MODE		   = true	
+
+#PM HOME INTERFACE
+#PM_INITIAL_CONTEXT_FACTORY = weblogic.jndi.WLInitialContextFactory
+PM_INITIAL_CONTEXT_FACTORY = com.sun.appserv.naming.S1ASCtxFactory
+PM_PROVIDER_URL            = iiop://localhost:3700
+PM_SECURITY_PRINCIPAL      = guest
+PM_SECURITY_CREDENTIALS    = guest
+
+#JMS PROPERTIES
+#JMS_INITIAL_CONTEXT_FACTORY = weblogic.jndi.WLInitialContextFactory
+JMS_INITIAL_CONTEXT_FACTORY = com.sun.appserv.naming.S1ASCtxFactory
+JMS_PROVIDER_URL            = iiop://localhost:3700
+JMS_SECURITY_PRINCIPAL      = guest
+JMS_SECURITY_CREDENTIALS    = guest
+
+JMS_CONNECTION_FACTORY      = System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/TopicConnectionFactory
+JMS_TOPIC                   = System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/JVTEventTopic
+JMS_SECURITY_USERNAME       = guest
+JMS_SECURITY_PASSWORD       = guest
+
+# Pointers where to get the performance data
+# which is sent in the FILE_SINGLE notification.
+#FTP_URL                     = ftp://user:passwd@host/temp/
+FTP_URL                     = file:/qos/pmreports/
+
+# Local dir where to put the generated performance data files.
+#PM_DATA_PATH                = C:\\OSS_QOS\\pmreports\\
+PM_DATA_PATH                = /qos/pmreports/
+
+#Application Distinguished Name
+APPLICATION_DN		    = System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM	

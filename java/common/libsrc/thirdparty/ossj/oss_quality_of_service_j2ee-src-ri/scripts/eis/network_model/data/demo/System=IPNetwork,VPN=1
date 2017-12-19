@@ -1,0 +1,3 @@
+Time	ipDownstreamDelay	ipDownstreamPkts	ipDownstreamLostPkts	ipUpstreamDelay	ipUpstreamPkts	ipUpstreamLostPkts
+0	36.343	54697	372	32.799	40922	244
+1	40.49	106366	313	39.059	32468	50

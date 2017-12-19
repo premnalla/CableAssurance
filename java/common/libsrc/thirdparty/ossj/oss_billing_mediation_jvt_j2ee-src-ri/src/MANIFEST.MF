@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.5.3 
+Created-By: Apache Maven
+Built-By: ossj
+Package: 
+Class-Path:  oss_common_spec-1.0.jar oss_common_ri-1.0.jar oss_ip_billing_spec-1.1.jar xml_ri_generator-1.4.jar jdom.jar commons-logging.jar
+
+Name: 
+Specification-Title: oss_billing_mediation
+Specification-Vendor: OSS-J
+Implementation-Title: oss_billing_mediation_jvt_ri
+Implementation-Vendor: OSS-J
+Implementation-Version: 1.1.1
+

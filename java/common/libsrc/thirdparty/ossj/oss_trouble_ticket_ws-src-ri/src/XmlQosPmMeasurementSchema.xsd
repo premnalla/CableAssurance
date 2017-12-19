@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2001 Cisco Systems, Inc., Ericsson Radio Systems AB., Motorola, Inc.,
+NEC Corporation, Nokia Networks Oy, Nortel Networks Limited, Sun Microsystems, Inc.,
+Telcordia Technologies, Inc., Digital Fairway Corporation, Orchestream Holdings plc,
+BEA Systems, Inc. All rights reserved. Use is subject to license terms. -->
+<!--
+DOCUMENTATION IS PROVIDED "AS IS" AND ALL EXPRESS OR IMPLIED
+CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED
+WARRANTY OF MERCHANTABILITY, FITNESS FOR FOR A PARTICULAR PURPOSE OR
+NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT THAT SUCH
+DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.
+-->
+<schema
+	targetNamespace="http://java.sun.com/products/oss/xml/QualityOfService/PM/Measurement"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:pmUtil="http://java.sun.com/products/oss/xml/QualityOfService/PM/Util"
+	xmlns:measurement="http://java.sun.com/products/oss/xml/QualityOfService/PM/Measurement"
+	xmlns:irp="http://java.sun.com/products/oss/xml/Common/Util"
+	xmlns:co="http://java.sun.com/products/oss/xml/Common"
+	elementFormDefault="qualified">
+	<import namespace="http://java.sun.com/products/oss/xml/Common"
+			schemaLocation="XmlCommonSchema.xsd"/>
+	<import namespace="http://java.sun.com/products/oss/xml/Common/Util"
+			schemaLocation="XmlCommonUtilSchema.xsd"/>
+	<import namespace="http://java.sun.com/products/oss/xml/QualityOfService/PM/Util"
+			schemaLocation="XmlQosPmUtilSchema.xsd"/>
+
+	<!-- Value type javax.oss.pm.measurement.CurrentResultReport -->
+	<complexType name="CurrentResultReport">
+		<sequence>
+			<element name="reportData" type="measurement:ReportData" nillable="true"/>
+			<element name="reportInformation" type="measurement:ReportInfo" nillable="true"/>
+		</sequence>
+	</complexType>
+	<element name="createPerformanceMonitorByValueRequest">
+	<complexType>
+		<sequence>
+			<element name="pmValue" type="measurement:PerformanceMonitorByObjectsValue"/>
+</sequence>
+</complexType>
+</element>
+<element name="createPerformanceMonitorByValueResponse">
+<complexType>
+<sequence>
+<element name="performanceMonitorByValue"
+type="measurement:PerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="createPerformanceMonitorByValueException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="createException" type="co:CreateException"/>
+<element name="duplicateKeyException" type="co:DuplicateKeyException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getCurrentReportFormatRequest">
+
+
+
+</element>
+<element name="getCurrentReportFormatResponse">
+<complexType>
+<sequence>
+<element name="currentReportFormat" type="measurement:ReportFormat"/>
+</sequence>
+</complexType>
+</element>
+<element name="getCurrentReportFormatException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getCurrentResultReportRequest">
+<complexType>
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"/>
+<element name="reportFormat" type="measurement:ReportFormat"
+nillable="true" minOccurs="0"/>
+</sequence>
+</complexType>
+</element>
+<element name="getCurrentResultReportResponse">
+<complexType>
+<sequence>
+<element name="currentResultReport"
+type="measurement:CurrentResultReport"/>
+</sequence>
+</complexType>
+</element>
+<element name="getCurrentResultReportException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="illegalStateException" type="co:IllegalStateException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getObservableAttributesRequest">
+<complexType>
+<sequence>
+<element name="observableObjectClassName" type="string"/>
+</sequence>
+</complexType>
+</element>
+<element name="getObservableAttributesResponse">
+<complexType>
+<sequence>
+<element name="observableAttributes"
+type="measurement:ArrayOfPerformanceAttributeDescriptor"/>
+</sequence>
+</complexType>
+</element>
+<element name="getObservableAttributesException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getObservableObjectClassesRequest">
+<complexType>
+<complexContent>
+<extension base="co:IteratorRequest">
+<sequence/>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getObservableObjectClassesResponse">
+<complexType>
+<complexContent>
+<extension base="co:IteratorResponse">
+<sequence>
+<element name="classes" type="co:ArrayOfString"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getObservableObjectClassesException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getObservableObjectsRequest">
+<complexType>
+<complexContent>
+<extension base="co:IteratorRequest">
+<sequence>
+<element name="observableObjectClassName" type="string"/>
+<element name="base" type="string"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getObservableObjectsResponse">
+<complexType>
+<complexContent>
+<extension base="co:IteratorResponse">
+<sequence>
+<element name="ooDNs" type="co:ArrayOfString" nillable="true"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getObservableObjectsException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getPerformanceMonitorByKeyRequest">
+<complexType>
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"/>
+<element name="attributes" type="co:ArrayOfString"/>
+</sequence>
+</complexType>
+</element>
+<element name="getPerformanceMonitorByKeyResponse">
+<complexType>
+<sequence>
+<element name="pmValue" type="measurement:PerformanceMonitorValue"/>
+</sequence>
+</complexType>
+</element>
+<element name="getPerformanceMonitorByKeyException">
+<complexType>
+<choice>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="remoteException" type="co:RemoteException"/>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+</choice>
+</complexType>
+</element>
+<element name="getPerformanceMonitorsByKeysRequest">
+<complexType>
+<complexContent>
+<extension base="co:IteratorRequest">
+<sequence>
+<element name="pmKeys"
+type="measurement:ArrayOfPerformanceMonitorKey"/>
+<element name="attributes" type="co:ArrayOfString"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getPerformanceMonitorsByKeysResponse">
+<complexType>
+<complexContent>
+<extension base="co:IteratorResponse">
+<sequence>
+<element name="pmValue"
+type="measurement:ArrayOfPerformanceMonitorValue" />
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getPerformanceMonitorsByKeysException">
+<complexType>
+<choice>
+<element name="finderException" type="co:FinderException"/>
+<element name="remoteException" type="co:RemoteException"/>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+</choice>
+</complexType>
+</element>
+<element name="getPerformanceReportInfoRequest">
+<complexType>
+<complexContent>
+<extension base="co:IteratorRequest">
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"
+nillable="true"/>
+<element name="date" type="dateTime" nillable="true"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getPerformanceReportInfoResponse">
+<complexType>
+<complexContent>
+<extension base="co:IteratorResponse">
+<sequence>
+<element name="performanceReportInfo"
+type="measurement:ArrayOfReportInfo"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="getPerformanceReportInfoException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getReportFormatsRequest">
+</element>
+<element name="getReportFormatsResponse">
+<complexType>
+<sequence>
+<element name="reportFormats" type="measurement:ArrayOfReportFormat"/>
+</sequence>
+</complexType>
+</element>
+<element name="getReportFormatsException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getReportModesRequest">
+</element>
+<element name="getReportModesResponse">
+<complexType>
+<sequence>
+<element name="reportModes" type="measurement:ArrayOfReportMode"
+nillable="true" />
+</sequence>
+</complexType>
+</element>
+<element name="getReportModesException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getSupportedGranularitiesRequest">
+<complexType>
+<sequence>
+<element name="pmValue" type="measurement:PerformanceMonitorValue"/>
+</sequence>
+</complexType>
+</element>
+<element name="getSupportedGranularitiesResponse">
+<complexType>
+<sequence>
+<element name="supportedGranularities" type="co:ArrayOfInt"/>
+</sequence>
+</complexType>
+</element>
+<element name="getSupportedGranularitiesException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+</choice>
+</complexType>
+</element>
+<element name="getSupportedObservableObjectsRequest">
+<complexType>
+<sequence>
+<element name="dnList" type="co:ArrayOfString"/>
+</sequence>
+</complexType>
+</element>
+<element name="getSupportedObservableObjectsResponse">
+<complexType>
+<sequence>
+<element name="supportedObservableObjects" type="co:ArrayOfString"/>
+</sequence>
+</complexType>
+</element>
+<element name="getSupportedObservableObjectsException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="getVersionRequest">
+
+
+
+</element>
+<element name="getVersionResponse">
+<complexType>
+<sequence>
+<element name="versions" type="co:ArrayOfString"/>
+</sequence>
+</complexType>
+</element>
+<element name="getVersionException">
+<complexType>
+<choice>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="queryPerformanceMonitorsRequest">
+<complexType>
+<complexContent>
+<extension base="co:IteratorRequest">
+<sequence>
+<element name="query" type="measurement:QueryPerformanceMonitorValue"/>
+<element name="attrNames" type="co:ArrayOfString"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="measurementQuery" >
+<complexType>
+<complexContent>
+<extension base="co:QueryValue">
+<sequence>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="queryPerformanceMonitorsResponse">
+<complexType>
+<complexContent>
+<extension base="co:IteratorResponse">
+<sequence>
+<element name="performanceMonitors"
+type="measurement:ArrayOfPerformanceMonitorValue"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</element>
+<element name="queryPerformanceMonitorsException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="removePerformanceMonitorByKeyRequest">
+<complexType>
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"
+minOccurs="0"/>
+</sequence>
+</complexType>
+</element>
+<element name="removePerformanceMonitorByKeyResponse">
+<complexType>
+<sequence/>
+</complexType>
+</element>
+<element name="removePerformanceMonitorByKeyException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="removeException" type="co:RemoveException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="resumePerformanceMonitorByKeyRequest">
+<complexType>
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="resumePerformanceMonitorByKeyResponse">
+<complexType>
+<sequence/>
+</complexType>
+</element>
+<element name="resumePerformanceMonitorByKeyException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="suspendPerformanceMonitorByKeyRequest">
+<complexType>
+<sequence>
+<element name="pmKey" type="measurement:PerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="suspendPerformanceMonitorByKeyResponse">
+<complexType>
+<sequence/>
+</complexType>
+</element>
+<element name="suspendPerformanceMonitorByKeyException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="objectNotFoundException"
+type="co:ObjectNotFoundException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="tryCreatePerformanceMonitorsByValuesRequest">
+<complexType>
+<sequence>
+<element name="pmValues"
+type="measurement:ArrayOfPerformanceMonitorValue"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryCreatePerformanceMonitorsByValuesResponse">
+<complexType>
+<sequence>
+<element name="createPerformanceMonitorsByValues"
+type="measurement:ArrayOfPerformanceMonitorKeyResult"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryCreatePerformanceMonitorsByValuesException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="duplicateKeyException" type="co:DuplicateKeyException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="tryRemovePerformanceMonitorsByKeysRequest">
+<complexType>
+<sequence>
+<element name="pmKeys" type="measurement:ArrayOfPerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryRemovePerformanceMonitorsByKeysResponse">
+<complexType>
+<sequence>
+<element name="removePerformanceMonitorsByKeys"
+type="measurement:ArrayOfPerformanceMonitorKeyResult"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryRemovePerformanceMonitorsByKeysException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="tryResumePerformanceMonitorsByKeysRequest">
+<complexType>
+<sequence>
+<element name="pmKeys" type="measurement:ArrayOfPerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryResumePerformanceMonitorsByKeysResponse">
+<complexType>
+<sequence>
+<element name="resumePerformanceMonitorsByKeys"
+type="measurement:ArrayOfPerformanceMonitorKeyResult"/>
+</sequence>
+</complexType>
+</element>
+<element name="tryResumePerformanceMonitorsByKeysException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+<element name="trySuspendPerformanceMonitorsByKeysRequest">
+<complexType>
+<sequence>
+<element name="pmKeys" type="measurement:ArrayOfPerformanceMonitorKey"/>
+</sequence>
+</complexType>
+</element>
+<element name="trySuspendPerformanceMonitorsByKeysResponse">
+<complexType>
+<sequence>
+<element name="suspendPerformanceMonitorsByKeys"
+type="measurement:ArrayOfPerformanceMonitorKeyResult"/>
+</sequence>
+</complexType>
+</element>
+<element name="trySuspendPerformanceMonitorsByKeysException">
+<complexType>
+<choice>
+<element name="illegalArgumentException"
+type="co:IllegalArgumentException"/>
+<element name="unsupportedOperationException"
+type="co:UnsupportedOperationException"/>
+<element name="remoteException" type="co:RemoteException"/>
+</choice>
+</complexType>
+</element>
+
+
+	<element name="getQueryTypesRequest">
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getQueryTypesResponse">
+		<complexType>
+			<sequence>
+				<element name="queryTypes" 
+                     type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getQueryTypesException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" 
+                     type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+
+<!--Enum type javax.oss.pm.measurement.JVTPerformanceMonitorSessionOptionalOpt-->
+<element name="jVTPerformanceMonitorSessionOptionalOpt"
+type="measurement:JVTPerformanceMonitorSessionOptionalOpt"
+nillable="true"/>
+<simpleType name="JVTPerformanceMonitorSessionOptionalOpt">
+<restriction base="string">
+<enumeration value="TRY_CREATE_PERFORMANCE_MONITORS_BY_VALUES"/>
+<enumeration value="TRY_REMOVE_PERFORMANCE_MONITORS_BY_KEYS"/>
+<enumeration value="SUSPEND_PERFORMANCE_MONITOR_BY_KEY"/>
+<enumeration value="TRY_SUSPEND_PERFORMANCE_MONITORS_BY_KEYS"/>
+<enumeration value="RESUME_PERFORMANCE_MONITOR_BY_KEY"/>
+<enumeration value="TRY_RESUME_PERFORMANCE_MONITORS_BY_KEYS"/>
+<enumeration value="GET_CURRENT_RESULT_REPORT"/>
+</restriction>
+</simpleType>
+<!-- Value type javax.oss.pm.measurement.PerformanceAttributeDescriptor -->
+<complexType name="PerformanceAttributeDescriptor">
+<sequence>
+<element name="name" type="string"/>
+<element ref="measurement:baseAttributeTypes"/>
+<element ref="measurement:baseCollectionMethods"/>
+<element name="isArray" type="boolean"/>
+</sequence>
+</complexType>
+<!-- Enum type attribute types -->
+<element name="baseAttributeTypes" type="string"/>
+<element name="attributeTypes" type="measurement:AttributeTypes"
+substitutionGroup="measurement:baseAttributeTypes"/>
+<simpleType name="AttributeTypes">
+<restriction base="string">
+<enumeration value="INT"/>
+<enumeration value="REAL"/>
+<enumeration value="STRING"/>
+</restriction>
+</simpleType>
+<!-- Enum type collection methods -->
+<element name="baseCollectionMethods" type="string"/>
+<element name="collectionMethods" type="measurement:CollectionMethods"
+substitutionGroup="measurement:baseCollectionMethods"/>
+<simpleType name="CollectionMethods">
+<restriction base="string">
+<enumeration value="CUMULATIVE_COUNTER"/>
+<enumeration value="GAUGE"/>
+<enumeration value="DISCRETE_EVENT_REGISTRATION"/>
+<enumeration value="STATUS_INSPECTION"/>
+</restriction>
+</simpleType>
+<complexType name="ArrayOfPerformanceAttributeDescriptor">
+<sequence>
+<element name="Item" type="measurement:PerformanceAttributeDescriptor"
+nillable="true" maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Event type javax.oss.pm.measurement.PerformanceDataEvent -->
+<element name="performanceDataEvent">
+<complexType>
+<sequence>
+<element name="event" type="measurement:PerformanceDataEventType"
+nillable="false"/>
+</sequence>
+</complexType>
+</element>
+<complexType name="PerformanceDataEventType">
+<complexContent>
+<extension base="irp:IRPEventType">
+<sequence>
+<element name="performanceMonitorReport" type="anyType"
+nillable="false"/>
+<element name="reportFormat" type="measurement:ReportFormat"
+nillable="false"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.PerformanceDataEventDescriptor -->
+<complexType name="PerformanceDataEventDescriptor">
+<complexContent>
+<extension base="irp:IRPEventPropertyDescriptor">
+<sequence/>
+</extension>
+</complexContent>
+</complexType>
+<!-- Event type javax.oss.pm.measurement.PerformanceDataAvailableEvent -->
+<element name="performanceDataAvailableEvent">
+<complexType>
+<sequence>
+<element name="event"
+type="measurement:PerformanceDataAvailableEventType"
+nillable="false"/>
+</sequence>
+</complexType>
+</element>
+<complexType name="PerformanceDataAvailableEventType">
+<complexContent>
+<extension base="irp:IRPEventType">
+<sequence>
+<element name="reportInformation" type="measurement:ReportInfo"
+nillable="false"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!--Value type javax.oss.pm.measurement.PerformanceDataAvailableEventDescriptor-->
+<complexType name="PerformanceDataAvailableEventDescriptor">
+<complexContent>
+<extension base="irp:IRPEventPropertyDescriptor">
+<sequence/>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.PerformanceMonitorByClassesValue -->
+<complexType name="PerformanceMonitorByClassesValue">
+<complexContent>
+<extension base="measurement:PerformanceMonitorValue">
+<sequence>
+<element name="measurementAttributes"
+type="measurement:ArrayOfPerformanceAttributeDescriptor"
+nillable="true" minOccurs="0"/>
+<element name="observedObjectClasses" type="co:ArrayOfString"
+nillable="true" minOccurs="0"/>
+<element name="scope" type="string" nillable="true" minOccurs="0"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.PerformanceMonitorByObjectsValue -->
+<complexType name="PerformanceMonitorByObjectsValue">
+<complexContent>
+<extension base="measurement:PerformanceMonitorValue">
+<sequence>
+<element name="measurementAttributes"
+type="measurement:ArrayOfPerformanceAttributeDescriptor"
+nillable="true" minOccurs="0"/>
+<element name="observedObjects" type="co:ArrayOfString"
+nillable="true" minOccurs="0"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.PerformanceMonitorKey -->
+<complexType name="PerformanceMonitorKey">
+<complexContent>
+<extension base="co:ManagedEntityKey">
+<sequence>
+<element name="performanceMonitorPrimaryKey" type="string"
+nillable="false"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Array type javax.oss.pm.measurement.PerformanceMonitorKey[] -->
+<complexType name="ArrayOfPerformanceMonitorKey">
+<sequence>
+<element name="item" type="measurement:PerformanceMonitorKey"
+nillable="true" maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.PerformanceMonitorKeyResult -->
+<complexType name="PerformanceMonitorKeyResult">
+<complexContent>
+<extension base="co:ManagedEntityKeyResult">
+<sequence>
+<element name="performanceMonitorKey"
+type="measurement:PerformanceMonitorKey" nillable="false"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Array type javax.oss.pm.measurement.PerformanceMonitorKeyResult[] -->
+<complexType name="ArrayOfPerformanceMonitorKeyResult">
+<sequence>
+<element name="item" type="measurement:PerformanceMonitorKeyResult"
+nillable="true" maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Enum type javax.oss.pm.measurement.PerformanceMonitorState -->
+<element name="basePerformanceMonitorState" type="string" nillable="true" />
+<element name="performanceMonitorState"
+type="measurement:PerformanceMonitorState"
+substitutionGroup="measurement:basePerformanceMonitorState"/>
+<simpleType name="PerformanceMonitorState">
+<restriction base="string">
+<enumeration value="ACTIVE_ON_DUTY"/>
+<enumeration value="ACTIVE_OFF_DUTY"/>
+<enumeration value="SUSPENDED"/>
+</restriction>
+</simpleType>
+<!-- Value type javax.oss.pm.measurement.PerformanceMonitorValue -->
+<complexType name="PerformanceMonitorValue">
+<complexContent>
+<extension base="co:ManagedEntityValue">
+<sequence>
+<element name="name" type="string" nillable="true" minOccurs="0"/>
+<element name="granularityPeriod" type="int" nillable="true"
+minOccurs="0"/>
+<element name="reportByFile" type="measurement:ReportMode"
+nillable="true" minOccurs="0"/>
+<element name="reportByEvent" type="measurement:ReportMode"
+nillable="true" minOccurs="0"/>
+<element name="reportPeriod" type="int" nillable="true"
+minOccurs="0"/>
+<element name="reportFormat" type="measurement:ReportFormat"
+nillable="true" minOccurs="0"/>
+<element name="schedule" type="pmUtil:Schedule" nillable="true"
+minOccurs="0"/>
+<element ref="measurement:basePerformanceMonitorState"
+minOccurs="0"/>
+<element name="performanceMonitorKey"
+type="measurement:PerformanceMonitorKey" nillable="true"
+minOccurs="0"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Array type javax.oss.pm.measurement.PerformanceMonitorValue[] -->
+<complexType name="ArrayOfPerformanceMonitorValue">
+<sequence>
+<element name="item" type="measurement:PerformanceMonitorValue"
+nillable="true" maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.QueryByDNValue -->
+<complexType name="QueryByDNValue">
+<complexContent>
+<extension base="measurement:QueryPerformanceMonitorValue">
+<sequence>
+<element name="distinguishedNames" type="co:ArrayOfString"
+nillable="true" minOccurs="0"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.QueryPerformanceMonitorValue -->
+<complexType name="QueryPerformanceMonitorValue">
+<complexContent>
+<extension base="co:QueryValue">
+<sequence>
+<element name="name" type="string" nillable="true" minOccurs="0"/>
+<element name="granularityPeriod" type="int" nillable="true"
+minOccurs="0"/>
+<element ref="measurement:basePerformanceMonitorState"
+minOccurs="0"/>
+<element name="valueType" type="string" nillable="true"
+minOccurs="0"/>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.ReportData -->
+<complexType name="ReportData">
+<sequence>
+<element name="performanceMonitorReport" type="anyType"/>
+<element name="reportFormat" type="measurement:ReportFormat"/>
+</sequence>
+</complexType>
+<!-- Enum type javax.oss.pm.measurement.ReportFormatTypes -->
+<element name="baseReportFormatTypes" type="string"/>
+<element name="reportFormatTypes" type="measurement:ReportFormatTypes"
+substitutionGroup="measurement:baseReportFormatTypes"/>
+<simpleType name="ReportFormatTypes">
+<restriction base="string">
+<enumeration value="ASCII"/>
+<enumeration value="ANS1"/>
+<enumeration value="BINARY"/>
+<enumeration value="XML"/>
+</restriction>
+</simpleType>
+<!-- Value type javax.oss.pm.measurement.ReportFormat -->
+<complexType name="ReportFormat">
+<sequence>
+<element name="owner" type="string" nillable="false"/>
+<element name="specification" type="string" nillable="false"/>
+<element name="technology" type="string" nillable="false"/>
+<element name="version" type="string" nillable="false"/>
+<element name="reportFormat" type="measurement:ReportFormatTypes"
+nillable="true" minOccurs="0"/>
+</sequence>
+</complexType>
+<!-- Array type javax.oss.pm.measurement.ReportFormat[] -->
+<complexType name="ArrayOfReportFormat">
+<sequence>
+<element name="item" type="measurement:ReportFormat" nillable="true"
+maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Value type javax.oss.pm.measurement.ReportInfo -->
+<complexType name="ReportInfo">
+<sequence>
+<element name="url" type="string" nillable="false"/>
+<element name="reportFormat" type="measurement:ReportFormat"
+nillable="false"/>
+<element name="expirationDate" type="dateTime" nillable="false"/>
+</sequence>
+</complexType>
+<!-- Array type javax.oss.pm.measurement.ReportInfo[] -->
+<complexType name="ArrayOfReportInfo">
+<sequence>
+<element name="item" type="measurement:ReportInfo" nillable="true"
+maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<!-- Enum type javax.oss.pm.measurement.ReportMode -->
+<element name="baseReportMode" type="string"/>
+<element name="reportMode" type="measurement:ReportMode"
+substitutionGroup="measurement:baseReportMode"/>
+<simpleType name="ReportMode">
+<restriction base="string">
+<enumeration value="NO_REPORT_MODE"/>
+<enumeration value="EVENT_SINGLE"/>
+<enumeration value="EVENT_MULTIPLE"/>
+<enumeration value="FILE_SINGLE"/>
+<enumeration value="FILE_MULTIPLE"/>
+</restriction>
+</simpleType>
+<!-- Array type javax.oss.pm.measurement.ReportMode[] -->
+<complexType name="ArrayOfReportMode">
+<sequence>
+<element name="item" type="measurement:ReportMode"
+nillable="true" maxOccurs="unbounded"/>
+</sequence>
+</complexType>
+<complexType name="measurementQuery" >
+<complexContent>
+<extension base="co:QueryValue">
+<sequence>
+</sequence>
+</extension>
+</complexContent>
+</complexType>
+</schema>
+

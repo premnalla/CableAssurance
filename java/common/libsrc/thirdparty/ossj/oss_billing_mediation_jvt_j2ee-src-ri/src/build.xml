@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE project [ <!ENTITY include SYSTEM "../common.xml"> ]>
+
+  <!-- ======================================================= -->
+  <!--  Sun ONE Application Server Sample Application build xml -->
+  <!-- ======================================================= -->
+
+  <project name="oss_billing_mediation" default="core" basedir=".">
+
+  <!-- ======================================================= -->
+  <!--			 App name-dependent settings.				   -->
+  <!-- ======================================================= -->
+
+  <property name="appname" value="oss_billing_mediation_jvt_ri-1.1.1"/>
+  <property name="sample.home" value="../"/>
+  <property name="sample.name" value="oss_billing_mediation"/>
+  <property name="project.classpath" 
+	 value="../lib/oss_common_spec-1.0.jar:../lib/oss_common_ri-1.0.jar:../lib/oss_ip_billing_spec-1.1.jar:../lib/xml_ri_generator-1.4.jar:../lib/jdom.jar" />
+<property name="classpath.prefix" value="${project.classpath}"/>
+
+ <property name="ear"         value="${appname}.ear"/>  
+ <property name="binary.name" value="${ear}"/>
+ <property name="deploy.file" value="../${ear}"/>
+
+  <!-- ======================================================= -->
+  <!--			 Package directory structures of interest.	   -->
+  <!-- ======================================================= -->
+
+  <property name="app.pkg" value="client"/>
+  <property name="jar.pkg" value="com"/>
+ 
+  <!-- ======================================================= -->
+  <!--			Java Doc properties .					       -->
+  <!-- ======================================================= -->
+  <property name="javadoc.pkgnames" value="com.*" />
+
+  <!-- ======================================================= -->
+  <!--				Include common.xml					       -->
+  <!-- ======================================================= -->
+ 
+  &include;
+	
+  <!-- ======================================================= -->
+  <!--		Tagets to build and deploy Billing Mediation 1.1.1 RI.      -->
+  <!-- ======================================================= -->
+
+  <target name="clean" depends="clean_common"/>
+  <target name="compile" depends="init,compile_common" />
+  <target name="javadocs" depends="javadocs_common" />
+  <target name="reconfig" depends="reconfig_common" />
+  <target name="deploy_ear" depends="deploy_common" />
+  <target name="deploy" depends="setup,deploy_ear"/>
+  <target name="undeploy_ear" depends="undeploy_common"/>
+  <target name="undeploy" depends="undeploy_ear,unsetup"/>
+  <target name="verify" depends="init,verify_common"/>
+  <target name="sql" depends="sql_common"/>
+  <target name="clientjar" depends="init,create_clientjar"/>
+  <target name="war" depends="init,create_project_war"/>
+  <target name="jar" depends="init,create_project_ejbjar"/>
+  <target name="ear" depends="init,jar,create_ear,clientjar"/>
+  <target name="core" depends="compile,ear" />
+  <target name="all" depends="core,javadocs,verify,deploy"/>
+ 
+  <!-- ======================================================= -->
+  <!-- Initialise init method properties                                            -->
+  <!-- ======================================================= -->
+  <target name="init"       depends="init_common">
+      <condition property="deploy.file" value="${assemble.ear}/${ear}"> 
+        <available file="${assemble.ear}/${ear}"/>   
+    </condition>
+    <property name="deploy.file" value="../${ear}"/>
+    
+    <condition property="verify.file" value="${assemble.ear}/${ear}"> 
+        <available file="${assemble.ear}/${ear}"/>   
+    </condition>
+    <property name="verify.file" value="../${ear}"/>    
+  </target>
+ 
+  <!-- ======================================================= -->
+  <!-- Assemble EJB JAR module.                                -->
+  <!-- ======================================================= -->
+  <property name="assemble.projectejbjar" value="${assemble}/${appname}jar"/>
+  <property name="projectejbjar" value="${appname}Ejb.jar"/>
+
+  <target name="clean_project_ejbjar">
+    <delete dir="${assemble.projectejbjar}"/>
+  </target>
+
+  <target name="create_project_ejbjar" depends="clean_project_ejbjar">
+    <mkdir dir="${assemble.projectejbjar}"/>
+    <copy todir="${assemble.projectejbjar}/${jar.pkg}">
+      <fileset dir="${build.classesdir}/${jar.pkg}/" includes="**/*.class"  excludes="**/IPBJVTSessionXmlDelegate.class,**/IPBRIXmlMessageDrivenBean.class,**/NameValueFieldDescriptor.class,**/servlet/, **/client/"/>
+    </copy>
+    <mkdir dir="${assemble.projectejbjar}/META-INF"/>
+    <copy file="ejb-jar.xml" tofile="${assemble.projectejbjar}/META-INF/ejb-jar.xml" />
+    <copy file="sun-ejb-jar.xml" tofile="${assemble.projectejbjar}/META-INF/sun-ejb-jar.xml" />
+    <copy file="sun-cmp-mappings.xml" tofile="${assemble.projectejbjar}/META-INF/sun-cmp-mappings.xml" />
+	<copy file="sql/${project.resource.prefix}.dbschema" tofile="${assemble.projectejbjar}/${project.resource.prefix}.dbschema" />
+    <jar jarfile="../${projectejbjar}" manifest="MANIFEST.MF"
+       basedir="${assemble.projectejbjar}" />
+    <move file="../${projectejbjar}" todir="${assemble.projectejbjar}"/>
+  </target>
+
+  <target name="create_ear" depends="clean_ear_common,jar,mkdir_ear">
+    <copy file="${assemble.projectejbjar}/${projectejbjar}" todir="${assemble.ear}"/>
+  	<copy file="../lib/oss_common_spec-1.0.jar" todir="${assemble.ear}"/>
+	<copy file="../lib/oss_common_ri-1.0.jar" todir="${assemble.ear}"/>
+	<copy file="../lib/oss_ip_billing_spec-1.1.jar" todir="${assemble.ear}"/>
+	<copy file="../lib/xml_ri_generator-1.4.jar" todir="${assemble.ear}"/>
+	<copy file="../lib/jdom.jar" todir="${assemble.ear}"/>
+	<copy file="../lib/commons-logging.jar" todir="${assemble.ear}"/>
+  <copy todir="${assemble.ear}/META-INF/">
+      <fileset dir="." includes="${earDD}"/>
+    </copy>
+    <jar jarfile="${assemble.ear}/${ear}"
+       basedir="${assemble.ear}" excludes="**/*.ear"/>
+    <delete file="${assemble.ear}/${projectejbjar}" />
+    <copy file="${assemble.ear}/${ear}" tofile="../${ear}"/>
+  </target>
+   
+  <target name="clean_clientjar">
+  </target>
+  <target name="create_clientjar" depends="clean_clientjar">
+      <echo message="Billing Mediation RI 1.1.1 do not have a client jar"/>
+  </target>  
+  <target name="clean_project_war">
+  </target>
+  <target name="create_project_war" depends="clean_project_war">
+        <echo message="Billing Mediation RI 1.1.1 do not have a war component"/>
+  </target>
+  <!-- ============================================================== -->
+  <!--           JDBC Resource specific properties.                   -->
+  <!-- ============================================================== -->
+  <property name="project.resource.prefix" value="ossjbilling_mediationri" />
+  <property name="conpool.name"       value="${project.resource.prefix}pool" />
+  <property name="jdbc.resource.name" value="jdbc/${project.resource.prefix}" />
+
+  <property name="pm.resource.name"   value="jdo/${project.resource.prefix}" />
+  <property name="pm.factory.class"
+            value="com.sun.jdo.spi.persistence.support.sqlstore.impl.PersistenceManagerFactoryImpl" />
+
+  <property name="db.user"  value="PBPUBLIC"/>
+  <property name="db.pwd"   value="PBPUBLIC"/>
+  <property name="ds.class" value="com.pointbase.xa.xaDataSource" />
+  <property name="ds.type"	value="javax.sql.XADataSource" />
+  <property name="db.file"  value="sql/${project.resource.prefix}_create.sql"/>
+  <property name="url.prop" value="databaseName" />
+  
+  <property name="db.host"  value="localhost"/>
+  <property name="db.port"  value="9092"/>
+  <property name="db.sid"   value="pointbase"/>
+  <property name="db.url"   value="jdbc\:pointbase\:server\://${db.host}:${db.port}\/${db.sid}"/>
+
+  <!-- ============================================================== -->
+  <!--      JDBC Tagets to build and deploy Billing Mediation 1.1.1 RI..       -->
+  <!-- ============================================================== -->
+
+  <target name="create-jdbc-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-connection-pool
+          --datasourceclassname ${ds.class}
+		  --restype ${ds.type}
+          ${conpool.name}" />
+    </antcall>
+    <antcall target="admin_command_common">
+		<param name="admin.command"
+			value="set server.resources.jdbc-connection-pool.${conpool.name}.property.user=${db.user}" />
+    </antcall>
+	<antcall target="admin_command_common">
+	  <param name="admin.command"
+		  value="set server.resources.jdbc-connection-pool.${conpool.name}.property.password=${db.pwd}" />
+	</antcall>
+	<antcall target="admin_command_common">
+		<param name="admin.command"
+			value="set server.resources.jdbc-connection-pool.${conpool.name}.property.databaseName=${db.url}" />
+	</antcall>
+</target>
+
+  <target name="create-jdbc-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-resource
+         --connectionpoolid ${conpool.name} 
+		 ${jdbc.resource.name}" />
+    </antcall>
+  </target>
+
+  <target name="create-persistence-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-persistence-resource 
+			--jdbcjndiname ${jdbc.resource.name} 
+			--factoryclass ${pm.factory.class} 
+			--enabled=true
+		${pm.resource.name} " />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-connection-pool ${conpool.name} " />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-resource ${jdbc.resource.name} " />
+    </antcall>
+  </target>
+ 
+  <target name="delete-persistence-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-persistence-resource ${pm.resource.name} " />
+    </antcall>
+  </target>
+
+  <!-- ============================================================== -->
+  <!--            JMS Resource specific properties.                                       -->
+  <!-- ============================================================== -->
+  
+  <property name="jvt.topic.factory.type" value="javax.jms.TopicConnectionFactory" />
+  <property name="jvt.topic.factory.jndi.name" 
+      value="System/DFW/ApplicationType/Producer/Application/1-1;1-1-1;NEC-Billing_mediation-RI/Comp/TopicConnectionFactory" />
+  <property name="jvt.topic.type" value="javax.jms.Topic" />
+  <property name="jvt.topic.jndi.name" 
+      value="System/DFW/ApplicationType/Producer/Application/1-1;1-1-1;NEC-Billing_mediation-RI/Comp/JVTEventTopic" />
+  <property name="jvt.topic.destination" value="Billing_mediationJvtEventTopic" />
+
+  <!-- ======================================================= -->
+  <!--   JMS Tagets to build and deploy Billing Mediation 1.1.1 RI.     -->
+  <!-- ======================================================= -->
+
+  <target name="create-jvt-jms-resources" depends="init">
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${jvt.topic.factory.type}" />
+       <param name="jms.resource.name"   value="${jvt.topic.factory.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${jvt.topic.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${jvt.topic.destination} ${jvt.topic.jndi.name}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+       <param name="jms.dest"            value="${jvt.topic.destination}" />
+     </antcall>
+  </target>
+
+  <target name="delete-jvt-jms-resources" depends="init">
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${jvt.topic.factory.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${jvt.topic.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+        <param name="jms.dest" value="${jvt.topic.destination}" />
+      </antcall>
+  </target>
+
+  <target name="create-jms-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="create-jms-resource --restype ${jms.restype} --enabled=true ${jms.resource.name}"/>
+  </target>
+
+  <target name="delete-jms-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="delete-jms-resource ${jms.resource.name}"/>
+  </target>
+
+  <target name="create-jmsdest" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="create-jmsdest --desttype ${jms.desttype} ${jms.dest}"/>
+  </target>
+
+  <target name="delete-jmsdest" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="delete-jmsdest --desttype ${jms.desttype} ${jms.dest}"/>
+  </target>
+
+  <!-- ======================================================= -->
+  <!--       SunONE AS set unset config                        -->
+  <!-- ======================================================= -->
+  <target name="setup" depends="setup_env">
+    <antcall target="create-jdbc-connection-pool"/>
+    <antcall target="create-jdbc-resource"/>
+    <antcall target="create-persistence-resource"/>
+    <antcall target="create-jvt-jms-resources"/>
+    <antcall target="reconfig"/>
+  </target>
+  <target name="unsetup"> 
+    <antcall target="delete-jdbc-resource"/>
+    <antcall target="delete-jdbc-connection-pool"/>
+    <antcall target="delete-persistence-resource"/>
+    <antcall target="delete-jvt-jms-resources"/>
+    <antcall target="reconfig"/>
+  </target>
+</project>

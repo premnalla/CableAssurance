@@ -1,0 +1,39 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from StockQuoteService WSDL service -->
+
+  <service name="StockQuoteServiceSOAP11port" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://StockQuoteService"/>
+      <parameter name="wsdlServiceElement" value="StockQuoteService"/>
+      <parameter name="schemaQualified" value="http://StockQuoteService/xsd"/>
+      <parameter name="wsdlServicePort" value="StockQuoteServiceSOAP11port"/>
+      <parameter name="className" value="StockQuoteService_pkg.StockQuoteServiceSOAP11BindingSkeleton"/>
+      <parameter name="wsdlPortType" value="StockQuoteServicePortType"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <parameter name="allowedMethods" value="*"/>
+      <parameter name="scope" value="Session"/>
+
+  </service>
+  <service name="StockQuoteServiceSOAP12port" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://StockQuoteService"/>
+      <parameter name="wsdlServiceElement" value="StockQuoteService"/>
+      <parameter name="schemaQualified" value="http://StockQuoteService/xsd"/>
+      <parameter name="wsdlServicePort" value="StockQuoteServiceSOAP12port"/>
+      <parameter name="className" value="StockQuoteService_pkg.StockQuoteServiceSOAP12BindingSkeleton"/>
+      <parameter name="wsdlPortType" value="StockQuoteServicePortType"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <parameter name="allowedMethods" value="*"/>
+      <parameter name="scope" value="Session"/>
+
+  </service>
+</deployment>

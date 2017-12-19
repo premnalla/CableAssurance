@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE project [ <!ENTITY include SYSTEM "E:\Sun\j2eesdk1.4_2005Q2\samples\common-ant.xml"> ]>
+
+  <!-- ======================================================= -->
+  <!--  Sun ONE Application Server Sample Application build xml -->
+  <!-- ======================================================= -->
+
+<project name="oss_common" default="core" basedir=".">
+    <property name="application.type.ear" value="true"/>
+    <property name="sample.home" value="E:\Sun\j2eesdk1.4_2005Q2\samples"/>
+    <property name="sample.name" value="oss_common"/>
+    <property name="src" value="."/>
+
+    <!-- ======================================================= -->
+    <!--			 App name-dependent settings.				   -->
+    <!-- ======================================================= -->
+
+    <property name="appname" value="oss_common_ri"/>
+    <property name="project.classpath" 
+    value=" ../lib/oss_cbe_alarm_spec-1.3.jar;
+    ../lib/oss_cbe_datatypes_spec-1.3.jar;
+    ../lib/oss_cbe_location_spec-1.3.jar;
+    ../lib/oss_cbe_measurement_spec-1.3.jar;
+    ../lib/oss_cbe_party_spec-1.3.jar;
+    ../lib/oss_cbe_policy_spec-1.3.jar;
+    ../lib/oss_cbe_product_spec-1.3.jar;
+    ../lib/oss_cbe_report_spec-1.3.jar;
+    ../lib/oss_cbe_resource_spec-1.3.jar;
+    ../lib/oss_cbe_schedule_spec-1.3.jar;
+    ../lib/oss_cbe_service_spec-1.3.jar;
+    ../lib/oss_cbe_sla_spec-1.3.jar;
+    ../lib/oss_cbe_trouble_spec-1.3.jar;
+    ../lib/oss_cbe_bi_spec-1.3.jar;
+    ../lib/oss_cbe_agreement_spec-1.3.jar;
+    ../lib/oss_common_spec-1.3.jar" />
+			
+			
+			
+    <property name="classpath.prefix" value="${project.classpath}"/>
+
+    <property name="ear"         value="${appname}_ear-1.3.ear"/>  
+    <property name="deploy.file" value="../${ear}"/>
+    <property name="binary.name" value="${appname}"/>
+
+    <!-- ======================================================= -->
+    <!--			 Package directory structures of interest.	   -->
+    <!-- ======================================================= -->
+
+    <property name="app.pkg" value="client"/>
+    <property name="jar.pkg" value=""/>
+ 
+    <!-- ======================================================= -->
+    <!--			Java Doc properties .					       -->
+    <!-- ======================================================= -->
+    <property name="javadoc.pkgnames" value="ossj.*" />
+
+    <!-- ======================================================= -->
+    <!--				Include common.xml					       -->
+    <!-- ======================================================= -->
+ 
+    &include;
+
+	
+    <!-- ======================================================= -->
+    <!--		Tagets to build and deploy sample application      -->
+    <!-- ======================================================= -->
+
+    <target name="clean" depends="clean_common"/>
+    <target name="init" depends="init_common"/>
+    <target name="compile" depends="init,compile_common" />
+    <target name="javadocs" depends="javadocs_common" />
+    <target name="deploy_ear" depends="deploy_common" />
+    <target name="deploy" depends="setup,deploy_ear"/>
+    <target name="undeploy_ear" depends="undeploy_common"/>
+    <target name="undeploy" depends="undeploy_ear,unsetup"/>
+    <target name="verify" depends="verify_common"/>
+    <target name="sql" depends="sql_common"/>
+
+    <target name="jar" depends="init,create_project_ejbjar"/>
+    <target name="ear" depends="init,jar,create_ear"/>
+    <target name="core" depends="compile,ear" />
+    <target name="all" depends="core,javadocs,verify,deploy"/>
+
+    <!-- ======================================================= -->
+    <!-- Assemble EJB JAR module.                                -->
+    <!-- ======================================================= -->
+
+    <property name="assemble.projectejbjar" value="${assemble}/${appname}jar"/>
+    <property name="assemble.projectdepjar" value="${assemble}/${appname}depjar"/>
+    <property name="projectejbjar" value="${appname}_ejb-1.3.jar"/>
+    <property name="projectdepjar" value="${appname}-1.3.jar"/>
+ 
+    <target name="clean_project_ejbjar">
+        <delete dir="${assemble.projectejbjar}"/>
+        <delete dir="${assemble.projectdepjar}"/>
+    </target>
+  
+    <target name="create_project_ejbjar" depends="clean_project_ejbjar">
+        <mkdir dir="${assemble.projectejbjar}"/>
+        <mkdir dir="${assemble.projectdepjar}"/>
+        <copy todir="${assemble.projectejbjar}/ossj">
+            <fileset dir="${build.classesdir}/ossj/" includes="**/ex/*.class" />
+        </copy>
+        <copy todir="${assemble.projectdepjar}/ossj">
+            <fileset dir="${build.classesdir}/ossj/" excludes="**/ex/*.class"/>
+        </copy>
+        <mkdir dir="${assemble.projectejbjar}/META-INF"/>
+        <copy file="ejb-jar.xml" tofile="${assemble.projectejbjar}/META-INF/ejb-jar.xml" />
+        <copy file="sun-ejb-jar.xml" tofile="${assemble.projectejbjar}/META-INF/sun-ejb-jar.xml" />
+        <jar jarfile="../${projectejbjar}" manifest="MANIFEST.MF"
+        basedir="${assemble.projectejbjar}" />
+        <move file="../${projectejbjar}" todir="${assemble.projectejbjar}"/>
+
+        <jar jarfile="../${projectdepjar}"
+        basedir="${assemble.projectdepjar}" includes="ossj/common/*.class,ossj/common/cbe/*.class,ossj/common/util/*.class"/>
+        <move file="../${projectdepjar}" todir="${assemble.projectdepjar}"/>
+
+
+        <jar jarfile="../oss_cbe_agreement_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/agreement/**/*.class"/>
+        <move file="../oss_cbe_agreement_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_trouble_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/trouble/**/*.class"/>
+        <move file="../oss_cbe_trouble_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_bi_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/bi/**/*.class"/>
+        <move file="../oss_cbe_bi_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_alarm_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/alarm/**/*.class"/>
+        <move file="../oss_cbe_alarm_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_datatypes_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/datatypes/**/*.class"/>
+        <move file="../oss_cbe_datatypes_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_measurement_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/measurement/**/*.class"/>
+        <move file="../oss_cbe_measurement_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_party_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/party/**/*.class"/>
+        <move file="../oss_cbe_party_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_product_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/product/**/*.class"/>
+        <move file="../oss_cbe_product_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_resource_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/resource/**/*.class"/>
+        <move file="../oss_cbe_resource_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_schedule_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/schedule/**/*.class"/>
+        <move file="../oss_cbe_schedule_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_report_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/report/**/*.class"/>
+        <move file="../oss_cbe_report_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_service_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/service/**/*.class"/>
+        <move file="../oss_cbe_service_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_sla_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/sla/**/*.class"/>
+        <move file="../oss_cbe_sla_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+
+        <jar jarfile="../oss_cbe_policy_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/policy/**/*.class"/>
+        <move file="../oss_cbe_policy_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+ 
+        <jar jarfile="../oss_cbe_location_ri-1.3.jar"
+        basedir="${assemble.projectdepjar}" includes="**/cbe/location/**/*.class"/>
+        <move file="../oss_cbe_location_ri-1.3.jar" todir="${assemble.projectdepjar}"/>
+    </target>
+
+
+    <target name="create_ear" depends="clean_ear_common,jar,mkdir_ear">
+        <copy file="${assemble.projectejbjar}/${projectejbjar}" todir="${assemble.ear}"/>
+        <copy file="${assemble.projectdepjar}/${projectdepjar}" todir="${assemble.ear}"/>
+    
+        <copy file="../lib/oss_cbe_alarm_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_datatypes_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_location_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_measurement_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_party_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_policy_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_product_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_report_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_resource_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_schedule_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_service_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_sla_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_trouble_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_bi_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_agreement_spec-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_common_spec-1.3.jar" todir="${assemble.ear}"/>
+	
+        <copy file="../lib/oss_cbe_alarm_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_datatypes_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_location_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_measurement_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_party_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_policy_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_product_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_report_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_resource_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_schedule_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_service_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_sla_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_trouble_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_bi_ri-1.3.jar" todir="${assemble.ear}"/>
+        <copy file="../lib/oss_cbe_agreement_ri-1.3.jar" todir="${assemble.ear}"/>
+	
+        <copy todir="${assemble.ear}/META-INF/">
+            <fileset dir="." includes="${earDD}"/>
+        </copy>
+        <jar jarfile="${assemble.ear}/${ear}"
+        basedir="${assemble.ear}" excludes="**/*.ear"/>
+        <delete file="${assemble.ear}/${projectejbjar}" />
+        <copy file="${assemble.ear}/${ear}" tofile="../${ear}"/>
+    </target>
+
+
+    <!-- ============================================================== -->
+    <!--            JMS Resource specific properties.                -->
+    <!-- ============================================================== -->
+
+    <target name="setup-jms-resource-jms/common/TopicConnectionFactory">
+        <echo message="Registering jms resource jms/common/TopicConnectionFactory "/>
+        <property name="queue.factory.type" value="javax.jms.TopicConnectionFactory"/>
+        <property name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/TopicConnectionFactory"/>
+    </target>
+    <target name="create-jms-resource-jms/common/TopicConnectionFactory" depends="setup-jms-resource-jms/common/TopicConnectionFactory, verify_jms_connection_exists_common, create-jms-connection_common"/>
+
+    <target name="setup-jms-resource-jms/common/JvtTopic">
+        <echo message="Registering jms resource jms/Topic "/>
+        <property name="queue.factory.type" value="javax.jms.Topic --property imqDestinationName=CommonJvtEventTopic"/>
+        <property name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/JVTEventTopic"/>
+    </target>
+    <target name="create-jms-resource-jms/common/JvtTopic" depends="setup-jms-resource-jms/common/JvtTopic, verify_jms_connection_exists_common, create-jms-connection_common"/>
+
+    <target name="setup-jms-resource-jms/common/QueueConnectionFactory">
+        <echo message="Registering jms resource jms/common/QueueConnectionFactory "/>
+        <property name="queue.factory.type" value="javax.jms.QueueConnectionFactory"/>
+        <property name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/QueueConnectionFactory"/>
+    </target>
+    <target name="create-jms-resource-jms/common/QueueConnectionFactory" depends="setup-jms-resource-jms/common/QueueConnectionFactory, verify_jms_connection_exists_common, create-jms-connection_common"/>
+
+    <target name="setup-jms-resource-jms/common/MessageQueue">
+        <echo message="Registering jms resource jms/MessageQueue "/>
+        <property name="queue.factory.type" value="javax.jms.Queue --property imqDestinationName=CommonRequestQueue"/>
+        <property name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/MessageQueue"/>
+    </target>
+    <target name="create-jms-resource-jms/common/MessageQueue" depends="setup-jms-resource-jms/common/MessageQueue, verify_jms_connection_exists_common, create-jms-connection_common"/>
+
+    <!-- ======================================================= -->
+    <!--       SunONE AS set unset config                        -->
+    <!-- ======================================================= -->
+    <target name="setup" depends="setup_env">
+        <antcall target="create-jms-resource-jms/common/TopicConnectionFactory"/>
+        <antcall target="create-jms-resource-jms/common/JvtTopic"/>
+        <antcall target="create-jms-resource-jms/common/QueueConnectionFactory"/>
+        <antcall target="create-jms-resource-jms/common/MessageQueue"/>
+    </target>
+
+    <target name="unsetup">
+        <antcall target="delete-jms-connection_common">
+            <param name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/TopicConnectionFactory"/>
+        </antcall>
+        <antcall target="delete-jms-connection_common">
+            <param name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/JVTEventTopic"/>
+        </antcall>
+        <antcall target="delete-jms-connection_common">
+            <param name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/MessageQueue"/>
+        </antcall>
+        <antcall target="delete-jms-connection_common">
+            <param name="queue.factory.jndi.name" value="System/System1/ApplicationType/Common/Application/1-3;1-3;ReferenceImplementation/Comp/QueueConnectionFactory"/>
+        </antcall>
+    </target>
+
+    <!-- ======================================================= -->
+    <!--       AVK Tests                                         -->
+    <!-- ======================================================= -->
+<!--
+    <property name="avkcpath" value="/javk/lib/javke-ant.jar"/>
+    <property name="avk.home" value="/javk"/>
+
+    <taskdef name="ArchiveTest" classname="org.apache.tools.ant.taskdefs.optional.sun.verification.StaticArchiveTest" classpath="${avkcpath}" />
+
+    <taskdef name="SourceScan" classname="org.apache.tools.ant.taskdefs.optional.sun.verification.SourceScan" classpath="${avkcpath}"/>
+
+    <taskdef name="TranslateRuntimeDD" classname="org.apache.tools.ant.taskdefs.optional.sun.verification.TranslateRuntimeDD" classpath="${avkcpath}"/>
+
+
+    <target name="verification" description="application static verification" depends="static-archive-test"/>
+-->
+    
+    <!--
+    Samples for running the archive tests  
+
+    partitionOpts determines which tests to run (default is all).
+    ejb - EJB tests
+    web - Web tests
+    webservices - Web services tests
+    connector - connector tests
+    app - application module tests
+    appclient - application client tests
+    webservicesclient - Web services client tests
+
+    reportingOpts determines the level of output produced.
+    Valid options are:
+    a - report all results
+    f - report failures only
+    w - report failures and warnings only (default)
+
+    resultDir determines the directory where results will be generated
+    (default is in <AVK-HOME>/reporttool/static).
+
+    -->
+<!--
+    <target name="static-archive-test" description="static archive tests for application containing enterprise beans and web components, reporting on all tests">
+        <ArchiveTest appName="${deploy.file}"
+        reportingOpts="a" />
+    </target>
+    <target name="code-scan" description="scan source code tests">
+        <SourceScan srcDir="${src}"
+        srcServer="sunone" />
+    </target>
+-->
+</project>

@@ -1,0 +1,84 @@
+<!--
+	* File : query.htm
+	* This is an ArcWeb Services Sample file for Query ArcWeb Service.
+	*
+-->
+<html>
+    <head><title>Query - ArcWeb Services Sample</title>	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+    <font class='boldfont'>Query -ArcWeb Services Sample </font><br><br><br>
+    <!-- ============= Input Form =============   -->
+    <form action="jsp/queryRes.jsp" name="mForm"  target="arcWebResultWin">
+    <table width='600' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+    <tr><td width='598%' align=center>
+        <table border=0 cellpadding='2' cellspacing='0'  width='100%' bgcolor='#ddebf1' class='textfont'>
+                <tr><td class='boldfont' height=28 colspan="2" align=center bgcolor="#4271ad"><font color=ffffff>Input Information</font></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+           	<tr><td align="left"> &nbsp;Street Address : </td>
+                    <td> <input type="text" name="street" size='25' value='380 New York St'> </td></tr>
+                <tr><td> &nbsp;City : </td>
+                    <td> <input type="text" name="city" size='8' value='Redlands'> State / Province  : <input type="text" name="state" size='5' value='CA'></td></tr>
+                  <tr><td> &nbsp;Postal Code : </td>
+                    <td> <input type="text" name="zip" size='8' value='92373'> Country Code : &nbsp;&nbsp;&nbsp;<input size='5' type=text name=country value='US' ></td></tr>
+                <tr><td> &nbsp;Geocode Data Source : </td>
+                <td class='textfont'>
+                    <select name="geoCodeDataSource">
+                        <option value="GDT.Address.US" selected>GDT.Address.US</option>
+                        <option value="GDT.Streets.US">GDT.Streets.US</option>
+                        <option value="TA.Address.US">TA.Address.US</option>
+                        <option value="TA.Streets.US">TA.Streets.US</option>
+                        <option value="GDT.Address.CA">GDT.Address.CA</option>
+                        <option value="GDT.Streets.CA">GDT.Streets.CA</option>
+                        <option value="TA.Address.EU">TA.Address.EU  &nbsp; &nbsp; &nbsp; &nbsp; </option>
+                    </select></td></tr>
+        	<tr><td colspan="2">&nbsp;</td></tr>
+                 <tr><td colspan="2"><hr></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td> &nbsp;Data source : </td>
+                     <td><select name=dataSource>
+                        <option value='Census.Population.US' selected>Census.Population.US</option>
+                        <option value='ESRI.AdminAreas.World'>ESRI.AdminAreas.World</option>
+                        <option value='ESRI.Demographics_1.US'>ESRI.Demographics_1.US</option>
+                        <option value='ESRI.Demographics_2.US'>ESRI.Demographics_2.US</option>
+                        <option value='ESRI.Thematic.US'>ESRI.Thematic.US</option>
+                        <option value='FEMA.Flood.US'>FEMA.Flood.US</option>
+                        <option value='GDT.PopulatedPlaces.CA'>GDT.PopulatedPlaces.CA</option>
+                        <option value='GDT.PopulatedPlaces.US'>GDT.PopulatedPlaces.US</option>
+                        <option value='GDT.PostalCodes.CA'>GDT.PostalCodes.CA</option>
+                        <option value='GDT.ZipCodes.US'>GDT.ZipCodes.US</option>
+                        <option value='MX.Precipitation.US'>MX.Precipitation.US</option>
+                        <option value='TA.PopulatedPlaces.EU'>TA.PopulatedPlaces.EU</option>
+                        <option value='TA.PopulatedPlaces.US'>TA.PopulatedPlaces.US</option>
+                        <option value='TA.PostalCodes.EU'>TA.PostalCodes.EU</option>
+                        <option value='TA.ZipCodes.US'>TA.ZipCodes.US</option>
+                    </select></td></tr>
+               <tr><td> &nbsp;Geography Level : </td>
+                     <td><select name=geoLevel>
+                        <option value='state' selected>state</option>
+                        <option value='county'>county</option>
+                        <option value='zip'>zip</option>
+                        <option value='tract'>tract</option>
+                        <option value='blockgroup'>blockgroup</option>
+                        <option value='block'>block</option>
+                        </select> <font class='smallfont'>
+                            <br>(ESRI.Demographics_X.US, Census.Population.US & ESRI.Thematic.US only) </font></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td colspan="2" align="center"><input type="submit" value="Query Information"></td></tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <input type="hidden" name="action" value="query">
+	</table>
+        </td></tr>
+    </table>
+    </form>
+	<br>
+	<a href="index.htm" class=textfont>Back to Index</a>
+</center>
+</body>
+</html>

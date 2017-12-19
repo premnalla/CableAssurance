@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE application PUBLIC '-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN' 'http://java.sun.com/dtd/application_1_3.dtd'><application>
+  <display-name>OssjSaRi</display-name>
+  <description>Application description</description>
+  <module>
+    <ejb>ossj_sa_riEjb.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>ossj_sa_riWeb.war</web-uri>
+      <context-root>orderscheduler</context-root>
+    </web>
+  </module>
+</application>
+

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.5.3 
+Created-By: Apache Jakarta Maven
+Built-By: vince
+Package: 
+Class-Path:  oss_quality_of_service_spec-1.0.jar oss_common_spec-1.0.jar jdom.jar ossj_qos_pm_eis.jar
+
+Name: 
+Specification-Title: oss_quality_of_service_pm_ri
+Specification-Version: 1.0
+Specification-Vendor: OSS-J
+Implementation-Title: 
+Implementation-Version: 1.1
+Implementation-Vendor: OSS-J
+

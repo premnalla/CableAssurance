@@ -1,0 +1,15 @@
+<JMSServer Name="CommonJMSServer" Targets="myserver" TemporaryTemplate="Common JMS Template">
+	<JMSTopic
+        JNDIName="System/RI/ApplicationType/Common/Application/1-0;0-0;OSSJ COMMON RI/Comp/JVTEventTopic"
+        Name="Event Topic" StoreEnabled="default"/>
+</JMSServer>
+
+<JMSTemplate Name="Common JMS Template"/>
+
+<JMSConnectionFactory AllowCloseInOnMessage="false"
+    DefaultDeliveryMode="Persistent" DefaultPriority="4"
+    DefaultTimeToLive="0"
+    JNDIName="System/RI/ApplicationType/Common/Application/1-0;0-0;OSSJ COMMON RI/Comp/TopicConnectionFactory"
+    MessagesMaximum="10" Name="Common RI Topic Connection Factory"
+    OverrunPolicy="KeepOld" Targets="myserver"/>
+

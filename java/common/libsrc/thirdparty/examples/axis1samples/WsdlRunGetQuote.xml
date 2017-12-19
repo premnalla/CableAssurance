@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="RunGetQuote" default="RunGetQuote" basedir=".">
+
+	<property name="axis.dist.libs" value="./WebContent/WEB-INF/lib" />
+	<property name="axis.dist.classes"
+		value="./WebContent/WEB-INF/classes" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${axis.dist.classes}" />
+	</path>
+
+	<target name="RunGetQuote">
+
+		<echo>${axis.dist.libs}</echo>
+		<echo>${basedir}</echo>
+
+		<java classname="wsdl.samples.stock.GetQuoteBindingStub" fork="yes">
+			<!-- 
+			<arg
+				value="-lhttp://localhost:8080/axis/servlet/AxisServlet" />
+			<arg
+				value="-lhttp://localhost:8080/axis1samples/servlet/AxisServlet" />
+			<arg value="-uuser1" />
+			<arg line="-wpass1 XXX" />
+			<arg
+				value="-lhttp://localhost:8080/axis1samples/servlet/AxisServlet" />
+				<arg value="XXX" />
+
+				<arg value="-uuser1" />
+				<arg line="-wpass1 XXX" />
+			-->
+
+			<classpath>
+				<path refid="axis.classpath" />
+			</classpath>
+		</java>
+
+	</target>
+
+</project>

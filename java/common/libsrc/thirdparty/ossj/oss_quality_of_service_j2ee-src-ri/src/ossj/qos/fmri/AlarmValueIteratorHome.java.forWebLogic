@@ -1,0 +1,23 @@
+package com.motorola.fmri;
+
+import java.util.ArrayList;
+
+/**
+ * AlarmValueIteratorHome
+ *
+ * @author  Audrey Ward
+ * @version 1.0
+ *
+ * © Copyright 2001-2002, MOTOROLA INC. 
+ * All Rights Reserved
+ */
+
+import javax.oss.ManagedEntityValue;
+
+public interface AlarmValueIteratorHome extends javax.ejb.EJBHome 
+{
+ 
+    public AlarmValueIteratorIF create( ArrayList queryResults, boolean logging )
+           throws javax.ejb.CreateException, java.rmi.RemoteException;        
+
+}

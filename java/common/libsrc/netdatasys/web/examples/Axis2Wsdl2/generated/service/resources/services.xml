@@ -1,0 +1,18 @@
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: #axisVersion# #today# -->
+<serviceGroup>
+<service name="StockQuoteService">
+<messageReceivers>
+<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="com.nds.www.stockquote.service.adb.StockQuoteServiceMessageReceiverInOut"/>
+<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only" class="com.nds.www.stockquote.service.adb.StockQuoteServiceMessageReceiverInOnly"/>
+</messageReceivers>
+<parameter locked="false" name="ServiceClass">com.nds.www.stockquote.service.adb.StockQuoteServiceSkeleton</parameter>
+<operation name="update" mep="http://www.w3.org/2004/08/wsdl/in-only">
+<actionMapping>urn:update</actionMapping>
+</operation>
+<operation name="getPrice" mep="http://www.w3.org/2004/08/wsdl/in-out">
+<actionMapping>urn:getPrice</actionMapping>
+<outputActionMapping>http://StockQuoteService/StockQuoteServicePortType/getPriceResponse</outputActionMapping>
+</operation>
+</service>
+</serviceGroup>

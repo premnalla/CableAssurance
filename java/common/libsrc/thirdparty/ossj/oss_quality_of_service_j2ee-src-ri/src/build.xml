@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE project [ <!ENTITY include SYSTEM "../common.xml"> ]>
+
+  <!-- ======================================================= -->
+  <!--  Sun ONE Application Server Sample Application build xml -->
+  <!-- ======================================================= -->
+
+  <project name="oss_quality_of_service" default="core" basedir=".">
+
+  <!-- ======================================================= -->
+  <!--			 App name-dependent settings.	       -->
+  <!-- ======================================================= -->
+
+  <property name="appname" value="ossj_qos_ri"/>
+  <property name="sample.home" value="../"/>
+  <property name="sample.name" value="oss_quality_of_service"/>
+  <property name="project.classpath" 
+	 value="../lib/oss_common_spec-1.0.jar:
+			../lib/oss_quality_of_service_spec-1.0.jar:
+			../lib/jdom.jar:
+			../lib/xercesImpl.jar:
+			../lib/xmlParserAPIs.jar
+			" />
+ <property name="classpath.prefix" value="${project.classpath}"/>
+
+ <property name="ear"         value="${appname}.ear"/>  
+ <property name="deploy.file" value="../${ear}"/>
+
+  <!-- ======================================================= -->
+  <!--			 Package directory structures of interest.	   -->
+  <!-- ======================================================= -->
+
+  <property name="app.pkg" value="client"/>
+  <property name="jar.pkg" value=""/>
+ 
+  <!-- ======================================================= -->
+  <!--			Java Doc properties .					       -->
+  <!-- ======================================================= -->
+  <property name="javadoc.pkgnames" value="ossj.*" />
+
+  <!-- ======================================================= -->
+  <!--				Include common.xml					       -->
+  <!-- ======================================================= -->
+ 
+  &include;
+
+	
+  <!-- ======================================================= -->
+  <!--		Tagets to build and deploy sample application      -->
+  <!-- ======================================================= -->
+
+  <target name="clean" depends="clean_common"/>
+  <target name="init" depends="init_common"/>
+  <target name="compile" depends="init,compile_common,compile_eis" />
+  <target name="javadocs" depends="javadocs_common" />
+  <target name="reconfig" depends="reconfig_common" />
+  <target name="deploy_ear" depends="deploy_common" />
+  <target name="deploy" depends="setup,deploy_ear"/>
+  <target name="undeploy_ear" depends="undeploy_common"/>
+  <target name="undeploy" depends="undeploy_ear,unsetup"/>
+  <target name="verify" depends="verify_common"/>
+  <target name="sql" depends="sql_common"/>
+  <target name="clientjar" depends="init,create_clientjar"/>
+
+  <target name="jar" depends="init,create_project_ejbjar"/>
+  <target name="ear" depends="init,jar,create_ear,clientjar"/>
+  <target name="core" depends="compile,ear" />
+  <target name="all" depends="core,javadocs,verify,deploy"/>
+
+  <!-- ======================================================= -->
+  <!-- Compile EIS                                             -->
+  <!-- ======================================================= -->
+
+  <target name="compile_eis" depends="init,compile_common">
+	<rmic stubVersion="1.2"
+		  base="${build.classesdir}"
+		  classname="ossj.qos.ri.pm.measurement.eis.EisSimulatorImpl"
+		  sourceBase="."
+		  classpath="${project.classpath}:${ossj_qos_pm_eis.jar}:${com.sun.aas.installRoot}/lib/appserv-ext.jar" />
+  </target>
+  <!-- ======================================================= -->
+  <!-- Assemble EJB JAR module.                                -->
+  <!-- ======================================================= -->
+  <property name="assemble.fmejbjar" value="${assemble}/fmjar"/>
+  <property name="assemble.pmejbjar" value="${assemble}/pmjar"/>
+  <property name="assemble.pmeisejbjar" value="${assemble}/pmeisjar"/>
+  <property name="assemble.tmejbjar" value="${assemble}/tmjar"/>
+
+  <property name="fmejbjar" value="ossj_qos_fm_ri.jar"/> 
+  <property name="pmejbjar" value="ossj_qos_pm_ri.jar"/> 
+  <property name="pmeisejbjar" value="ossj_qos_pm_eis.jar"/> 
+  <property name="tmejbjar" value="ossj_qos_tm_ri.jar"/> 
+
+  <target name="create_project_ejbjar" depends="create_fm_ejbjar,create_pm_ejbjar,create_tm_ejbjar"/>
+
+  <target name="clean_fm_ejbjar">
+    <delete dir="${assemble.fmejbjar}"/>
+  </target>
+  <target name="clean_pm_ejbjar">
+    <delete dir="${assemble.pmejbjar}"/>
+  </target>
+  <target name="clean_pm_eis_ejbjar">
+    <delete dir="${assemble.pmeisejbjar}"/>
+  </target>
+  <target name="clean_tm_ejbjar">
+    <delete dir="${assemble.tmejbjar}"/>
+  </target>
+
+  <!-- =============== -->
+  <!-- Assemble FM     -->
+  <!-- =============== -->
+  <target name="create_fm_ejbjar" depends="clean_fm_ejbjar">
+    <mkdir dir="${assemble.fmejbjar}"/>
+    <copy todir="${assemble.fmejbjar}/ossj/qos/fmri/">
+      <fileset dir="${build.classesdir}/ossj/qos/fmri/" includes="**/*.class"/>
+    </copy>
+    <copy todir="${assemble.fmejbjar}/ossj/qos/">
+      <fileset dir="${build.classesdir}/ossj/qos/" includes="*.class,util/*.class" />
+    </copy>
+    <copy todir="${assemble.fmejbjar}/ossj/qos/mdbimpl/fm/">
+      <fileset dir="${build.classesdir}/ossj/qos/mdbimpl/fm/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.fmejbjar}/ossj/qos/xmlri/fmxmlri/">
+      <fileset dir="${build.classesdir}/ossj/qos/xmlri/fmxmlri/" includes="*.class"/>
+    </copy>
+    <mkdir dir="${assemble.fmejbjar}/META-INF"/>
+    <copy file="ejb-jar-fm.xml" tofile="${assemble.fmejbjar}/META-INF/ejb-jar.xml" />
+    <copy file="sun-ejb-jar-fm.xml" tofile="${assemble.fmejbjar}/META-INF/sun-ejb-jar.xml" />
+    <jar jarfile="../${fmejbjar}" manifest="MANIFEST_FM.MF"
+       basedir="${assemble.fmejbjar}" />
+    <copy file="../${fmejbjar}" todir="../lib"/>
+    <move file="../${fmejbjar}" todir="${assemble.fmejbjar}"/>
+  </target>
+ 
+
+  <!-- =============== -->
+  <!-- Assemble PM     -->
+  <!-- =============== -->
+  <target name="create_pm_eis_ejbjar" depends="clean_pm_eis_ejbjar">
+    <mkdir dir="${assemble.pmeisejbjar}"/>
+    <copy todir="${assemble.pmeisejbjar}/ossj/qos/ri/pm/measurement/eis/">
+      <fileset dir="${build.classesdir}/ossj/qos/ri/pm/measurement/eis/" includes="**/*.class"/>
+    </copy>
+    <jar jarfile="../${pmeisejbjar}" manifest="MANIFEST_PM_EIS.MF"
+       basedir="${assemble.pmeisejbjar}" />
+    <copy file="../${pmeisejbjar}" todir="../lib"/>
+    <move file="../${pmeisejbjar}" todir="${assemble.pmeisejbjar}"/>
+  </target>
+ 
+
+	<!--
+		put back the eis class in PM as class not found when tested
+	-->
+  <target name="create_pm_ejbjar" depends="clean_pm_ejbjar,create_pm_eis_ejbjar">
+    <mkdir dir="${assemble.pmejbjar}"/>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/ri/pm/measurement/eis/">
+      <fileset dir="${build.classesdir}/ossj/qos/ri/pm/measurement/eis/" includes="EisSimulator*.class"/>
+    </copy>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/">
+      <fileset dir="${build.classesdir}/ossj/qos/" includes="*.class,util/*.class" />
+    </copy>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/pm/measurement/">
+      <fileset dir="${build.classesdir}/ossj/qos/pm/measurement/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/ri/pm/measurement/adapter/">
+      <fileset dir="${build.classesdir}/ossj/qos/ri/pm/measurement/adapter/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/xmlri/pmxmlri/">
+      <fileset dir="${build.classesdir}/ossj/qos/xmlri/pmxmlri/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.pmejbjar}/ossj/qos/mdbimpl/pm/">
+      <fileset dir="${build.classesdir}/ossj/qos/mdbimpl/pm/" includes="*.class"/>
+    </copy>
+    <mkdir dir="${assemble.pmejbjar}/META-INF"/>
+    <copy file="ejb-jar-pm.xml" tofile="${assemble.pmejbjar}/META-INF/ejb-jar.xml" />
+    <copy file="sun-ejb-jar-pm.xml" tofile="${assemble.pmejbjar}/META-INF/sun-ejb-jar.xml" />
+    <jar jarfile="../${pmejbjar}" manifest="MANIFEST_PM.MF"
+       basedir="${assemble.pmejbjar}" />
+    <copy file="../${pmejbjar}" todir="../lib"/>
+    <move file="../${pmejbjar}" todir="${assemble.pmejbjar}"/>
+  </target>
+
+  <!-- =============== -->
+  <!-- Assemble TM     -->
+  <!-- =============== -->
+  <target name="create_tm_ejbjar" depends="clean_tm_ejbjar">
+    <mkdir dir="${assemble.tmejbjar}"/>
+    <copy todir="${assemble.tmejbjar}/">
+      <fileset dir="dtd/" includes="MeasDataCollection.dtd" />
+    </copy>
+    <copy todir="${assemble.tmejbjar}/ossj/qos/">
+      <fileset dir="${build.classesdir}/ossj/qos/" includes="*.class,util/*.class" />
+    </copy>
+    <copy todir="${assemble.tmejbjar}/ossj/qos/pm/threshold/">
+      <fileset dir="${build.classesdir}/ossj/qos/pm/threshold/" includes="*.class" excludes="**/eis/"/>
+    </copy>
+    <copy todir="${assemble.tmejbjar}/ossj/qos/ri/pm/threshold/adapter/">
+      <fileset dir="${build.classesdir}/ossj/qos/ri/pm/threshold/adapter/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.tmejbjar}/ossj/qos/xmlri/tmxmlri/">
+      <fileset dir="${build.classesdir}/ossj/qos/xmlri/tmxmlri/" includes="*.class"/>
+    </copy>
+    <copy todir="${assemble.tmejbjar}/ossj/qos/mdbimpl/tm/">
+      <fileset dir="${build.classesdir}/ossj/qos/mdbimpl/tm/" includes="*.class"/>
+    </copy>
+    <mkdir dir="${assemble.tmejbjar}/META-INF"/>
+    <copy file="ejb-jar-tm.xml" tofile="${assemble.tmejbjar}/META-INF/ejb-jar.xml" />
+    <copy file="sun-ejb-jar-tm.xml" tofile="${assemble.tmejbjar}/META-INF/sun-ejb-jar.xml" />
+    <jar jarfile="../${tmejbjar}" manifest="MANIFEST_TM.MF"
+       basedir="${assemble.tmejbjar}" />
+    <copy file="../${tmejbjar}" todir="../lib"/>
+    <move file="../${tmejbjar}" todir="${assemble.tmejbjar}"/>
+  </target>
+ 
+
+  <!-- =============== -->
+  <!-- Assemble EAR    -->
+  <!-- =============== -->
+  <target name="create_ear" depends="clean_ear_common,jar,mkdir_ear">
+    <copy file="${assemble.fmejbjar}/${fmejbjar}" todir="${assemble.ear}"/>
+    <copy file="${assemble.pmejbjar}/${pmejbjar}" todir="${assemble.ear}"/>
+    <copy file="${assemble.tmejbjar}/${tmejbjar}" todir="${assemble.ear}"/>
+    <copy file="../lib/oss_common_spec-1.0.jar" todir="${assemble.ear}"/>
+    <copy file="../lib/oss_quality_of_service_spec-1.0.jar" todir="${assemble.ear}"/>
+    <copy file="../lib/jdom.jar" todir="${assemble.ear}"/>
+    <copy todir="${assemble.ear}/META-INF/">
+      <fileset dir="." includes="${earDD}"/>
+    </copy>
+    <jar jarfile="${assemble.ear}/${ear}"
+       basedir="${assemble.ear}" excludes="**/*.ear"/>
+    <delete file="${assemble.ear}/${projectejbjar}" />
+    <copy file="${assemble.ear}/${ear}" tofile="../${ear}"/>
+  </target>
+
+  <target name="create_clientjar">
+	<mkdir dir="${assemble.clientjar}"/>
+    <copy todir="${assemble.clientjar}/ossj/qos/util">
+      <fileset dir="${build.classesdir}/ossj/qos/util/" includes="*.class" />
+    </copy>
+	<copy todir="${assemble.clientjar}">
+	  <fileset dir="${build.classesdir}" includes="**/testclient/*.class" />
+    </copy>
+	<copy todir="${assemble.clientjar}/ossj/qos/ri/pm/threshold/testclient">
+	  <fileset dir="ossj/qos/ri/pm/threshold/testclient/" includes="*.gif" />
+    </copy>
+	<copy todir="${assemble.clientjar}">
+	  <fileset dir="dtd" includes="*.dtd" />
+    </copy>
+	<jar jarfile="../lib/ossj_qos_client.jar"
+	   basedir="${assemble.clientjar}" />
+  </target>
+
+  <!-- ============================================================== -->
+  <!--           JDBC Resource specific properties.                   -->
+  <!-- ============================================================== -->
+  <property name="project.resource.prefix" value="ossjqos" />
+  <property name="conpool.fm.name"       value="${project.resource.prefix}fmripool" />
+  <property name="jdbc.fm.resource.name" value="jdbc/${project.resource.prefix}fmri" />
+  <property name="conpool.tm.name"       value="${project.resource.prefix}tmripool" />
+  <property name="jdbc.tm.resource.name" value="jdbc/${project.resource.prefix}tmri" />
+
+  <property name="db.user"  value="PBPUBLIC"/>
+  <property name="db.pwd"   value="PBPUBLIC"/>
+  <property name="ds.class" value="com.pointbase.xa.xaDataSource" />
+  <property name="db.file"  value="sql/${project.resource.prefix}ri_as7.sql"/>
+  <property name="url.prop" value="databaseName" />
+
+  <property name="db.host"  value="localhost"/>
+  <property name="db.port"  value="9092"/>
+  <property name="db.sid"   value="pointbase"/>
+  <property name="db.url"   value="jdbc\:pointbase\:server\://${db.host}:${db.port}\/${db.sid}"/>
+
+  <target name="create-jdbc-connection-pool" depends="create-jdbc-fm-connection-pool,create-jdbc-tm-connection-pool"/>
+  <target name="create-jdbc-resource" depends="create-jdbc-fm-resource,create-jdbc-tm-resource"/>
+  <target name="delete-jdbc-connection-pool" depends="delete-jdbc-fm-connection-pool,delete-jdbc-tm-connection-pool"/>
+  <target name="delete-jdbc-resource" depends="delete-jdbc-fm-resource,delete-jdbc-tm-resource"/>
+
+  <!-- ======================== -->
+  <!--      JDBC Tagets for fm  -->
+  <!-- ======================== -->
+
+
+  <target name="create-jdbc-fm-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-connection-pool
+          --datasourceclassname ${ds.class}
+	  --restype javax.sql.XADataSource
+           ${conpool.fm.name}"  />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.fm.name}.property.user=${db.user}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.fm.name}.property.password=${db.pwd}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.fm.name}.property.databaseName=${db.url}" />
+    </antcall>
+  </target>
+
+  <target name="create-jdbc-fm-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-resource 
+         --connectionpoolid ${conpool.fm.name}
+         ${jdbc.fm.resource.name} " />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-fm-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-connection-pool ${conpool.fm.name}" />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-fm-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-resource ${jdbc.fm.resource.name}"  />
+    </antcall>
+  </target>
+
+
+  <!-- ======================== -->
+  <!--      JDBC Tagets for tm  -->
+  <!-- ======================== -->
+  <target name="create-jdbc-tm-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"  
+        value="create-jdbc-connection-pool 
+          --datasourceclassname ${ds.class}
+	  --restype javax.sql.XADataSource
+          ${conpool.tm.name}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.tm.name}.property.user=${db.user}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.tm.name}.property.password=${db.pwd}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set server.resources.jdbc-connection-pool.${conpool.tm.name}.property.${url.prop}=${db.url}" />
+    </antcall>
+  </target>
+
+  <target name="create-jdbc-tm-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-resource 
+         --connectionpoolid ${conpool.tm.name}
+         ${jdbc.tm.resource.name} "  />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-tm-connection-pool">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-connection-pool ${conpool.tm.name}"  />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-tm-resource">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-resource ${jdbc.tm.resource.name}"  />
+    </antcall>
+  </target>
+
+
+  <!-- ============================================================== -->
+  <!--            FM JMS Resource specific properties.                -->
+  <!-- ============================================================== -->
+
+  <property name="fm.topic.factory1.type" value="com.sun.messaging.TopicConnectionFactory" />
+  <property name="fm.topic.factory1.jndi.name" 
+      value="jms/sampleTCF" />
+  <property name="fm.topic1.type" value="javax.jms.Topic" />
+  <property name="fm.topic1.jndi.name" 
+      value="Private/System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/BackEndEventTopic" />
+  <property name="fm.topic1.destination" value="BackEndQoSFMRiJmsServer" />
+
+
+  <property name="fm.topic.factory2.type" value="com.sun.messaging.TopicConnectionFactory" />
+  <property name="fm.topic.factory2.jndi.name" 
+      value="System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/TopicConnectionFactory" />
+  <property name="fm.topic2.type" value="javax.jms.Topic" />
+  <property name="fm.topic2.jndi.name" 
+      value="System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/JVTEventTopic" />
+  <property name="fm.topic2.destination" value="QoSFMRiJmsServer" />
+
+
+  <property name="fm.queue.factory.type" value="com.sun.messaging.QueueConnectionFactory" />
+  <property name="fm.queue.factory.jndi.name" 
+      value="System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/QueueConnectionFactory" />
+  <property name="fm.queue.type" value="javax.jms.Queue" />
+  <property name="fm.queue.jndi.name" 
+      value="System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/FMTestQueue" />
+  <property name="fm.queue.destination" value="QoSFMRiJmsServer" />
+
+  <!-- ======================================================= -->
+  <!--   FM JMS Targets                                        -->
+  <!-- ======================================================= -->
+  <target name="create-fm-jms-resources" depends="init">
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${fm.topic.factory1.type}" />
+       <param name="jms.resource.name"   value="${fm.topic.factory1.jndi.name}" />
+     </antcall>
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${fm.topic.factory2.type}" />
+       <param name="jms.resource.name"   value="${fm.topic.factory2.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${fm.topic1.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${fm.topic1.destination} ${fm.topic1.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${fm.topic2.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${fm.topic2.destination} ${fm.topic2.jndi.name}" />
+     </antcall>
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${fm.queue.factory.type}" />
+       <param name="jms.resource.name"   value="${fm.queue.factory.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${fm.queue.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${fm.queue.destination} ${fm.queue.jndi.name}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+       <param name="jms.dest"            value="${fm.queue.destination}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+       <param name="jms.dest"            value="${fm.topic1.destination}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+       <param name="jms.dest"            value="${fm.topic2.destination}" />
+     </antcall>
+  </target>
+
+  <target name="delete-fm-jms-resources" depends="init">
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${fm.topic.factory1.jndi.name}" />
+      </antcall>
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${fm.topic.factory2.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${fm.topic1.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${fm.topic2.jndi.name}" />
+      </antcall>
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${fm.queue.factory.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${fm.queue.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+        <param name="jms.dest" value="${fm.queue.destination}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+        <param name="jms.dest" value="${fm.topic1.destination}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+        <param name="jms.dest" value="${fm.topic2.destination}" />
+      </antcall>
+  </target>
+
+  <!-- ============================================================== -->
+  <!--            PM JMS Resource specific properties.                -->
+  <!-- ============================================================== -->
+
+  <property name="pm.topic.factory.type" value="com.sun.messaging.TopicConnectionFactory" />
+  <property name="pm.topic.factory.jndi.name" 
+      value="System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/TopicConnectionFactory" />
+
+  <property name="pm.topic.type" value="javax.jms.Topic" />
+  <property name="pm.topic.jndi.name" 
+      value="System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/JVTEventTopic" />
+
+  <property name="pm.topic.destination" value="QoSPMRiJmsServer" />
+
+  <property name="pm.queue.factory.type" value="com.sun.messaging.QueueConnectionFactory" />
+  <property name="pm.queue.factory.jndi.name" 
+      value="System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/QueueConnectionFactory" />
+
+  <property name="pm.queue.type" value="javax.jms.Queue" />
+  <property name="pm.queue.jndi.name" 
+      value="System/Gothenburg/ApplicationType/PerformanceMonitor/Application/1-0;1-0;JSR90RIPM/Comp/PMTestQueue" />
+
+  <property name="pm.queue.destination" value="QoSPMRiJmsServer" />
+
+  <!-- ======================================================= -->
+  <!--   PM JMS Targets                                        -->
+  <!-- ======================================================= -->
+
+  <target name="create-pm-jms-resources" depends="init">
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${pm.topic.factory.type}" />
+       <param name="jms.resource.name"   value="${pm.topic.factory.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${pm.topic.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${pm.topic.destination} ${pm.topic.jndi.name}" />
+     </antcall>
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${pm.queue.factory.type}" />
+       <param name="jms.resource.name"   value="${pm.queue.factory.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${pm.queue.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${pm.queue.destination} ${pm.queue.jndi.name}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+       <param name="jms.dest"            value="${pm.queue.destination}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+       <param name="jms.dest"            value="${pm.topic.destination}" />
+     </antcall>
+  </target>
+
+  <target name="delete-pm-jms-resources" depends="init">
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${pm.topic.factory.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${pm.topic.jndi.name}" />
+      </antcall>
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${pm.queue.factory.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${pm.queue.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+        <param name="jms.dest" value="${pm.queue.destination}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="topic" />
+        <param name="jms.dest" value="${pm.topic.destination}" />
+      </antcall>
+  </target>
+
+  <!-- ============================================================== -->
+  <!--            TM JMS Resource specific properties.                -->
+  <!-- ============================================================== -->
+
+  <property name="tm.queue.factory.type" value="com.sun.messaging.QueueConnectionFactory" />
+  <property name="tm.queue.factory.jndi.name" 
+      value="System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM/Comp/QueueConnectionFactory" />
+
+  <property name="tm.queue.type" value="javax.jms.Queue" />
+  <property name="tm.queue.jndi.name" 
+      value="System/Linkoping/ApplicationType/ThresholdMonitor/Application/1-0;1-0;JSR90RITM/Comp/TMTestQueue" />
+
+  <property name="tm.queue.destination" value="QoSTMRiJmsServer" />
+
+  <!-- ======================================================= -->
+  <!--   TM JMS Targets                                        -->
+  <!-- ======================================================= -->
+
+  <target name="create-tm-jms-resources" depends="init">
+     <antcall target="create-custom-resource">
+       <param name="jms.restype"         value="${tm.queue.factory.type}" />
+       <param name="jms.resource.name"   value="${tm.queue.factory.jndi.name}" />
+     </antcall>
+     <antcall target="create-jms-resource">
+       <param name="jms.restype"         value="${tm.queue.type}" />
+       <param name="jms.resource.name"   
+          value="--property imqDestinationName=${tm.queue.destination} ${tm.queue.jndi.name}" />
+     </antcall>
+     <antcall target="create-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+       <param name="jms.dest"            value="${tm.queue.destination}" />
+     </antcall>
+  </target>
+
+  <target name="delete-tm-jms-resources" depends="init">
+      <antcall target="delete-custom-resource">
+        <param name="jms.resource.name" value="${tm.queue.factory.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jms-resource">
+        <param name="jms.resource.name" value="${tm.queue.jndi.name}" />
+      </antcall>
+      <antcall target="delete-jmsdest">
+       <param name="jms.desttype"        value="queue" />
+        <param name="jms.dest" value="${tm.queue.destination}" />
+      </antcall>
+  </target>
+
+  <!-- ======================================================= -->
+  <!--   JMS Tagets to build and deploy sample application     -->
+  <!-- ======================================================= -->
+
+  <target name="create-jms-resources">
+    <antcall target="create-fm-jms-resources"/>
+    <antcall target="create-pm-jms-resources"/>
+    <antcall target="create-tm-jms-resources"/>
+  </target>
+
+  <target name="delete-jms-resources">
+    <antcall target="delete-fm-jms-resources"/>
+    <antcall target="delete-pm-jms-resources"/>
+    <antcall target="delete-tm-jms-resources"/>
+  </target>
+
+  <target name="create-jms-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="create-jms-resource --restype ${jms.restype} --enabled=true ${jms.resource.name}"/>
+  </target>
+
+  <target name="delete-jms-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="delete-jms-resource ${jms.resource.name}"/>
+  </target>
+
+  <target name="create-custom-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      Command="create-custom-resource --restype ${jms.restype} 
+              --factoryclass com.sun.messaging.naming.TCFObjectFactory 
+              --enabled=true --property 
+                host=localhost:ackTimeout=30000:version=1.1:parm=\\\&quot;\\&quot;:subnet=0:securityPort=22000 
+                ${jms.resource.name} "/>
+  </target>
+
+  <target name="delete-custom-resource" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="delete-custom-resource ${jms.resource.name}"/>
+  </target>
+
+  <target name="create-jmsdest" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="create-jmsdest --desttype ${jms.desttype} ${jms.dest}"/>
+  </target>
+
+  <target name="delete-jmsdest" depends="init">
+    <sun-appserv-admin
+      user="${admin.user}"
+      password="${admin.password}"
+      host="${admin.host}"
+      port="${admin.port}"
+      sunonehome="${com.sun.aas.installRoot}"
+      command="delete-jmsdest --desttype ${jms.desttype} ${jms.dest}"/>
+  </target>
+
+  <!-- ======================================================= -->
+  <!--       SunONE AS set unset config                        -->
+  <!-- ======================================================= -->
+  <target name="setup" depends="setup_env">
+    <antcall target="create-jdbc-connection-pool"/>
+    <antcall target="create-jdbc-resource"/>
+    <antcall target="create-jms-resources"/>
+    <antcall target="reconfig"/>
+  </target>
+
+  <target name="unsetup">
+    <antcall target="delete-jdbc-resource"/>
+    <antcall target="delete-jdbc-connection-pool"/>
+    <antcall target="delete-jms-resources"/>
+    <antcall target="reconfig"/>
+  </target>
+
+<!-- 
+          Set up the environment  
+    <property file="./build.properties"/>
+-->
+	<property name="avk.home" value="/mnt/javke1.4"/>
+
+    <property name="cpath" 
+              value="${avk.home}/appserver/lib/sun-appserv-ant.jar:${avk.home}/lib/javke-ant.jar:${project.classpath}"/>
+
+<!-- 
+          Tasks defined for the AVK verification
+ -->
+
+    <taskdef name="ArchiveTest" classname="org.apache.tools.ant.taskdefs.optional.sun.verification.StaticArchiveTest" classpath="${cpath}" />
+
+    <taskdef name="SourceScan" classname="org.apache.tools.ant.taskdefs.optional.sun.verification.SourceScan" classpath="${cpath}"/>
+
+<!--
+           Samples of targets for running the Ant tasks  
+-->
+
+    <target name="verification" description="application static verification" depends="static-archive-test"/>
+
+<!--
+           Samples for running the archive tests  
+
+ 	    partitionOpts determines which tests to run (default is all).
+		ejb - EJB tests
+		web - Web tests
+		webservices - Web services tests
+		connector - connector tests
+		app - application module tests
+		webservicesclient - Web services client tests
+
+	    reportingOpts determines the level of output produced.
+	    Valid options are:
+		a - report all results
+		f - report failures only
+		w - report failures and warnings only (default)
+-->
+    <target name="static-archive-test" description="static archive tests for application containing enterprise beans and web components, reporting on all tests">
+        <ArchiveTest appName="../${ear}"
+		    reportingOpts="a" />
+    </target>
+
+<!--
+        Sample for running the code scanning task 
+
+	    srcServer specifies which server was used to create the application.
+	    Valid options are (no default so one must be specified):
+		sunone - Sun ONE 6.x or Sun Java System Application Server 7.x
+		weblogic5 - WebLogic 5.x
+		weblogic6 - WebLogic 6.x
+		websphere - WebSphere 3.x or 4.x
+		jboss  - JBoss 3.x
+ -->
+    <target name="code-scan" description="scan source code tests">
+        <SourceScan srcDir="."
+		    srcServer="sunone" />
+    </target>
+</project>

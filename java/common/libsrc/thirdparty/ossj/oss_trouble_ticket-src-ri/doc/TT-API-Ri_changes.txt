@@ -1,0 +1,114 @@
+                    OSS through Java - Trouble Ticket API
+                                RI Change History
+---------------------------------------------------------------------------------
+Previous Version      :1.0.2
+Release Date          :2005/10
+---------------------------------------------------------------------------------
+
+Fixed Bugs:
+>Bug ID: 6272267 Invalid schema encoding/decoding from to RI and TCK 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6272267>*
+> jsr91_trouble_ticket:reference_implementation, Invalid schema 
+> encoding/decoding from to RI and TCK, State: In progress, bug,
+> Reported:
+> 18-MAY-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6272267 -
+> 18-MAY-2005
+> 
+> *Bug ID: 6268635 Invalid JNDI name for TT resources replace 0-0 by
+> 1-0-1
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6268635>*
+> jsr91_trouble_ticket:reference_implementation, Invalid JNDI name for
+> TT
+> resources replace 0-0 by 1-0-1, State: In progress, bug, Reported: 
+> 11-MAY-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6268635 -
+> 11-MAY-2005
+> 
+> *Bug ID: 6250089 closing a TT's by best effort template methods
+> triggers
+> both Cancel & Close 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250089>*
+> jsr91_trouble_ticket:reference_implementation, closing a TT's by best 
+> effort template methods triggers both Cancel & Close, State: In 
+> progress, bug, Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250089 -
+> 04-APR-2005
+> 
+> *Bug ID: 6250086 "FailuresOnly" flag hardcoded in 
+> XVTTroubleTicketSessionBean.java in best effort 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250086>*
+> jsr91_trouble_ticket:reference_implementation, "FailuresOnly" flag 
+> hardcoded in XVTTroubleTicketSessionBean.java in best effort, State:
+> In
+> progress, bug, Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250086 -
+> 04-APR-2005
+> 
+> *Bug ID: 6250088 RemoteException is thrown by 
+> JVTTroubleTicketSessionBean when no match is found 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250088>*
+> jsr91_trouble_ticket:reference_implementation, RemoteException is
+> thrown
+> by JVTTroubleTicketSessionBean when no match is found, State: In 
+> progress, bug, Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250088 -
+> 04-APR-2005
+> 
+> *Bug ID: 6250087 resyncRequired is hard coded to false in 
+> XVTTroubleTicketSessionBean.java 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250087>*
+> jsr91_trouble_ticket:reference_implementation, resyncRequired is hard 
+> coded to false in XVTTroubleTicketSessionBean.java, State: In
+> progress,
+> bug, Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250087 -
+> 04-APR-2005
+> 
+> *Bug ID: 6250091 the GetQueryTypes() method is returning the 
+> implementation class name 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250091>*
+> jsr91_trouble_ticket:reference_implementation, the GetQueryTypes() 
+> method is returning the implementation class name, State: In progress,
+> bug, Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250091 -
+> 04-APR-2005
+> 
+> *Bug ID: 6250090 No Events are being triggerred in 
+> tryCloseTroubleTicketsByKeys() 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250090>*
+> jsr91_trouble_ticket:reference_implementation, No Events are being 
+> triggerred in tryCloseTroubleTicketsByKeys(), State: In progress, bug,
+> Reported: 04-APR-2005, Reported against:
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6250090 -
+> 04-APR-2005
+> 
+> *Bug ID: 5100911 illegal 'Invalid TroubleTicket State transition' when
+> state stays the same 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5100911>*
+> jsr91_trouble_ticket:reference_implementation, illegal 'Invalid 
+> TroubleTicket State transition' when state stays the same, State: In 
+> progress, bug, Reported: 13-SEP-2004, Reported against: 1.0
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5100911 -
+> 13-SEP-2004
+> 
+> *Bug ID: 4915739 Event types are not correctly implemented, return 
+> always an empty array 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4915739>*
+> jsr91_trouble_ticket:reference_implementation, Event types are not 
+> correctly implemented, return always an empty array, State: In
+> progress,
+> bug, Reported: 02-SEP-2003, Reported against: 1.0
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4915739 -
+> 02-SEP-2003
+> 
+>  
+> *Bug ID: 4915740 setEventType badly implemented in 
+> TroubleTicketEvent.java 
+> <http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4915740>*
+> jsr91_trouble_ticket:reference_implementation, setEventType badly 
+> implemented in TroubleTicketEvent.java, State: In progress, bug, 
+> Reported: 02-SEP-2003, Reported against: 1.0
+> http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4915740 -
+> 02-SEP-2003
+> 

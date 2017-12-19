@@ -1,0 +1,136 @@
+<!--
+	* File : siteReport.htm
+	* This is an ArcWeb Services Sample file for Report ArcWeb Service.
+-->
+<html>
+    <head><title>Report - Site report - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+                .textboldfont{FONT: bold 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+        <font class='boldfont' ><center>Report - Site report - ArcWeb Services Sample</font><br><br>
+
+       <!-- ============= Input Form =============   -->
+        <form action="jsp/siteReportRes.jsp" name="mForm" target="arcWebResultWin">
+        <table width='750' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+            <tr><td>
+            <table border=0 cellpadding='0' cellspacing='0'  width='748'  bgcolor='#ddebf1'  class="textfont">
+                <tr><td height=28 colspan='5' align=center bgcolor="#4271ad" class='boldfont'><font  color=ffffff>Input Information </font></td></tr>
+                <tr><td colspan='5'>&nbsp;</td></tr>
+                <tr><td class="boldfont" vAlign="middle" colspan='5'>&nbsp;Site  </td></tr>
+
+                <tr><td nowrap>&nbsp;</td><td class="textboldfont" vAlign="middle" colspan='4'>Define Location :</td></tr>
+                 <tr><td class="textfont" nowrap  width="5%"  >&nbsp;</td>
+                    <td class="textfont"> Latitude : </td>
+                        <td colspan='3'> <input type=text name=lat value=33.9938></td></tr>
+                 <tr><td class="textfont" nowrap >&nbsp;</td>
+                    <td class="textfont"> Longitude :  </td>
+                        <td colspan='3'> <input type=text name=lon value=-117.149></td></tr>
+
+                <tr><td nowrap>&nbsp;</td><td class="textboldfont" vAlign="middle" colspan='4'>Specify Study Areas : </td></tr>
+                <tr><td class="textfont" nowrap >&nbsp;</td>
+                    <td class="textfont"> Ring 1 :  </td>
+                        <td colspan='3' class=textfont> <input type=text name=radius1 value=1 size=6> (miles) </td></tr>
+                <tr><td class="textfont" nowrap >&nbsp;</td>
+                    <td class="textfont"> Ring 2 :  </td>
+                        <td colspan='3' class=textfont> <input type=text name=radius2 value=3 size=6>  (miles) </td></tr>
+                <tr><td class="textfont" nowrap >&nbsp;</td>
+                    <td class="textfont"> Ring 3 :  </td>
+                        <td colspan='3' class=textfont> <input type=text name=radius3 value=5 size=6> (miles) </td></tr>
+                <tr><td class="textfont" nowrap >&nbsp;</td>
+                    <td class="textfont"> Ring calculation type :  </td>
+                        <td colspan='3' class=textfont>
+                            <select name=calcType>
+                                <option value=solid selected>Solid
+                                <option value=hollow>Hollow
+                            </select></td></tr>
+
+                <tr><td colspan='5'>&nbsp;</td></tr>
+                <tr><td class="boldfont" vAlign="middle" colspan='5'>&nbsp; Report Options </td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class="textfont"> DataSource : </td>
+                    <td colspan='3'>
+                            <select name=dataSource>
+                            <option value=ESRIBIS.PreviewReport.US selected>ESRIBIS.PreviewReport.US
+                            <option value=ESRIBIS.19902000Comparison.US>ESRIBIS.19902000Comparison.US
+                            <option value=ESRIBIS.Age55Plus.US>ESRIBIS.Age55Plus.US
+                            <option value=ESRIBIS.AgeByIncome.US>ESRIBIS.AgeByIncome.US
+                            <option value=ESRIBIS.AgeBySex.US>ESRIBIS.AgeBySex.US
+                            <option value=ESRIBIS.CEX_AutomotiveAftermarket.US>ESRIBIS.CEX_AutomotiveAftermarket.US
+                            <option value=ESRIBIS.CEX_Financial.US>ESRIBIS.CEX_Financial.US
+                            <option value=ESRIBIS.CEX_HouseAndHome.US>ESRIBIS.CEX_HouseAndHome.US
+                            <option value=ESRIBIS.CEX_HouseholdBudget.US>ESRIBIS.CEX_HouseholdBudget.US
+                            <option value=ESRIBIS.CEX_Medical.US>ESRIBIS.CEX_Medical.US
+                            <option value=ESRIBIS.CEX_Recreation.US>ESRIBIS.CEX_Recreation.US
+                            <option value=ESRIBIS.CEX_RetailGoodsAndServices.US>ESRIBIS.CEX_RetailGoodsAndServices.US
+                            <option value=ESRIBIS.Census2000DetailedRace.US>ESRIBIS.Census2000DetailedRace.US
+                            <option value=ESRIBIS.Census2000Summary.US>ESRIBIS.Census2000Summary.US
+                            <option value=ESRIBIS.DemographicAndIncome.US>ESRIBIS.DemographicAndIncome.US
+                            <option value=ESRIBIS.DetailedAge.US>ESRIBIS.DetailedAge.US
+                            <option value=ESRIBIS.DetailedIncome.US>ESRIBIS.DetailedIncome.US
+                            <option value=ESRIBIS.DisposableIncome.US>ESRIBIS.DisposableIncome.US
+                            <option value=ESRIBIS.Graphic.US>ESRIBIS.Graphic.US
+                            <option value=ESRIBIS.Housing.US>ESRIBIS.Housing.US
+                            <option value=ESRIBIS.MarketProfile.US>ESRIBIS.MarketProfile.US
+                            <option value=ESRIBIS.NetWorth.US>ESRIBIS.NetWorth.US
+                            <option value=ESRIBIS.TapestryAreaProfile.US>ESRIBIS.TapestryAreaProfile.US
+                            <option value=ESRIBIS.TrafficProfile.US>ESRIBIS.TrafficProfile.US
+                        </select></td></tr>
+
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class="textfont"> Report Format  :</td>
+                    <td colspan='3'><Select name=reportFormat>
+                            <option value=PDF>PDF
+                            <option value=XML>XML
+                            <option value=EXCEL>EXCEL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </select>
+                    </td></tr>
+                <tr><td colspan='5'>&nbsp;</td></tr>
+
+                <tr><td nowrap>&nbsp;</td><td class="textboldfont" vAlign="middle" colspan='4'>Report Headers :</td></tr>
+                <tr><td colspan='5'>&nbsp;</td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class="textfont" >&nbsp;&nbsp;&nbsp;&nbsp;Sub title :</td>
+                <td colspan='3'><input type=text name=subtitle value='This is a sample report' size='55'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class="textfont" >&nbsp;&nbsp;&nbsp;&nbsp;Location name :</td>
+                <td colspan='3'><input type=text name=locationname value='Sample location name' size='55'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class="textfont" >&nbsp;&nbsp;&nbsp;&nbsp;Custom logo :</td>
+                <td colspan='3'><input type=text name=customlogo value='http://arcweb.esri.com/arcwebonline/arcweb_services.gif' size='55'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class=textfont>&nbsp;&nbsp;&nbsp;&nbsp;Site type :</td>
+                    <td><input type=text name=sitetype value='Type'></td>
+                    <td class=textfont nowrap>Site value :</td>
+                    <td><input type=text name=sitetypevalue value='Headquarters'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                     <td class=textfont>&nbsp;&nbsp;&nbsp;&nbsp;Units name 1 :</td>
+                    <td><input type=text name=siteunitsname1 value='Radius one'></td>
+                    <td class=textfont nowrap>Units value 1 :</td>
+                    <td><input type=text name=siteunitsvalue1 value='1 Mile'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class=textfont>&nbsp;&nbsp;&nbsp;&nbsp;Units name 2 :</td>
+                    <td><input type=text name=siteunitsname2 value='Radius two'></td>
+                    <td class=textfont nowrap>Units value 2 :</td>
+                    <td><input type=text name=siteunitsvalue2 value='3 Mile'></td></tr>
+                <tr><td class="textfont" nowrap>&nbsp;</td>
+                    <td class=textfont>&nbsp;&nbsp;&nbsp;&nbsp;Units name 3 :</td>
+                    <td><input type=text name=siteunitsname3 value='Radius three'></td>
+                    <td class=textfont nowrap>Units value 3 :</td>
+                    <td><input type=text name=siteunitsvalue3 value='5 Mile'></td></tr>
+            <tr><td align="center" colspan='5'><input  type=submit value=" Get Site Report "></td></tr>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            </table>
+            </td></tr>
+        </table>
+        <input type="hidden" name="action" value="report">
+        </form>
+    <br><center><a href="index.htm" class=textfont>Back to Index</a></center>
+    </body>
+</html>

@@ -1,0 +1,1176 @@
+<!--
+ Copyright 2004 Sun Microsystems, Inc. All rights reserved.
+ SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+-->
+
+  <!-- ======================================================== -->
+  <!--  Application Server Common Properties            -->
+  <!-- ======================================================== -->
+  <!-- properties to be read from properties file - set default to -->
+  <property file="${sample.home}/common.properties"/>
+  <property file="${sample.home}/database.properties"/>
+  <property environment="as.env"/>
+  <property name="earDD"       value="application.xml,sun-application.xml"/>
+  <property name="warDD"       value="sun-web.xml,web.xml"/>
+  <property name="jarDD"       value="ejb-jar.xml,sun-ejb-jar.xml"/>
+  <property name="clientDD"    value="application-client.xml,sun-application-client.xml"/>
+
+  <!-- change this property to use a compiler other than javac. -->
+  <property name="build.compiler" value="modern"/>
+  
+  <!-- Source file location. -->
+  <property name="src"         value="."/>
+  <property name="src.docroot" value="${src}/docroot"/>
+  
+  <!-- Destination directory for the build and assembly targets -->
+  <property name="build"              value="../build"/>
+  <property name="build.docdir"       value="../javadocs/"/>
+  <property name="build.classesdir"   value="${build}/classes"/>
+  <property name="assemble"           value="../assemble"/>
+  <property name="assemble.jar"       value="${assemble}/jar"/>
+  <property name="assemble.ejbjar"    value="${assemble}/jar"/>
+  <property name="assemble.war"       value="${assemble}/war"/>
+  <property name="assemble.ear"       value="${assemble}/ear"/>
+  <property name="assemble.clientjar" value="${assemble}/client"/>
+
+  <!-- Target file Names.                                      -->
+  <property name="ear"         value="${appname}.ear"/>
+  <property name="war"         value="${appname}.war"/>
+  <property name="jar"         value="${appname}.jar"/>
+  <property name="ejbjar"      value="${appname}Ejb.jar"/>
+  <property name="clientjar"   value="${appname}Client.jar"/>  
+    
+  
+  <!-- application type                                        -->
+  <property name="apptype"     value="application"/>
+
+  <!-- classpath jar files location. -->
+  <property name="sample.classpath.dir" value="${com.sun.aas.installRoot}/lib"/>
+  <property name="optional.taskdef.jar" value="sun-appserv-ant.jar"/>
+  <property name="admin.cli.jar" value="admin-cli.jar"/>	
+
+<!-- common taskdefs -->
+	
+
+   <taskdef name="sun-appserv-admin"
+ classname="org.apache.tools.ant.taskdefs.optional.sun.appserv.AdminTask"
+    classpath="${sample.classpath.dir}/${optional.taskdef.jar}"  
+  />
+  
+   <taskdef name="sun-appserv-deploy"
+     
+ classname="org.apache.tools.ant.taskdefs.optional.sun.appserv.DeployTask"
+     classpath="${sample.classpath.dir}/${optional.taskdef.jar}"
+   />
+   <taskdef name="sun-appserv-undeploy"
+
+ classname="org.apache.tools.ant.taskdefs.optional.sun.appserv.UndeployTask"
+     classpath="${sample.classpath.dir}/${optional.taskdef.jar}"
+ />
+  <taskdef name="sun-appserv-input"
+    
+ classname="org.apache.tools.ant.taskdefs.optional.sun.appserv.SunONEInput"
+    classpath="${sample.classpath.dir}/${optional.taskdef.jar}"
+ />
+  
+ 
+
+
+
+
+
+  <!-- database properties -->
+   <target name="check_db">
+         <condition property="db.pointbase" value="true">
+ 	 <equals arg1="${default.database}" arg2="pointbase" casesensitive="false" trim="true"/>
+	 </condition>   
+
+         <condition property="db.oracleDD" value="true">
+         <equals arg1="${default.database}" arg2="oracleDD" casesensitive="false" trim="true"/>
+         </condition>
+
+         <condition property="db.oracle" value="true">
+         <equals arg1="${default.database}" arg2="oracle" casesensitive="false" trim="true"/>
+         </condition>
+
+         <condition property="db.oracleInet" value="true">
+         <equals arg1="${default.database}" arg2="oracleInet" casesensitive="false" trim="true"/>
+         </condition>
+
+  </target>
+
+  <target name="setup_pointbase" if="db.pointbase">
+           <property name="db.host" value="${pointbase.server}"/>
+	   <property name="db.port" value="${pointbase.port}"/>
+	   <property name="db.driver" value="${pointbase.driver}"/>
+	   <property name="db.sid"   value="{pointbase.dbName}"/>
+	   <property name="db.root" value="${com.sun.aas.pointbaseRoot}"/>
+	   <property name="db.url" value="${pointbase.url}"/>  
+	   <property name="db.classpath" value="${pointbase.classes}"/>
+	   <property name="db.delimiter" value=";"/>	
+	   <property name="url.prop" value="DatabaseName" />
+	   <property name="ds.class" value="${pointbase.dataSource}" />
+	   <property name="xa.ds.class" value="com.pointbase.xa.xaDataSource" />
+	   <property name="dbvendorname" value="${pointbase.dbvendorname}" />	
+           <property name="db.properties" value="${pointbase.properties}" />
+  </target>
+
+  <target name="setup_oracle" if="db.oracle">
+           <property name="db.host" value="${oracle.server}"/>
+           <property name="db.port" value="${oracle.port}"/>
+           <property name="db.driver" value="${oracle.driver}"/>
+           <property name="db.sid"   value="{oracle.dbName}"/>
+           <property name="db.root" value=""/>
+           <property name="db.url" value="${oracle.url}"/>
+           <property name="db.classpath" value="${oracle.classes}"/>
+           <property name="db.delimiter" value=";"/>
+           <property name="url.prop" value="DatabaseName"/> 
+           <property name="ds.class" value="${oracle.dataSource}" />
+	   <property name="dbvendorname" value="${oracle.dbvendorname}" />
+           <property name="db.properties" value="${oracle.properties}" />
+  </target>
+ 
+  <target name="setup_oracleDD" if="db.oracleDD">
+           <property name="db.host" value="${oracleDD.server}"/>
+           <property name="db.port" value="${oracleDD.port}"/>
+           <property name="db.driver" value="${oracleDD.driver}"/>
+           <property name="db.sid"   value="{oracleDD.dbName}"/>
+           <property name="db.root" value=""/>
+           <property name="db.url" value="${oracleDD.url}"/>
+           <property name="db.classpath" value="${oracleDD.classes}"/>
+           <property name="db.delimiter" value=";"/>
+           <property name="url.prop" value="DatabaseName" />
+           <property name="ds.class" value="${oracleDD.dataSource}" />
+           <property name="dbvendorname" value="${oracleDD.dbvendorname}" />
+           <property name="db.properties" value="${oracleDD.properties}" />
+  </target>
+
+
+  <target name="setup_oracleInet" if="db.oracleInet">
+           <property name="db.host" value="${oracleInet.server}"/>
+           <property name="db.port" value="${oracleInet.port}"/>
+           <property name="db.driver" value="${oracleInet.driver}"/>
+           <property name="db.sid"   value="{oracleInet.dbName}"/>
+           <property name="db.root" value=""/>
+           <property name="db.url" value="${oracleInet.url}"/>
+           <property name="db.classpath" value="${oracleInet.classes}"/>
+           <property name="db.delimiter" value=";"/>
+           <property name="url.prop" value="DatabaseName" />
+           <property name="ds.class" value="${oracleInet.dataSource}" />
+           <property name="dbvendorname" value="${oracleInet.dbvendorname}" />
+           <property name="db.properties" value="${oracleInet.properties}" />
+  </target>
+
+  <target name="setup_db" depends="check_db, setup_pointbase,setup_oracle,setup_oracleDD,setup_oracleInet"/>
+
+  <!-- ======================================================= -->
+  <!--              Read/Set properties.                       -->
+  <!-- ======================================================= -->
+
+  <target name="init_common" depends="build_cpath">
+    <!-- define these properties if samples dont define  -->
+    <property name="classpath.prefix" value="."/>
+    <property name="classpath.suffix" value="."/>
+    <property name="build.classpath" 
+      value="${classpath.prefix}:${build.classesdir}:${appserver.cpath}:${classpath.suffix}"/>
+  </target>
+
+  <target name="build_cpath" unless="appserver.cpath">
+  	<property name="build.sysclasspath" value="ignore"/>
+    <path id="sample_classpath_jars">
+      <fileset dir="${com.sun.aas.installRoot}/lib" includes="*.jar" />
+      <fileset dir="${com.sun.aas.webServicesLib}" includes="*.jar"/>
+      <fileset dir="${com.sun.aas.imqLib}" includes="*.jar"/>
+      <fileset dir="${com.sun.aas.installRoot}/lib/endorsed/" includes="*.jar" />
+   </path>
+   
+   
+    <pathconvert pathsep=":" property="appserver.cpath" refid="sample_classpath_jars"/>
+    <echo message="build_cpath is  ${appserver.cpath}"/>
+  </target>
+
+  <target name="setup_env" depends="init_common,sethost,setport,setuser,setpassword,setinstance,undate_env"/>
+
+  <target name="undate_env" if="update.done">
+    <propertyfile file="${sample.home}/common.properties">
+      <entry key="admin.host" value="${admin.host}"/>
+      <entry key="admin.port" value="${admin.port}"/>
+      <entry key="admin.password" value="${admin.password}"/> 
+      <entry key="admin.user" value="${admin.user}"/>
+      <entry key="appserver.instance" value="${appserver.instance}"/>
+    </propertyfile>
+  </target>
+
+  <target name="sethost" depends="envhost, readhost"/>
+  <target name="envhost" if="as.env.AS_ADMIN_HOST" >
+    <property name="admin.host" value="${as.env.AS_ADMIN_HOST}"/>
+  </target>
+  <target name="readhost" unless="admin.host" >
+    <echo>
+     ======================================================================================
+     You will be promted for application server installation parameters. These inputs will 
+     be stored in ${com.sun.aas.installRoot}/samples/common.properties. Please edit this 
+     file to make any corrections in future.
+     ======================================================================================
+     </echo>
+    <sun-appserv-input message="Please Enter app-server Host Name : " addproperty="admin.host" />
+    <property name="update.done" value="true"/>
+  </target>
+
+  <target name="setport" depends="envport, readport"/>
+  <target name="envport" if="as.env.AS_ADMIN_PORT" >
+    <property name="admin.port" value="${as.env.AS_ADMIN_PORT}"/>
+  </target>
+  <target name="readport"  unless="admin.port" >
+    <sun-appserv-input message="Please Enter app-server Admin Port : " addproperty="admin.port" />
+    <property name="update.done" value="true"/>
+  </target>
+ 
+  <target name="setuser" depends="envuser, readuser"/>
+  <target name="envuser" if="as.env.AS_ADMIN_USER" >
+    <property name="admin.user" value="${as.env.AS_ADMIN_USER}"/>
+  </target>
+  <target name="readuser" unless="admin.user">
+    <sun-appserv-input message="Please Enter app-server Admin User Name : " addproperty="admin.user" />
+    <property name="update.done" value="true"/>
+  </target>
+
+  <target name="setpassword" depends="envpassword, readpassword"/>
+  <target name="envpassword" if="as.env.AS_ADMIN_PASSWORD" >
+    <property name="admin.password" value="${as.env.AS_ADMIN_PASSWORD}"/>
+  </target>
+  <target name="readpassword"  unless="admin.password" >
+    <sun-appserv-input message="Please Enter app-server Admin User Password : " addproperty="admin.password" />
+    <property name="update.done" value="true"/>
+  </target>
+  <target name="setinstance" depends="envinstance, readinstance"/>
+
+  <target name="envinstance" if="as.env.AS_ADMIN_INSTANCE" >
+    <property name="appserver.instance" value="${as.env.AS_ADMIN_INSTANCE}"/>
+    <echo message="${appserver.instance}"/>
+  </target>
+  <target name="readinstance"  unless="appserver.instance" >
+    <sun-appserv-input message="Please Enter app-server Instance Name : " addproperty="appserver.instance" />
+    <property name="update.done" value="true"/>
+    <echo>
+     ======================================================================================
+     Your inputs have been stored in ${com.sun.aas.installRoot}/samples/common.properties. 
+     Please edit this file to make any corrections.
+     ======================================================================================
+    </echo>
+  </target>
+  <!--
+      add.classpathsuffix adds the classpath settings as defined in
+      build.properties.
+                                                                                                                                                             
+     The path is converted to correctly reflect the OS that ant is being
+     executed on.
+    -->
+                                                                                                                                                             
+   <target name="add.classpathsuffix" depends="configPlatform" if="db.oracleInet">
+        <echo message="Setting ${appserver.instance}.java-config.classpathsuffix=${j2ee.home.ri.classpathsuffix}"/>
+        <path id="foosuffix">
+            <pathelement location="${j2ee.home.ri.classpathsuffix}" />
+        </path>
+        <pathconvert targetos="${os}" property="classpathsuffix"
+                     refid="foosuffix"
+                     dirsep="${dirsep}" >
+        </pathconvert>
+        <exec executable="${exec.asadmin}" >
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" set"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+            <arg line=" ${appserver.instance}.java-config.classpath_suffix=${classpathsuffix}"/>
+        </exec>
+        <antcall target="restart.server"/>
+    </target>
+ 
+ 
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Compile all classes.                                    -->
+  <!-- ======================================================= -->
+  <target name="compile_common" depends="init_common">
+    <mkdir dir="${build.classesdir}"/>
+    <echo message="Compiling source files" />
+    <javac srcdir="${src}"
+           destdir="${build.classesdir}" 
+           classpath="${build.classpath}"/>
+  </target> 
+  
+
+  
+  
+  
+   
+  <!-- ======================================================= -->
+  <!-- Compile all JSP's.                                    -->
+  <!-- ======================================================= -->
+<target name="compile_jsp_common" depends="create_war_common">
+     <echo message="Compiling JSP(s)"/>
+     <mkdir dir="${assemble.war}/WEB-INF/generated"/>
+     <sun-appserv-jspc
+         webapp="${assemble.war}"
+         destdir="${assemble.war}/WEB-INF/generated"
+         classpath="${assemble.war}/WEB-INF/classes:${com.sun.aas.installRoot}/lib/appserv-rt.jar:${com.sun.aas.installRoot}/lib/j2ee.jar:${com.sun.aas.installRoot}/lib/appserv-ext.jar"/>
+     <javac
+         srcdir="${assemble.war}/WEB-INF/generated"
+         destdir="${assemble.war}/WEB-INF/generated"
+         debug="on"
+         classpath="${assemble.war}/WEB-INF/classes:${com.sun.aas.installRoot}/lib/appserv-rt.jar:${com.sun.aas.installRoot}/lib/j2ee.jar:${com.sun.aas.installRoot}/lib/appserv-ext.jar">
+         <include name="**/*.java"/>
+     </javac>
+   </target>
+
+ 
+
+   
+   
+   
+  <!-- ======================================================= -->
+  <!-- Clean up various files and directories.                 -->
+  <!-- ======================================================= -->
+  <target name="clean_clientjar_common">
+    <delete dir="${assemble.clientjar}"/>    
+  </target>
+  
+  <target name="clean_ear_common">
+    <delete dir="${assemble.ear}"/>    
+  </target>
+ 
+  <target name="clean_war_common">
+    <delete dir="${assemble.war}"/>    
+  </target>
+ 
+  <target name="clean_ejbjar_common">
+    <delete dir="${assemble.ejbjar}"/>    
+  </target>
+  
+  <target name="clean_jar_common">
+    <delete dir="${assemble.jar}"/>    
+  </target>
+
+  <target name="clean_common" >
+    <delete dir="${build}"/>
+    <delete dir="${build.docdir}"/>
+    <delete dir="${assemble}"/>
+  </target>
+
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Assemble WAR module.                                    -->
+  <!-- ======================================================= -->
+  <target name="check_warfile">
+    <available file="${build.classesdir}/${war.pkg}/" type="dir" 
+               property="warfiles.present"/>
+    <available file="${src}/docroot" type="dir" 
+               property="docroot.present"/>
+  </target>
+
+  <target name="copy_warfiles" if="warfiles.present">
+    <copy todir="${assemble.war}/WEB-INF/classes/${war.pkg}">
+      <fileset dir="${build.classesdir}/${war.pkg}/" includes="**/*.class"/>
+    </copy>
+  </target>
+
+  <target name="copy_docroot" if="docroot.present">
+    <copy todir="${assemble.war}">
+      <fileset dir="${src.docroot}" excludes="cvs,annontation"/>
+    </copy>
+  </target>
+
+  <target name="copy_ejbjar_war" if="ejbjar.done">
+    <copy file="${assemble.ejbjar}/${ejbjar}" 
+          tofile="${assemble.war}/WEB-INF/lib/${ejbjar}"/>
+  </target>
+
+
+  <target name="mkdir_war">
+    <mkdir dir="${assemble.war}"/>
+  </target>
+  
+  <target name="add_classes" if="warfiles.present">
+    <jar destfile="${assemble.war}/${war}" update="true">
+      <zipfileset dir="${build.classesdir}/${war.pkg}/" includes="**/*.class" 
+                                       prefix="WEB-INF/classes/${war.pkg}"/>
+    </jar>
+  </target>
+  
+  <target name="add_docroot" if="docroot.present">
+    <jar destfile="${assemble.war}/${war}" update="true">
+      <fileset dir="${src.docroot}" excludes="CVS,annotation"/>
+    </jar>
+  </target>
+
+  <target name="add_ejbjar_war" if="ejbjar.done">
+    <jar destfile="${assemble.war}/${war}" update="true">
+      <zipfileset dir="${assemble.ejbjar}" includes="${ejbjar}" 
+                                           prefix="WEB-INF/lib"/>
+    </jar>
+  </target>
+
+  <target name="create_war_common" depends="clean_war_common,mkdir_war,check_warfile,add_docroot,add_classes,add_ejbjar_war">
+    <jar destfile="${assemble.war}/${war}" update="true">
+      <zipfileset dir="." includes="${warDD}" prefix="WEB-INF"/>
+    </jar>
+    <property name="war.done" value="true"/>
+  </target>
+
+
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Assemble EAR module.                                    -->
+  <!-- ======================================================= -->
+  <target name="mkdir_ear">
+    <mkdir dir="${assemble.ear}/META-INF"/>
+  </target>
+ 
+  <target name="copy_ejbjar" if="ejbjar.done">
+    <copy file="${assemble.ejbjar}/${ejbjar}" 
+          tofile="${assemble.ear}/${ejbjar}"/>
+  </target>
+
+  <target name="copy_war" if="war.done">
+    <copy file="${assemble.war}/${war}"    tofile="${assemble.ear}/${war}"/>
+  </target>
+  
+  <target name="copy_clientjar" if="clientjar.done">
+     <copy file="${assemble.clientjar}/${clientjar}" 
+           tofile="${assemble.ear}/${clientjar}"/>
+  </target>
+  
+
+  <target name="mkdir_ear_dir">
+    <mkdir dir="${assemble.ear}"/>
+  </target>
+
+  <target name="add_ejbjar" if="ejbjar.done">
+    <jar destfile="${assemble.ear}/${ear}" update="true">
+      <fileset dir="${assemble.ejbjar}" includes="${ejbjar}"/>
+    </jar>
+  </target>
+
+  <target name="add_war" if="war.done">
+    <jar destfile="${assemble.ear}/${ear}" update="true">
+      <fileset dir="${assemble.war}" includes="${war}"/>
+    </jar>
+  </target>
+
+  <target name="add_clientjar" if="clientjar.done">
+    <jar destfile="${assemble.ear}/${ear}" update="true">
+      <fileset dir="${assemble.clientjar}" includes="${clientjar}"/>
+    </jar>
+  </target>
+
+  <target name="create_ear_common" depends="clean_ear_common,mkdir_ear_dir,add_ejbjar,add_clientjar,add_war">
+    <jar destfile="${assemble.ear}/${ear}" update="true">
+      <metainf dir="." includes="${earDD}"/>
+    </jar>
+    <delete file="../${war}" />
+    <delete file="../${ejbjar}" />
+    <delete file="../${clientjar}" />    
+  </target>
+ 
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Assemble EJB JAR module.                                -->
+  <!-- ======================================================= -->
+  <target name="create_ejbjar_common" depends="clean_ejbjar_common">
+    <mkdir dir="${assemble.ejbjar}"/>
+    <jar destfile="${assemble.ejbjar}/${ejbjar}">
+      <zipfileset dir="${build.classesdir}/${jar.pkg}/" includes="**/*.class" 
+                  excludes="**/servlet/, **/client/" prefix="${jar.pkg}"/>
+      <metainf dir="." includes="${jarDD}"/>
+    </jar>
+    <copy file="${assemble.ejbjar}/${ejbjar}" tofile="../${ejbjar}"/>
+    <property name="ejbjar.done" value="true"/>
+  </target>
+
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Assemble CLIENT JAR module.                             -->
+  <!-- ======================================================= -->
+  <target name="clientjar_common" depends="clean_clientjar_common">
+    <mkdir dir="${assemble.clientjar}"/>
+    <jar destfile="${assemble.clientjar}/${clientjar}" manifest="MANIFEST.MF">
+      <zipfileset dir="${build.classesdir}/${app.pkg}/" 
+                  includes="**/*Client.class" excludes="**/servlet/"
+                  prefix="${app.pkg}"/>
+      <metainf dir="." includes="${clientDD}"/>
+    </jar>
+    <property name="clientjar.done" value="true"/>
+  </target>
+
+ 
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Assemble Simple JAR file.                               -->
+  <!-- ======================================================= -->
+  <target name="create_jar_common" depends="clean_jar_common">
+    <mkdir dir="${assemble.jar}"/>
+    <jar destfile="${assemble.jar}/${jar}">
+      <zipfileset dir="${build.classesdir}/${app.pkg}/" includes="**/*.class"
+                                                        prefix="${app.pkg}"/>
+    </jar>
+  </target>
+
+  
+  
+  
+       
+  <!-- ======================================================= -->
+  <!-- Deploy CLI support.                                    -->
+  <!-- ======================================================= -->
+  <!-- Name of the asadmin commands -->
+    <property name="s1as.admin" value="${com.sun.aas.installRoot}/bin/asadmin"/>   
+
+    <!-- checkPlatform determines which OS is being utilized. -->
+    <target name="checkPlatform" >
+        <condition property ="isUnixPlatform">
+           <os family="unix"/>
+        </condition>
+        <condition property ="isWindowsPlatform">
+           <os family="windows"/>
+        </condition>
+    </target>
+    
+     <!--
+         configUnix will be invoked when ant is being run on 
+         unix/Linux.  It will configure the values for ${os}
+         and ${dir.sep}
+         
+         Due to differences on how ant invokes external commands
+         on windows, we need to execute asadmin and imqusermgr
+         differently on each platform.
+    -->
+    <target name="configUnix" depends="checkPlatform" if="isUnixPlatform" >
+           <echo message="on unix"/>
+           <property name="dir.sep" value="/"/>
+           <property name="os" value="unix"/>
+           <property name="exec.asadmin" value="${s1as.admin}" />
+           <property name="exec.asadmin.part2" value="" />               
+    </target>
+
+    <!--
+         configWindows will be invoked when ant is being run on 
+         windows.  It will configure the values for ${os}
+         and ${dir.sep}
+         
+         Due to differences on how ant invokes external commands
+         on windows, we need to execute asadmin and imqusermgr
+         differently on each platform.
+    -->
+    <target name="configWindows" depends="checkPlatform" if="isWindowsPlatform" >
+           <echo message="on windows"/>
+           <property name="dir.sep" value="\\"/>
+           <property name="os" value="windows"/>
+           <property name="exec.asadmin" value="cmd.exe" />
+           <property name="exec.asadmin.part2" value= " /c ${s1as.admin}" />              
+    </target>
+    
+  
+    
+  
+      
+    
+  <!-- ======================================================= -->
+  <!-- Update target.                                          -->
+  <!-- ======================================================= -->
+  <target name="update_common" depends="setup_env">
+    <echo message="Updating ${deploy.file}."/>
+    <sun-appserv-update file="${deploy.file}"/>
+  </target>
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Deploy CLI support.                                    -->
+  <!-- ======================================================= -->
+  <!-- Name of the asadmin commands -->
+  <property name="s1as.admin" value="${com.sun.aas.installRoot}/bin/asadmin"/>
+  <property name="s1as.domain.dir" value="${com.sun.aas.installRoot}/domains"/>
+  <property name="s1as.domain.name" value="${domain.name}"/>    
+  <property name="s1as.domain" value="${s1as.domain.dir}/${s1as.domain.name}"/>
+    
+  <target name="configPlatform"
+       depends="checkPlatform, configUnix, configWindows"/>
+  
+  <target name="reconfig.restart" depends="init_common, setpassword, configPlatform">
+    <antcall target="restart.server"/>
+  </target>   
+      
+  <target name="restart.server" depends="init_common, setpassword, configPlatform">
+     <antcall target="stop.appserver"/>   
+     <antcall target="start.appserver"/>   
+  </target>
+
+  <target name="stop.appserver" depends="configPlatform, init_common, setpassword">
+    <echo message="Stopping Appserver on ${admin.host}"/>
+    <sun-appserv-admin explicitcommand="stop-domain ${domain.name}" />
+    <echo message="Waiting for server to stop before restarting."/>
+ </target>
+  
+  <target name="start.appserver" depends="configPlatform, init_common, setpassword">
+    <echo message="Restarting appserver on ${admin.host}"/>
+    <sun-appserv-admin explicitcommand="start-domain ${domain.name}" />
+    <echo message="Appserver started."/>
+ </target>
+ 
+ 
+ 
+ 
+ 
+ 
+  <!-- ======================================================= -->
+  <!-- Create the CMP tables if they will not be created by the -->
+  <!-- appserver at deploy time.                               -->
+  <!-- ======================================================= --> 
+ 
+  <target name="common.configure.db" depends="setup_db">
+    <echo message="Create the CMP tables if they will not be created by the appserver at deploy time."/>
+        <sql driver="${db.driver}"
+             url="${db.url}"
+             userid="${db.user}"
+             password="${db.pwd}"
+             classpath="${db.classpath}"
+             delimiter="${db.delimiter}"
+             autocommit="true"
+             onerror="continue" >
+             <transaction src="${transaction.src}"/>             
+        </sql>               
+  </target>            
+  
+  <target name="common.unconfigure.db" depends="setup_db">
+    <echo message="Delete the CMP tables at undeploy time."/>
+      <sql driver="${db.driver}"
+             url="${db.url}"
+             userid="${db.user}"
+             password="${db.pwd}"
+             classpath="${db.classpath}"
+             delimiter="${db.delimiter}"
+             autocommit="true"
+             onerror="continue" >
+             <transaction src="${transaction.src}"/>             
+        </sql>                   
+  </target>  
+ 
+  
+  
+  
+  
+   
+  <!-- ======================================================= -->
+  <!-- FileRealm key generaion targets.                        -->
+  <!-- ======================================================= -->
+
+  <target name="keygen_create" depends="setup_env"  unless="file.user.exists.common${app.user}">
+    <echo message="Generating key for user ${app.user} in server ${appserver.instance}"/>
+    <antcall target="verify_file_user_exists_common"/>
+     <sun-appserv-admin 
+      command="create-file-user --groups ${app.groups} --userpassword=${app.userpassword} ${app.user}"
+      user="${admin.user}" 
+      password="${admin.password}" 
+      host="${admin.host}" 
+      port="${admin.port}" 
+      sunonehome="${com.sun.aas.installRoot}" />
+  </target>
+
+  <target name="keygen_common" depends="setup_env, verify_file_user_exists_common">
+   <antcall target="keygen_create"/>
+  </target>
+
+  <target name="keydel_common" depends="setup_env">
+    <echo message="Deleting key for user ${app.user} in server ${appserver.instance}"/>
+    <sun-appserv-admin 
+      command="delete-file-user ${app.user}"
+      user="${admin.user}" 
+      password="${admin.password}" 
+      host="${admin.host}" 
+      port="${admin.port}" 
+      sunonehome="${com.sun.aas.installRoot}" />
+  </target>
+
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Install targets.                                        -->
+  <!-- ======================================================= -->
+  <target name="deploy_common" depends="setup_env, setup_db, checkPlatform, configUnix, configWindows">
+     
+    <echo message="Deploying ${deploy.file}."/>
+    <exec executable="${exec.asadmin}" >
+        <arg line="${exec.asadmin.part2}" />
+        <arg line=" deploy"/>
+        <arg line=" --user ${admin.user}"/>
+        <arg line=" --password ${admin.password}"/>
+        <arg line=" --host ${admin.host}"/>
+        <arg line=" --port ${admin.port}"/>
+        <arg line=" --virtualservers ${appserver.instance}"/>
+        <arg line=" --force=true"/>
+        <arg line=" --name ${appname}"/>
+        <arg line=" --upload=true"/>
+<!--        <arg line=" dbvendorname=${dbvendorname}"/>-->
+        <arg line="${deploy.file}"/>
+     </exec>   
+  </target>
+  
+  <target name="deploy_retrieve_common" depends="setup_env, checkPlatform, configUnix, configWindows">
+    <echo message="Deploying ${deploy.file} and retrieving client stubs."/>
+    <exec executable="${exec.asadmin}" >
+        <arg line="${exec.asadmin.part2}" />
+        <arg line=" deploy"/>
+        <arg line=" --user ${admin.user}"/>
+        <arg line=" --password ${admin.password}"/>
+        <arg line=" --host ${admin.host}"/>
+        <arg line=" --port ${admin.port}"/>
+        <arg line=" --virtualservers ${appserver.instance}"/>
+        <arg line=" --force=true"/>
+        <arg line=" --name ${appname}"/>
+        <arg line=" --upload=true"/>
+        <arg line=" --retrieve=../"/>
+        <arg line="${deploy.file}"/> 
+     </exec> 
+  </target>  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Uninstall targets.                                      -->
+  <!-- ======================================================= -->
+  <target name="undeploy_common" depends="setup_env">
+    <echo message="Undeploying ${appname}."/>
+    <sun-appserv-undeploy 
+      name="${appname}"
+      user="${admin.user}" 
+      password="${admin.password}" 
+      host="${admin.host}" 
+      port="${admin.port}"        
+      sunonehome="${com.sun.aas.installRoot}" />    
+  </target>
+
+  <target name="undeploy_clean_stubs_common" depends="undeploy_common">
+      <echo message="Removing application client stubs: ${stub.file}."/>
+      <delete file="${stub.file}" />
+  </target>
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Admin targets.                                      -->
+  <!-- ======================================================= -->
+  <target name="admin_command_common" depends="setup_env">
+    <echo message="Doing admin task ${admin.command}"/>
+    
+    
+    <sun-appserv-admin 
+      command="${admin.command}"
+      user="${admin.user}" 
+      password="${admin.password}" 
+      host="${admin.host}" 
+      port="${admin.port}" 
+      sunonehome="${com.sun.aas.installRoot}"/>
+      
+    
+      
+  </target>
+
+  <target name="reconfig_common">
+  </target> 
+
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Create Javadocs.                                        -->
+  <!-- ======================================================= -->
+  <target name="javadocs_common" depends="init_common">
+    <delete dir="${build.docdir}"/>
+    <mkdir dir="${build.docdir}"/>
+    <javadoc packagenames="${javadoc.pkgnames}"
+             sourcepath="${src}" 
+             destdir="${build.docdir}"
+             classpath="${build.classpath}"
+             author="true"
+             version="true"
+             use="true"
+             windowtitle="SunOne Application Server ${sample.name} Sample Application API"
+             doctitle="SunOne Application Server ${sample.name} Sample"
+             bottom="Copyright &#169; 2001 Sun Microsystems Inc. All Rights Reserved."/>
+  </target>
+  
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!-- Verify Targets.                                         -->
+  <!-- ======================================================= -->
+  <target name="verify_common" depends="init_common">
+    <echo message="Verifying Process for ${verify.file}" />
+    <java classname="com.sun.enterprise.tools.verifier.Verifier" fork="yes" dir="." failonerror="true">
+      <sysproperty key="com.sun.aas.installRoot" value="${com.sun.aas.installRoot}"/>
+      <sysproperty key="com.sun.aas.verifier.xsl" value="${com.sun.aas.installRoot}/lib/verifier/" />
+      <sysproperty key="java.endorsed.dirs" value="${com.sun.aas.installRoot}/lib/endorsed" />
+      <!-- uncomment the following for verbose output -->
+      <!--<arg value="-v"/>-->
+      <arg value="${verify.file}"/>
+      <classpath path="${build.classpath}"/>
+    </java>
+  </target>
+
+
+  
+  
+  
+  
+  <!-- ======================================================= --> 
+  <!-- CleanUp Pointbase table Targets.                        --> 
+  <!-- ======================================================= -->
+  <target name="sql_common" depends="setup_db"> 
+	 <java classname="com.pointbase.tools.toolsCommander" classpath="${db.classpath}"> 
+	   <arg line="${db.driver} ${db.url} ${db.file} ${db.user} ${db.pwd}" /> 
+	 </java> 
+  </target>
+
+  
+  
+  
+  
+  <!-- ======================================================= -->
+  <!--       Targets to deploy/undeploy resources.             -->
+  <!-- ======================================================= -->
+  <target name="create-jdbc-connection-pool_common" depends="setup_db" unless="create.jdbc.conpool.common">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-connection-pool
+          --datasourceclassname ${ds.class} ${conpool.name}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set ${appserver.instance}.resources.jdbc-connection-pool.${conpool.name}.property.${url.prop}=${db.url}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set ${appserver.instance}.resources.jdbc-connection-pool.${conpool.name}.property.User=${db.user}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="set ${appserver.instance}.resources.jdbc-connection-pool.${conpool.name}.property.Password=${db.pwd}" />
+    </antcall>
+  </target>
+
+  <target name="create-jdbc-resource_common" unless="create.jdbc.resource.common">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jdbc-resource
+         --connectionpoolid ${conpool.name} ${jdbc.resource.name}"/>
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-connection-pool_common">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-connection-pool ${conpool.name}" />
+    </antcall>
+  </target>
+
+  <target name="delete-jdbc-resource_common">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-jdbc-resource ${jdbc.resource.name}" />
+    </antcall>
+  </target>
+
+  <target name="deploy_jdbc_resource_common" depends="setup_env,verify_jdbc_connection_pool_common,verify_jdbc_resource_common">
+    <antcall target="create-jdbc-connection-pool_common"/>
+    <antcall target="create-jdbc-resource_common"/>
+  </target>
+
+
+  <target name="create-persistence-resource_common" unless="create.persistence.resource.common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-persistence-resource ${pm.resource.name}" />
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="set
+        ${appserver.instance}.resources.persistence-manager-factory-resource.${pm.resource.name}.factory-class=${pm.factory.class}"/>
+    </antcall>
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="set
+        ${appserver.instance}.resources.persistence-manager-factory-resource.${pm.resource.name}.jdbc-resource-jndi-name=${jdbc.resource.name}" />
+    </antcall>
+  </target>
+
+  <target name="delete-persistence-resource_common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="delete-persistence-resource ${pm.resource.name}" />
+    </antcall>
+  </target>
+
+  <target name="create-jms-connection_common" unless="jms.connection.exists.common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jms-resource --restype ${queue.factory.type} ${queue.factory.jndi.name}" />
+    </antcall>
+  </target>
+                                                                                                                                                             
+  <target name="delete-jms-connection_common">
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="delete-jms-resource ${queue.factory.jndi.name} " />
+    </antcall>
+  </target>
+                                                                                                                                                             
+  <target name="create-jms-queue_common" unless="jms.queue.exists.common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command"
+        value="create-jms-resource
+          --restype ${queue.type}
+          --property ${queue.property.name}=${queue.property.value}
+          ${queue.jndi.name}" />
+    </antcall>
+  </target>
+                                                                                                                                                             
+  <target name="delete-jms-queue_common">
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="delete-jms-resource ${queue.jndi.name} " />
+    </antcall>
+  </target>
+                                                                                                                                                             
+  <target name= "deploy-jms-resource_common" depends = "verify_jms_connection_exists_common, verify_jms_queue_exists_common" >
+    <antcall target="create-jms-connection_common"/>
+    <antcall target="create-jms-queue_common"/>
+  </target>
+                                                                                                                                                             
+  <target name= "undeploy-jms-resource_common">
+    <antcall target="delete-jms-connection_common"/>
+    <antcall target="delete-jms-queue_common"/>
+  </target>
+
+  <target name="create-javamail-resource_common" unless="create.javamail.resource.common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="create-javamail-resource ${javamail.resource.properties} ${javamail.resource.name}"/>
+    </antcall>
+  </target>
+ 
+  <target name="delete-javamail-resource_common" depends="setup_env">
+    <antcall target="admin_command_common">
+      <param name="admin.command" value="delete-javamail-resource ${javamail.resource.name}"/>
+    </antcall>
+  </target>
+
+
+
+  <!-- ========================================================== -->
+  <!-- Check duplicate targets for deploy/undeploy resources      -->
+  <!-- ========================================================== -->
+  
+  <target name="verify_jdbc_resource_common" depends="setup_env,init_common,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.resource">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-jdbc-resources"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+    </exec>
+
+    <condition property="create.jdbc.resource.common" value="true">
+      <contains string="${list.resource}" substring="${jdbc.resource.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_jdbc_resource_exists"/>
+  </target>
+                                                                                         
+  <target name="verify_jdbc_connection_pool_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.pool">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-jdbc-connection-pools"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+    </exec>
+                                                                                          
+    <condition property="create.jdbc.conpool.common" value="true">
+      <contains string="${list.pool}" substring="${conpool.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_jdbc_conpool_exists"/>
+  </target>
+
+  <target name="verify_persistence_resource_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.persistence">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-persistence-resources"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+    </exec>
+                                                                                          
+    <condition property="create.persistence.resource.common" value="true">
+      <contains string="${list.persistence}" substring="${pm.resource.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_persistence_resource_exists"/>
+  </target>
+
+  <target name="verify_javamail_resource_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.javamail">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-javamail-resources"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+    </exec>
+    <condition property="create.javamail.resource.common" value="true">
+      <contains string="${list.javamail}" substring="${javamail.resource.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_javamail_resource_exists"/>
+  </target>
+
+  <target name="verify_file_user_exists_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.users" failonerror="true">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-file-users"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+ </exec>
+    <condition property="file.user.exists.common${app.user}" value="true">
+      <contains string="${list.users}" substring="${app.user}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_file_user_exists"/>
+  </target>
+
+<target name="verify_jms_connection_exists_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.jms.resources" failonerror="true">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-jms-resources"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+ </exec>
+    <condition property="jms.connection.exists.common" value="true">
+      <contains string="${list.jms.resources}" substring="${queue.factory.jndi.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_jms_connection_exists"/>
+  </target>
+  
+<target name="verify_jms_queue_exists_common" depends="setup_env,checkPlatform, configUnix, configWindows">
+    <exec executable="${exec.asadmin}" outputproperty="list.jms.resources" failonerror="true">
+            <arg line="${exec.asadmin.part2}" />
+            <arg line=" list-jms-resources"/>
+            <arg line=" --user ${admin.user}"/>
+            <arg line=" --password ${admin.password}"/>
+            <arg line=" --host ${admin.host}"/>
+            <arg line=" --port ${admin.port}"/>
+ </exec>
+    <condition property="jms.queue.exists.common" value="true">
+      <contains string="${list.jms.resources}" substring="${queue.jndi.name}" casesensitive="false"/>
+    </condition>
+    <antcall target="message_warning_jms_queue_exists"/>
+  </target>
+    
+  
+  <!-- ================================================= -->
+  <!--                Warning messages                   -->
+  <!-- ================================================= -->
+
+  <target name="message_warning_jdbc_conpool_exists" if="create.jdbc.conpool.common">
+    <echo>
+===================================================================
+JDBC Connection Pool: ${conpool.name} already exists on the server. 
+The existing ${conpool.name} JDBC connection pool will be used.
+===================================================================
+    </echo>
+  </target>
+
+  <target name="message_warning_jdbc_resource_exists" if="create.jdbc.resource.common">
+    <echo>
+==================================================================
+JDBC Resource: ${jdbc.resource.name} already exists on the server. 
+The existing ${jdbc.resource.name} JDBC resource will be used.
+ =================================================================
+    </echo>
+  </target>
+
+  <target name="message_warning_persistence_resource_exists" if="create.persistence.resource.common">
+    <echo>
+======================================================================
+Persistent Resource: ${pm.resource.name} already exists on the server. 
+The existing ${pm.resource.name} persistent resource will be used.
+======================================================================
+    </echo>
+  </target>
+
+<target name="message_warning_javamail_resource_exists" if="create.javamail.resource.common">
+    <echo>
+=========================================================================
+Javamail resource: ${javamail.resource.name} already exists on the server.
+The existing ${javamail.resource.name} javamail resource will be used. 
+=========================================================================
+    </echo>
+  </target>
+
+
+<target name="message_warning_file_user_exists" if="file.user.exists.common${app.user}">
+    <echo>
+=========================================================================
+File user: ${app.user} already exists on the server.
+The existing ${app.user} file user will be used.
+=========================================================================
+    </echo>
+  </target>
+
+<target name="message_warning_jms_connection_exists" if="jms.connection.exists.common">
+    <echo>
+==================================================================
+JMS Connection: ${queue.factory.jndi.name} already exists on the server. 
+The existing ${queue.factory.jndi.name} JMS connection will be used.
+ =================================================================
+    </echo>
+  </target>
+
+  <target name="message_warning_jms_queue_exists" if="jms.queue.exists.common">
+    <echo>
+==================================================================
+JMS Queue: ${queue.jndi.name} already exists on the server. 
+The existing ${queue.jndi.name} JMS queue will be used.
+ =================================================================
+    </echo>
+  </target>  
+  

@@ -1,0 +1,149 @@
+<!DOCTYPE ejb-jar PUBLIC '-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://java.sun.com/dtd/ejb-jar_2_0.dtd'>
+
+
+<!-- Generated XML! -->
+
+<ejb-jar>
+  <enterprise-beans>
+    <session>
+      <ejb-name>JVTAlarmMonitorSession</ejb-name>
+      <home>javax.oss.fm.monitor.JVTAlarmMonitorHome</home>
+      <remote>javax.oss.fm.monitor.JVTAlarmMonitorSession</remote>
+      <ejb-class>ossj.qos.fmri.AlarmMonitorSessionBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+
+     <env-entry>
+        <description>The initial context factory classs property used in ApplicationContext.</description>
+        <env-entry-name>applicationContextInitialContextFactory</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>com.sun.jndi.cosnaming.CNCtxFactory</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>The provider URL property used in ApplicationContext.</description>
+        <env-entry-name>applicationContextProviderURL</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>iiop://localhost:3700</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Application distinguished name.</description>
+        <env-entry-name>applicationDistinguishedName</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/JVTHome</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Include application distinguished name in events.</description>
+        <env-entry-name>includeApplicationInfo</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Flag that determines if debug messages are logged.</description>
+        <env-entry-name>debugLogEnabled</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+    </session>
+
+
+    <message-driven>
+      <ejb-name>BackEndAlarmMessageBean1</ejb-name>
+      <ejb-class>ossj.qos.fmri.BackEndAlarmMessageBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+      </message-driven-destination>
+
+      <env-entry>
+        <description>The initial context factory classs property used in ApplicationContext.</description>
+        <env-entry-name>applicationContextInitialContextFactory</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>com.sun.jndi.cosnaming.CNCtxFactory</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>The provider URL property used in ApplicationContext.</description>
+        <env-entry-name>applicationContextProviderURL</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>iiop://localhost:3700</env-entry-value>
+      </env-entry>
+	 <env-entry>
+        <description>Application distinguished name.</description>
+        <env-entry-name>applicationDistinguishedName</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>System/DFW/ApplicationType/QoS/AlarmMonitor/Application/1-0;1-0;JSR90FMRI/Comp/JVTHome</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Include application distinguished name in events.</description>
+        <env-entry-name>includeApplicationInfo</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Flag that determines if debug messages are logged.</description>
+        <env-entry-name>debugLogEnabled</env-entry-name>
+        <env-entry-type>java.lang.Boolean</env-entry-type>
+        <env-entry-value>true</env-entry-value>
+      </env-entry>
+
+      <resource-ref>
+        <res-ref-name>jdbc/ossjqosfmri</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+      </resource-ref>
+    </message-driven>
+
+    <message-driven>
+      <ejb-name>XmlFMRIMessageDrivenBean</ejb-name>
+      <ejb-class>ossj.qos.mdbimpl.fm.FmRequestResponseMDB</ejb-class>
+      <transaction-type>Container</transaction-type>
+        <message-driven-destination>
+          <destination-type>javax.jms.Queue</destination-type>
+        </message-driven-destination>
+      </message-driven>
+
+
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>JVTAlarmMonitorSession</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>NotSupported</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <ejb-name>JVTAlarmMonitorSession</ejb-name>
+        <method-name>tryUnacknowledgeAlarms</method-name>
+      </method>
+      <method>
+        <ejb-name>JVTAlarmMonitorSession</ejb-name>
+        <method-name>tryAcknowledgeAlarms</method-name>
+      </method>
+      <method>
+        <ejb-name>JVTAlarmMonitorSession</ejb-name>
+        <method-name>tryCommentAlarms</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <description>processes alarm events</description>
+        <ejb-name>BackEndAlarmMessageBean1</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+	<ejb-name>XmlFMRIMessageDrivenBean</ejb-name>
+	<method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>
+
+

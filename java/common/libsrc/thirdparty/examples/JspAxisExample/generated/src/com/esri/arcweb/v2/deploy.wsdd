@@ -1,0 +1,97 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AddressFinder WSDL service -->
+
+  <service name="IAddressFinder" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://arcweb.esri.com/v2"/>
+      <parameter name="wsdlServiceElement" value="AddressFinder"/>
+      <parameter name="schemaUnqualified" value="http://www.themindelectric.com/package/com.esri.is.services.glue.v2.addressfinder/,http://www.themindelectric.com/package/com.esri.is.services.common.v2.geom/,http://www.themindelectric.com/package/com.esri.is.services.common.v2/,http://www.themindelectric.com/package/java.lang/"/>
+      <parameter name="wsdlServicePort" value="IAddressFinder"/>
+      <parameter name="className" value="com.esri.arcweb.v2.IAddressFinderSkeleton"/>
+      <parameter name="wsdlPortType" value="IAddressFinder"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <parameter name="allowedMethods" value="*"/>
+      <parameter name="scope" value="Session"/>
+
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2/"
+        qname="ns:Location"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2.Location"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2/"
+        qname="ns:ArrayOfLocation"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2.Location[]"
+        innerType="cmp-ns:Location" xmlns:cmp-ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2.geom/"
+        qname="ns:Point"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2_geom.Point"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.glue.v2.addressfinder/"
+        qname="ns:AddressFinderOptions"
+        type="java:com.themindelectric.www._package.com_esri_is_services_glue_v2_addressfinder.AddressFinderOptions"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.themindelectric.com/package/java.lang/"
+        qname="ns:ArrayOfstring"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2/"
+        qname="ns:LocationInfo"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2.LocationInfo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2.geom/"
+        qname="ns:Envelope"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2_geom.Envelope"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.glue.v2.addressfinder/"
+        qname="ns:Address"
+        type="java:com.themindelectric.www._package.com_esri_is_services_glue_v2_addressfinder.Address"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.themindelectric.com/package/com.esri.is.services.common.v2.geom/"
+        qname="ns:CoordinateSystem"
+        type="java:com.themindelectric.www._package.com_esri_is_services_common_v2_geom.CoordinateSystem"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

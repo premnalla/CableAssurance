@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="StockQuoteService" default="StockQuoteService" basedir=".">
+
+	<property environment="env" />
+
+	<property name="wsdl.uri" value="./wsdl/StockQuote.wsdl" />
+	<property name="service.target" value="/TEMP/generated/service" />
+	<property name="client.target" value="/TEMP/generated/client" />
+
+	<property name="HelloText" value="Hello" />
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<macrodef name="CastorSourceGenerator">
+		<attribute name="schema" default="NOT SET" />
+		<attribute name="package" default="NOT SET" />
+		<attribute name="output" default="NOT SET" />
+		<sequential>
+			<echo />
+			<java classname="org.exolab.castor.builder.SourceGeneratorMain" fork="true">
+				<classpath refid="axis.classpath" />
+				<arg line="-i @{schema}  -package @{package} -dest @{output}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<target name="StockQuoteServiceOld">
+
+		<CastorSourceGenerator output="${service.target}/src" package="samples.databinding.data" schema="wsdl/StockQuote.xsd" />
+
+		<java classname="org.apache.axis2.wsdl.WSDL2Java" fork="true" classpathref="axis.classpath">
+			<arg line="-uri ${wsdl.uri}" />
+			<arg line="-ss" />
+			<arg line="-sd" />
+			<arg line="-p com.nds.www.stockquote" />
+			<arg line="-d none" />
+			<arg line="-o ${service.target}" />
+		</java>
+
+	</target>
+
+	<target name="StockQuoteService">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${service.target}" packageName="com.nds.www.stockquote.service.adb" language="java" databindingName="adb" synconly="true" serverside="true" serverSideInterface="true" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" generateservicexml="true" />
+
+	</target>
+
+	<target name="StockQuoteClient">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${client.target}" packageName="com.nds.www.stockquote.client.adb" databindingName="adb" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" language="java" synconly="true" />
+
+	</target>
+
+	<target name="StockQuoteClientOld" unless="skip.generate">
+
+		<java classname="org.apache.axis2.wsdl.WSDL2Java" fork="true" classpathref="axis.classpath">
+			<arg line="-uri ${wsdl.uri}" />
+			<arg line="-u" />
+			<arg line="-p com.nds.www.stockquote" />
+			<arg line="-d none" />
+			<arg line="-t" />
+			<arg line="-o ${client.target}" />
+		</java>
+
+	</target>
+
+</project>

@@ -1,0 +1,529 @@
+<!--
+	* File : thematic.htm
+	* This is an ArcWeb Services Sample file for MapImage ArcWeb Service.
+-->
+<html>
+    <head><title>MapImage - Thematic Map - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+    <font class='boldfont'>MapImage - Thematic Map - ArcWeb Services Sample</font><br><br>
+
+    <!-- ============================ Input Form ============================  -->
+    <form action="jsp/thematicRes.jsp"  name="mForm" target="arcWebResultWin">
+    <table width='500' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+        <tr><td width='100%'>
+        <table border=0 cellpadding='0' cellspacing='0'  width='498' bgcolor='#ddebf1'>
+        <tr><td height=28 align=center bgcolor="#4271ad" class='boldfont'><font color=ffffff>Input Information</font><br></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="boldfont" vAlign="middle"> &nbsp; Geographic Area: </td></tr>
+        <tr><td width='100%'>
+            <table border=0 class='textfont'>
+                <tr><td></td>
+                    <td align=middle>Max Y : <input maxLength=7 size=5 name='maxY'
+                            value="34.13"></td>
+                    <td></td></tr>
+                <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td></tr>
+                <tr>
+                        <td align=middle>Min X : <input maxLength=7 size=5 value=-117.25 name=minX></td>
+                        <td align=middle></td>
+                        <td align=middle>Max X : <input maxLength=7 size=5 value=-117.10 name=maxX></td></tr>
+                <tr>
+                        <td></td>
+                        <td align=middle>Min Y : <input maxLength=7 size=5 value=33.98 name=minY></td>
+                        <td></td></tr>
+            </table>
+        </td></tr>
+        <tr><td width='100%'  valign=top>
+        <table border=0 cellpadding='0' cellspacing='0'  width='498' bgcolor='#ddebf1' class='textfont'>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td  nowrap>Image Width/Height</td>
+                <td colspan='2'> : <input type=text name=width size=6 maxlength='4' value=500> / <input type=text name=height size=6 maxlength='4' value=400></td>
+                <td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td  nowrap>Data source</td>
+                <td colspan='2'> :
+                    <select name=datasource>
+                        <option value='ESRI.Demographics.US' selected>ESRI.Demographics.US
+                    </select></td>
+                 <td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td  nowrap>Thematic fields</td>
+                <td colspan='2'> :
+                <select name="thematicField">
+                    <option value='ADULTS00'>ADULTS00</option>
+                    <option value='AMERIND00'>AMERIND00</option>
+                    <option value='APOVFAM15'>APOVFAM15</option>
+                    <option value='APOVFAM25'>APOVFAM25</option>
+                    <option value='APOVFAM45'>APOVFAM45</option>
+                    <option value='APOVFAM65'>APOVFAM65</option>
+                    <option value='APOVFAMHH'>APOVFAMHH</option>
+                    <option value='APOVHH'>APOVHH</option>
+                    <option value='APOVHHA15'>APOVHHA15</option>
+                    <option value='APOVHHA25'>APOVHHA25</option>
+                    <option value='APOVHHA45'>APOVHHA45</option>
+                    <option value='APOVHHA65'>APOVHHA65</option>
+                    <option value='APOVMCFAM'>APOVMCFAM</option>
+                    <option value='APOVNFAM15'>APOVNFAM15</option>
+                    <option value='APOVNFAM25'>APOVNFAM25</option>
+                    <option value='APOVNFAM45'>APOVNFAM45</option>
+                    <option value='APOVNFAM65'>APOVNFAM65</option>
+                    <option value='APOVNFAMHH'>APOVNFAMHH</option>
+                    <option value='APOVOFFHHR'>APOVOFFHHR</option>
+                    <option value='APOVOFMHHR'>APOVOFMHHR</option>
+                    <option value='ARMDFORC'>ARMDFORC</option>
+                    <option value='ASIAN00'>ASIAN00</option>
+                    <option value='AVGFAMINC'>AVGFAMINC</option>
+                    <option value='AVGFAMSIZ00'>AVGFAMSIZ00</option>
+                    <option value='AVGHHINC'>AVGHHINC</option>
+                    <option value='AVGHHSIZ00'>AVGHHSIZ00</option>
+                    <option value='AVGOOHUSIZ00'>AVGOOHUSIZ00</option>
+                    <option value='AVGROHUSIZ00'>AVGROHUSIZ00</option>
+                    <option value='AVGTRVLWRK'>AVGTRVLWRK</option>
+                    <option value='BICYCLE'>BICYCLE</option>
+                    <option value='BLACK00'>BLACK00</option>
+                    <option value='BORNCTZBAS'>BORNCTZBAS</option>
+                    <option value='BPOVFAM15'>BPOVFAM15</option>
+                    <option value='BPOVFAM25'>BPOVFAM25</option>
+                    <option value='BPOVFAM45'>BPOVFAM45</option>
+                    <option value='BPOVFAM65'>BPOVFAM65</option>
+                    <option value='BPOVFAMHH'>BPOVFAMHH</option>
+                    <option value='BPOVHH'>BPOVHH</option>
+                    <option value='BPOVHHA15'>BPOVHHA15</option>
+                    <option value='BPOVHHA25'>BPOVHHA25</option>
+                    <option value='BPOVHHA45'>BPOVHHA45</option>
+                    <option value='BPOVHHA65'>BPOVHHA65</option>
+                    <option value='BPOVMCFAM'>BPOVMCFAM</option>
+                    <option value='BPOVNFAM15'>BPOVNFAM15</option>
+                    <option value='BPOVNFAM25'>BPOVNFAM25</option>
+                    <option value='BPOVNFAM45'>BPOVNFAM45</option>
+                    <option value='BPOVNFAM65'>BPOVNFAM65</option>
+                    <option value='BPOVNFAMHH'>BPOVNFAMHH</option>
+                    <option value='BPOVOFFHHR'>BPOVOFFHHR</option>
+                    <option value='BPOVOFMHHR'>BPOVOFMHHR</option>
+                    <option value='BUS'>BUS</option>
+                    <option value='CARALONE'>CARALONE</option>
+                    <option value='CARPOOLED'>CARPOOLED</option>
+                    <option value='CIVEMP'>CIVEMP</option>
+                    <option value='CIVUNEMP'>CIVUNEMP</option>
+                    <option value='COMBOAIND'>COMBOAIND</option>
+                    <option value='COMBOASN'>COMBOASN</option>
+                    <option value='COMBOBLK'>COMBOBLK</option>
+                    <option value='COMBOOTH'>COMBOOTH</option>
+                    <option value='COMBOPAC'>COMBOPAC</option>
+                    <option value='COMBOWHT'>COMBOWHT</option>
+                    <option value='DIVINDEX00'>DIVINDEX00</option>
+                    <option value='EDASSCDEG'>EDASSCDEG</option>
+                    <option value='EDBACHDEG'>EDBACHDEG</option>
+                    <option value='EDCOLL1'>EDCOLL1</option>
+                    <option value='EDCOLLU1'>EDCOLLU1</option>
+                    <option value='EDDOCTDEG'>EDDOCTDEG</option>
+                    <option value='EDGRD10'>EDGRD10</option>
+                    <option value='EDGRD11'>EDGRD11</option>
+                    <option value='EDGRD12'>EDGRD12</option>
+                    <option value='EDGRD5_6'>EDGRD5_6</option>
+                    <option value='EDGRD7_8'>EDGRD7_8</option>
+                    <option value='EDGRD9'>EDGRD9</option>
+                    <option value='EDHSGRAD'>EDHSGRAD</option>
+                    <option value='EDMASTDEG'>EDMASTDEG</option>
+                    <option value='EDNOSCHL'>EDNOSCHL</option>
+                    <option value='EDNURS_4'>EDNURS_4</option>
+                    <option value='EDPROFDEG'>EDPROFDEG</option>
+                    <option value='EDUCBASE'>EDUCBASE</option>
+                    <option value='EMPBASE'>EMPBASE</option>
+                    <option value='FAMHH00'>FAMHH00</option>
+                    <option value='FAMINCBASE'>FAMINCBASE</option>
+                    <option value='FAMWRKBASE'>FAMWRKBASE</option>
+                    <option value='FAMWRKRS0'>FAMWRKRS0</option>
+                    <option value='FAMWRKRS1'>FAMWRKRS1</option>
+                    <option value='FAMWRKRS2'>FAMWRKRS2</option>
+                    <option value='FAMWRKRS3'>FAMWRKRS3</option>
+                    <option value='FBORNCTZN'>FBORNCTZN</option>
+                    <option value='FBORNNCTZN'>FBORNNCTZN</option>
+                    <option value='FDIDNTWORK'>FDIDNTWORK</option>
+                    <option value='FEDUCBASE'>FEDUCBASE</option>
+                    <option value='FEM00AGE0_4'>FEM00AGE0_4</option>
+                    <option value='FEM00AGE10_14'>FEM00AGE10_14</option>
+                    <option value='FEM00AGE15_19'>FEM00AGE15_19</option>
+                    <option value='FEM00AGE18UP'>FEM00AGE18UP</option>
+                    <option value='FEM00AGE20_24'>FEM00AGE20_24</option>
+                    <option value='FEM00AGE25_29'>FEM00AGE25_29</option>
+                    <option value='FEM00AGE30_34'>FEM00AGE30_34</option>
+                    <option value='FEM00AGE35_39'>FEM00AGE35_39</option>
+                    <option value='FEM00AGE40_44'>FEM00AGE40_44</option>
+                    <option value='FEM00AGE45_49'>FEM00AGE45_49</option>
+                    <option value='FEM00AGE50_54'>FEM00AGE50_54</option>
+                    <option value='FEM00AGE55_59'>FEM00AGE55_59</option>
+                    <option value='FEM00AGE5_9'>FEM00AGE5_9</option>
+                    <option value='FEM00AGE60_64'>FEM00AGE60_64</option>
+                    <option value='FEM00AGE65_69'>FEM00AGE65_69</option>
+                    <option value='FEM00AGE70_74'>FEM00AGE70_74</option>
+                    <option value='FEM00AGE75_79'>FEM00AGE75_79</option>
+                    <option value='FEM00AGE80_84'>FEM00AGE80_84</option>
+                    <option value='FEM00AGE85UP'>FEM00AGE85UP</option>
+                    <option value='FEMALES00'>FEMALES00</option>
+                    <option value='FEMPBASE'>FEMPBASE</option>
+                    <option value='FERRY'>FERRY</option>
+                    <option value='FFULLTIME'>FFULLTIME</option>
+                    <option value='FINDBASE'>FINDBASE</option>
+                    <option value='FOCCBASE'>FOCCBASE</option>
+                    <option value='FPARTTIME'>FPARTTIME</option>
+                    <option value='FSCHLBASE'>FSCHLBASE</option>
+                    <option value='FSCHNOTIN'>FSCHNOTIN</option>
+                    <option value='FUNEMPRATE'>FUNEMPRATE</option>
+                    <option value='HAMERIND00'>HAMERIND00</option>
+                    <option value='HASIAN00'>HASIAN00</option>
+                    <option value='HBLACK00'>HBLACK00</option>
+                    <option value='HCOMBOAIND'>HCOMBOAIND</option>
+                    <option value='HCOMBOASN'>HCOMBOASN</option>
+                    <option value='HCOMBOBLK'>HCOMBOBLK</option>
+                    <option value='HCOMBOOTH'>HCOMBOOTH</option>
+                    <option value='HCOMBOPAC'>HCOMBOPAC</option>
+                    <option value='HCOMBOWHT'>HCOMBOWHT</option>
+                    <option value='HHINC0'>HHINC0</option>
+                    <option value='HHINC10'>HHINC10</option>
+                    <option value='HHINC100'>HHINC100</option>
+                    <option value='HHINC125'>HHINC125</option>
+                    <option value='HHINC15'>HHINC15</option>
+                    <option value='HHINC150'>HHINC150</option>
+                    <option value='HHINC20'>HHINC20</option>
+                    <option value='HHINC200'>HHINC200</option>
+                    <option value='HHINC25'>HHINC25</option>
+                    <option value='HHINC30'>HHINC30</option>
+                    <option value='HHINC35'>HHINC35</option>
+                    <option value='HHINC40'>HHINC40</option>
+                    <option value='HHINC45'>HHINC45</option>
+                    <option value='HHINC50'>HHINC50</option>
+                    <option value='HHINC60'>HHINC60</option>
+                    <option value='HHINC75'>HHINC75</option>
+                    <option value='HHINCBASE'>HHINCBASE</option>
+                    <option value='HHPOP00'>HHPOP00</option>
+                    <option value='HHWITHNONONRELATIVE'>HHWITHNONONRELATIVE</option>
+                    <option value='HHWITHNONRELATIVE'>HHWITHNONRELATIVE</option>
+                    <option value='HHWITHPOP18UP'>HHWITHPOP18UP</option>
+                    <option value='HHWITHPOPLT18'>HHWITHPOPLT18</option>
+                    <option value='HISPANIC00'>HISPANIC00</option>
+                    <option value='HOTHRACE00'>HOTHRACE00</option>
+                    <option value='HPACIFIC00'>HPACIFIC00</option>
+                    <option value='HRACE2UP00'>HRACE2UP00</option>
+                    <option value='HRACESUM_A'>HRACESUM_A</option>
+                    <option value='HRACESUM_B'>HRACESUM_B</option>
+                    <option value='HRACESUM_I'>HRACESUM_I</option>
+                    <option value='HRACESUM_O'>HRACESUM_O</option>
+                    <option value='HRACESUM_P'>HRACESUM_P</option>
+                    <option value='HRACESUM_W'>HRACESUM_W</option>
+                    <option value='HWHITE00'>HWHITE00</option>
+                    <option value='INDACCOM'>INDACCOM</option>
+                    <option value='INDADMIN'>INDADMIN</option>
+                    <option value='INDAGRIC'>INDAGRIC</option>
+                    <option value='INDARTENT'>INDARTENT</option>
+                    <option value='INDBASE'>INDBASE</option>
+                    <option value='INDCONSTR'>INDCONSTR</option>
+                    <option value='INDEDUC'>INDEDUC</option>
+                    <option value='INDFNCINS'>INDFNCINS</option>
+                    <option value='INDHEALTH'>INDHEALTH</option>
+                    <option value='INDINFO'>INDINFO</option>
+                    <option value='INDMANUF'>INDMANUF</option>
+                    <option value='INDMGMNT'>INDMGMNT</option>
+                    <option value='INDMINING'>INDMINING</option>
+                    <option value='INDOTHSRV'>INDOTHSRV</option>
+                    <option value='INDPUBADM'>INDPUBADM</option>
+                    <option value='INDRE'>INDRE</option>
+                    <option value='INDRETLTR'>INDRETLTR</option>
+                    <option value='INDTECH'>INDTECH</option>
+                    <option value='INDTRANSP'>INDTRANSP</option>
+                    <option value='INDUTILIT'>INDUTILIT</option>
+                    <option value='INDWHOLTR'>INDWHOLTR</option>
+                    <option value='MAL00AGE0_4'>MAL00AGE0_4</option>
+                    <option value='MAL00AGE10_14'>MAL00AGE10_14</option>
+                    <option value='MAL00AGE15_19'>MAL00AGE15_19</option>
+                    <option value='MAL00AGE18UP'>MAL00AGE18UP</option>
+                    <option value='MAL00AGE20_24'>MAL00AGE20_24</option>
+                    <option value='MAL00AGE25_29'>MAL00AGE25_29</option>
+                    <option value='MAL00AGE30_34'>MAL00AGE30_34</option>
+                    <option value='MAL00AGE35_39'>MAL00AGE35_39</option>
+                    <option value='MAL00AGE40_44'>MAL00AGE40_44</option>
+                    <option value='MAL00AGE45_49'>MAL00AGE45_49</option>
+                    <option value='MAL00AGE50_54'>MAL00AGE50_54</option>
+                    <option value='MAL00AGE55_59'>MAL00AGE55_59</option>
+                    <option value='MAL00AGE5_9'>MAL00AGE5_9</option>
+                    <option value='MAL00AGE60_64'>MAL00AGE60_64</option>
+                    <option value='MAL00AGE65_69'>MAL00AGE65_69</option>
+                    <option value='MAL00AGE70_74'>MAL00AGE70_74</option>
+                    <option value='MAL00AGE75_79'>MAL00AGE75_79</option>
+                    <option value='MAL00AGE80_84'>MAL00AGE80_84</option>
+                    <option value='MAL00AGE85UP'>MAL00AGE85UP</option>
+                    <option value='MALES00'>MALES00</option>
+                    <option value='MARRCOUPLEFAM'>MARRCOUPLEFAM</option>
+                    <option value='MCFAMNOOWNKIDLT18'>MCFAMNOOWNKIDLT18</option>
+                    <option value='MCFAMNORELKIDLT18'>MCFAMNORELKIDLT18</option>
+                    <option value='MCFAMOWN6_17LT6'>MCFAMOWN6_17LT6</option>
+                    <option value='MCFAMOWN6_17ONLY'>MCFAMOWN6_17ONLY</option>
+                    <option value='MCFAMOWNKIDLT18'>MCFAMOWNKIDLT18</option>
+                    <option value='MCFAMOWNLT6ONLY'>MCFAMOWNLT6ONLY</option>
+                    <option value='MCFAMREL6_17LT6'>MCFAMREL6_17LT6</option>
+                    <option value='MCFAMREL6_17ONLY'>MCFAMREL6_17ONLY</option>
+                    <option value='MCFAMRELLT6ONLY'>MCFAMRELLT6ONLY</option>
+                    <option value='MCFAMWITHPOP18UP'>MCFAMWITHPOP18UP</option>
+                    <option value='MCFAMWITHPOPLT18'>MCFAMWITHPOPLT18</option>
+                    <option value='MDIDNTWORK'>MDIDNTWORK</option>
+                    <option value='MEDAGE00'>MEDAGE00</option>
+                    <option value='MEDFAMINC'>MEDFAMINC</option>
+                    <option value='MEDFEMAGE00'>MEDFEMAGE00</option>
+                    <option value='MEDHHINC'>MEDHHINC</option>
+                    <option value='MEDMALAGE00'>MEDMALAGE00</option>
+                    <option value='MEDUCBASE'>MEDUCBASE</option>
+                    <option value='MEMPBASE'>MEMPBASE</option>
+                    <option value='MFULLTIME'>MFULLTIME</option>
+                    <option value='MINDBASE'>MINDBASE</option>
+                    <option value='MOCCBASE'>MOCCBASE</option>
+                    <option value='MOTORCYCLE'>MOTORCYCLE</option>
+                    <option value='MPARTTIME'>MPARTTIME</option>
+                    <option value='MSCHLBASE'>MSCHLBASE</option>
+                    <option value='MSCHNOTIN'>MSCHNOTIN</option>
+                    <option value='MUNEMPRATE'>MUNEMPRATE</option>
+                    <option value='NATIVEINUS'>NATIVEINUS</option>
+                    <option value='NATIVEOUT'>NATIVEOUT</option>
+                    <option value='NFAMFHHRPOP18UP'>NFAMFHHRPOP18UP</option>
+                    <option value='NFAMFHHRPOPLT18'>NFAMFHHRPOPLT18</option>
+                    <option value='NFAMMHHRPOP18UP'>NFAMMHHRPOP18UP</option>
+                    <option value='NFAMMHHRPOPLT18'>NFAMMHHRPOPLT18</option>
+                    <option value='NOTINLF'>NOTINLF</option>
+                    <option value='NTVABROAD'>NTVABROAD</option>
+                    <option value='NTVOTHSTMW'>NTVOTHSTMW</option>
+                    <option value='NTVOTHSTNE'>NTVOTHSTNE</option>
+                    <option value='NTVOTHSTS'>NTVOTHSTS</option>
+                    <option value='NTVOTHSTW'>NTVOTHSTW</option>
+                    <option value='NTVPUERTOR'>NTVPUERTOR</option>
+                    <option value='NTVSAMEST'>NTVSAMEST</option>
+                    <option value='NTVUSISLND'>NTVUSISLND</option>
+                    <option value='OCCAIRTRF'>OCCAIRTRF</option>
+                    <option value='OCCARCHCT'>OCCARCHCT</option>
+                    <option value='OCCBASE'>OCCBASE</option>
+                    <option value='OCCBUSOPS'>OCCBUSOPS</option>
+                    <option value='OCCCMPUTR'>OCCCMPUTR</option>
+                    <option value='OCCCONSTR'>OCCCONSTR</option>
+                    <option value='OCCDRAFTR'>OCCDRAFTR</option>
+                    <option value='OCCEDUC'>OCCEDUC</option>
+                    <option value='OCCENTERT'>OCCENTERT</option>
+                    <option value='OCCEXTRCT'>OCCEXTRCT</option>
+                    <option value='OCCFARM'>OCCFARM</option>
+                    <option value='OCCFINANC'>OCCFINANC</option>
+                    <option value='OCCFOODSV'>OCCFOODSV</option>
+                    <option value='OCCFSHFOR'>OCCFSHFOR</option>
+                    <option value='OCCHLTHCR'>OCCHLTHCR</option>
+                    <option value='OCCHPRCTR'>OCCHPRCTR</option>
+                    <option value='OCCHTECHN'>OCCHTECHN</option>
+                    <option value='OCCLAWENF'>OCCLAWENF</option>
+                    <option value='OCCLEGAL'>OCCLEGAL</option>
+                    <option value='OCCMAINT'>OCCMAINT</option>
+                    <option value='OCCMGMNT'>OCCMGMNT</option>
+                    <option value='OCCMTRLMV'>OCCMTRLMV</option>
+                    <option value='OCCOFFADM'>OCCOFFADM</option>
+                    <option value='OCCOTPROT'>OCCOTPROT</option>
+                    <option value='OCCPERSCR'>OCCPERSCR</option>
+                    <option value='OCCPRODUC'>OCCPRODUC</option>
+                    <option value='OCCREPAIR'>OCCREPAIR</option>
+                    <option value='OCCSALES'>OCCSALES</option>
+                    <option value='OCCSOCSCI'>OCCSOCSCI</option>
+                    <option value='OCCSOCSRV'>OCCSOCSRV</option>
+                    <option value='OCCSPVSRC'>OCCSPVSRC</option>
+                    <option value='OCCSPVSRT'>OCCSPVSRT</option>
+                    <option value='OCCTRANSP'>OCCTRANSP</option>
+                    <option value='OCCVEHOPR'>OCCVEHOPR</option>
+                    <option value='OFAMFHHRNOOWNLT18'>OFAMFHHRNOOWNLT18</option>
+                    <option value='OFAMFHHRNORELLT18'>OFAMFHHRNORELLT18</option>
+                    <option value='OFAMFHHROWN6_17LT6'>OFAMFHHROWN6_17LT6</option>
+                    <option value='OFAMFHHROWN6_17ONLY'>OFAMFHHROWN6_17ONLY</option>
+                    <option value='OFAMFHHROWNLT18'>OFAMFHHROWNLT18</option>
+                    <option value='OFAMFHHROWNLT6ONLY'>OFAMFHHROWNLT6ONLY</option>
+                    <option value='OFAMFHHRREL6_17LT6'>OFAMFHHRREL6_17LT6</option>
+                    <option value='OFAMFHHRREL6_17ONLY'>OFAMFHHRREL6_17ONLY</option>
+                    <option value='OFAMFHHRRELLT6ONLY'>OFAMFHHRRELLT6ONLY</option>
+                    <option value='OFAMMHHRNOOWNLT18'>OFAMMHHRNOOWNLT18</option>
+                    <option value='OFAMMHHRNORELLT18'>OFAMMHHRNORELLT18</option>
+                    <option value='OFAMMHHROWN6_17LT6'>OFAMMHHROWN6_17LT6</option>
+                    <option value='OFAMMHHROWN6_17ONLY'>OFAMMHHROWN6_17ONLY</option>
+                    <option value='OFAMMHHROWNLT18'>OFAMMHHROWNLT18</option>
+                    <option value='OFAMMHHROWNLT6ONLY'>OFAMMHHROWNLT6ONLY</option>
+                    <option value='OFAMMHHRREL6_17LT6'>OFAMMHHRREL6_17LT6</option>
+                    <option value='OFAMMHHRREL6_17ONLY'>OFAMMHHRREL6_17ONLY</option>
+                    <option value='OFAMMHHRRELLT6ONLY'>OFAMMHHRRELLT6ONLY</option>
+                    <option value='OTHERFAM'>OTHERFAM</option>
+                    <option value='OTHERFAMFEMHHR'>OTHERFAMFEMHHR</option>
+                    <option value='OTHERFAMMALHHR'>OTHERFAMMALHHR</option>
+                    <option value='OTHFAMFHHRPOP18UP'>OTHFAMFHHRPOP18UP</option>
+                    <option value='OTHFAMFHHRPOPLT18'>OTHFAMFHHRPOPLT18</option>
+                    <option value='OTHFAMMHHRPOP18UP'>OTHFAMMHHRPOP18UP</option>
+                    <option value='OTHFAMMHHRPOPLT18'>OTHFAMMHHRPOPLT18</option>
+                    <option value='OTHRACE00'>OTHRACE00</option>
+                    <option value='OTHTRANS'>OTHTRANS</option>
+                    <option value='OWNEROCC00'>OWNEROCC00</option>
+                    <option value='PACIFIC00'>PACIFIC00</option>
+                    <option value='PCI00'>PCI00</option>
+                    <option value='PLCWRKBASE'>PLCWRKBASE</option>
+                    <option value='POP00AGE0_4'>POP00AGE0_4</option>
+                    <option value='POP00AGE10_14'>POP00AGE10_14</option>
+                    <option value='POP00AGE15_19'>POP00AGE15_19</option>
+                    <option value='POP00AGE20_24'>POP00AGE20_24</option>
+                    <option value='POP00AGE25_29'>POP00AGE25_29</option>
+                    <option value='POP00AGE30_34'>POP00AGE30_34</option>
+                    <option value='POP00AGE35_39'>POP00AGE35_39</option>
+                    <option value='POP00AGE40_44'>POP00AGE40_44</option>
+                    <option value='POP00AGE45_49'>POP00AGE45_49</option>
+                    <option value='POP00AGE50_54'>POP00AGE50_54</option>
+                    <option value='POP00AGE55_59'>POP00AGE55_59</option>
+                    <option value='POP00AGE5_9'>POP00AGE5_9</option>
+                    <option value='POP00AGE60_64'>POP00AGE60_64</option>
+                    <option value='POP00AGE65_69'>POP00AGE65_69</option>
+                    <option value='POP00AGE70_74'>POP00AGE70_74</option>
+                    <option value='POP00AGE75_79'>POP00AGE75_79</option>
+                    <option value='POP00AGE80_84'>POP00AGE80_84</option>
+                    <option value='POP00AGE85UP'>POP00AGE85UP</option>
+                    <option value='POPFAMHH'>POPFAMHH</option>
+                    <option value='POVHHRBASE'>POVHHRBASE</option>
+                    <option value='RACE2UP00'>RACE2UP00</option>
+                    <option value='RACESUM_A'>RACESUM_A</option>
+                    <option value='RACESUM_B'>RACESUM_B</option>
+                    <option value='RACESUM_I'>RACESUM_I</option>
+                    <option value='RACESUM_O'>RACESUM_O</option>
+                    <option value='RACESUM_P'>RACESUM_P</option>
+                    <option value='RACESUM_W'>RACESUM_W</option>
+                    <option value='RAILROAD'>RAILROAD</option>
+                    <option value='RENTEROCC00'>RENTEROCC00</option>
+                    <option value='RESDIFCTY'>RESDIFCTY</option>
+                    <option value='RESDIFSTMW'>RESDIFSTMW</option>
+                    <option value='RESDIFSTNE'>RESDIFSTNE</option>
+                    <option value='RESDIFSTS'>RESDIFSTS</option>
+                    <option value='RESDIFSTW'>RESDIFSTW</option>
+                    <option value='RESFORSEA'>RESFORSEA</option>
+                    <option value='RESIDBASE'>RESIDBASE</option>
+                    <option value='RESPUERTOR'>RESPUERTOR</option>
+                    <option value='RESSAMECTY'>RESSAMECTY</option>
+                    <option value='RESSAMEHSE'>RESSAMEHSE</option>
+                    <option value='RESUSISLND'>RESUSISLND</option>
+                    <option value='RURALFARM'>RURALFARM</option>
+                    <option value='RURALNFARM'>RURALNFARM</option>
+                    <option value='SAMPPOP00'>SAMPPOP00</option>
+                    <option value='SCHLBASE'>SCHLBASE</option>
+                    <option value='SCHNOTIN'>SCHNOTIN</option>
+                    <option value='SCHPRVCOL'>SCHPRVCOL</option>
+                    <option value='SCHPRVGR1'>SCHPRVGR1</option>
+                    <option value='SCHPRVGR5'>SCHPRVGR5</option>
+                    <option value='SCHPRVGR9'>SCHPRVGR9</option>
+                    <option value='SCHPRVGRD'>SCHPRVGRD</option>
+                    <option value='SCHPRVKIN'>SCHPRVKIN</option>
+                    <option value='SCHPRVPRE'>SCHPRVPRE</option>
+                    <option value='SCHPUBCOL'>SCHPUBCOL</option>
+                    <option value='SCHPUBGR1'>SCHPUBGR1</option>
+                    <option value='SCHPUBGR5'>SCHPUBGR5</option>
+                    <option value='SCHPUBGR9'>SCHPUBGR9</option>
+                    <option value='SCHPUBGRD'>SCHPUBGRD</option>
+                    <option value='SCHPUBKIN'>SCHPUBKIN</option>
+                    <option value='SCHPUBPRE'>SCHPUBPRE</option>
+                    <option value='STREETCAR'>STREETCAR</option>
+                    <option value='SUBWAY'>SUBWAY</option>
+                    <option value='TAXICAB'>TAXICAB</option>
+                    <option value='TOTHH00'>TOTHH00</option>
+                    <option value='TOTHU00'>TOTHU00</option>
+                    <option value='TOTPOP00'>TOTPOP00</option>
+                    <option value='TRANSPBASE'>TRANSPBASE</option>
+                    <option value='TRVLWRK10'>TRVLWRK10</option>
+                    <option value='TRVLWRK15'>TRVLWRK15</option>
+                    <option value='TRVLWRK20'>TRVLWRK20</option>
+                    <option value='TRVLWRK25'>TRVLWRK25</option>
+                    <option value='TRVLWRK30'>TRVLWRK30</option>
+                    <option value='TRVLWRK35'>TRVLWRK35</option>
+                    <option value='TRVLWRK40'>TRVLWRK40</option>
+                    <option value='TRVLWRK45'>TRVLWRK45</option>
+                    <option value='TRVLWRK5'>TRVLWRK5</option>
+                    <option value='TRVLWRK60'>TRVLWRK60</option>
+                    <option value='TRVLWRK90'>TRVLWRK90</option>
+                    <option value='TRVLWRKLT5'>TRVLWRKLT5</option>
+                    <option value='UNEMPRATE'>UNEMPRATE</option>
+                    <option value='URBANAREA'>URBANAREA</option>
+                    <option value='URBANCLUST'>URBANCLUST</option>
+                    <option value='URPOPBASE'>URPOPBASE</option>
+                    <option value='VACANTformIGRWRKRS'>VACANTformIGRWRKRS</option>
+                    <option value='VACANTFORRENT'>VACANTFORRENT</option>
+                    <option value='VACANTFORSALEONLY'>VACANTFORSALEONLY</option>
+                    <option value='VACANTHU00'>VACANTHU00</option>
+                    <option value='VACANTOTHER'>VACANTOTHER</option>
+                    <option value='VACANTRENTEDSOLD'>VACANTRENTEDSOLD</option>
+                    <option value='VACANTSEASONAL'>VACANTSEASONAL</option>
+                    <option value='WALKED'>WALKED</option>
+                    <option value='WHITE00'>WHITE00</option>
+                    <option value='WORKHOME'>WORKHOME</option>
+                    <option value='WRKINSTCTY'>WRKINSTCTY</option>
+                    <option value='WRKNHMBASE'>WRKNHMBASE</option>
+                    <option value='WRKOUTCTY'>WRKOUTCTY</option>
+                    <option value='WRKOUTST'>WRKOUTST</option>
+                    <option value='WRKSTATBAS'>WRKSTATBAS</option>
+            </select></td>
+                 <td>&nbsp;</td></tr>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr><td colspan='5' class="boldfont" vAlign="middle"> &nbsp; Thematic Options </td></tr>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td>
+                <td  nowrap>Group the data into </td>
+                <td colspan='2'> :
+                  <select name="classes">
+                    <option value="2" >2
+                    <option value="3" selected>3
+                    <option value="4" >4
+                    <option value="5" >5
+                  </select>
+                </td>
+                <td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td><td  nowrap>Classification method </td>
+                <td colspan='2'> :
+                    <select class="content" name="method">
+                    <option value="EqualInterval" selected>EqualInterval
+                    <option value="Quantile" >Quantile
+                  </select>
+                </td>
+                <td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td><td  nowrap>Color palette </td>
+                <td colspan='2'> :
+                   <select name="palette">
+                    <option value="orange" >orange
+                    <option value="green" selected>green
+                    <option value="blue" >blue
+                    <option value="red" >red
+                    <option value="coldToHot" >coldToHot
+                    <option value="grey" >grey
+                  </select>
+                </td>
+                <td>&nbsp;</td></tr>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr><td><input type="checkbox" name=showMapLegend value="true"></td>
+                <td nowrap>Draw Legend</td>
+                <td colspan='3'>&nbsp;</td></tr>
+            <tr>
+                <td colspan='5'>&nbsp;</td></tr>
+            <tr><td align="center" colspan='5'><input  type=submit value="   Get Thematic Map   "></td></tr>
+            <tr>
+                <td colspan='5'>&nbsp;</td></tr>
+            <input type="hidden" name="action" value="mapImage">
+        </form>
+        </table>
+        </td></tr>
+    </table>
+    </td></tr>
+</table>
+<br><center><a href="index.htm" class=textfont>Back to Index</a>
+</body>
+</html>

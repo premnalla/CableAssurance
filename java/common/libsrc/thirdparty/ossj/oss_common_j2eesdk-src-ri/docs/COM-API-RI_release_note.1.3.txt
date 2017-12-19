@@ -1,0 +1,67 @@
+                    OSS through Java - Common API
+                           RI Change History
+---------============================================================---------
+------------------------------------------------------------------------------
+------- RI 1.3 - February 2006 ------------------------------------------------
+------------------------------------------------------------------------------
+
+Development:
+- use hand-made generator to create 95% of the content for the value and
+  key class implementations. project ossj/tools/mev_generator version 1.7
+
+Fixed Bugs:
+Issue tracker of jsr144-private and jsr144-public project on java.net 
+21   	DEFECT  P3   	All   	FIXE   	[RI] Incorrect Implementation of Polymorphic Keys
+23 	DEFECT 	P3 	All 	WONT 	[RI] set Default Values Missing from Implementation
+25 	DEFECT 	P3 	All 	FIXE 	[RI] party jar is empty
+36 	DEFECT 	P3 	All 	FIXE 	[RI] Clone for Value object produce an invalid copy
+37 	DEFECT 	P3 	All 	FIXE 	[RI] invalid implementation of *KeyResultImpl
+
+
+
+------------------------------------------------------------------------------
+------- RI 1.2 - October 2005 ------------------------------------------------
+------------------------------------------------------------------------------
+
+Development:
+- use hand-made generator to create 80% of the content for the value and
+  key class implementations.
+
+Fixed Bugs:
+CR 6307549 + 6307587	primaryKeyString  in ManagedEntityKeyImpl: removed String Key management and declaration
+CR 6293857	Constructor of ResourceKeyImpl: removed ctor with parameters use default ctor	
+CR 6267814	change management of crossAssociationKey to call set/getAssociationKey in cross: Fix and use inherited method to manage Key definitions
+CR 6267197	Invocation of ReportFormatImpl.clone() generates a class cast exception: All clone methods have bee revisited and specific test have been added to the TCK
+CR 6253087	PerformanceAttributAeDescriptorImpl.java throws null pointer exception: rewrite PerformanceAttributAeDescriptorImpl implementation
+
+Deployment:
+- Create deployment descriptor and build.xml developement tool for 
+  J2EE SDK (1_4_02_2005-Q2)
+
+
+------------------------------------------------------------------------------
+------- RI 1.1 - March 2005 --------------------------------------------------
+------------------------------------------------------------------------------
+
+Development:
+- Re-arrange directories structure
+- Create compilation/configuration and deployment script using asant
+- clean up the code (typo, etc...)
+- report modification done in the interface (See Spec bundle)
+
+Deployment:
+- Create deployment descriptor for J2EE SDK
+
+Compatibility:
+- Remove none portable or application server specific code
+
+Bugs:
+- Bug ID: 4836439 RI contains dependencies to WLS from BEA 
+Fixed: remove all Application server dependencies
+- Bug ID: 4836440 Invalid type for RMI IIOP in the interface generate compilation errors 
+Fixed: Common pass the J2EE AVK Static and Dynamic tests
+
+
+Enhancement:
+- Include CBE 1.2.1 class implementation
+- 

@@ -1,0 +1,13 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "ServiceConfigurator", "ServiceConfigurator.vjp", "{AB19D963-5A5E-11D3-86CC-D0DB55C10000}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {AB19D963-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {AB19D963-5A5E-11D3-86CC-D0DB55C10000}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

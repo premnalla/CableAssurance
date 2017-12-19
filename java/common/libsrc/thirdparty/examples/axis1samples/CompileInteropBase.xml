@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="InteropBase" default="InteropBase" basedir=".">
+
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+	<property name="generated.dir" value="./generated/cpp" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="InteropBase">
+
+		<echo>${axis.dist.dir}</echo>
+
+		<delete dir="${generated.dir}"></delete>
+
+		<java classname="org.apache.axis.wsdl.wsdl2ws.WSDL2Ws"
+			fork="yes" classpathref="axis.classpath">
+			<arg value="./services/clientserver/wsdl/base.wsdl" />
+			<arg line="-lc++" />
+			<arg line="-sserver" />
+			<arg line="-o${generated.dir}" />
+		</java>
+
+	</target>
+
+</project>

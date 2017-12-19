@@ -1,0 +1,904 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=ISO-8859-1">
+  <meta name="keywords"
+ content="ossj, operation support, system, trouble, ticket">
+  <meta name="description"
+ content="">
+  <title>OSSJ Reference Implementation (RI) for the Trouble Ticketing API v1.0.3 with WSIP</title>
+</head>
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+ alink="#333366" link="#594fbf" vlink="#1005fb">
+<table border="0" cellspacing="4" width="100%">
+  <tbody>
+    <tr>
+      <td align="right" bgcolor="#594fbf" valign="top"> <font
+ color="#ffffff" face="Helvetica, Arial, sans-serif" size="-1"><b>OSS/J
+TT RI</b></font></td>
+    </tr>
+  </tbody>
+</table>
+<p>&nbsp; <br>
+</p>
+<bookcontent> </bookcontent>
+<blockquote> <a name="8063"> </a>  <font
+ color="#000000" face="Helvetica, Arial, Sans-Serif" size="+1"> <b>OSS/J
+Reference Implementation (RI) for the Trouble Ticketing API v1.0.3 <br>with Web Services Integration Profile</b></font><br>
+  <br>
+  <br>
+
+  <font face="Helvetica, Arial, sans-serif" size="2">
+  	This document describes the installation of the OSS/J TT Reference Implementation (RI) J2EE application servers
+  	delivered with the J2EE-SDK v1.4.<br>
+  	This package also contains the source code of the RI and ant tasks to build the RI from the sources.
+  </font>
+
+  <p> <a name="14787"> </a><font face="Helvetica, Arial, sans-serif"
+ size="2">This document contains the following sections:</font></p>
+  <p> </p>
+  <ul>
+    <li><font face="Helvetica, Arial, sans-serif" size="-1">
+    	<a href="#notice">Notice on Web Services Profile</a> </font></li>
+    <li><font face="Helvetica, Arial, sans-serif" size="-1">
+    	<a href="#overview">Overview</a> </font></li>
+    <li><font face="Helvetica, Arial, sans-serif" size="-1">
+    	<a href="#deploying">Deploying the RI</a></font></li>
+    <li><font face="Helvetica, Arial, sans-serif" size="-1">
+    	<a href="#building">Compiling and Assembling the OSS/J RI&nbsp;</a></font></li>
+    <li><font face="Helvetica, Arial, sans-serif" size="-1">
+    	<a href="#troubleshooting">Troubleshooting</a></font></li>
+  </ul>
+  <br>
+  <br>
+  <a name="notice" />
+	<font face="Helvetica, Arial, sans-serif" size="+1"> Notice on Web Services Profile
+		<hr noshade="noshade" size="2">
+	</font><br>
+
+	<font face="Helvetica, Arial, sans-serif" size="2">
+	This Reference Implementation provides a preview implementation of the new Web Services Integration Profile (WSIP).
+	The WSIP is <b>not</b> part of the OSS/J Trouble Ticketing API specification version 1.0.
+	The WSIP implementation is provided as an extension of the RI and has no impact on the specification of the
+	OSS/J Trouble Ticketing API.
+	The implementation of the WSIP follows the OSS/J design guidelines for Web Services as defined in the document
+	<i>OSS through Java Web Services Integration Profile (WSIP) v.1.0</i>..<br>
+	<br>
+	This preview implementation of the WSIP is based on JAX-RPC at the moment. This package does not include any
+	source code of the WSIP. Source code will be available with a future release of the WSIP for OSS/J Trouble Ticketing API.<br>
+    <br>
+    <b>Additional System Requirements</b><br>
+    This guide describes the installation of the RI on the "*J2EE 1.4 SDK and Sun Java System Application Server Platform Edition 8
+	Update 1* /June 15, 2004" and is working with J2SE 1.4.2. A further requirement is
+    the use of the <i>Java Web Services Development Pack (JWSDP)</i> version 1.6. Typically it is neccessary to download
+    the JWSDP separately and integrate it into the J2EE RI. Please refer to the documentation of the JWSDP for the integration procedure.<br>
+    <br>
+    <b>Accessing the Web Service</b><br>
+    After installing this RI package you can access the Web Services using the following URLs:
+
+    <ul>
+    	<li><i>http://host:port/ossj_tt_ri_ws_endpoint/troubleticket</i><br>The operational endpoint for the operation on trouble tickets.</li>
+    	<li><i>http://host:port/ossj_tt_ri_ws_endpoint/troubleticket?WSDL</i><br>Provides the web service definition.</li>
+    	<li><i>http://host:port/ossj_tt_ri_ws_notification/producer</i><br>The web service endpoint used to subscribe and unsubscribe for events.</li>
+    </ul>
+
+    <b>WS-Notification</b><br>
+	To support eventing the WS-Notification definitions are applied.
+	The implementation is based on a subset of <a href="http://www-128.ibm.com/developerworks/library/specification/ws-notification/">WS-Notification v1.0</a> and provides:
+	<ul>
+		<li>subscribe to topic</li>
+		<li>unsubscribe from topic</li>
+		<li>deliver events</li>
+	</ul>
+
+	The current implementation supports the delivery of notifications to the subscribed NotificationConsumer endpoints by
+	sending <i>Notify</i> messages. Please refer to WS-Notification specification for more information.
+	Future versions of the WSIP will be based on <a href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wsn">WS-Notification v1.3</a>.
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <a name="overview" />
+	<font face="Helvetica, Arial, sans-serif" size="+1"> Overview
+		<hr noshade="noshade" size="2">
+	</font><br>
+
+	<font face="Helvetica, Arial, sans-serif" size="2">
+	This Reference Implementation provides an implementation of the JVT and XVT communication profile as
+	specified in the OSS/J Trouble Ticketing API specification version 1.0. This package includes:
+
+	<ul>
+		<li>This documentation</li>
+		<li>Prepared jars for direct deployment</li>
+		<li>Source code</li>
+		<li>Ant scripts for building jars from the source code and deploying the RI to the application server.</li>
+	</ul>
+
+    This RI uses parts of the OSS/J RI for the QOS/FM API version 1.0. The source code for this RI is not included but
+    can be downloaded from the OSS/J web sites.<br>
+    The deployment scripts which are delivered with this package are tailored for installing this RI on the
+    J2EE 1.4 Reference Implementation. This RI should be runnable on any J2EE compliant application server,
+	deployment on other application servers is not supported by this package.<br>
+	The Reference Implementation uses a relational database to store the trouble ticket data. This documentation describes
+	how to use the TT RI with the Pointbase RDBMS delivered with the J2EE-SDK 1.4.
+  	</font>
+  <p><br>
+  </p>
+  <p> </p>
+
+
+
+
+
+  <p><font face="Helvetica, Arial, sans-serif" size="2"><br>
+  </font></p>
+  <a name="deploying"> </a> <a name="Deploying the Sample Application"> </a>
+  <font face="Helvetica, Arial, sans-serif" size="+1"> Deploying the RI
+  <hr noshade="noshade" size="2"> </font> <br>
+  <font face="Helvetica, Arial, sans-serif" size="-1">Command Line
+Based Deployment
+describes how to manually register the application in a Application
+Server using a Command Line Interface (CLI). This is the fastest means
+of deploying the application.</font><br>
+  <p><br>
+
+  	<br>
+	<a name="setting_up" />
+	<font face="Helvetica, Arial, sans-serif" size="+1"> Setting up the environment </font>
+	<br>
+	<br>
+	<font face="Helvetica, Arial, sans-serif" size="2">
+	In order to successfully deploy and run the RI, Database resources (PointBase) needs to be setup
+	with the Application Server.
+	</font>
+
+	<font face="Helvetica, Arial, sans-serif" size="2">
+	If you want to run the RI with the Oracle database, please refer to (oracle sample in the j2EE sdk sample package) for
+	configuration steps.<br>
+	</font>
+
+	<p><font face="Helvetica, Arial, sans-serif" size="2">Prerequisite:<br>
+	</font></p>
+	<dl>
+	<dt> <font face="Helvetica, Arial, sans-serif" size="-1">Add &lt;<i>j2ee
+	sdk 1.4 install_dir</i>&gt;<font
+	face="courier, couriernew, monospaced size">/bin to your path</font>
+	and configure the </font><font face="Helvetica, Arial, sans-serif"
+	size="-1">&lt;<i>install_dir</i>&gt;/common.properties
+	file according to </font><font face="Helvetica, Arial, sans-serif"
+	size="-1">&lt;<i>j2ee sdk 1.4 install_dir</i>&gt;</font></dt>
+	<dd>(or copy the common.properties from <font
+	face="Helvetica, Arial, sans-serif" size="-1">&lt;<i>j2ee
+	sdk 1.4 install_dir</i>&gt;/samples to </font><font
+	face="Helvetica, Arial, sans-serif" size="-1">&lt;<i>install_dir</i>&gt;)</font></dd>
+	</dl>
+	<p> </p>
+	&lt;&gt;<br>
+	<br>
+
+  <a name="14862"> </a> <a name="Starting the Database"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1"> NOTE: You must start
+and configure the Database.
+  <hr noshade="noshade" size="2"></font></p>
+  <h2><b>Starting PointBase</b></h2>
+  <p>The database server can be easily started by performing one of the
+following actions:</p>
+  <p>Windows Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the application server: <i>Start -&gt;
+Programs -&gt; Sun Microsystems -&gt; J2EE 1.4 SDK -&gt; Start PointBase</i></p>
+    <p>PointBase downloaded and installed separately:<i> </i><font
+ face="Courier New, Courier, mono"><br>
+&lt;</font><font face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir</i></font><font face="Courier New, Courier, mono">&gt;/pointbase/tools/serveroption/startserver.bat</font></p>
+  </blockquote>
+  <p>UNIX Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the application server: <font
+ face="Courier New, Courier, mono"><br>
+&lt;</font><font face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir</i></font><font face="Courier New, Courier, mono">&gt;/pointbase/tools/serveroption/startserver.sh</font></p>
+    <p>PointBase downloaded and installed separately:<i> <br>
+    </i><font face="Courier New, Courier, mono">&lt;</font><font
+ face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir&gt;/</i></font><font
+ face="Courier New, Courier, mono">pointbase/tools/serveroption/startserver.sh</font></p>
+  </blockquote>
+  <p>Alternatively, if you copied the PointBase Server files to your
+own directory, execute the <font face="Courier New, Courier, mono">startserver</font>
+script from that location.</p>
+  <p>Once you execute the startup script, you will see the following
+text in either a command window or at the UNIX terminal prompt: </p>
+  <ol>
+    <blockquote>
+      <p><font face="Courier New, Courier, mono">Server started,
+listening on port 9092, display level: 0 ...<br>
+&gt;</font></p>
+    </blockquote>
+  </ol>
+  <p>To stop the server, enter <font face="Courier New, Courier, mono">quit</font>
+at the <font face="Courier New, Courier, mono">&gt;</font> prompt.</p>
+  <table align="center" border="1" cellpadding="3" height="64"
+ width="85%">
+    <tbody>
+      <tr>
+        <td height="248">
+        <p><b>Don't Need A Console Window?</b> On UNIX, if you want to
+run the PointBase server in the background, you can
+edit the <font face="Courier New, Courier, mono">startserver.sh</font>
+script and place the option "<font face="Courier New, Courier, mono">/noconsole</font>"
+at the end of the command line. </p>
+        <blockquote>
+          <p><font face="Courier New, Courier, mono">.../java
+-classpath ./lib/pbembedded.jar;</font><font
+ face="Courier New, Courier, mono">./lib/pbtools.jar</font><font
+ face="Courier New, Courier, mono"> com.pointbase.net.netServer
+/port:9092 <b>/noconsole</b></font></p>
+        </blockquote>
+        <p>The jar file <font face="Courier New, Courier, mono">pbembedded.jar</font>
+and <font face="Courier New, Courier, mono">pbtools.jar</font> are for
+PointBase 4.5 installation. You may have to use different jar file
+depending upon your PointBase installation. </p>
+        <p>Use "<font face="Courier New, Courier, mono">&amp;</font>"
+at the end of the <font face="Courier New, Courier, mono">StartServer.sh</font>
+command to run the server in the background.</p>
+        <blockquote>
+          <p><font face="Courier New, Courier, mono"> <b>./startserver.sh
+&amp;</b><br>
+[1] 26418 </font></p>
+        </blockquote>
+        <p>If you want to set traces on the Pointbase server, you can
+edit the startserver.sh script and place the option "/d:3" at the end
+of the command line:</p>
+        <blockquote>
+          <p><font face="Courier New, Courier, mono">.../java
+-classpath ./lib/pbembedded.jar;</font><font
+ face="Courier New, Courier, mono">./lib/pbtools.jar</font><font
+ face="Courier New, Courier, mono"> com.pointbase.net.netServer
+/port:9092 <b>/d:3<br>
+or <br>
+          </b></font><font face="Courier New, Courier, mono"><b>./startserver.sh
+/d:3 &amp;</b></font><br>
+          </p>
+        </blockquote>
+        <p>See the PointBase server documentation in the following
+location for more information on starting and stopping the server:</p>
+        <blockquote>
+          <p><font face="Courier New, Courier, mono">&lt;</font><font
+ face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir</i></font><font face="Courier New, Courier, mono">&gt;/pointbase/docs/
+          </font></p>
+        </blockquote>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+You can now deploy&nbsp; the application.<br>
+  <h2><a name="STOP"></a>Stopping PointBase</h2>
+  <p>To stop the server, enter <font face="Courier New, Courier, mono">quit</font>
+at the <font face="Courier New, Courier, mono">&gt;</font> prompt.<br>
+  <br>
+  </p>
+  <h2>Executing SQL Statements with PointBase</h2>
+  <p>The easiest means of performing these tasks is to use the
+PointBase Console GUI to execute SQL statements found in the .sql files
+within the <font face="Courier New, Courier, mono">src/sql/</font>
+directory.</p>
+  <p>To start the Console, follow these instructions:</p>
+  <p>Windows Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the application server: Execute <br>
+    <code><font face="Courier New, Courier, mono">&lt;</font></code><font
+ face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir</i></font><code><font
+ face="Courier New, Courier, mono">&gt;\pointbase\</font>tools\serveroption\startconsole.bat</code></p>
+    <p>PointBase downloaded and installed separately:<i> </i><font
+ face="Courier New, Courier, mono">&lt;</font><font
+ face="Helvetica, Arial, sans-serif" size="-1"><i>j2ee
+sdk 1.4 install_dir&gt;/</i></font><font
+ face="Courier New, Courier, mono">pointbase&gt;\tools\serveroption\startconsole.bat</font></p>
+  </blockquote>
+  <p>UNIX Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the application server: Execute<font
+ face="Courier New, Courier, mono"> &lt;install_dir&gt;/pointbase/</font><code>tools/serveroption/startconsole.sh</code></p>
+    <p>PointBase downloaded and installed separately:<i> </i><font
+ face="Courier New, Courier, mono">&lt;pointbase_install_dir&gt;/tools/serveroption/startconsole.sh</font></p>
+  </blockquote>
+  <p>The Console appears.</p>
+Note: To connect to the database, select <i>DBA -&gt; Connect to
+Database. (Note: Default user name and password for Pointbase is
+PBPUBLIC /</i><i> PBPUBLIC</i>)<br>
+  <p>Enter the following information for the samples database installed
+with the application server:</p>
+  <ul>
+    <li><b>Driver</b>: use the default value as provided.</li>
+    <li> <b>URL</b>: <font face="Courier New, Courier, mono">jdbc:pointbase:server://localhost/pointbase</font></li>
+    <li><font face="Courier New, Courier, mono"><span
+ style="font-weight: bold;">check</span> the box "Create new Data base"
+(if it is the time) </font><br>
+    </li>
+    <li> <b>User</b> and <b>Password</b>: use values as appropriate
+for the sample of interest:</li>
+  </ul>
+  <table align="center" border="1" cellpadding="3" width="75%">
+    <tbody>
+      <tr bgcolor="#cccccc">
+        <td><b>Application</b></td>
+        <td><b>User</b></td>
+        <td><b>Password</b></td>
+      </tr>
+      <tr>
+        <td>OSS/J RI</td>
+        <td><code>PBPUBLIC</code></td>
+        <td><code>PBPUBLIC</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Once connected to the database, you can enter SQL statements in
+the top portion of the window and the results can be viewed in the
+lower portion. SQL statements can be entered individually or as a
+sequence of statements from a file. </p>
+  <p>Select <i>File -&gt; Open</i> and open <font
+ face="Helvetica, Arial, sans-serif" size="-1">&lt;<i>install_dir</i>&gt;/src/sql/pointbase/pointbase.create.sql
+directory</font>,
+as
+provided with the OSS/J RI. <br>
+  </p>
+  <p>Note: <br>
+  </p>
+  <p>If a single statement has to be executed, then enter the SQL
+statement and select the menu option <i>SQL -&gt; Execute</i> to
+execute the statement.</p>
+  <p>If a sequence of statements is to be executed, use the menu option
+  <i>SQL -&gt; Execute all</i>. </p>
+  <span style="font-family: helvetica,arial,sans-serif;"></span><font
+ face="Helvetica, Arial, sans-serif" size="-1"></font>
+  <p> <a name="14862"> </a> <a name="Starting the Database"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1">Prerequisites to
+deployment.
+  <hr noshade="noshade" size="2"></font></p>
+  <pre>Change server security to add write permision to server.policy<br>Modify <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="2">&lt;<i>j2ee sdk 1.4 install-dir</i>&gt;</font></font></font>/domains/domain1/config/server.policy from<br>     permission java.util.PropertyPermission "*", "read";<br>   to<br>     permission java.util.PropertyPermission "*", "read,write";<br><br>Modify server.policy file to allow the RMI communication with the backend eis application. <br></pre>
+  <blockquote> &nbsp;&nbsp; permission java.net.SocketPermission
+"*:0-65535", "accept, resolve, connect, listen";<br>
+&nbsp; &nbsp;permission java.security.AllPermission;<br>
+  </blockquote>
+For example,<br>
+  <blockquote>grant { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; permission
+java.lang.RuntimePermission&nbsp; "loadLibrary.*"; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; permission
+java.lang.RuntimePermission&nbsp; "queuePrintJob"; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#3333ff"><b>permission
+java.net.SocketPermission&nbsp;&nbsp;&nbsp; "*:0-65535", "accept,
+resolve, connect, listen"; </b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; permission
+java.io.FilePermission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "&lt;&lt;ALL
+FILES&gt;&gt;", "read,write"; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="color: rgb(0, 0, 153); font-weight: bold;"><span
+ style="color: rgb(51, 51, 255);">permission
+java.util.PropertyPermission "*", "read,write";</span> </span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; permission
+java.lang.RuntimePermission&nbsp; "modifyThreadGroup"; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#3333ff"><b>
+permission java.security.AllPermission; </b></font><br>
+}; <br>
+    <br>
+    <br>
+  </blockquote>
+  <pre><span style="font-weight: bold;">Start the application Server</span> using the command "asadmin start-domain"     </pre>
+  <br>
+  <a name="14846"></a><a name="Command Line Based Deployment"></a><font
+ face="Helvetica, Arial, sans-serif" size="+1">Command Line
+Based Deployment </font> <br>
+</blockquote>
+<blockquote>
+  <p> <br>
+  <font face="Helvetica, Arial, sans-serif" size="2">Since a complete <font
+ face="courier, couriernew, monospaced size">.ear</font> file is
+supplied, the fastest means of setting up the application is to use the
+command line utilities as described in this section. </font> </p>
+  <p> <font face="Helvetica, Arial, sans-serif" size="2">The pre-built<font
+ face="courier, couriernew, monospaced size">
+xxxx.ear </font>file is an Enterprise Archive file that contains
+the Java Archive (JAR) files of the application.</font><br>
+  </p>
+  <p> <font face="Helvetica, Arial, sans-serif" size="2">Deploy using
+the <font face="courier, couriernew, monospaced size">asant</font>
+script. </font> </p>
+  <p> <br>
+  </p>
+  <p> <a name="14858"> </a> <a name="Using the asant Script"> </a> <font
+ face="Helvetica, Arial, sans-serif"> <b> Using the asant Script </b>
+  </font> <br>
+  </p>
+  <p><br>
+  </p>
+  <ol type="1">
+    <font face="Helvetica, Arial, sans-serif" size="-1"><b><li value="1"><br>
+    </li>
+    </b> Go to the<font face="courier, couriernew, monospaced size">
+src </font>directory of the sample: </font>
+    <p> </p>
+    <dl>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">&lt;<i>install_dir</i>&gt;<font
+ face="courier, couriernew, monospaced size">/src</font> </font>
+        <p> </p>
+      </dt>
+    </dl>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><b><li value="2"><br>
+    </li>
+    </b> Execute the<font face="courier, couriernew, monospaced size">
+"asant deploy" </font>command. This will configure and deploy the RI
+to
+the Application server.<br>
+    <br>
+For re-deployment the following command could
+be used independently<br>
+    </font> <br>
+    <table align="center" border="1" cellpadding="5" width="71%">
+      <tbody>
+        <tr bgcolor="#cccccc">
+          <td width="12%"><b>Target</b></td>
+          <td width="88%"><b>Function</b></td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>compile</b></font></td>
+          <td width="88%">Compiles all Java source code.</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>war</b></font></td>
+          <td width="88%">Assembles the WAR file in<font
+ face="Courier New, Courier, mono"> &lt;sample_dir&gt;/assemble/war/</font>.</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>ear</b></font></td>
+          <td width="88%">Assembles the EAR file in<font
+ face="Courier New, Courier, mono"> &lt;sample_dir&gt;/assemble/ear/</font>.</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>core</b>
+(default)</font></td>
+          <td width="88%">Compiles all sources, builds stubs/skeletons
+and assembles EJB[tm] JAR, WAR and EAR files. This is the
+default target for all <font face="Courier New, Courier, mono">build.xml</font>
+files shipped in the application server.</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>javadocs</b></font></td>
+          <td width="88%">Creates Java docs in <font
+ face="Courier New, Courier, mono">&lt;sample_dir&gt;/javadocs</font></td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>all</b></font></td>
+          <td width="88%">Builds both core and javadocs, verifies,
+registers resources and deploys app.</td>
+        </tr>
+        <tr>
+          <td height="18" width="12%"><font
+ face="Courier New, Courier, mono"><b>deploy</b></font></td>
+          <td height="18" width="88%">Registers resources, deploys
+app, but does not install Javadocs.</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>deploy</b>_<b>ear</b></font></td>
+          <td width="88%">Application deployment only. No resource
+registration.</td>
+        </tr>
+        <tr>
+          <td valign="top"><b>verify</b><br>
+          </td>
+          <td valign="top">Verifies application binaries.<br>
+          </td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>undeploy</b></font></td>
+          <td width="88%">Removes the deployed application from
+application server and remove resources.</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;"><span
+ style="font-weight: bold;">undeploy_ear</span><br>
+          </td>
+          <td style="vertical-align: top;">Removes the deployed
+application from application server</td>
+        </tr>
+        <tr>
+          <td width="12%"><font face="Courier New, Courier, mono"><b>clean</b></font></td>
+          <td width="88%">Removes <font
+ face="Courier New, Courier, mono">&lt;appname&gt;/build/</font>
+and <font face="Courier New, Courier, mono">&lt;appname&gt;/assemble/ </font>content.</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;"><span
+ style="font-weight: bold;">setup</span><br>
+          </td>
+          <td style="vertical-align: top;">Configure the Application
+server (create JDBC and JMS resources)<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;"><span
+ style="font-weight: bold;">unsetup</span><br>
+          </td>
+          <td style="vertical-align: top;">Remove resources from the
+Application server (delete JDBC and JMS resources)</td>
+        </tr>
+      </tbody>
+    </table>
+    <font face="Helvetica, Arial, sans-serif" size="-1"> <b> </b></font>
+  </ol>
+</blockquote>
+<blockquote><font face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b></b></font></b></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><a name="14924"></a><a
+ name="Verifying Deployment"></a><font
+ face="Helvetica, Arial, sans-serif" size="+1">Verifying Deployment<br>
+  </font></font></font><font face="Helvetica, Arial, sans-serif"
+ size="+1">
+  <hr noshade="noshade" size="2"></font><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="+1">&nbsp;</font><br>
+  <br>
+  </font></font></b></font></b><font face="Helvetica, Arial, sans-serif"
+ size="-1"><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="2">As an optional step, you
+can use the Application Server
+Administration Tool to verify that the application has been registered.
+  </font> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif">To verify the registration
+of the application: </font> <br>
+  <br>
+  </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <ol type="1">
+    <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><br>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><li value="1"><br>
+    </li>
+Execute the<font face="courier, couriernew, monospaced size">
+asadmin </font>command to look at applications deployed with a server
+instance. You see<font face="courier, couriernew, monospaced size">
+ossj_qos_ri </font>as one
+of the listed applications. </font> </font></font> </font></font>
+    <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+    <dl>
+      <dt><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="courier, couriernew, monospaced size">asadmin
+list-components&nbsp;<font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="courier, couriernew, monospaced size"> --user</font></font><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="courier, couriernew, monospaced size"> </font>&lt;<i>user-name</i>&gt;<font
+ face="courier, couriernew, monospaced size"> --password </font>&lt;<i>password</i>&gt;<font
+ face="courier, couriernew, monospaced size">&nbsp;</font></font></font></font><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font> </font></font>
+        </font></font>
+        <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+        <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font></dt>
+    </dl>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><br>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><li value="2"><br>
+    </li>
+Or navigate the Admin tool GUI to <tt><big>Applications--&gt;Enterprise
+Applications</big></tt>. </font> </font></font> </font></font>
+    <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><br>
+    <font face="Helvetica, Arial, sans-serif" size="-1">Click <big><tt>Enterprise
+Applications</tt></big> on the
+left frame menu to display a list of applications deployed on the
+server. </font> </font></font></font></font></p>
+  </ol>
+
+
+   <br>
+   <br>
+   <br>
+   <a name="building"> </a> <a
+ name="Compiling and Assembling the Application"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1"> Compiling and
+Assembling the
+Application
+  <hr noshade="noshade" size="2"> </font> <br>
+  <a name="15910"> </a><font face="Helvetica, Arial, sans-serif"
+ size="2">This <a href="index.html#14815">Command Line Based
+Compilation and Assembly</a> procedure
+describes how to assemble and compile the sample using a Command Line
+Interface
+(CLI). No source code is provided for the implementation of the Web Service Integration Profile.</font>
+  <p> </p>
+  <p> <br>
+  <a name="14815"> </a> <a
+ name="Command Line Based Compilation and Assembly"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1"> Command Line Based
+Compilation and Assembly </font> <br>
+  <br>
+  <br>
+  </p>
+  <p> <a name="14817"> </a> <a
+ name="To rebuild the entire application from scratch:"> </a> <font
+ face="Helvetica, Arial, sans-serif"> <b> To rebuild the entire
+application from scratch: </b> </font> <br>
+  <br>
+  </p>
+  <ol type="1">
+    <font face="Helvetica, Arial, sans-serif" size="-1"><b><li value="1"><br>
+    </li>
+    </b> Compile and Assemble. </font>
+    <p> </p>
+    <dl>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">Execute
+the<font face="courier, couriernew, monospaced size"> "asant compile
+ear" </font>command
+under &lt;<i>install_dir</i>&gt;<font
+ face="courier, couriernew, monospaced size">/src/</font> </font>
+        <p> </p>
+      </dt>
+    </dl>
+  </ol>
+  <ol type="1">
+    <dl>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">The
+default target core
+is executed to rebuild the<font
+ face="courier, couriernew, monospaced size"> .ear </font>file. <br>
+The command: <font face="courier, couriernew, monospaced size"> asant
+compile ear </font> can also be used.<br>
+        <br>
+        </font>
+        <p> </p>
+      </dt>
+    </dl>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><b><li value="2"><br>
+    </li>
+    </b> Deploy the application. </font>
+    <p> </p>
+    <dl>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">When
+you have
+re-created the RI from scratch, proceed to Deploying the application.<br>
+        <br>
+        </font>
+        <p> </p>
+      </dt>
+    </dl>
+    <font face="Helvetica, Arial, sans-serif" size="-1"><b><li value="3"><br>
+    </li>
+    </b> Clean the RI project area. </font>
+    <p> </p>
+    <dl>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">Execute
+the<font face="courier, couriernew, monospaced size"> "asant clean" </font>command
+to
+remove the RI's assemble and build directories. </font>
+        <p> </p>
+      </dt>
+      <dt> <font face="Helvetica, Arial, sans-serif" size="-1">Now you
+are ready to
+use this<font face="courier, couriernew, monospaced size"> .ear </font>file
+for deployment. </font>
+        <p> </p>
+      </dt>
+    </dl>
+  </ol>
+  <br>
+  <p> </p>
+
+
+  <a name="14961"> </a> <a name="Generating Javadocs"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1"> Generating Javadocs <br>
+  </font></font></font><font face="Helvetica, Arial, sans-serif"
+ size="+1">
+  <hr noshade="noshade" size="2"></font><br>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <br>
+  </font></font></b></font></b><font face="Helvetica, Arial, sans-serif"
+ size="-1"><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="2">To understand sample
+application source code better, you can
+refer to the related javadocs. To generate javadocs, run the command </font>
+  </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <dl>
+    <dl>
+      <dt><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="courier, couriernew, monospaced size">asant javadocs</font> </font>
+        </font></font> </font></font>
+        <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+        <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font></dt>
+      <dt><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1">or </font> </font></font>
+        </font></font>
+        <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+        <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font></dt>
+      <dt><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="courier, couriernew, monospaced size">asant all</font> </font> </font></font>
+        </font></font>
+        <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+        <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font></dt>
+    </dl>
+  </dl>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="2">After javadocs are
+generated, you can access them at </font> </font></font> </font></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="2">&lt;<i>install_dir</i>&gt;<font
+ face="courier, couriernew, monospaced size">/javadocs/index.html</font>
+  </font> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </b></font></b></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <br>
+  <br>
+  <a name="14976"> </a> <a name="troubleshooting"> </a> <font
+ face="Helvetica, Arial, sans-serif" size="+1"> Troubleshooting
+  <hr noshade="noshade" size="2"> </font> <br>
+  </font></font></b></font></b><font face="Helvetica, Arial, sans-serif"
+ size="-1"><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="2">If you encounter problems
+when running the application,
+review the log files at &lt;<i>j2ee sdk 1.4 install-dir</i>&gt;<font
+ face="courier, couriernew, monospaced size">/domains/&lt;<i>domain</i>&gt;</font>/logs/server.log
+to see what went wrong. </font> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="2">Make certain that you run<font
+ face="courier, couriernew, monospaced size"> asant undeploy </font>before
+redeploying this sample to make sure that all modules are undeployed
+and the resources are disabled. </font> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font> </font></font>
+  <p><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></p>
+  <font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font></font></blockquote>
+<font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <footercontent> </footercontent>
+</font></font></font></font>
+<blockquote><font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> </font></font></font><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><br>
+  </font></font> </b></font></b></font>
+  <hr noshade="noshade" size="1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"><!-- start copyright --><font face="Helvetica, Arial, sans-serif" size="-2"> Copyright &copy;
+2005 <a href="http://www.ossj.org">The Members of the OSS through Java Initiative</a> All rights
+reserved.</font><!--  end copyright  --> </font></font></b></font></b></font></blockquote>
+<font face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><b><font
+ face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <font
+ face="Helvetica, Arial, sans-serif" size="-2"> </font> </font></font>
+<font face="Helvetica, Arial, sans-serif" size="-1"><font
+ face="Helvetica, Arial, sans-serif" size="-1"> <br>
+<br>
+<br>
+<br>
+<br>
+</font></font></b></font></b></font>
+</body>
+</html>

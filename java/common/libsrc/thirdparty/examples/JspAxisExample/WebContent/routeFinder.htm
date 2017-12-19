@@ -1,0 +1,142 @@
+<!--
+	* File : routeFinder.htm
+	* This is an ArcWeb Services Sample file for RouteFinder ArcWeb Service.
+-->
+<html>
+    <head><title>RouteFinder - ArcWeb Services Sample</title>	<style type="text/css">
+            <!--
+            .boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+            .textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+            .smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+            .italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+            -->
+	</style></head>
+    <body><center>
+    <font class='boldfont'>RouteFinder  - ArcWeb Services Sample </font><br><br>
+
+        <!-- ============= Input Form =============   -->
+        <form action="jsp/routeFinderRes.jsp" name="mForm" target="arcWebResultWin">
+        <table width='600' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+            <tr><td width='100%'>
+                <table border=0 cellpadding='0' cellspacing='0'  align=center width='598' bgcolor='#ddebf1' class='textfont'>
+                    <tr><td height=28 colspan=3 align=center bgcolor="#4271ad" class='boldfont'><font color=ffffff>Input Information </font><br></td></tr>
+                    <tr><td colspan=3>&nbsp;</td></tr>
+                    <tr>
+                        <td height='100%'>
+                            <table border=0 cellpadding='0' cellspacing='0'>
+                             <tr><td>&nbsp;</td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; Address : </td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; City  : </td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; State/Province : </td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; Postal Code  : </td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; Country Code  : </td></tr>
+                             <tr><td height='25' class='textfont'>&nbsp; Geocode Data Source : </td></tr>
+                            </table>
+                        </td>
+                        <td height='100%'>
+                            <table border=0 cellpadding='0' cellspacing='0' class='textfont'>
+                             <tr><td class='boldfont'>Start Address </td></tr>
+                             <tr><td class='textfont'><input type=text name=fromStreet value='380 New York St' ></td></tr>
+                             <tr><td class='textfont'><input type=text name=fromCity value='Redlands' ></td></tr>
+                             <tr><td class='textfont'><input type=text name=fromState value='CA' ></td></tr>
+                             <tr><td class='textfont'><input type=text name=fromZip value='92373' ></td></tr>
+                             <tr><td class='textfont'><input type=text name=fromCountry value='US' ></td></tr>
+                            <tr><td class='textfont'>
+                                <select name="fromGeoCodeDataSource">
+                                    <option value="GDT.Address.US" selected>GDT.Address.US</option>
+                                    <option value="GDT.Streets.US">GDT.Streets.US</option>
+                                    <option value="TA.Address.US">TA.Address.US</option>
+                                    <option value="TA.Streets.US">TA.Streets.US</option>
+                                    <option value="GDT.Address.CA">GDT.Address.CA</option>
+                                    <option value="GDT.Streets.CA">GDT.Streets.CA</option>
+                                    <option value="TA.Address.EU">TA.Address.EU  &nbsp; &nbsp; &nbsp; &nbsp; </option>
+                                </select></td></tr>
+                            </table>
+                        </td>
+                        <td height='100%'>
+                            <table border=0 cellpadding='0' cellspacing='0'>
+                             <tr><td class='boldfont'>End Address</td></tr>
+                             <tr><td><input type=text name=toStreet value='8430 Sunset Blvd' ></td></tr>
+                             <tr><td><input type=text name=toCity value='West Hollywood' ></td></tr>
+                             <tr><td><input type=text name=toState value='CA' ></td></tr>
+                             <tr><td><input type=text name=toZip value='90069' ></td></tr>
+                             <tr><td><input type=text name=toCountry value='US' ></td></tr>
+                             <tr><td class='textfont'>
+                                <select name="toGeoCodeDataSource">
+                                    <option value="GDT.Address.US" selected>GDT.Address.US</option>
+                                    <option value="GDT.Streets.US">GDT.Streets.US</option>
+                                    <option value="TA.Address.US">TA.Address.US</option>
+                                    <option value="TA.Streets.US">TA.Streets.US</option>
+                                    <option value="GDT.Address.CA">GDT.Address.CA</option>
+                                    <option value="GDT.Streets.CA">GDT.Streets.CA</option>
+                                    <option value="TA.Address.EU">TA.Address.EU &nbsp; &nbsp; &nbsp; &nbsp; </option>
+                                </select></td></tr>
+                            </table>
+                        </td></tr>
+                    <tr><td colspan='3'>&nbsp;&nbsp;</td></tr>
+                    <tr><td colspan='3'>&nbsp;&nbsp;</td></tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;Route Data Source :</td>
+                        <td colspan='2'>
+                            <select name="routeDataSource">
+                                <option value="GDT.Streets.NA" selected>GDT.Streets.NA</option>
+                                <option value="TA.Streets.US">TA.Streets.US</option>
+                                <option value="TA.Address.EU">TA.Address.EU</option>
+                            </select>
+                        </td></tr>
+                    <tr><td colspan='3'>&nbsp;&nbsp;</td></tr>
+                    <tr>
+                        <td colspan='3'>
+                                <table width="100%" border=0 cellspacing=0 cellpadding=2 class='textfont'>
+                                    <tr><td class="boldfont" vAlign="top" align=left>Route Optional Settings : </td></tr>
+                                    <tr><td>
+                                        <table border=0 class='textfont'>
+                                            <tr><td class='textfont'>Language : </td>
+                                                <td><select name="language" size="1" >
+                                                        <option value="english" selected >english</option>
+                                                        <option value="french">french</option>
+                                                        <option value="german">german</option>
+                                                        <option value="spanish" >spanish</option>
+                                                        <option value="italian" >italian</option>
+                                                        <option value="swedish" >swedish</option>
+                                                        <option value="norwegian" >norwegian</option>
+                                                        <option value="portuguese" >portuguese</option>
+                                                        <option value="danish" >danish</option>
+                                                        <option value="dutch" >dutch</option>
+                                                    </select>
+                                                </td></tr>
+                                            <tr><td class='textfont'>Distance Units : </td>
+                                                <td class='textfont'>
+                                                    <input type=radio name=distanceUnits checked value='Miles'> Miles
+                                                    <input type=radio name=distanceUnits value='Km'> Km
+                                                </td></tr>
+                                            <tr><td class='textfont'>Route color : </td>
+                                                <td class='textfont'>
+                                                    <input type=test name=color value="255,0,0" size="15">(R,G,B)
+                                                </td></tr>
+                                            <tr><td class='textfont'>Route width : </td>
+                                                <td class='textfont'>
+                                                    <input type=test name=thickness value="10" size="15" >(in pixels)
+                                                </td></tr>
+                                            <tr><td> Route transparency : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td class='textfont'>
+                                                    <input type=test name=transparency value="0.5" size="15">(1 is Opaque and 0.01 is Transparent)
+                                                </td></tr>
+                                        </table>
+                                     </td></tr>
+                                </table>
+                       </td></tr>
+                       <tr><td colspan=3>&nbsp;</td></tr>
+                        <tr>
+                            <td align="center" colspan='3'><input  type=submit name="RouteFinder" value="   Get Route Directions   "></td></tr>
+                            <input type="hidden" name="action" value="routeFinder">
+                       <tr><td colspan=3>&nbsp;</td></tr>
+                </table>
+            </td></tr>
+        </table>
+        </form>
+		<br><br>
+		<a href="index.htm" class=textfont>Back to Index</a>
+    </center>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="wsdl2java" default="wsdl2java" basedir=".">
+
+	<property name="HelloText" value="Hello" />
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+	<property name="generated.dir" value="./generated/src" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="wsdl2java"
+		classname="org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask"
+		loaderref="axis">
+		<classpath refid="axis.classpath" />
+	</taskdef>
+
+	<target name="wsdl2java">
+
+		<echo>${HelloText}</echo>
+		<echo>${axis.dist.dir}</echo>
+		
+		<delete dir="./generated/src/com/foo/www/ArrayOfComplexTypes">
+		</delete>
+
+		<wsdl2java
+			url="./wsdl/ArrayOfComplexTypes2.wsdl"
+			output="${generated.dir}" deployscope="session" serverSide="yes"
+			skeletonDeploy="yes" noimports="no" verbose="no"
+			typeMappingVersion="1.1" testcase="no">
+			<mapping namespace="urn:AddressFinder"
+				package="samples.addr" />
+		</wsdl2java>
+
+	</target>
+
+</project>

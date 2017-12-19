@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2002 Cisco Systems, Inc., Ericsson Radio Systems AB., Motorola, Inc., NEC Corporation, Nokia Networks Oy, Nortel Networks Limited, Sun Microsystems, Inc., Telcordia Technologies, Inc., Cygent, Inc., Agilent Technologies, Inc., BEA Systems, Inc., Digital Fairway Corporation, Orchestream Holdings plc.  
+All rights reserved.  Use is subject to license terms.
+
+DOCUMENTATION IS PROVIDED "AS IS" AND ALL EXPRESS OR IMPLIED
+CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED
+WARRANTY OF MERCHANTABILITY, FITNESS FOR FOR A PARTICULAR PURPOSE OR
+NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT THAT SUCH
+DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.
+-->
+<schema targetNamespace="http://java.sun.com/products/oss/xml/ServiceActivation" xmlns:co="http://java.sun.com/products/oss/xml/Common" xmlns:sa="http://java.sun.com/products/oss/xml/ServiceActivation" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<import namespace="http://java.sun.com/products/oss/xml/Common" schemaLocation="XmlCommonSchema.xsd"/>
+	<annotation>
+		<documentation>
+			Service Activation XML schema.
+		</documentation>
+	</annotation>
+	<!--================OrderKey==================-->
+	<complexType name="OrderKey">
+		<annotation>
+			<documentation>The OrderKey uniquely identifies an
+order.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityKey">
+				<sequence>
+					<element name="primaryKey" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfOrderKey">
+		<annotation>
+			<documentation>This is a representation of a OrderKey
+array.</documentation>
+		</annotation>
+		<sequence>
+			<element name="item" type="sa:OrderKey" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="OrderKeyResult">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityKeyResult">
+				<sequence>
+					<element name="orderKey" type="sa:OrderKey"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfOrderKeyResult">
+		<sequence>
+			<element name="item" type="sa:OrderKeyResult" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--================OrderValue==================-->
+	<complexType name="OrderValue" abstract="true">
+		<annotation>
+			<documentation>The following is an XML representation of
+an order An order is a request to perform an
+operation. Typical operations are Activate, Deactivate
+etc. OrderValue is the base type of an order. The intent of
+OrderValue is to be derived by a more specific type such
+Activate. This is acheived by declaring OrderValue abstract,
+meaning OrderValue can not be used directly in instance
+documents, but only derivd types of OrderValue can be used in
+instance documents. The base OrderValue contains the elements
+state (contains the current state of the order which must be
+one of OrderState), orderKey (uniquely identifies an order),
+serviceValue (indicates a busineiness service to be sold to a
+customer), clientId (Client id of the customer), priority
+(Priority of the order, must be one of OrderPriority), and a
+miscellanous description field. </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityValue">
+				<sequence>
+					<element name="actualCompletionDate" type="dateTime" nillable="true" minOccurs="0"/>
+					<element name="apiClientId" type="string" nillable="true" minOccurs="0"/>
+					<element name="description" type="string" nillable="true" minOccurs="0"/>
+					<element name="failedServices" type="sa:ArrayOfServiceKeyResult" nillable="true" minOccurs="0"/>
+					<element name="orderDate" type="dateTime" nillable="true" minOccurs="0"/>
+					<element name="orderKey" type="sa:OrderKey" nillable="true" minOccurs="0"/>
+					<element ref="sa:priority" minOccurs="0"/>
+					<element name="purchaseOrder" type="string" nillable="true" minOccurs="0"/>
+					<element name="requestedCompletionDate" type="dateTime" nillable="true" minOccurs="0"/>
+					<element name="services" type="sa:ArrayOfServiceValue" minOccurs="0"/>
+					<element ref="sa:orderState" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="CreateOrderValue">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexContent>
+			<extension base="sa:OrderValue"/>
+		</complexContent>
+	</complexType>
+	<complexType name="ModifyOrderValue">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexContent>
+			<extension base="sa:OrderValue"/>
+		</complexContent>
+	</complexType>
+	<complexType name="CancelOrderValue">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexContent>
+			<extension base="sa:OrderValue"/>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfOrderValue">
+		<annotation>
+			<documentation>This is a representation of a OrderValue
+array.</documentation>
+		</annotation>
+		<sequence>
+			<element name="item" type="sa:OrderValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<element name="priority" type="sa:OrderPriorityType" nillable="true"/>
+	<simpleType name="OrderPriorityType">
+		<annotation>
+			<documentation>See: JVTActivationSession for the meanings
+of these priority values.</documentation>
+		</annotation>
+		<restriction base="unsignedInt">
+			<minInclusive value="1"/>
+			<maxInclusive value="5"/>
+		</restriction>
+	</simpleType>
+	<element name="orderState" type="sa:OrderStateType" nillable="true"/>
+	<simpleType name="OrderStateType">
+		<restriction base="string">
+			<enumeration value="open"/>
+			<enumeration value="open.not_running"/>
+			<enumeration value="open.not_running.not_started"/>
+			<enumeration value="open.not_running.suspended"/>
+			<enumeration value="open.running"/>
+			<enumeration value="closed"/>
+			<enumeration value="closed.completed"/>
+			<enumeration value="closed.aborted"/>
+			<enumeration value="closed.aborted.byclient"/>
+			<enumeration value="closed.aborted.byserver"/>
+		</restriction>
+	</simpleType>
+	<!--================Order Value Meta information==================-->
+	<element name="getSupportedOptionalAttributesRequest">
+		<annotation>
+			<documentation> The getSupportedOptionalAttributesRequest
+is used to return a list of the implemented optional
+attributes.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getSupportedOptionalAttributesResponse">
+		<annotation>
+			<documentation>The getSupportedOptionalAttributesResponse
+will return a list of implemented optional
+attributes.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="options" type="co:ArrayOfString" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getSupportedOptionalAttributesException">
+		<annotation>
+			<documentation>The getSupportedOptionalAttributesException is
+returned if an exception occured during the request. The
+only exception that is thrown is a
+RemoteException.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!--================ServiceKey==================-->
+	<complexType name="ServiceKey">
+		<annotation>
+			<documentation>The ServiceKey uniquely identifies a
+service.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityKey">
+				<sequence>
+					<element name="primaryKey" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ServiceKeyResult">
+		<complexContent>
+			<extension base="co:ManagedEntityKeyResult">
+				<sequence>
+					<element name="serviceKey" type="sa:ServiceKey"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfServiceKeyResult">
+		<sequence>
+			<element name="item" type="sa:ServiceKeyResult" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--================ServiceValue==================-->
+	<complexType name="ServiceValue" abstract="true">
+		<annotation>
+			<documentation>The following is an XML representation of a
+service. An service is something of business value that can
+be associated to a subscriber. Typical are DSL, 3G
+etc. ServiceValue is the base type of a service. The intent of
+ServiceValue is to be derived by a more specific type such
+DSL. This is acheived by declaring ServiceValue abstract,
+meaning ServiceValue can not be used directly in instance
+documents, but only derivd types of ServiceValue can be used
+in instance documents. The base ServiceValue contains the
+elements ServiciceState (contains the current state of the
+order which must be one of ServiceStateType), serviceKey
+(uniquely identifies an service)</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityValue">
+				<sequence>
+					<element name="serviceKey" type="sa:ServiceKey" nillable="true" minOccurs="0"/>
+					<element ref="sa:serviceState" minOccurs="0"/>
+					<element name="subscriberId" type="string" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfServiceValue">
+		<annotation>
+			<documentation>This is a representation of a ServiceValue
+array.</documentation>
+		</annotation>
+		<sequence>
+			<element name="item" type="sa:ServiceValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<element name="serviceState" type="sa:ServiceStateType" nillable="true"/>
+	<simpleType name="ServiceStateType">
+		<restriction base="string">
+			<enumeration value="active"/>
+			<enumeration value="inactive"/>
+		</restriction>
+	</simpleType>
+	<!--================Events==================-->
+	<complexType name="OrderAttributeValueChangeEventType">
+		<annotation>
+			<documentation>Base Content of Attribute Value Change
+Event</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseEventType">
+				<sequence>
+					<element name="newOrderValue" type="sa:OrderValue" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="OrderCreateEventType">
+		<annotation>
+			<documentation>Base Content of Create Event
+Type</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseEventType">
+				<sequence>
+					<element name="orderValue" type="sa:OrderValue" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="OrderRemoveEventType">
+		<annotation>
+			<documentation>Base Content of Remove Event
+Type</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseEventType">
+				<sequence>
+					<element name="orderValue" type="sa:OrderValue" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="OrderStateChangeEventType">
+		<annotation>
+			<documentation>Base Content of State Change Event
+Type</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:BaseEventType">
+				<sequence>
+					<element name="currentState" type="string"/>
+					<element name="orderKey" type="sa:OrderKey"/>
+					<element name="reason" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="orderAttributeValueChangeEvent" type="sa:OrderAttributeValueChangeEventType">
+		<annotation>
+			<documentation>An Event that is sent in the case in which
+some value of the order has changed. The event is thrown in
+the case of 1) setOrder(s).Request has been called and changed
+the value of an order 2) Some values of the order have been
+changed during the execution of an order by
+implementation. This event is not published if the state of
+the order has changed, that occurrence is handled by the
+OrderStateChangeEvent.</documentation>
+		</annotation>
+	</element>
+	<element name="orderCreateEvent" type="sa:OrderCreateEventType">
+		<annotation>
+			<documentation>An Event that is published in the case
+where a new order is created. The event is thrown when
+createOrder(s).Request has been called.</documentation>
+		</annotation>
+	</element>
+	<element name="orderRemoveEvent" type="sa:OrderRemoveEventType">
+		<annotation>
+			<documentation>An Event that is published in the case
+where an order has been removed. The event is thrown when 1)
+removeOrder(s).Request has been called. 2) Implementation may
+also throw this exception if it supports an automatic cleanup
+functionality to remove, for example, all completed
+orders.</documentation>
+		</annotation>
+	</element>
+	<element name="orderStateChangeEvent" type="sa:OrderStateChangeEventType">
+		<annotation>
+			<documentation>An Event that is published in the case
+where the state of an order has changed. The event is thrown
+when 1) One of the Suspend/Resume/Start/Abort operations are
+called 2) While executing the order, the state of the order
+has been changed by the implementation</documentation>
+		</annotation>
+	</element>
+	<!--================ActivationSession Operations==================-->
+	<simpleType name="OptionalOperations">
+		<restriction base="string">
+			<enumeration value="REMOVE_ORDER_BY_KEY"/>
+			<enumeration value="RESUME_ORDER_BY_KEY "/>
+			<enumeration value="SUSPEND_ORDER_BY_KEY"/>
+			<enumeration value="GET_ORDERS_BY_TEMPLATES"/>
+		</restriction>
+	</simpleType>
+	<!--================Creating order and service values==================-->
+	<element name="getOrderTypesRequest">
+		<annotation>
+			<documentation>The getOrderTypesRequest is used to return
+a string list of available OrderTypes. Each one of the
+strings in the list can be passed as an agrument to
+makeOrderValue(factory) to create a corresponding OrderValue
+instance.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getOrderTypesResponse">
+		<annotation>
+			<documentation>The getOrderTypesResponse will return a
+list of available OrderTypes.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderTypes" type="co:ArrayOfString" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getOrderTypesException">
+		<annotation>
+			<documentation>The getOrderTypesException is returned if
+an execption occurred.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getServiceTypesRequest">
+		<annotation>
+			<documentation>The getServiceTypesRequest is used to
+return a string list of available Service Types. Each one of
+the Service Types returned can then be passed as an argument
+to makeServiceValue(factory) to create a corresponding
+ServiceValue.</documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getServiceTypesResponse">
+		<annotation>
+			<documentation>The getServiceTypesResponse will contain
+the list of available Service Types.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="serviceTypes" type="co:ArrayOfString" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getServiceTypesException">
+		<annotation>
+			<documentation>The getServiceTypesException is returned if
+an exception occurred.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="makeOrderValueRequest">
+		<annotation>
+			<documentation>This request will return a new Order Value
+for usage in a client. The type of Order Value returned is
+based on the orderType attribute populatd in this request.
+This request does not create a "real" order. It only supples
+to the client an empty OrderValue (i.e not populated with
+data). The client would then make a createOrder.Request with
+that OrderValue populated with appropriate
+values.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderType" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="makeOrderValueResponse">
+		<annotation>
+			<documentation>This returns the empty
+OrderValue</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValue" type="sa:OrderValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="makeOrderValueException">
+		<annotation>
+			<documentation>This is returned if an exception
+occurrs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="makeServiceValueRequest">
+		<annotation>
+			<documentation>This request will return a new Service
+Value for usage in a client. The type of Service Value
+returned is based on the serviceType attribute populatd in
+this request. This request does not create a "real"
+service. It only supples to the client an empty ServiceValue
+(i.e not populated with data). The client would then add this
+ServiceValue (populated with data) to an OrderValue and make a
+CreateOrderRequest.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="serviceType" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="makeServiceValueResponse">
+		<annotation>
+			<documentation>This returns the empty
+ServiceValue</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="serviceValue" type="sa:ServiceValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="makeServiceValueException">
+		<annotation>
+			<documentation>This is returned if an exception
+occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!--================Managing the lifetime of orders==================-->
+	<element name="createOrderByValueRequest">
+		<annotation>
+			<documentation>Creates a new order object in the system
+and returns the key for the new object. A single OrderValue is
+the only value passed into the request. The state values in
+OrderValue are ignored, the state is initialized to STARTED by
+the system.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValue" type="sa:OrderValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="createOrderByValueResponse">
+		<annotation>
+			<documentation>This returns the OrderKey corresponding to
+the order which was created in the system</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="createOrderByValueException">
+		<annotation>
+			<documentation>This is returned if an exception
+occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="createException" type="co:CreateException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+				<element name="illegalAttributeValueException" type="co:IllegalAttributeValueException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="startOrderByKeyRequest">
+		<annotation>
+			<documentation>This request puts the order into a RUNNING
+state.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="startOrderByKeyResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order was
+started. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="startOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="suspendOrderByKeyRequest">
+		<annotation>
+			<documentation>The following request put the order from a
+RUNNING state into a SUSPENDED state.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="suspendOrderByKeyResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order has been
+suspended. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="suspendOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="resumeOrderByKeyRequest">
+		<annotation>
+			<documentation>This request puts the order from a state
+SUSPENDED back into a RUNNING state.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="resumeOrderByKeyResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order has been
+resumed. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="resumeOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="abortOrderByKeyRequest">
+		<annotation>
+			<documentation>The following request aborts the order and
+puts the state to ABORTED.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="abortOrderByKeyResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order has been
+aborted. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="abortOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="removeOrderByKeyRequest">
+		<annotation>
+			<documentation>The following request will terminate the
+lifetime or an order. This request indicates that the
+client(s) does not need the referenced order anymore. The
+implementation can also remove orders automatically, example
+batch cleanup of completed orders. If the order is removed
+successfully then a OrderRemoveEvent is published. Exceptions
+are returned if for example the Order does not exist or if the
+order is not in an appropriate state (i.e. RUNNING state). If
+the order is not in an appropriate state then the user would
+have to abort the order and then call
+removeOrder.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="removeOrderByKeyResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order was
+removed. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="removeOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="removeException" type="co:RemoveException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!--================Changing and retrieving orders==================-->
+	<element name="getOrderByKeyRequest">
+		<annotation>
+			<documentation>Returns values for the order identified by
+the (unique) key. The value object returned will always have a
+type that is derived from OrderValue(polymorphism). The
+attributeName list indicates which attributes are to be
+returned. If the AttributeName is null then all possible
+attributes are returned. </documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKey" type="sa:OrderKey"/>
+				<element name="attributeName" type="co:ArrayOfString" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getOrdeByKeyrResponse">
+		<annotation>
+			<documentation> The value for the order is
+returned.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValue" type="sa:OrderValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getOrderByKeyException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getOrdersByKeysRequest">
+		<annotation>
+			<documentation>This is the plural version of GetOrder. It
+takes in a list of order keys.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKeys" type="sa:ArrayOfOrderKey"/>
+				<element name="attributeNames" type="co:ArrayOfString" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getOrdersByKeysResponse">
+		<annotation>
+			<documentation>A list of order values is
+returned.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValues" type="sa:ArrayOfOrderValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getOrdersByKeysException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="getOrdersByTemplatesRequest">
+		<annotation>
+			<documentation>This is an associative lookup which will
+return values for the order, identified by the OrderValue
+template. The value object returned will always have a type
+that is derived from OrderValue(polymorphism). The
+AttributeName list indicates which attributes are to be
+returned. If the attributeName is null then all possible
+attributes are returned. The howMany element (from
+IteratorRequest) is used to restrict the returning result set.
+If the result set exceeds the "howMany" value than consequent
+response messages are returned.</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorRequest">
+					<sequence>
+						<element name="templates" type="sa:ArrayOfOrderValue"/>
+						<element name="attributeNames" type="co:ArrayOfString" nillable="true" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="getOrdersByTemplatesResponse">
+		<annotation>
+			<documentation>The result set is a list (the amount in the
+list is determined by the howMany element in the
+IteratorRequest type) of orderValues. The EndOfReply (from
+IteratorResponse)indicates whether there are any more result
+sets being returned. The Sequence number (from
+IteratorResponse) indicates the result set order, since there
+can be a number of response messages generated and there is no
+mechanism to insure the responses are sent sequentially, there
+needs to be a method of preserving the order of the response
+messages.</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorResponse">
+					<sequence>
+						<element name="orderValue" type="sa:ArrayOfOrderValue" nillable="true" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="getOrdersByTemplatesException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+				<element name="UnsupportedOperationException" type="co:UnsupportedOperationException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="setOrderByValueRequest">
+		<annotation>
+			<documentation>This request is used to change the
+attributes of an Order. Only the attributes which are
+populated are changed. The state and key attributes are
+ignored.</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValue" type="sa:OrderValue"/>
+				<element name="checkConcurrentAccess" type="boolean"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="setOrderByValueResponse">
+		<annotation>
+			<documentation>Only the message header is returned. This
+is sufficient to indicate that the order was
+changed. </documentation>
+		</annotation>
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="setOrderByValueException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="objectNotFoundException" type="co:ObjectNotFoundException"/>
+				<element name="illegalAttributeValueException" type="co:IllegalAttributeValueException"/>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="setException" type="co:SetException"/>
+				<element name="resyncRequiredException" type="co:ResyncRequiredException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!--================Querying for orders==================-->
+	<element name="queryOrdersRequest">
+		<annotation>
+			<documentation>The following request runs a (complex)
+query and returns the matching orders. The howMany (from
+IteratorRequest) element is used to restrict the returning
+result set. If the result set exceeds the "howMany" value
+than consequent response messages are
+returned.</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorRequest">
+					<sequence>
+						<element name="queryValue" type="co:QueryValue"/>
+						<element name="attributeNames" type="co:ArrayOfString" nillable="true" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryOrdersResponse">
+		<annotation>
+			<documentation>The result set is a list (the amount in the
+list is determined by the howMany element from the
+QueryOrdersRequest) of OrderValues. The EndOfReply (from
+IteratorResponse) indicates whether there are any more result
+sets being returned. The Sequence number (from
+IteratorResponse) indicates the result set order i.e. since
+there can be a number of response messages generated and there
+is no mechanism to insure the responses are sent sequentially,
+there needs to be a method of ordering the response messages
+that are returned.</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorResponse">
+					<sequence>
+						<element name="orderValue" type="sa:ArrayOfOrderValue" nillable="true" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryOrdersException">
+		<annotation>
+			<documentation>The following exceptions are returned if an
+error occurs.</documentation>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<complexType name="QueryAllOrdersValue">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexContent>
+			<extension base="co:QueryValue"/>
+		</complexContent>
+	</complexType>
+	<!--================BestEffort==================-->
+	<element name="tryCreateOrdersByValuesRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValues" type="sa:ArrayOfOrderValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryCreateOrdersByValuesResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="result" type="sa:ArrayOfOrderKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryCreateOrdersByValuesException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="createException" type="co:CreateException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryStartOrdersByKeysRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKeys" type="sa:ArrayOfOrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryStartOrdersByKeysResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="result" type="sa:ArrayOfOrderKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryStartOrdersByKeysException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="trySetOrdersByValuesRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderValues" type="sa:ArrayOfOrderValue"/>
+				<element name="checkConcurrentAccess" type="boolean"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="trySetOrdersByValuesResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="result" type="sa:ArrayOfOrderKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="trySetOrdersByValuesException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="setException" type="co:SetException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryAbortOrdersByKeysRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKeys" type="sa:ArrayOfOrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryAbortOrdersByKeysResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="result" type="sa:ArrayOfOrderKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryAbortOrdersByKeysException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalStateException" type="co:IllegalStateException"/>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryRemoveOrdersByKeysRequest">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="orderKeys" type="sa:ArrayOfOrderKey"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryRemoveOrdersByKeysResponse">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="result" type="sa:ArrayOfOrderKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryRemoveOrdersByKeysException">
+		<annotation>
+			<documentation/>
+		</annotation>
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+				<element name="removeException" type="co:RemoveException"/>
+			</choice>
+		</complexType>
+	</element>
+</schema>

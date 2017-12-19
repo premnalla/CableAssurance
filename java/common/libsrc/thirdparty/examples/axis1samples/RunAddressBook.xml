@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="RunAddressBook" default="RunAddressBook" basedir=".">
+
+	<property name="axis.dist.libs" value="./WebContent/WEB-INF/lib" />
+	<property name="axis.dist.classes"
+		value="./WebContent/WEB-INF/classes" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${axis.dist.classes}" />
+	</path>
+
+	<target name="RunAddressBook">
+
+		<echo>${axis.dist.libs}</echo>
+		<echo>${basedir}</echo>
+
+		<java classname="samples.addr.Main" fork="yes">
+			<!-- 
+				<arg
+				value="-lhttp://localhost:8080/axis/servlet/AxisServlet" />
+				<arg value="-uuser1" />
+				<arg line="-wpass1 XXX" />
+			-->
+			<classpath>
+				<path refid="axis.classpath" />
+			</classpath>
+		</java>
+
+	</target>
+
+</project>

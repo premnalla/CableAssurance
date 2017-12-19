@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="UndeployGetQuote" default="UndeployGetQuote" basedir=".">
+
+	<property name="axis.dist.libs" value="./WebContent/WEB-INF/lib" />
+	<property name="axis.dist.classes"
+		value="./WebContent/WEB-INF/classes" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${axis.dist.classes}" />
+	</path>
+
+	<taskdef name="axis-admin"
+		classname="org.apache.axis.tools.ant.axis.AdminClientTask"
+		loaderref="axis">
+		<classpath refid="axis.classpath" />
+	</taskdef>
+
+	<target name="UndeployGetQuote">
+
+		<echo>${axis.dist.libs}</echo>
+		<echo>${basedir}</echo>
+
+		<axis-admin
+			xmlfile="${basedir}/formatting/stockquote/undeploy.wsdd" />
+
+	</target>
+
+</project>

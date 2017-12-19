@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.nds.com/wsdl/CableAssurance"
+	targetNamespace="http://www.nds.com/wsdl/CableAssurance"
+	xmlns:tns="http://www.nds.com/wsdl/CableAssurance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<import namespace="http://www.nds.com/wsdl/CableAssurance" location="CableAssurance.xsd"/>
+
+	<!-- message declns -->
+	<message name="empty" />
+
+	<message name="LocalSystemResponse">
+		<part name="name" type="tns:localSystemType" />
+	</message>
+
+	<message name="AggregateResponse">
+		<part name="name" type="tns:ArrayOfAggregateType" />
+	</message>
+
+	<message name="CmtsResponse">
+		<part name="name" type="tns:ArrayOfCmtsType" />
+	</message>
+
+	<portType name="LocalSystemPort">
+		<operation name="queryLocalSystem">
+			<input message="tns:empty" />
+			<output message="tns:LocalSystemResponse" />
+		</operation>
+		<operation name="queryChildAggregates">
+			<input message="tns:empty" />
+			<output message="tns:AggregateResponse" />
+		</operation>
+		<operation name="queryChildCmts">
+			<input message="tns:empty" />
+			<output message="tns:CmtsResponse" />
+		</operation>
+	</portType>
+
+	<!-- binding declns -->
+	<binding name="LocalSystemSOAPBinding" type="tns:LocalSystemPort">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="queryLocalSystem">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="queryChildAggregates">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="queryChildCmts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="http://www.nds.com/wsdl/CableAssurance"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+
+	<!-- service decln -->
+	<service name="LocalSystemService">
+		<port name="LocalSystemPort" binding="tns:LocalSystemSOAPBinding">
+			<soap:address
+				location="http://localhost:8080/axis/services/LocalSystem" />
+		</port>
+	</service>
+
+</definitions>
+

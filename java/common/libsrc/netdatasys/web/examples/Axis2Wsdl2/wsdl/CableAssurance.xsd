@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<xsd:schema targetNamespace="http://www.nds.com/wsdl/cableassurance/schema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://www.nds.com/wsdl/cableassurance/schema">
+
+	<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+
+	<xsd:simpleType name="systemTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="EnterpriseServer" />
+			<xsd:enumeration value="RegionServer" />
+			<xsd:enumeration value="MarketServer" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="localSystemType">
+		<xsd:all>
+			<xsd:element name="systemType" type="tns:systemTypeType" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="aggregateType">
+		<xsd:all>
+			<xsd:element name="aggregateName" type="xsd:string" />
+			<xsd:element name="aggregateType"
+				type="tns:localSystemType" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="cmtsType">
+		<xsd:all>
+			<xsd:element name="cmtsName" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfCmtsType">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:cmtsType[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfAggregateType">
+		<xsd:complexContent>
+			<xsd:restriction base="soapenc:Array">
+				<xsd:attribute ref="soapenc:arrayType"
+					wsdl:arrayType="tns:aggregateType[]" />
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>

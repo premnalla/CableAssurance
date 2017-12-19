@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+
+<definitions name="http://www.foo.com/ArrayOfComplexTypes"
+	targetNamespace="http://www.foo.com/ArrayOfComplexTypes"
+	xmlns:tns="http://www.foo.com/ArrayOfComplexTypes"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+	<!-- type defs -->
+	<types>
+
+		<xsd:schema
+			targetNamespace="http://www.foo.com/ArrayOfComplexTypes"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+
+			<import
+				namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+
+			<xsd:simpleType name="stateType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="TX" />
+					<xsd:enumeration value="IN" />
+					<xsd:enumeration value="OH" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:complexType name="phone">
+				<xsd:all>
+					<xsd:element name="areaCode" type="xsd:int" />
+					<xsd:element name="exchange" type="xsd:string" />
+					<xsd:element name="number" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="address">
+				<xsd:all>
+					<xsd:element name="streetNum" type="xsd:int" />
+					<xsd:element name="streetName" type="xsd:string" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="state" type="tns:stateType" />
+					<xsd:element name="zip" type="xsd:int" />
+					<xsd:element name="phoneNumber" type="tns:phone" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="phoneNumbers">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:phone[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+
+		</xsd:schema>
+
+	</types>
+
+
+</definitions>
+

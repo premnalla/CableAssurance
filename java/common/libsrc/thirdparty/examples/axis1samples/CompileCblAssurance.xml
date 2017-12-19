@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="CableAssuranceService" default="CableAssuranceLocSystem" basedir=".">
+
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+	<property name="generated.dir" value="./generated/src" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="wsdl2java"
+		classname="org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask"
+		loaderref="axis">
+		<classpath refid="axis.classpath" />
+	</taskdef>
+
+	<target name="CableAssuranceLocSystem">
+
+		<echo>${axis.dist.dir}</echo>
+		
+		<delete dir="./generated/src/com/nds/www/wsdl/CableAssurance">
+		</delete>
+
+		<wsdl2java
+			url="./services/web/wsdl/CableAssurance.wsdl"
+			output="${generated.dir}" deployscope="session" serverSide="true"
+			skeletonDeploy="false" noimports="false" verbose="true"
+			typeMappingVersion="1.1" testcase="true">
+			<mapping namespace="urn:AddressFinder"
+				package="samples.addr" />
+		</wsdl2java>
+
+	</target>
+
+</project>

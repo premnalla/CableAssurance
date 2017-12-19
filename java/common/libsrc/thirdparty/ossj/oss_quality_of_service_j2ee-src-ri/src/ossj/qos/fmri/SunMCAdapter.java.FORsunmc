@@ -1,0 +1,29 @@
+package com.motorola.fmri;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+import java.util.Properties;
+import javax.oss.fm.monitor.*;
+import javax.oss.*;
+
+public interface SunMCAdapter extends Remote {
+// for test 	
+  public String getVersion()
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+
+  public AlarmValue[] queryAlarmList(QueryValue[] query)
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+  public  AlarmCountsValue queryAlarmCounts(QueryValue[] query) 
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+  public   AlarmKeyResult AcknowledgeAlarms(String NotId, String ackUserId, String ackSystemId)  
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+  public   AlarmKeyResult UnacknowledgeAlarms(String NotId, String ackUserId, String ackSystemId)  
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+  public   AlarmKeyResult CommentAlarms(String NotId, String ackUserId,
+		String commentText, String ackSystemId)  
+  	throws javax.oss.IllegalArgumentException, java.rmi.RemoteException;
+
+}
+
+

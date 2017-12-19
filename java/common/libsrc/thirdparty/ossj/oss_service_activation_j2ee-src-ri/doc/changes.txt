@@ -1,0 +1,38 @@
+                    OSS through Java - Service Activation API
+                                RI Change History
+---------============================================================---------
+
+------------------------------------------------------------------------------
+------- RI 1.0.1 - January 2005 ----------------------------------------------
+------------------------------------------------------------------------------
+
+Development:
+- Re-arrange directories structure
+- Create compilation/configuration and deployment script using asant
+
+Deployment:
+- Create deployment descriptor for J2EE SDK
+
+Compatibility:
+- Remove none portable or application server specific code
+- Change the interfaces of the CMP Beans to local interfaces
+- Remove code for class loader handling in OrderScheduler and SimpleClient
+  (client now needs implementation classes on classpath)
+- Changed the creation of the naming context in the OrderScheduler
+
+Bugs:
+- Implement workaround regarding bug ID 4941119: 
+  Change the name of create/ejbPostCreate Method (error reported by the AVK)
+- Change resources names for more consistencies
+- Fix all errors and warning reported by the Static part of the J2EE AVK
+- Change OrderEventPropertyDescriptorImpl to implement Serializable instead 
+  of Remote, to be able to transfer between the Servlet and the ejb in a 
+  serializable form.
+- Use Local interface/ejb when possible instead of the remote one.
+- Change the JmsSender method parameters to use only  parameter that are 
+  Serializable by the container. So the Order have been split into: 
+  String (clientID), OrderKey (key)
+
+Enhancement:
+- Add hashcode and equals methods to OssjXmlMessage class
+- JvtToXvtEventBridgeBean: clear resources when resources not anymore used.

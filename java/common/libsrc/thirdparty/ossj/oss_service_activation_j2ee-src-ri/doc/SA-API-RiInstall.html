@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=ISO-8859-1">
+  <title>OSS Service Activation API v 1.0.1, Reference Implementation</title>
+</head>
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+ alink="#333366" link="#594fbf" vlink="#1005fb">
+<table style="color: rgb(255, 255, 255);" border="0" cellspacing="4"
+ width="100%">
+  <tbody>
+    <tr>
+      <td align="right" bgcolor="#594fbf" valign="top"><b>OSS/J
+Reference Implementation</b></td>
+    </tr>
+  </tbody>
+</table>
+<blockquote>
+  <h1><b>OSS/J
+Reference Implementation </b></h1>
+  <p>This document describes how
+to utilize the OSS/J Reference Implementation (RI) in conjunction
+with the Application Server.</p>
+  <p>This application document
+contains the following sections: </p>
+  <ul>
+    <li><a href="#Overview">Overview</a> </li>
+    <li><a href="#Compiling%20and%20Assembling%20the%20Application">Compiling
+and
+Assembling the OSS/J
+RI&nbsp;</a> </li>
+    <li><a href="#Deploying_the_RI_">Deploying the
+RI</a></li>
+    <li><a href="#Troubleshooting">Troubleshooting</a></li>
+    <p> </p>
+  </ul>
+  <h2><a name="Overview"></a>Overview </h2>
+  <hr noshade="noshade" size="2"> <br>
+  <p>The following
+instructions describe how to assemble, deploy
+to the
+Application Server, and how to access the EJB.&nbsp; </p>
+  <p>The EJB uses
+a relational database, and the following
+instructions describe how to register the JDBC resources.<br>
+  </p>
+  <p>The following
+instructions describe also how to configure the
+JMS resources used by the RI.<br>
+  </p>
+  <h3> Setting up the
+environment </h3>
+  <p> In order to
+successfully deploy
+and run the RI, Database resources (PointBase) needs to be setup
+with the Application Server. The Application Server will automatically
+manage JMS broker. </p>
+  <p>If you want
+to run the RI with the Oracle database, please
+refer to (oracle sample in the j2EE sdk sample package) for
+configuration steps.<br>
+  </p>
+  <h2><a name="Compiling and Assembling the Application"></a>Compiling
+and
+Assembling the
+Application </h2>
+  <hr noshade="noshade" size="2"> <br>
+  <p>This Command Line Based
+Compilation and Assembly procedure
+describes how to assemble and compile the application using a Command
+Line
+Interface
+(CLI).<br>
+  </p>
+  <table style="width: 85%; text-align: left;" border="1"
+ cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr>
+        <td
+ style="background-color: rgb(255, 255, 204); vertical-align: top;">
+        <p style="font-weight: bold;">Prerequisite:<br>
+        </p>
+        <ul>
+          <li>Add &lt;<i>j2ee
+sdk 1.4 install_dir</i>&gt;<code>/bin</code> to your path</li>
+          <li>copy the <code>common.properties</code> from &lt;<i>j2ee
+sdk 1.4 install_dir</i>&gt;<code>/samples</code> to &lt;<i>ri&nbsp;install_dir</i>&gt;</li>
+        </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Command Line
+Based
+Compilation and Assembly <br>
+  </h3>
+  <p> <b>To rebuild the
+entire
+application from scratch: <br>
+  </b></p>
+  <ol>
+    <li>
+      <p>Compile and Assemble</p>
+    </li>
+    <ul>
+      <li>
+        <p>Execute
+the "<code>asant compile
+ear</code>" command
+under &lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/src/</code></p>
+      </li>
+      <li>
+        <p> The
+default target core
+is executed to rebuild the .ear file. </p>
+      </li>
+      <li>
+        <p>The command: "<code>asant
+compile ear</code>" can also be used.</p>
+      </li>
+    </ul>
+    <li>
+      <p>Deploy the application.</p>
+    </li>
+    <ul>
+      <li>
+        <p>When
+you have
+re-created the RI from scratch, proceed to <a href="#Deploying_the_RI_">Deploying
+the application</a>.</p>
+      </li>
+    </ul>
+    <li>
+      <p>Clean the RI project area.</p>
+    </li>
+    <ul>
+      <li>
+        <p> Execute
+the "<code>asant clean</code>"
+command
+to
+remove the RI's assemble and build directories.<br>
+        </p>
+      </li>
+    </ul>
+  </ol>
+</blockquote>
+<blockquote>
+  <h2><a name="Deploying_the_RI_"></a>Deploying
+the RI </h2>
+  <hr noshade="noshade" size="2"> <br>
+  <p>Command Line
+Based Deployment
+describes how to manually register the application in a Application
+Server using a Command Line Interface (CLI). This is the fastest means
+of deploying the application.</p>
+  <p><span style="font-weight: bold;">NOTE</span>: You must start
+and configure the Database. </p>
+  <hr noshade="noshade" size="2">
+  <h3>Starting PointBase</h3>
+  <p>The database server can be
+easily started by performing one of the
+following actions:</p>
+  <p style="font-weight: bold;">Windows Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with
+the application server: Start -&gt;
+Programs -&gt; Sun Microsystems -&gt; J2EE 1.4 SDK -&gt; Start PointBase</p>
+    <p>PointBase downloaded and
+installed separately: <br>
+&lt;<span style="font-style: italic;">pointbase_install_dir</span>&gt;<code>\tools\serveroption\startserver.bat</code></p>
+  </blockquote>
+  <p style="font-weight: bold;">UNIX Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the
+application server: <br>
+&lt;<span style="font-style: italic;">j2ee
+sdk 1.4 install_dir</span>&gt;<code>/pointbase/tools/serveroption/startserver.sh</code></p>
+    <p>PointBase downloaded and installed
+separately: <br>
+&lt;<span style="font-style: italic;">pointbase_install_dir</span>&gt;<code>/tools/serveroption/startserver.sh</code></p>
+  </blockquote>
+  <p>Alternatively, if you copied the
+PointBase Server files to your
+own directory, execute the startserver
+script from that location.</p>
+  <p>Once you execute the startup script,
+you will see the following
+text in either a command window or at the UNIX terminal prompt: </p>
+  <blockquote> <code>Server started, listening on port 9092, display
+level: 0 ...<br>
+&gt;</code> </blockquote>
+  <table
+ style="background-color: rgb(255, 255, 204); margin-left: auto; margin-right: auto; width: 85%; text-align: left;"
+ border="1" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;">
+        <p><b>Don't Need A Console Window?</b> </p>
+        <p>On UNIX, if you want to
+run the PointBase server in the background, you can
+edit the startserver.sh
+script and place the option "/noconsole"
+at the end of the command line. </p>
+        <blockquote>
+          <p><code>.../java
+-classpath ./lib/pbembedded.jar;./lib/pbtools.jar
+com.pointbase.net.netServer
+/port:9092 <span style="font-weight: bold;">/noconsole</span></code></p>
+        </blockquote>
+        <p>The jar file pbembedded.jar
+and pbtools.jar are for
+PointBase 4.5 installation. You may have to use different jar file
+depending upon your PointBase installation. </p>
+        <p>Use "&amp;"
+at the end of the StartServer.sh
+command to run the server in the background.</p>
+        <blockquote>
+          <p><code><span style="font-weight: bold;"> ./startserver.sh
+&amp;</span><br>
+[1] 26418</code> </p>
+        </blockquote>
+        <p>If you want to set traces on the
+Pointbase server, you can
+edit the startserver.sh script and place the option "/d:3" at the end
+of the command line:</p>
+        <blockquote>
+          <p><code>.../java
+-classpath ./lib/pbembedded.jar;./lib/pbtools.jar
+com.pointbase.net.netServer
+/port:9092 <span style="font-weight: bold;">/d:3</span></code><br>
+or <br>
+          <code style="font-weight: bold;">./startserver.sh
+/d:3 &amp;</code><br>
+          </p>
+        </blockquote>
+        <p>See the PointBase server
+documentation in the following
+location for more information on starting and stopping the server:</p>
+        <blockquote>
+          <p>&lt;<span style="font-style: italic;">j2ee
+sdk 1.4 install_dir</span>&gt;<code>/pointbase/docs/</code> </p>
+        </blockquote>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p><br>
+  </p>
+  <p>You can now deploy&nbsp; the application.</p>
+  <h3><a name="STOP"></a>Stopping PointBase</h3>
+  <p>To stop the server, enter <code>quit </code>at the &gt; prompt.<br>
+  <br>
+  </p>
+  <h3>Executing SQL Statements with
+PointBase</h3>
+  <p>The easiest means of performing
+these tasks is to use the
+PointBase Console GUI to execute SQL statements found in the .sql files
+within the <code>src/sql/ </code>directory.</p>
+  <p>To start the Console, follow these
+instructions:</p>
+  <p style="font-weight: bold;">Windows Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the
+application server: Execute <br>
+&lt;<span style="font-style: italic;">j2ee
+sdk 1.4 install_dir</span>&gt;<code>\pointbase\tools\serveroption\startconsole.bat</code></p>
+    <p>PointBase downloaded and installed
+separately: <br>
+&lt;<span style="font-style: italic;">pointbase_install_dir</span>&gt;<code>\tools\serveroption\startconsole.bat</code></p>
+  </blockquote>
+  <p style="font-weight: bold;">UNIX Platforms:</p>
+  <blockquote>
+    <p>PointBase installed with the
+application server: Execute <br>
+&lt;<span style="font-style: italic;">j2ee sdk 1.4 install_dir</span>&gt;<code>/pointbase/tools/serveroption/startconsole.sh</code></p>
+    <p>PointBase downloaded and installed
+separately: <br>
+&lt;<span style="font-style: italic;">pointbase_install_dir</span>&gt;<code>/tools/serveroption/startconsole.sh</code></p>
+  </blockquote>
+  <p>The Console appears.</p>
+  <p><span style="font-weight: bold;">NOTE</span>: To connect to the
+database,
+select DBA -&gt; Connect to
+Database. (Note: Default user name and password for Pointbase is
+PBPUBLIC / PBPUBLIC)</p>
+  <p>Enter the following information for
+the applications database
+installed
+with the application server:</p>
+  <ul>
+    <li>Driver: use the default
+value as provided.</li>
+    <li> URL: <code>jdbc:pointbase:server://localhost/pointbase</code></li>
+    <li>check
+the box "Create new Data base", if the database does not exist already
+from previous installations<br>
+    </li>
+    <li> <span style="font-weight: bold;">User </span>and <span
+ style="font-weight: bold;">Password</span>:
+use values as appropriate
+for the sample of interest:</li>
+  </ul>
+  <table align="center" border="1" cellpadding="3" width="75%">
+    <tbody>
+      <tr bgcolor="#cccccc">
+        <td>Application</td>
+        <td>User</td>
+        <td>Password</td>
+      </tr>
+      <tr>
+        <td>OSS/J RI</td>
+        <td>PBPUBLIC</td>
+        <td>PBPUBLIC</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Once connected to the database, you
+can enter SQL statements in
+the top portion of the window and the results can be viewed in the
+lower portion. SQL statements can be entered individually or as a
+sequence of statements from a file. </p>
+  <p>Select File -&gt; Open and
+open &lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/src/sql/pointbase/pointbase.create.sql</code>
+file,
+as
+provided with the OSS/J RI. <br>
+  </p>
+  <p><span style="font-weight: bold;">NOTE:</span> If a
+single
+statement has to be
+executed, then enter the SQL
+statement and select the menu option SQL -&gt; Execute to
+execute the statement.</p>
+  <p>If a sequence of statements is to be
+executed, use the menu option SQL -&gt; Execute all. </p>
+  <h3> Prerequisites to
+deployment. </h3>
+  <hr noshade="noshade" size="2">
+  <p>Start the application Server using the command "<code>asadmin
+start-domain</code>" </p>
+  <h3>Command
+Line
+Based Deployment </h3>
+</blockquote>
+<blockquote>
+  <p> Since a complete .ear file is
+supplied, the fastest means of setting up the application is to use the
+command line utilities as described in this section. </p>
+  <p> The pre-built ossj_sa_ri.ear file is an Enterprise Archive file
+that contains
+the Java Archive (JAR) files of the application.<br>
+  </p>
+  <p><span style="font-weight: bold;"> Deploy using
+the asant
+script</span>:</p>
+  <ol type="1">
+    <li value="1">
+      <p>Go to the
+src directory: &lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/src</code></p>
+    </li>
+    <li value="2">
+      <p>Execute the
+"<code>asant deploy</code>" command. This will configure and deploy the
+RI
+to
+the Application server.</p>
+    </li>
+  </ol>
+  <p><span style="font-weight: bold;">NOTE</span>: For re-deployment
+the following command could
+be used independently<br>
+  </p>
+  <table align="center" border="1" cellpadding="5" width="71%">
+    <tbody>
+      <tr bgcolor="#cccccc">
+        <td width="12%">Target</td>
+        <td width="88%">Function</td>
+      </tr>
+      <tr>
+        <td width="12%">compile</td>
+        <td width="88%">Compiles all Java source code.</td>
+      </tr>
+      <tr>
+        <td width="12%">war</td>
+        <td width="88%">Assembles the WAR file in
+&lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/assemble/war/</code>.</td>
+      </tr>
+      <tr>
+        <td width="12%">ear</td>
+        <td width="88%">Assembles the EAR file in
+&lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/assemble/ear/</code>.</td>
+      </tr>
+      <tr>
+        <td width="12%">core
+(default)</td>
+        <td width="88%">Compiles all sources, builds stubs/skeletons
+and assembles EJB[tm] JAR, WAR and EAR files. This is the
+default target for all build.xml
+files shipped in the application server.</td>
+      </tr>
+      <tr>
+        <td width="12%">javadocs</td>
+        <td width="88%">Creates Java docs in
+&lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/javadocs</code></td>
+      </tr>
+      <tr>
+        <td width="12%">all</td>
+        <td width="88%">Builds both core and javadocs, verifies,
+registers resources and deploys app.</td>
+      </tr>
+      <tr>
+        <td height="18" width="12%">deploy</td>
+        <td height="18" width="88%">Registers resources, deploys
+app, but does not install Javadocs.</td>
+      </tr>
+      <tr>
+        <td width="12%">deploy_ear</td>
+        <td width="88%">Application deployment only. No resource
+registration.</td>
+      </tr>
+      <tr>
+        <td valign="top">verify<br>
+        </td>
+        <td valign="top">Verifies application binaries.<br>
+        </td>
+      </tr>
+      <tr>
+        <td width="12%">undeploy</td>
+        <td width="88%">Removes the deployed application from
+application server and remove resources.</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">undeploy_ear<br>
+        </td>
+        <td style="vertical-align: top;">Removes the deployed
+application from application server</td>
+      </tr>
+      <tr>
+        <td width="12%">clean</td>
+        <td width="88%">Removes &lt;<span style="font-style: italic;">appname</span>&gt;/build/
+and &lt;<span style="font-style: italic;">appname</span>&gt;<code>/assemble/</code>
+content.</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">setup<br>
+        </td>
+        <td style="vertical-align: top;">Configure the Application
+server (create JDBC and JMS resources)<br>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">unsetup<br>
+        </td>
+        <td style="vertical-align: top;">Remove resources from the
+Application server (delete JDBC and JMS resources)</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+<blockquote>
+  <h3>Verifying Deployment</h3>
+  <hr noshade="noshade" size="2">
+  <p>As an optional step, you
+can use the Application Server
+Administration Tool to verify that the application has been registered.
+  </p>
+  <p>To verify the
+registration
+of the application: <br>
+  </p>
+  <ol type="1">
+    <li>
+      <p>Execute the
+asadmin command to look at applications deployed with a server
+instance. You see
+ossj_sa_ri as one
+of the listed applications.</p>
+      <ul>
+        <li value="1">
+          <p><code>asadmin
+list-components&nbsp;
+--user &lt;<span style="font-style: italic;">user-name</span>&gt;
+--password &lt;<span style="font-style: italic;">password</span>&gt;&nbsp;</code></p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Or navigate the Admin tool GUI to Applications--&gt;Enterprise
+Applications.&nbsp;</p>
+      <ul>
+        <li value="1">
+          <p>Click Enterprise
+Applications on the
+left frame menu to display a list of applications deployed on the
+server.</p>
+        </li>
+      </ul>
+    </li>
+  </ol>
+  <h3>Use The Generic Client</h3>
+  <hr style="width: 100%; height: 2px;">
+  <p>The generic client is a application, which only uses the standard
+interfaces to operate with the deployed service activation application.
+In order to use the application: </p>
+  <ul>
+    <li value="1">
+      <p>Update the properties in the &lt;<span
+ style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/scripts/env_j2eesdk.sh</code>
+(or <code>.cmd</code> on Windows) file.</p>
+    </li>
+    <li value="1">
+      <p>change directory to &lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/scripts</code>
+and execute the <code>run_client_j2eesdk</code> script (either .cmd or
+.sh).</p>
+    </li>
+  </ul>
+  <p><span style="font-weight: bold;">NOTE: </span>The client was
+first developed as a tool during development of the RI, not all
+functions may be correctly implemented or implemented at all. But since
+the ri package comes with the source code, this might be a good
+oppertunity to learn using the API.<br>
+  </p>
+  <h3> Generating
+Javadocs <br>
+  </h3>
+  <hr noshade="noshade" size="2">
+  <p>To understand&nbsp;
+application source code better, you can
+refer to the related javadocs. To generate javadocs, run the command<br>
+  </p>
+  <ul>
+    <li>
+      <p><code>asant javadocs</code></p>
+    </li>
+  </ul>
+  <p>or </p>
+  <ul>
+    <li>
+      <p><code>asant all</code></p>
+    </li>
+  </ul>
+  <p>After
+javadocs are
+generated, you can access them at &lt;<span style="font-style: italic;">ri&nbsp;install_dir</span>&gt;<code>/javadocs/index.html</code></p>
+  <h2><a name="Troubleshooting"></a>Troubleshooting </h2>
+  <hr noshade="noshade" size="2">
+  <p>If you encounter problems
+when running the application,
+review the log files at &lt;<span style="font-style: italic;">j2ee sdk
+1.4
+install-dir</span>&gt;<code>/domains/</code>&lt;<span
+ style="font-style: italic;">domain</span>&gt;<code>/logs/server.log</code>
+to see what went wrong. </p>
+  <p> Make certain
+that you run "<code>asant
+undeploy"</code> before
+redeploying this application to make sure that all modules are
+undeployed
+and the resources are disabled. </p>
+</blockquote>
+<blockquote> <br>
+  <hr noshade="noshade" size="1"><!-- start copyright -->Copyright
+&copy;
+2003 <a href="http://sun.com">Sun Microsystems, Inc.</a> All rights
+reserved.<!--  end copyright  --></blockquote>
+</body>
+</html>

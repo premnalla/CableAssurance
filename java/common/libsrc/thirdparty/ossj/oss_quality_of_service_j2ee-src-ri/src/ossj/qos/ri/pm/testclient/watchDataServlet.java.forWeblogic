@@ -1,0 +1,193 @@
+/* $Id: watchDataServlet.java.forWeblogic,v 1.1.1.1 2006/04/12 14:35:38 prem Exp $
+ *
+ */
+
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import javax.oss.*;
+import javax.oss.fm.monitor.*;
+import javax.oss.pm.measurement.*;
+import javax.oss.pm.threshold.*;
+
+
+/**
+ * The simplest possible servlet.
+ *
+ * @author James Duncan Davidson
+ */
+
+public class watchDataServlet  extends HttpServlet {
+
+
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response)
+        throws IOException, ServletException
+    {
+
+        String jobName = request.getParameter("jobName");
+        String objectName = request.getParameter("objectName");
+
+
+        HashMap serverityMap = new HashMap();
+        serverityMap.put(new Integer( PerceivedSeverity.CRITICAL), new String( "CRITICAL"));
+        serverityMap.put(new Integer( PerceivedSeverity.MINOR), new String( "MINOR" ));
+        serverityMap.put(new Integer( PerceivedSeverity.WARNING), new String( "WARNING" ) );
+        serverityMap.put(new Integer( PerceivedSeverity.INDETERMINATE), new String( "INDETERMINATE" ) );
+        serverityMap.put(new Integer( PerceivedSeverity.MAJOR), new String(  "MAJOR"  ));
+        serverityMap.put(new Integer( PerceivedSeverity.CLEARED),new String( "CLEARED" ));
+
+
+        String observableObjectClassName;
+        int index = objectName.indexOf(",");
+        observableObjectClassName = objectName.substring(index+1);
+        index = observableObjectClassName.indexOf("=");
+        observableObjectClassName = observableObjectClassName.substring(0,index);
+        observableObjectClassName = observableObjectClassName.trim();
+
+
+        IrenePmClient pmClient  = IrenePmClient.getInstance();
+        System.out.println("before getInstance()");
+        ThresholdClient thresholdClient = ThresholdClient.getInstance();
+        System.out.println("after getInstance");
+        System.out.println("thresholdClient: " + thresholdClient);
+
+        FmClient fmClient = FmClient.getInstance("/net/rattler/export/d62/ccao/ossws/qosfmri/script/fmClient.properties");
+        AlarmValue[] almvs = null;
+        try {
+            almvs = fmClient.QueryAllAlarms();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+         PerformanceMonitorValue perfValue = pmClient.findMonitorJobByName(jobName);
+         PerformanceMonitorKey perfKey = perfValue.getPerformanceMonitorKey();
+         String primaryKey = perfKey.getPerformanceMonitorPrimaryKey();
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        try {
+            ArrayList observableObjectAttribute = thresholdClient.getObservableObjectAttributes( observableObjectClassName );
+       
+            pmClient.getReportData(jobName);
+
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>really create a job </title>");
+            out.println("</head>");
+            out.println("<body>");
+
+            out.println("<form method=\"POST\">" );
+            String currentData = pmClient.currentData;
+            System.out.println("currentData: " + currentData);
+            PerformanceReportHandler.createDocument(currentData);
+            PerformanceReportHandler.getMeasurementValue(objectName);
+
+                out.println("<BGCOLOR=\"#FDF5E6\">\n" +
+                "<H1 ALIGN=CENTER>" + "This is the monitor DATA:" + "</H1>\n" +
+                "<TABLE BORDER=1 ALIGN=CENTER>\n" +
+                "<TR BGCOLOR=\"#FFAD00\">\n" +
+                "<TH>Parameter Name<TH>Parameter Value(s)<TH>Status<TH>Threshold</TR>");
+
+                out.println("<tr><td>Object</td>");
+                out.println("<td>"+objectName+"</td>");
+                out.println("<td>" + "---" +"</td>");
+                out.println("<td>" + "---" +"</td>"); 
+                out.println("</tr>");
+
+               System.out.println("PerformanceReportHandler lenght: " + PerformanceReportHandler.getItemName().length);
+                
+                for ( int i = 0; i < PerformanceReportHandler.getItemName().length  ; i++) {
+                    
+                     out.println("<tr>");
+                     out.println("<td>" + PerformanceReportHandler.getItemName()[i] + "</td>");   
+                     out.println("<td>" + PerformanceReportHandler.getItemValue()[i] + "</td>");
+                     String status ="--" ;
+                     PerformanceAttributeDescriptor descriptor = null;
+                     System.out.println("wrx--one");
+                     System.out.println("wrx--one,i" + i);
+                     for (int m=0;m<observableObjectAttribute.size();m++) {
+                         System.out.println("wrx--one,m" + m);
+                         if( ((((PerformanceAttributeDescriptor)observableObjectAttribute.get(m)).getName()).trim()).equals(PerformanceReportHandler.getItemName()[i].trim())) {
+                             descriptor = (PerformanceAttributeDescriptor)observableObjectAttribute.get(m);
+                             break;
+                          }
+                     }
+                  
+                     System.out.println("wrx--two");
+                     if( descriptor != null) {
+                     System.out.println("wrx--three");
+
+                     if(descriptor.getType()==PerformanceAttributeDescriptor.REAL || descriptor.getType()==PerformanceAttributeDescriptor.INTEGER) {
+
+
+                      System.out.println("wrx--four");
+                     if(almvs !=null ) {
+                     System.out.println("wrx--five");
+                     for(int j = 0; j < almvs.length; j++) {
+                         System.out.println("wrx--six");
+                         System.out.println("wrx--" + j);
+                         System.out.println("almvs[j].getManagedObjectInstance()" + almvs[j].getManagedObjectInstance());
+                         System.out.println("almvs[j].getMonitoredAttributes() " + almvs[j].getMonitoredAttributes());
+                         AttributeValue[] a = almvs[j].getMonitoredAttributes();
+                         System.out.println("a" + a);
+                         System.out.println("a lenght" +  a.length);
+                         String name = a[0].getAttributeName();
+                         System.out.println("name: " + name);
+                         System.out.println("almvs[j].getMonitoredAttributes() lenght" + (almvs[j].getMonitoredAttributes()).length);
+                        
+                         System.out.println("alarm attribue anme: " + (almvs[j].getMonitoredAttributes())[0].getAttributeName());
+                         if( (almvs[j].getManagedObjectInstance()).equals(primaryKey ) &&  ((almvs[j].getMonitoredAttributes())[0].getAttributeName()).equals(PerformanceReportHandler.getItemName()[i]) ) {
+                             System.out.println("wrx--find the alarm");
+                             status = (String)serverityMap.get(new Integer(almvs[j].getPerceivedSeverity()));
+                             System.out.println("after,wrx--find the alarm");
+                             break;
+                         }
+                     }
+                     }
+                     System.out.println("wrx--seven");
+                     if(status.length() > 0)
+                         out.println("<td>" + status + " </td>"); 
+
+                    
+
+
+                     out.println("<td>");
+                     out.println("<a href=\"setThresholdPageServlet?jobName=" + jobName + "&objectName=" + objectName + "&attName=" +  PerformanceReportHandler.getItemName()[i] +  "\">set the threshold</a>"); 
+                     out.println("</td");
+                     } else {
+                         out.println("<td>" + "---" + "</td>");
+                         out.println("<td>" + "---" + "</td>");
+                     }
+                     }
+                     out.println("</tr>");
+
+               }
+
+               out.println("</TABLE>");
+               out.println("</form> </body> </html>");
+
+        } catch ( Exception e ) {
+            out.println("<html>");
+            out.println("failed to get the data ");
+            out.println("</html>");
+
+            System.out.println("exception="+e);
+        }
+
+
+    }
+    
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+                       throws ServletException, IOException {
+        doGet(req, res);
+    }
+
+}
+
+
+

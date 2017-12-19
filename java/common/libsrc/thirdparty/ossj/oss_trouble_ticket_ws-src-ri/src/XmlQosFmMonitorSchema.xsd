@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2001 Cisco Systems, Inc., Ericsson Radio Systems AB., Motorola, Inc.,
+NEC Corporation, Nokia Networks Oy, Nortel Networks Limited, Sun Microsystems, Inc.,
+Telcordia Technologies, Inc., Digital Fairway Corporation, Orchestream Holdings plc,
+BEA Systems, Inc. All rights reserved. Use is subject to license terms. -->
+<!--
+DOCUMENTATION IS PROVIDED "AS IS" AND ALL EXPRESS OR IMPLIED
+CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED
+WARRANTY OF MERCHANTABILITY, FITNESS FOR FOR A PARTICULAR PURPOSE OR
+NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT THAT SUCH
+DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:measurement="http://java.sun.com/products/oss/xml/QualityOfService/PM/Measurement" xmlns:fm="http://java.sun.com/products/oss/xml/QualityOfService/FM/Monitor" xmlns:threshold="http://java.sun.com/products/oss/xml/QualityOfService/PM/Threshold" xmlns:irp="http://java.sun.com/products/oss/xml/Common/Util" xmlns:co="http://java.sun.com/products/oss/xml/Common" targetNamespace="http://java.sun.com/products/oss/xml/QualityOfService/FM/Monitor" elementFormDefault="qualified">
+	<import namespace="http://java.sun.com/products/oss/xml/Common" schemaLocation="XmlCommonSchema.xsd"/>
+	<import namespace="http://java.sun.com/products/oss/xml/Common/Util" schemaLocation="XmlCommonUtilSchema.xsd"/>
+	<import namespace="http://java.sun.com/products/oss/xml/QualityOfService/PM/Threshold" schemaLocation="XmlQosPmThresholdSchema.xsd"/>
+	<import namespace="http://java.sun.com/products/oss/xml/QualityOfService/PM/Measurement" schemaLocation="XmlQosPmMeasurementSchema.xsd"/>
+	<!-- Value type javax.oss.fm.monitor.AlarmAckState -->
+	<element name="baseAlarmAckState" type="string" nillable="true"/>
+	<element name="alarmAckState" type="fm:AlarmAckState" substitutionGroup="fm:baseAlarmAckState"/>
+	<simpleType name="AlarmAckState">
+		<restriction base="string">
+			<enumeration value="ACKNOWLEDGED"/>
+			<enumeration value="UNACKNOWLEDGED"/>
+		</restriction>
+	</simpleType>  
+	<!-- Value type javax.oss.fm.monitor.AlarmCountsValue -->
+	<complexType name="AlarmCountsValue">
+		<sequence>
+			<element name="criticalCount" type="int"/>
+			<element name="majorCount" type="int"/>
+			<element name="minorCount" type="int"/>
+			<element name="warningCount" type="int"/>
+			<element name="indeterminateCount" type="int"/>
+			<element name="clearedCount" type="int"/>
+		</sequence>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.AlarmEvent -->
+	<element name="alarmEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:AlarmEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="AlarmEventType">
+		<complexContent>
+			<extension base="irp:IRPEventType">
+				<sequence>
+					<element name="alarmType" type="string" nillable="false"/>
+					<element name="alarmKey" type="fm:AlarmKey" nillable="false"/>
+					<element ref="fm:basePerceivedAlarmSeverity"/>
+					<element ref="fm:baseProbableAlarmCause"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.AlarmEventPropertyDescriptor -->
+	<complexType name="AlarmEventPropertyDescriptor" abstract="true">
+		<complexContent>
+			<extension base="irp:IRPEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.AlarmKey -->
+	<complexType name="AlarmKey">
+		<annotation>
+			<documentation>The AlarmKey uniquely identifies an Alarm.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="co:ManagedEntityKey">
+				<sequence>
+					<element name="alarmPrimaryKey" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfAlarmKey">
+		<annotation>
+			<documentation>
+This is a representation of an AlarmKey array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:AlarmKey" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.AlarmKeyResult -->
+	<complexType name="AlarmKeyResult">
+		<complexContent>
+			<extension base="co:ManagedEntityKeyResult">
+				<sequence>
+					<element name="alarmKey" type="fm:AlarmKey" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfAlarmKeyResult">
+		<annotation>
+			<documentation>
+This is a representation of an AlarmKeyResult array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:AlarmKeyResult" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Enum type javax.oss.fm.monitor.AlarmType -->
+	<element name="baseAlarmType" type="string" nillable="true"/>
+	<element name="alarmType" type="fm:AlarmType" substitutionGroup="fm:baseAlarmType"/>
+	<simpleType name="AlarmType">
+		<restriction base="string">
+			<enumeration value="CommunicationsAlarm"/>
+			<enumeration value="ProcessingErrorAlarm"/>
+			<enumeration value="EnvironmentalAlarm"/>
+			<enumeration value="QualityOfServiceAlarm"/>
+			<enumeration value="EquipmentAlarm"/>
+			<enumeration value="IntegrityViolation"/>
+			<enumeration value="SecurityViolation"/>
+			<enumeration value="TimeDomainViolation"/>
+			<enumeration value="OperationalViolation"/>
+			<enumeration value="PhysicalViolation"/>
+		</restriction>
+	</simpleType>
+	<!-- Value type javax.oss.fm.monitor.AlarmValue -->
+	<complexType name="AlarmValue">
+		<complexContent>
+			<extension base="co:ManagedEntityValue">
+				<sequence>
+					<element name="alarmRaisedTime" type="dateTime" nillable="true" minOccurs="0"/>
+					<element name="managedObjectClass" type="string" nillable="true" minOccurs="0"/>
+					<element name="managedObjectInstance" type="string" nillable="true" minOccurs="0"/>
+					<element name="systemDN" type="string" nillable="true" minOccurs="0"/>
+					<element ref="fm:baseAlarmType" minOccurs="0"/>
+					<element name="alarmKey" type="fm:AlarmKey" nillable="true" minOccurs="0"/>
+					<element name="notificationId" type="string" nillable="true" minOccurs="0"/>
+					<element ref="fm:baseProbableAlarmCause" minOccurs="0"/>
+					<element ref="fm:basePerceivedAlarmSeverity" minOccurs="0"/>
+					<element name="specificProblem" type="string" nillable="true" minOccurs="0"/>
+					<element name="correlatedNotifications" type="fm:ArrayOfCorrelatedNotificationValue" nillable="true" minOccurs="0"/>
+					<element name="backedUpStatus" type="boolean" nillable="true" minOccurs="0"/>
+					<element name="backUpObject" type="string" nillable="true" minOccurs="0"/>
+					<element ref="fm:baseTrendIndicationType" minOccurs="0"/>
+					<element name="thresholdInfo" type="fm:ThresholdInfoType" nillable="true" minOccurs="0"/>
+					<element name="attributeChanges" type="fm:ArrayOfAttributeValueChange" nillable="true" minOccurs="0"/>
+					<element name="monitoredAttributes" type="fm:ArrayOfAttributeValue" nillable="true" minOccurs="0"/>
+					<element name="proposedRepairActions" type="string" nillable="true" minOccurs="0"/>
+					<element name="additionalText" type="string" nillable="true" minOccurs="0"/>
+					<element name="ackUserId" type="string" nillable="true" minOccurs="0"/>
+					<element name="ackTime" type="dateTime" nillable="true" minOccurs="0"/>
+					<element ref="fm:baseAlarmAckState" minOccurs="0"/> 
+					<element name="ackSystemId" type="string" nillable="true" minOccurs="0"/>
+					<element name="comments" type="fm:ArrayOfCommentValue" nillable="true" minOccurs="0"/>
+					<element name="alarmClearedTime" type="dateTime" nillable="true" minOccurs="0"/>
+					<element name="alarmChangedTime" type="dateTime" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ArrayOfAlarmValue">
+		<annotation>
+			<documentation>
+This is a representation of an AlarmValue array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:AlarmValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.AttributeValue -->
+	<complexType name="AttributeValue">
+		<sequence>
+			<element name="attributeName" type="string" nillable="false"/>
+			<element name="attributeType" type="string" nillable="false"/>
+			<element name="value" type="string" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfAttributeValue">
+		<annotation>
+			<documentation>
+This is a representation of an AttributeValue array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:AttributeValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.AttributeValueChange -->
+	<complexType name="AttributeValueChange">
+		<sequence>
+			<element name="attributeName" type="string" nillable="false"/>
+			<element name="attributeType" type="string" nillable="false"/>
+			<element name="oldValue" type="string" nillable="true" minOccurs="0"/>
+			<element name="newValue" type="string" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfAttributeValueChange">
+		<annotation>
+			<documentation>
+This is a representation of an AttributeValueChange array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:AttributeValueChange" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.CommentValue -->
+	<complexType name="CommentValue">
+		<sequence>
+			<element name="commentUserId" type="string" nillable="false"/>
+			<element name="commentTime" type="dateTime" nillable="false"/>
+			<element name="commentText" type="string" nillable="false"/>
+			<element name="commentSystemId" type="string" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfCommentValue">
+		<sequence>
+			<element name="item" type="fm:CommentValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.CorrelatedNotificationValue -->
+	<complexType name="CorrelatedNotificationValue">
+		<sequence>
+			<element name="notificationIds" type="co:ArrayOfString" nillable="false"/>
+			<element name="managedObjectInstance" type="string" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfCorrelatedNotificationValue">
+		<annotation>
+			<documentation>
+This is a representation of a CorrelatedNotificationValue array.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="Item" type="fm:CorrelatedNotificationValue" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<element name="getVersionRequest">
+		<complexType>
+			<sequence/>
+		</complexType>
+	</element>
+	<element name="getVersionResponse">
+		<complexType>
+			<sequence>
+				<element name="version" type="co:ArrayOfString"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="getVersionException">
+		<complexType>
+			<choice>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="queryAlarmCountsRequest">
+		<complexType>
+			<sequence>
+				<element name="query" type="co:ArrayOfQueryValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="queryAlarmCountsResponse">
+		<complexType>
+			<sequence>
+				<element name="alarmCounts" type="fm:AlarmCountsValue"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="queryAlarmCountsException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="queryAlarmListRequest">
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorRequest">
+					<sequence>
+						<element name="query" type="co:ArrayOfQueryValue"/>
+						<element name="attributes" type="co:ArrayOfString"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryAlarmListResponse">
+		<complexType>
+			<complexContent>
+				<extension base="co:IteratorResponse">
+					<sequence>
+						<element name="alarm" type="fm:ArrayOfAlarmValue"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="queryAlarmListException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryAcknowledgeAlarmsRequest">
+		<complexType>
+			<sequence>
+				<element name="alarmReferenceList" type="fm:ArrayOfAlarmKey"/>
+				<element name="ackUserId" type="string"/>
+				<element name="ackSystemId" type="string" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryAcknowledgeAlarmsResponse">
+		<complexType>
+			<sequence>
+				<element name="acknowledgeAlarms" type="fm:ArrayOfAlarmKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryAcknowledgeAlarmsException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryCommentAlarmsRequest">
+		<complexType>
+			<sequence>
+				<element name="alarmReferenceList" type="fm:ArrayOfAlarmKey"/>
+				<element name="commentUserId" type="string"/>
+				<element name="commentText" type="string"/>
+				<element name="commentSystemId" type="string" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryCommentAlarmsResponse">
+		<complexType>
+			<sequence>
+				<element name="commentAlarms" type="fm:ArrayOfAlarmKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryCommentAlarmsException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="tryUnacknowledgeAlarmsRequest">
+		<complexType>
+			<sequence>
+				<element name="alarmReferenceList" type="fm:ArrayOfAlarmKey"/>
+				<element name="ackUserId" type="string"/>
+				<element name="ackSystemId" type="string" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryUnacknowledgeAlarmsResponse">
+		<complexType>
+			<sequence>
+				<element name="unacknowledgeAlarms" type="fm:ArrayOfAlarmKeyResult"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="tryUnacknowledgeAlarmsException">
+		<complexType>
+			<choice>
+				<element name="illegalArgumentException" type="co:IllegalArgumentException"/>
+				<element name="unsupportedOperationException" type="co:UnsupportedOperationException"/>
+				<element name="remoteException" type="co:RemoteException"/>
+			</choice>
+		</complexType>
+	</element>
+	<!-- Enum type javax.oss.fm.monitor.JVTAlarmMonitorSessionOptionalOpt -->
+	<element name="jVTAlarmMonitorSessionOptionalOpt" type="fm:JVTAlarmMonitorSessionOptionalOpt" nillable="true"/>
+	<simpleType name="JVTAlarmMonitorSessionOptionalOpt">
+		<restriction base="string">
+			<enumeration value="TRY_UNACKNOWLEDGE_ALARMS"/>
+			<enumeration value="QUERY_ALARM_COUNTS"/>
+			<enumeration value="TRY_COMMENT_ALARMS"/>
+		</restriction>
+	</simpleType>
+	<!-- Event type javax.oss.fm.monitor.NotifyAckStateChangedEvent -->
+	<element name="notifyAckStateChangedEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyAckStateChangedEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyAckStateChangedEventType">
+		<complexContent>
+			<extension base="fm:AlarmEventType">
+				<sequence>
+					<element name="ackUserId" type="string" nillable="false"/>
+					<element name="ackTime" type="dateTime" nillable="false"/>
+					<element name="alarmAckState" type="int" nillable="false"/>
+					<element name="ackSystemId" type="string" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type
+javax.oss.fm.monitor.NotifyAckStateChangedEventPropertyDescriptor-->
+	<complexType name="NotifyAckStateChangedEventPropertyDescriptor">
+		<complexContent>
+			<extension base="fm:AlarmEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.NotifyAlarmCommentsEvent -->
+	<element name="notifyAlarmCommentsEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyAlarmCommentsEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyAlarmCommentsEventType">
+		<complexContent>
+			<extension base="fm:AlarmEventType">
+				<sequence>
+					<element name="comment" type="fm:CommentValue" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Value type javax.oss.fm.monitor.NotifyAlarmCommentsEventPropertyDescriptor-->
+	<complexType name="NotifyAlarmCommentsEventPropertyDescriptor">
+		<complexContent>
+			<extension base="fm:AlarmEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.NotifyAlarmListRebuiltEvent -->
+	<element name="notifyAlarmListRebuiltEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyAlarmListRebuiltEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyAlarmListRebuiltEventType">
+		<complexContent>
+			<extension base="irp:IRPEventType">
+				<sequence>
+					<element name="reason" type="string" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Value type
+javax.oss.fm.monitor.NotifyAlarmListRebuiltEventPropertyDescriptor-->
+	<complexType name="NotifyAlarmListRebuiltEventPropertyDescriptor">
+		<complexContent>
+			<extension base="irp:IRPEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.NotifyChangedAlarmEvent -->
+	<element name="notifyChangedAlarmEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyChangedAlarmEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyChangedAlarmEventType">
+		<complexContent>
+			<extension base="fm:AlarmEventType">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Value type javax.oss.fm.monitor.NotifyChangedAlarmEventPropertyDescriptor -->
+	<complexType name="NotifyChangedAlarmEventPropertyDescriptor">
+		<complexContent>
+			<extension base="fm:AlarmEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.NotifyClearedAlarmEvent -->
+	<element name="notifyClearedAlarmEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyClearedAlarmEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyClearedAlarmEventType">
+		<complexContent>
+			<extension base="fm:AlarmEventType">
+				<sequence>
+					<element name="correlatedNotifications" type="fm:ArrayOfCorrelatedNotificationValue" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.NotifyClearedAlarmEventPropertyDescriptor-->
+	<complexType name="NotifyClearedAlarmEventPropertyDescriptor">
+		<complexContent>
+			<extension base="fm:AlarmEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Event type javax.oss.fm.monitor.NotifyNewAlarmEvent -->
+	<element name="notifyNewAlarmEvent">
+		<complexType>
+			<sequence>
+				<element name="event" type="fm:NotifyNewAlarmEventType" nillable="false"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="NotifyNewAlarmEventType">
+		<complexContent>
+			<extension base="fm:AlarmEventType">
+				<sequence>
+					<element name="specificProblem" type="string" nillable="true" minOccurs="0"/>
+					<element name="correlatedNotifications" type="fm:ArrayOfCorrelatedNotificationValue" nillable="true" minOccurs="0"/>
+					<element name="backedUpStatus" type="boolean" nillable="true" minOccurs="0"/>
+					<element name="backUpObject" type="string" nillable="true" minOccurs="0"/>
+					<element name="trendIndication" type="string" nillable="true" minOccurs="0"/>
+					<element name="thresholdInfo" type="fm:ThresholdInfoType" nillable="true" minOccurs="0"/>
+					<element name="attributeChanges" type="fm:ArrayOfAttributeValueChange" nillable="true" minOccurs="0"/>
+					<element name="monitoredAttributes" type="fm:ArrayOfAttributeValue" nillable="true" minOccurs="0"/>
+					<element name="proposedRepairActions" type="string" nillable="true" minOccurs="0"/>
+					<element name="additionalText" type="string" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.NotifyNewAlarmEventPropertyDescriptor -->
+	<complexType name="NotifyNewAlarmEventPropertyDescriptor">
+		<complexContent>
+			<extension base="fm:AlarmEventPropertyDescriptor">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Enum type javax.oss.fm.monitor.PerceivedAlarmSeverity -->
+	<element name="basePerceivedAlarmSeverity" type="string" nillable="true"/>
+	<element name="perceivedAlarmSeverity" type="fm:PerceivedAlarmSeverity" substitutionGroup="fm:basePerceivedAlarmSeverity"/>
+	<simpleType name="PerceivedAlarmSeverity">
+		<restriction base="string">
+			<enumeration value="INDETERMINATE"/>
+			<enumeration value="CRITICAL"/>
+			<enumeration value="MAJOR"/>
+			<enumeration value="MINOR"/>
+			<enumeration value="WARNING"/>
+			<enumeration value="CLEARED"/>
+		</restriction>
+	</simpleType>
+	<!-- Enum type javax.oss.fm.monitor.ProbableAlarmCause -->
+	<element name="baseProbableAlarmCause" type="string" nillable="true"/>
+	<element name="probableAlarmCause" type="fm:ProbableAlarmCause" substitutionGroup="fm:baseProbableAlarmCause"/>
+	<simpleType name="ProbableAlarmCause">
+		<restriction base="string">
+			<enumeration value="INDETERMINATE"/>
+			<enumeration value="ALARM_INDICATION_SIGNAL"/>
+			<enumeration value="CALL_SETUP_FAILURE"/>
+			<enumeration value="DEGRADED_SIGNAL_M3100"/>
+			<enumeration value="FAR_END_RECEIVER_FAILURE"/>
+			<enumeration value="FRAMING_ERROR_M3100"/>
+			<enumeration value="LOSS_OF_FRAME"/>
+			<enumeration value="LOSS_OF_POINTER"/>
+			<enumeration value="LOSS_OF_SIGNAL"/>
+			<enumeration value="PAYLOAD_TYPE_MISMATCH"/>
+			<enumeration value="TRANSMISSION_ERROR"/>
+			<enumeration value="REMOTE_ALARM_INTERFACE"/>
+			<enumeration value="EXCESSIVE_BIT_ERROR_RATE"/>
+			<enumeration value="PATH_TRACE_MISMATCH"/>
+			<enumeration value="UNAVAILABLE"/>
+			<enumeration value="SIGNAL_LABEL_MISMATCH"/>
+			<enumeration value="LOSS_OF_MULTI_FRAME"/>
+			<enumeration value="BACK_PLANE_FAILURE"/>
+			<enumeration value="DATA_SET_PROBLEM"/>
+			<enumeration value="EQUIPMENT_IDENTIFIER_DUPLICATION"/>
+			<enumeration value="EXTERNAL_DEVICE_PROBLEM"/>
+			<enumeration value="LINE_CARD_PROBLEM"/>
+			<enumeration value="MULTIPLEXER_PROBLEM_M3100"/>
+			<enumeration value="NE_IDENTIFIER_DUPLICATION"/>
+			<enumeration value="POWER_PROBLEM_M3100"/>
+			<enumeration value="PROCESSOR_PROBLEM_M3100"/>
+			<enumeration value="PROTECTION_PATH_FAILURE"/>
+			<enumeration value="RECEIVER_FAILURE_M3100"/>
+			<enumeration value="REPLACEABLE_UNIT_MISSING"/>
+			<enumeration value="REPLACEABLE_UNIT_TYPE_MISMATCH"/>
+			<enumeration value="SYNCHRONISATION_SOURCE_MISMATCH"/>
+			<enumeration value="TERMINAL_PROBLEM"/>
+			<enumeration value="TIMING_PROBLEM_M3100"/>
+			<enumeration value="TRANSMITTER_FAILURE_M3100"/>
+			<enumeration value="TRUNK_CARD_PROBLEM"/>
+			<enumeration value="REPLACEABLE_UNIT_PROBLEM"/>
+			<enumeration value="AIR_COMPRESSOR_FAILURE"/>
+			<enumeration value="AIR_CONDITIONING_FAILURE"/>
+			<enumeration value="AIR_DRYER_FAILURE"/>
+			<enumeration value="BATTERY_DISCHARGING"/>
+			<enumeration value="BATTERY_FAILURE"/>
+			<enumeration value="COMMERICAL_POWER_FAILURE"/>
+			<enumeration value="COOLING_FAN_FAILURE"/>
+			<enumeration value="ENGINE_FAILURE"/>
+			<enumeration value="FIRE_DETECTOR_FAILURE"/>
+			<enumeration value="FUSE_FAILURE"/>
+			<enumeration value="GENERATOR_FAILURE"/>
+			<enumeration value="LOW_BATTERY_THRESHOLD"/>
+			<enumeration value="PUMP_FAILURE_M3100"/>
+			<enumeration value="RECTIFIER_FAILURE"/>
+			<enumeration value="RECTIFIER_HIGH_VOLTAGE"/>
+			<enumeration value="RECTIFIER_LOW_F_VOLTAGE"/>
+			<enumeration value="VENTILATION_SYSTEM_FAILURE"/>
+			<enumeration value="ENCLOSURE_DOOR_OPEN_M3100"/>
+			<enumeration value="EXPLOSIVE_GAS"/>
+			<enumeration value="FIRE"/>
+			<enumeration value="FLOOD"/>
+			<enumeration value="HIGH_HUMIDITY"/>
+			<enumeration value="HIGH_TEMPERATURE"/>
+			<enumeration value="HIGH_WIND"/>
+			<enumeration value="ICE_BUILD_UP"/>
+			<enumeration value="LOW_FUEL"/>
+			<enumeration value="LOW_HUMIDITY"/>
+			<enumeration value="LOW_CABLE_PRESSURE"/>
+			<enumeration value="LOW_TEMPERATURE"/>
+			<enumeration value="LOW_WATER"/>
+			<enumeration value="SMOKE"/>
+			<enumeration value="TOXIC_GAS"/>
+			<enumeration value="STORAGE_CAPACITY_PROBLEM_M3100"/>
+			<enumeration value="MEMORY_MISMATCH"/>
+			<enumeration value="CORRUPT_DATA_M3100"/>
+			<enumeration value="OUT_OF_CPU_CYCLES"/>
+			<enumeration value="SOFTWARE_ENVIRONMENT_PROBLEM"/>
+			<enumeration value="SOFTWARE_DOWNLOAD_FAILURE"/>
+			<enumeration value="ADAPTER_ERROR"/>
+			<enumeration value="APPLICATION_SUBSYSTEM_FAILURE"/>
+			<enumeration value="BANDWIDTH_REDUCTION"/>
+			<enumeration value="COMMUNICATION_PROTOCOL_ERROR"/>
+			<enumeration value="COMMUNICATION_SUBSYSTEM_FAILURE"/>
+			<enumeration value="CONFIGURATION_OR_CUSTOMIZING_ERROR"/>
+			<enumeration value="CONGESTION"/>
+			<enumeration value="CPU_CYCLES_LIMIT_EXCEEDED"/>
+			<enumeration value="DATA_SET_OR_MODEM_ERROR"/>
+			<enumeration value="DTE_DCE_INTERFACE_ERROR"/>
+			<enumeration value="EQUIPMENT_MALFUNCTION"/>
+			<enumeration value="EXCESSIVE_VIBRATION"/>
+			<enumeration value="FILE_ERROR"/>
+			<enumeration value="HEATING_OR_VENTILATION_OR_COOLING_SYSTEM_PROBLEM"/>
+			<enumeration value="HUMIDITY_UNACCEPTABLE"/>
+			<enumeration value="INPUT_OUTPUT_DEVICE_ERROR"/>
+			<enumeration value="INPUT_DEVICE_ERROR"/>
+			<enumeration value="LAN_ERROR"/>
+			<enumeration value="LEAK_DETECTION"/>
+			<enumeration value="LOCAL_NODE_TRANSMISSION_ERROR"/>
+			<enumeration value="MATERIAL_SUPPLY_EXHAUSTED"/>
+			<enumeration value="OUT_OF_MEMORY"/>
+			<enumeration value="OUTPUT_DEVICE_ERROR"/>
+			<enumeration value="PERFORMANCE_DEGRADED"/>
+			<enumeration value="PRESSURE_UNACCEPTABLE"/>
+			<enumeration value="QUEUE_SIZE_EXCEEDED"/>
+			<enumeration value="RECEIVE_FAILURE"/>
+			<enumeration value="REMOTE_NODE_TRANSMISSION_ERROR"/>
+			<enumeration value="RESOURCE_AT_OR_NEARING_CAPACITY"/>
+			<enumeration value="RESPONSE_TIME_EXCESSIVE"/>
+			<enumeration value="RETRANSMISSION_RATE_EXCESSIVE"/>
+			<enumeration value="SOFTWARE_ERROR"/>
+			<enumeration value="SOFTWARE_PROGRAM_ABNORMALLY_TERMINATED"/>
+			<enumeration value="SOFTWARE_PROGRAM_ERROR"/>
+			<enumeration value="TEMPERATURE_UNACCEPTABLE"/>
+			<enumeration value="THRESHOLD_CROSSED"/>
+			<enumeration value="TOXIC_LEAK_DETECTED"/>
+			<enumeration value="TRANSMIT_FAILURE"/>
+			<enumeration value="UNDERLYING_RESOURCE_UNAVAILABLE"/>
+			<enumeration value="VERSION_MISMATCH"/>
+			<enumeration value="A_BIS_TO_BTS_INTERFACE_FAILURE"/>
+			<enumeration value="A_BIS_TO_TRX_INTERFACE_FAILURE"/>
+			<enumeration value="ANTENNA_PROBLEM"/>
+			<enumeration value="BATTERY_BREAKDOWN"/>
+			<enumeration value="BATTERY_CHARGING_FAULT"/>
+			<enumeration value="CLOCK_SYNCHRONISATION_PROBLEM"/>
+			<enumeration value="COMBINER_PROBLEM"/>
+			<enumeration value="DISK_PROBLEM"/>
+			<enumeration value="EXCESSIVE_RECEIVER_TEMPERATURE"/>
+			<enumeration value="EXCESSIVE_TRANSMITTER_OUTPUT_POWER"/>
+			<enumeration value="EXCESSIVE_TRANSMITTER_TEMPERATURE"/>
+			<enumeration value="FREQUENCY_HOPPING_DEGRADED"/>
+			<enumeration value="FREQUENCY_HOPPING_FAILURE"/>
+			<enumeration value="FREQUENCY_REDEFINITION_FAILED"/>
+			<enumeration value="LINE_INTERFACE_FAILURE"/>
+			<enumeration value="LINK_FAILURE"/>
+			<enumeration value="LOSS_OF_SYNCHRONISATION"/>
+			<enumeration value="LOST_REDUNDANCY"/>
+			<enumeration value="MAINS_BREAKDOWN_WITH_BATTERY_BACKUP"/>
+			<enumeration value="MAINS_BREAKDOWN_WITHOUT_BATTERY_BACKUP"/>
+			<enumeration value="POWER_SUPPLY_FAILURE"/>
+			<enumeration value="RECEIVER_ANTENNA_FAULT"/>
+			<enumeration value="RECEIVER_MULTICOUPLER_FAILURE"/>
+			<enumeration value="REDUCED_TRANSMITTER_OUTPUT_POWER"/>
+			<enumeration value="SIGNAL_QUALITY_EVALUATION_FAULT"/>
+			<enumeration value="TIMESLOT_HARDWARE_FAILURE"/>
+			<enumeration value="TRANSCEIVER_PROBLEM"/>
+			<enumeration value="TRANSCODER_PROBLEM"/>
+			<enumeration value="TRANSCODER_OR_RATE_ADAPTER_PROBLEM"/>
+			<enumeration value="TRANSMITTER_ANTENNA_FAILURE"/>
+			<enumeration value="TRANSMITTER_ANTENNA_NOT_ADJUSTED"/>
+			<enumeration value="TRANSMITTER_LOW_VOLTAGE_OR_CURRENT"/>
+			<enumeration value="TRANSMITTER_OFF_FREQUENCY"/>
+			<enumeration value="DATABASE_INCONSISTENCY"/>
+			<enumeration value="FILE_SYSTEM_CALL_UNSUCCESSFUL"/>
+			<enumeration value="INPUT_PARAMETER_OUT_OF_RANGE"/>
+			<enumeration value="INVALID_PARAMETER"/>
+			<enumeration value="INVALID_POINTER"/>
+			<enumeration value="MESSAGE_NOT_EXPECTED"/>
+			<enumeration value="MESSAGE_NOT_INITIALISED"/>
+			<enumeration value="MESSAGE_OUT_OF_SEQUENCE"/>
+			<enumeration value="SYSTEM_CALL_UNSUCCESSFUL"/>
+			<enumeration value="TIMEOUT_EXPIRED"/>
+			<enumeration value="VARIABLE_OUT_OF_RANGE"/>
+			<enumeration value="WATCH_DOG_TIMER_EXPIRED"/>
+			<enumeration value="COOLING_SYSTEM_FAILURE"/>
+			<enumeration value="EXTERNAL_EQUIPMENT_FAILURE"/>
+			<enumeration value="EXTERNAL_POWER_SUPPLY_FAILURE"/>
+			<enumeration value="EXTERNAL_TRANSMISSION_DEVICE_FAILURE"/>
+			<enumeration value="REDUCED_ALARM_REPORTING"/>
+			<enumeration value="REDUCED_EVENT_REPORTING"/>
+			<enumeration value="RECUCED_LOGGING_CAPABILITY"/>
+			<enumeration value="SYSTEM_RESOURCES_OVERLOAD"/>
+			<enumeration value="BROADCAST_CHANNEL_FAILURE"/>
+			<enumeration value="CALL_ESTABLISHMENT_ERROR"/>
+			<enumeration value="INVALID_MESSAGE_RECEIVED"/>
+			<enumeration value="INVALID_MSU_RECEIVED"/>
+			<enumeration value="LAPD_LINK_PROTOCOL_FAILURE"/>
+			<enumeration value="LOCAL_ALARM_INDICATION"/>
+			<enumeration value="REMOTE_ALARM_INDICATION"/>
+			<enumeration value="ROUTING_FAILURE"/>
+			<enumeration value="SS7_PROTOCOL_FAILURE"/>
+			<enumeration value="TRANSMISSION_FAILURE"/>
+		</restriction>
+	</simpleType>
+	<!-- Value type javax.oss.fm.monitor.QueryByFilterableAttributesValue -->
+	<complexType name="QueryByFilterableAttributesValue">
+		<complexContent>
+			<extension base="co:QueryValue">
+				<sequence>
+					<element name="managedObjectInstance" type="string" nillable="true" minOccurs="0"/>
+					<element name="managedObjectClass" type="string" nillable="true" minOccurs="0"/>
+					<element name="alarmType" type="string" nillable="true" minOccurs="0"/>
+					<element name="perceivedSeverity" type="string" nillable="true" minOccurs="0"/>
+					<element name="alarmAckState" type="string" nillable="true" minOccurs="0"/>
+					<element name="timeConstraint" type="dateTime" nillable="true" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- Value type javax.oss.fm.monitor.ThresholdInfoType -->
+	<complexType name="ThresholdInfoType">
+		<annotation>
+			<documentation>
+The ThresholdInfoType defines parameters that shall be present when the
+alarm is a result of a threshold crossing.
+</documentation>
+		</annotation>
+		<sequence>
+			<element name="observedObject" type="string" nillable="false"/>
+			<element name="thresholdDefinition" type="threshold:ThresholdDefinition" nillable="false"/>
+			<element name="observedValue" type="string" nillable="false"/>
+			<element name="armTime" type="dateTime" nillable="false"/>
+		</sequence>
+	</complexType>
+	<!-- Enum type javax.oss.fm.monitor.TrendIndicationType -->
+	<element name="baseTrendIndicationType" type="string" nillable="true"/>
+	<element name="trendIndicationType" type="fm:TrendIndicationType" substitutionGroup="fm:baseTrendIndicationType"/>
+	<simpleType name="TrendIndicationType">
+		<restriction base="string">
+			<enumeration value="LessSevere"/>
+			<enumeration value="NoChange"/>
+			<enumeration value="MoreSevere"/>
+		</restriction>
+	</simpleType>
+</schema>

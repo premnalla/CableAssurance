@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC '-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN' 'http://java.sun.com/dtd/application_1_3.dtd'>
+<application>
+   <display-name>Threshold Management</display-name>
+      <description>OSS Quality of Service API Threshold Management Reference Implementation</description>
+
+      <module>
+              <ejb>ossj_qos_fm_ri.jar</ejb>
+      </module>
+
+      <module>
+              <ejb>ossj_qos_pm_ri.jar</ejb>
+      </module>
+
+      <module>
+              <ejb>ossj_qos_tm_ri.jar</ejb>
+      </module>
+
+</application>

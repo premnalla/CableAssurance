@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="CableAssuranceLocSystem" default="CableAssuranceService" basedir=".">
+
+	<property environment="env" />
+
+	<property name="wsdl.uri" value="./wsdl/CableAssuranceService.wsdl" />
+	<property name="service.target" value="/TEMP/generated/service" />
+	<property name="client.target" value="/TEMP/generated/client" />
+
+	<property name="HelloText" value="Hello" />
+	<property name="axis.dist.dir" value="./WebContent/WEB-INF/lib" />
+
+	<path id="axis.classpath">
+		<fileset dir="${axis.dist.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<macrodef name="CastorSourceGenerator">
+		<attribute name="schema" default="NOT SET" />
+		<attribute name="package" default="NOT SET" />
+		<attribute name="output" default="NOT SET" />
+		<sequential>
+			<echo />
+			<java classname="org.exolab.castor.builder.SourceGeneratorMain" fork="true">
+				<classpath refid="axis.classpath" />
+				<arg line="-i @{schema}  -package @{package} -dest @{output}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<target name="CableAssuranceService">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${service.target}" packageName="com.nds.www.cableassurance.service.adb" language="java" databindingName="jibx" synconly="true" serverside="true" serverSideInterface="true" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" generateservicexml="true" />
+
+	</target>
+
+	<target name="CableAssuranceClient">
+
+		<taskdef name="wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis.classpath" />
+		<wsdl2java wsdlFilename="${wsdl.uri}" output="${client.target}" packageName="com.nds.www.cableassurance.client.adb" databindingName="jibx" namespaceToPackages="http://quickstart.samples/xsd=samples.quickstart.service.adb.xsd" language="java" synconly="true" />
+
+	</target>
+
+</project>

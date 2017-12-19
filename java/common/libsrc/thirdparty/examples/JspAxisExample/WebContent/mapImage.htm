@@ -1,0 +1,184 @@
+<!--
+	* File : mapImage.htm
+	* This is an ArcWeb Services Sample file for MapImage ArcWeb Service.
+	*
+-->
+<html>
+    <head><title>Map Image - ArcWeb Services Sample</title>
+	<style type="text/css">
+		<!--
+		.boldfont{FONT: bold 14px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.textfont{FONT: 12px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.smallfont{FONT:10px Verdana, Arial, Helvetica, sans-serif;COLOR: #000000;}
+		.italicfont{FONT:12px Verdana, Arial, Helvetica, sans-serif; font-style: italic; COLOR: #000000;}
+		-->
+	</style></head>
+    <body><center>
+    <font class='boldfont'>Map Image - ArcWeb Services Sample</font><br><br>
+
+    <!-- ============================ Input Form ============================  -->
+    <form action="jsp/mapImageRes.jsp" name="mForm" target="arcWebResultWin">
+    <table width='600' border=0 cellpadding='2' cellspacing='0' bgcolor='#95b7d3'>
+        <tr><td width='100%'>
+        <table border=0 cellpadding='0' cellspacing='0'  width='598' bgcolor='#ddebf1' class='textfont'>
+        <tr><td height=28 align=center bgcolor="#4271ad" class='boldfont'><font color=ffffff>Input Information</font><br></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;Data Source : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name=datasource>
+                <!-- Streets Data source -->
+                <option value='Census.Streets.US' selected>Census.Streets.US
+                <option value='GDT.Streets.US'>GDT.Streets.US
+                <option value='GDT.Streets.US.BlackWhite' >GDT.Streets.US.BlackWhite
+                <option value='GDT.Streets.US.European'>GDT.Streets.US.European
+                <option value='GDT.Streets.US.ExpressMap'>GDT.Streets.US.ExpressMap
+                <option value='GDT.Streets.US.GrayScale'>GDT.Streets.US.GrayScale
+                <option value='GDT.Streets.US.RoadAtlas'>GDT.Streets.US.RoadAtlas
+                <option value='GDT.Streets.US.SmallDevice'>GDT.Streets.US.SmallDevice
+
+                <option value='GDT.Streets.NA'>GDT.Streets.NA
+                <option value='GDT.Streets.NA.ExpressMap'>GDT.Streets.NA.ExpressMap
+                <option value='GDT.Streets.NA.GrayScale'>GDT.Streets.NA.GrayScale
+                <option value='GDT.Streets.NA.SmallDevice'>GDT.Streets.NA.SmallDevice
+
+                <option value='TA.Streets.US'>TA.Streets.US
+                <option value='TA.Streets.EU'>TA.Streets.EU
+                <option value='TA.Streets.EU.European'>TA.Streets.EU.European
+                <option value='TA.Streets.EU.ExpressMap'>TA.Streets.EU.ExpressMap
+                <option value='TA.Streets.EU.GrayScale'>TA.Streets.EU.GrayScale
+                <option value='TA.Streets.EU.SmallDevice'>TA.Streets.EU.SmallDevice
+
+                <!-- Other Data Sources -->
+                <option value='AND.Roads.World' >AND.Roads.World
+                <option value='AND.Satellite.World' >AND.Satellite.World
+                <option value='CBI.Relief.US'>CBI.Relief.US
+                <option value='Census.Density.US'>Census.Density.US
+
+                <option value='ESRI.Basemap.World'>ESRI.Basemap.World
+                <option value='ESRI.Satellite.World'>ESRI.Satellite.World
+
+                <option value='FEMA.Flood.US'>FEMA.Flood.US
+                <option value='GlobeXplorer.DOQQ.US'>GlobeXplorer.DOQQ.US
+                <option value='GlobeXplorer.PremiumImagerySmall.US'>GlobeXplorer.PremiumImagerySmall.US
+                <option value='GlobeXplorer.PremiumImageryMedium.US'>GlobeXplorer.PremiumImageryMedium.US
+                <option value='GlobeXplorer.PremiumImageryLarge.US'>GlobeXplorer.PremiumImageryLarge.US
+                <option value='MX.CurrentWeather.NA'>MX.CurrentWeather.NA
+                <option value='MX.ForecastWeather.NA'>MX.ForecastWeather.NA
+                <option value='MX.Precipitation.US'>MX.Precipitation.US
+
+                <option value='NGS.Topo.US'>NGS.Topo.US
+                <option value='Pixxures.DOQQ.US'>Pixxures.DOQQ.US
+                <option value='TC.Traffic.US'>TC.Traffic.US
+                <option value='USGS.NED.US'>USGS.NED.US
+                <option value='USGS.NLCD.US'>USGS.NLCD.US
+
+                <!-- NewZealand DS -->
+                <option value='ESRINZ.StreetsTM.NZ'>ESRINZ.StreetsTM.NZ
+                <option value='ESRINZ.StreetsMG.NZ'>ESRINZ.StreetsMG.NZ
+                <option value='ESRINZ.TopoTM.NZ'>ESRINZ.TopoTM.NZ
+                <option value='ESRINZ.TopoMG.NZ'>ESRINZ.TopoMG.NZ
+                <option value='ESRINZ.CadastralTM.NZ'>ESRINZ.CadastralTM.NZ
+                <option value='ESRINZ.CadastralPlusTM.NZ'>ESRINZ.CadastralPlusTM.NZ
+                <option value='ESRINZ.CadastralMG.NZ'>ESRINZ.CadastralMG.NZ
+                <option value='ESRINZ.LandcoverTM.NZ'>ESRINZ.LandcoverTM.NZ
+                <option value='ESRINZ.LandcoverMG.NZ'>ESRINZ.LandcoverMG.NZ
+            </select></td>
+        </tr>
+        <tr><td>&nbsp;<br><br></td></tr>
+        <tr><td vAlign="middle" class='boldfont'> &nbsp; Geographic Area:</td></tr>
+        <tr><td width='100%'>
+            <table border=0 class='textfont'>
+                <tr><td></td>
+                    <td align=middle>Max Y : <input maxLength=7 size=5 name='maxY'
+                            value="34.13"></td>
+                    <td></td></tr>
+                <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td></tr>
+                <tr>
+                        <td align=middle>Min X : <input maxLength=7 size=5 value=-117.25 name=minX></td>
+                        <td align=middle></td>
+                        <td align=middle>Max X : <input maxLength=7 size=5 value=-117.10 name=maxX></td></tr>
+                <tr>
+                        <td></td>
+                        <td align=middle>Min Y : <input maxLength=7 size=5 value=33.98 name=minY></td>
+                        <td></td></tr>
+            </table>
+        </td></tr>
+        <tr><td>&nbsp;<br><br></td></tr>
+        <tr><td width='100%'  valign=top>
+        <table border=0 cellpadding='0' cellspacing='0'  width='598' bgcolor='#ddebf1' class='textfont'>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr><td colspan='5' class="boldfont" valign="top" >&nbsp;<B>Optional Settings:</b></td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td  nowrap>Image Width/Height : </td>
+                <td colspan='2'> <input type=text name=width size=6 maxlength='4' value=500> / <input type=text name=height size=6 maxlength='4' value=400></td>
+                <td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td nowrap>Image Format : </td>
+                <td colspan='2'>
+                    <select name=imageformat>
+                        <option value='gif' selected>gif
+                        <option value='jpg'>jpg
+                        <option value='png'>png
+                        <option value='png8'>png8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </select></td>
+                <td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td nowrap>Background Color (R, G, B) :</td>
+                <td colspan='2'><input type=text name=red size=3 value=255> ,
+                      <input type=text name=green size=3 value=255> ,
+                      <input type=text name=blue size=3 value=255></td>
+                <td>&nbsp;</td></tr>
+            <tr><td colspan='5'>&nbsp;</td></tr>
+            <tr>
+                <td><input type="checkbox" name=showMapLegend value="true"></td>
+                <td nowrap>Draw Legend</td>
+                <td colspan='3'>&nbsp;</td></tr>
+            <tr>
+                <td><input type="checkbox" name="showScaleBar" value="true"></td>
+                <td nowrap>Draw ScaleBar</td>
+                 <td> X : <input type=text name=sbarX size=3 value=20></td>
+                <td> Y : <input type=text name=sbarY size=3 value=10></td>
+                <td>&nbsp;</td></tr>
+            <tr>
+                <td><input type="checkbox" name=showMarker value="true"></td>
+                <td nowrap>Draw Icon</td>
+                <td>X : <input size='5' type=text name=markerX value=-117.18></td>
+                <td>Y : <input size='5' type=text name=markerY value=34.05></td>
+                <td><select name="markerSymbol" size="1">
+                        <option value="star" >star</option>
+                        <option value="circle" >circle</option>
+	                <option value="cross" >cross </option>
+	                <option value="square" >square</option>
+	                <option value="triangle" >triangle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                    </select></td></tr>
+            <tr>
+                <td><input type="checkbox" name=showCircle value="true"></td>
+                <td nowrap>Draw Circle</td>
+                <td>X : <input size='5' type=text name=cirX value=-117.18></td>
+                <td>Y : <input size='5' type=text name=cirY value=34.05></td>
+                <td><input type=text name=cirRadius size=1 value=3>
+                        <select name=cirUnits>
+                            <option value=km>Km
+                            <option value=miles selected>Miles</select></td></tr>
+            <tr>
+                <td colspan='5'>&nbsp;</td></tr>
+            <tr><td align="center" colspan='5'><input  type=submit name="MapImage" value="   Get Map Image   "></td></tr>
+            <tr>
+                <td colspan='5'>&nbsp;</td></tr>
+            <input type="hidden" name="action" value="mapImage">
+        </form>
+        </table>
+        </td></tr>
+    </table>
+    </td></tr>
+</table>
+<br><center><a href="index.htm" class=textfont>Back to Index</a>
+</body>
+</html>

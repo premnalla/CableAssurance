@@ -1,0 +1,26 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GetQuoteService WSDL service -->
+
+  <service name="GetQuote" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="urn:GetQuote2"/>
+      <parameter name="wsdlServiceElement" value="GetQuoteService"/>
+      <parameter name="wsdlServicePort" value="GetQuote"/>
+      <parameter name="className" value="samples.stock.GetQuoteBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="GetQuote"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <parameter name="allowedMethods" value="*"/>
+      <parameter name="scope" value="Session"/>
+
+  </service>
+</deployment>
